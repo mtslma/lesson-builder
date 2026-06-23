@@ -162,17 +162,6 @@ export const LessonEditor: React.FC = () => {
             onChange={(e) => updateTitle(e.target.value)}
             placeholder="Untitled lesson"
           />
-          <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-500">
-            <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1">
-              Level: {lesson.level || '-'}
-            </span>
-            <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1">
-              Language: {lesson.language}
-            </span>
-            <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1">
-              Blocks: {lesson.blocks.length}
-            </span>
-          </div>
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-6">
@@ -321,32 +310,13 @@ export const LessonEditor: React.FC = () => {
               <div className="space-y-8">
                 <div className="flex items-end justify-between border-b border-slate-200 pb-5">
                   <div>
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm">
-                      {lesson.level || 'No level'}
-                    </span>
                     <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900">
                       {lesson.title}
                     </h1>
-                    <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-500">
-                      <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1">
-                        Language: {lesson.language}
-                      </span>
-                      <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1">
-                        Blocks on lesson: {lesson.blocks.length}
-                      </span>
-                    </div>
                   </div>
-                  <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-right shadow-sm">
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                      Page Metadata
-                    </div>
-                    <div className="mt-1 text-sm font-medium text-slate-700">
-                      Page {currentPage} of {totalPages}
-                    </div>
-                    <div className="mt-1 text-[11px] text-slate-500">
-                      {previewBlocks.length} visible block{previewBlocks.length === 1 ? '' : 's'}
-                    </div>
-                  </div>
+                  <span className="text-xs text-slate-500">
+                    Page {currentPage} of {totalPages}
+                  </span>
                 </div>
 
                 {previewBlocks.length === 0 ? (
