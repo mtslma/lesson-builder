@@ -10,6 +10,7 @@ import {
   Plus,
   RotateCcw,
   ScissorsLineDashed,
+  Tags,
   Wand2,
   X
 } from 'lucide-react';
@@ -44,7 +45,10 @@ export const LessonEditor: React.FC = () => {
   const [insertMenuIndex, setInsertMenuIndex] = useState<number | null>(null);
   const [jsonCopied, setJsonCopied] = useState(false);
   const [previewResetKey, setPreviewResetKey] = useState(0);
+  const [showBlockLabels, setShowBlockLabels] = useState(true);
+  const [previewWidth, setPreviewWidth] = useState(56);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const previewScrollRef = useRef<HTMLDivElement | null>(null);
 
   const totalPages = Math.max(1, lesson.blocks.filter((b) => b.type === 'page-break').length);
 
@@ -72,6 +76,48 @@ export const LessonEditor: React.FC = () => {
     setJsonCopied(true);
     window.setTimeout(() => setJsonCopied(false), 1500);
   };
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    window.requestAnimationFrame(() => {
+      previewScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
+  const renderPageControls = () => (
+    <div className="flex items-center justify-between gap-4">
+      <button
+        disabled={currentPage === 1}
+        onClick={() => goToPage(currentPage - 1)}
+        className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs text-slate-600 shadow-sm disabled:opacity-35"
+        type="button"
+      >
+        <ChevronLeft size={14} strokeWidth={2.3} />
+        Previous
+      </button>
+      <div className="flex flex-wrap justify-center gap-2">
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goToPage(i + 1)}
+            className={`h-8 w-8 rounded-md text-xs shadow-sm ${currentPage === i + 1 ? 'bg-slate-900 text-white' : 'border border-slate-300 bg-white text-slate-500'}`}
+            type="button"
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+      <button
+        disabled={currentPage === totalPages}
+        onClick={() => goToPage(currentPage + 1)}
+        className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-xs text-white shadow-sm disabled:opacity-35"
+        type="button"
+      >
+        Next
+        <ChevronRight size={14} strokeWidth={2.3} />
+      </button>
+    </div>
+  );
 
   const renderInlineInserter = (index: number) => {
     const isOpen = insertMenuIndex === index;
@@ -153,7 +199,10 @@ export const LessonEditor: React.FC = () => {
         onChange={handleJsonFileImport}
       />
 
-      <div className="flex h-full w-1/2 flex-col border-r border-slate-300/80 bg-white/90 backdrop-blur-sm">
+      <div
+        className="flex h-full flex-col border-r border-slate-300/80 bg-white/90 backdrop-blur-sm"
+        style={{ width: `${100 - previewWidth}%` }}
+      >
         <div className="shrink-0 border-b border-slate-200 px-6 py-5">
           <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
             Lesson Editor
@@ -259,7 +308,10 @@ export const LessonEditor: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex h-full w-1/2 flex-col bg-[linear-gradient(180deg,#0f172a_0%,#111827_100%)] text-slate-200">
+      <div
+        className="flex h-full flex-col bg-[linear-gradient(180deg,#0f172a_0%,#111827_100%)] text-slate-200"
+        style={{ width: `${previewWidth}%` }}
+      >
         <div className="flex shrink-0 items-center justify-between border-b border-slate-800 px-6 py-4">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -267,25 +319,39 @@ export const LessonEditor: React.FC = () => {
             </div>
             <div className="mt-1 text-sm text-slate-300">Current student-facing view</div>
           </div>
-          <div className="flex gap-1 rounded-lg border border-slate-800 bg-slate-950 p-1">
-            <button
-              onClick={() => setRightPanelMode('preview')}
-              className={`rounded-md px-4 py-1.5 text-xs ${rightPanelMode === 'preview' ? 'bg-white text-slate-900' : 'text-slate-400'}`}
-              type="button"
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setRightPanelMode('json')}
-              className={`rounded-md px-4 py-1.5 text-xs ${rightPanelMode === 'json' ? 'bg-white text-slate-900' : 'text-slate-400'}`}
-              type="button"
-            >
-              JSON
-            </button>
+          <div className="flex items-center gap-4">
+            <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-slate-400">
+              Width
+              <input
+                type="range"
+                min={44}
+                max={72}
+                value={previewWidth}
+                onChange={(e) => setPreviewWidth(Number(e.target.value))}
+                className="w-24 accent-white"
+              />
+              <span className="w-8 text-right">{previewWidth}%</span>
+            </label>
+            <div className="flex gap-1 rounded-lg border border-slate-800 bg-slate-950 p-1">
+              <button
+                onClick={() => setRightPanelMode('preview')}
+                className={`rounded-md px-4 py-1.5 text-xs ${rightPanelMode === 'preview' ? 'bg-white text-slate-900' : 'text-slate-400'}`}
+                type="button"
+              >
+                Preview
+              </button>
+              <button
+                onClick={() => setRightPanelMode('json')}
+                className={`rounded-md px-4 py-1.5 text-xs ${rightPanelMode === 'json' ? 'bg-white text-slate-900' : 'text-slate-400'}`}
+                type="button"
+              >
+                JSON
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6">
+        <div ref={previewScrollRef} className="flex-1 overflow-y-auto p-6">
           {rightPanelMode === 'json' ? (
             <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-[0_18px_48px_-24px_rgba(15,23,42,0.7)]">
               <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
@@ -309,7 +375,7 @@ export const LessonEditor: React.FC = () => {
               </pre>
             </div>
           ) : (
-            <div className="mx-auto flex min-h-full max-w-2xl flex-col justify-between rounded-[28px] border border-slate-200/80 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] p-8 text-slate-800 shadow-[0_30px_70px_-35px_rgba(15,23,42,0.4)]">
+            <div className="mx-auto flex min-h-full w-full max-w-4xl flex-col justify-between rounded-[28px] border border-slate-200/80 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] p-8 text-slate-800 shadow-[0_30px_70px_-35px_rgba(15,23,42,0.4)]">
               <div className="space-y-8">
                 <div className="flex items-end justify-between border-b border-slate-200 pb-5">
                   <div>
@@ -317,7 +383,7 @@ export const LessonEditor: React.FC = () => {
                       {lesson.title}
                     </h1>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 flex-wrap justify-end">
                     <button
                       onClick={() => setPreviewResetKey((value) => value + 1)}
                       className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-600 shadow-sm hover:border-slate-400"
@@ -326,11 +392,21 @@ export const LessonEditor: React.FC = () => {
                       <Eraser size={13} strokeWidth={2.1} />
                       Limpar respostas
                     </button>
+                    <button
+                      onClick={() => setShowBlockLabels((value) => !value)}
+                      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs shadow-sm ${showBlockLabels ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-300 bg-white text-slate-600 hover:border-slate-400'}`}
+                      type="button"
+                    >
+                      <Tags size={13} strokeWidth={2.1} />
+                      {showBlockLabels ? 'Ocultar tipos' : 'Mostrar tipos'}
+                    </button>
                     <span className="text-xs text-slate-500">
                       Page {currentPage} of {totalPages}
                     </span>
                   </div>
                 </div>
+
+                {renderPageControls()}
 
                 {previewBlocks.length === 0 ? (
                   <p className="py-16 text-center text-sm text-slate-400">
@@ -339,11 +415,13 @@ export const LessonEditor: React.FC = () => {
                 ) : (
                   previewBlocks.map((b) => (
                     <div key={`${previewResetKey}-${b.id}`} className="relative">
-                      <div className="mb-2 flex justify-end">
-                        <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
-                          {BLOCK_LABELS[b.type]}
-                        </span>
-                      </div>
+                      {showBlockLabels && (
+                        <div className="mb-2 flex justify-end">
+                          <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                            {BLOCK_LABELS[b.type]}
+                          </span>
+                        </div>
+                      )}
                       <StudentPreviewDispatcher block={b} />
                     </div>
                   ))
@@ -351,36 +429,7 @@ export const LessonEditor: React.FC = () => {
               </div>
 
               <div className="mt-10 flex items-center justify-between border-t border-slate-200 pt-5">
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage((p) => p - 1)}
-                  className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs text-slate-600 shadow-sm disabled:opacity-35"
-                  type="button"
-                >
-                  <ChevronLeft size={14} strokeWidth={2.3} />
-                  Previous
-                </button>
-                <div className="flex gap-2">
-                  {Array.from({ length: totalPages }).map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={`h-8 w-8 rounded-md text-xs shadow-sm ${currentPage === i + 1 ? 'bg-slate-900 text-white' : 'border border-slate-300 bg-white text-slate-500'}`}
-                      type="button"
-                    >
-                      {i + 1}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage((p) => p + 1)}
-                  className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-xs text-white shadow-sm disabled:opacity-35"
-                  type="button"
-                >
-                  Next
-                  <ChevronRight size={14} strokeWidth={2.3} />
-                </button>
+                {renderPageControls()}
               </div>
             </div>
           )}
