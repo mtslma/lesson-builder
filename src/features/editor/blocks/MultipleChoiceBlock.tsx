@@ -2,20 +2,29 @@ import type { BlockFormProps, BlockPreviewProps, MultipleChoiceBlock } from '../
 
 export const MultipleChoiceForm = ({ block, onUpdate }: BlockFormProps<MultipleChoiceBlock>) => {
   const addOption = () =>
-    onUpdate({ options: [...(block.options || []), { id: crypto.randomUUID(), text: '', isCorrect: false }] });
+    onUpdate({ options: [...block.options, { id: crypto.randomUUID(), text: '' }] });
   const removeOption = (index: number) =>
-    onUpdate({ options: block.options.filter((_, optionIndex) => optionIndex !== index) });
+    onUpdate({
+      options: block.options.filter((_, optionIndex) => optionIndex !== index),
+      correctOptionIds: block.correctOptionIds.filter((optionId) => optionId !== block.options[index]?.id)
+    });
   return (
     <div className="space-y-2">
       <input type="text" className="w-full p-2 border rounded text-sm font-bold" value={block.question} onChange={(e) => onUpdate({ question: e.target.value })} placeholder="Question..." />
       <div className="space-y-1">
         {(block.options || []).map((o, i) => (
           <div key={o.id} className="flex items-center gap-2 border p-1 rounded bg-slate-50">
-            <input type="checkbox" checked={!!o.isCorrect} onChange={(e) => {
-              const n = [...block.options];
-              n[i].isCorrect = e.target.checked;
-              onUpdate({ options: n });
-            }} />
+            <input
+              type="checkbox"
+              checked={block.correctOptionIds.includes(o.id)}
+              onChange={(e) =>
+                onUpdate({
+                  correctOptionIds: e.target.checked
+                    ? [...block.correctOptionIds, o.id]
+                    : block.correctOptionIds.filter((optionId) => optionId !== o.id)
+                })
+              }
+            />
             <input type="text" className="flex-1 p-1 text-xs border rounded" value={o.text} onChange={(e) => {
               const n = [...block.options];
               n[i].text = e.target.value;

@@ -11,24 +11,67 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
     />
     <textarea
       className="w-full p-2 border rounded text-sm h-20"
-      value={block.textWithGaps}
-      onChange={(e) => onUpdate({ textWithGaps: e.target.value })}
-      placeholder="Hello, I [am] happy."
+      value={block.text}
+      onChange={(e) => onUpdate({ text: e.target.value })}
+      placeholder="{{gap1}} you study English?"
     />
-    <input
-      type="text"
-      className="w-full p-2 border rounded text-sm"
-      value={(block.supportWords || []).join(', ')}
-      onChange={(e) =>
-        onUpdate({
-          supportWords: e.target.value
-            .split(',')
-            .map((s: string) => s.trim())
-            .filter(Boolean)
-        })
-      }
-      placeholder="Word Box (comma separated)"
-    />
+    <div className="space-y-2 rounded border bg-slate-50 p-2">
+      {block.gaps.map((gap, index) => (
+        <div key={gap.id} className="grid grid-cols-[1fr_2fr_auto] gap-2 items-center">
+          <input
+            type="text"
+            className="rounded border p-1 text-xs font-mono"
+            value={gap.id}
+            onChange={(e) => {
+              const nextGaps = [...block.gaps];
+              nextGaps[index].id = e.target.value;
+              onUpdate({ gaps: nextGaps });
+            }}
+            placeholder="gap1"
+          />
+          <input
+            type="text"
+            className="rounded border p-1 text-xs"
+            value={gap.acceptedAnswers.join(', ')}
+            onChange={(e) => {
+              const nextGaps = [...block.gaps];
+              nextGaps[index].acceptedAnswers = e.target.value
+                .split(',')
+                .map((answer) => answer.trim())
+                .filter(Boolean);
+              onUpdate({ gaps: nextGaps });
+            }}
+            placeholder="Accepted answers"
+          />
+          <label className="flex items-center gap-1 text-[10px]">
+            <input
+              type="checkbox"
+              checked={gap.caseSensitive}
+              onChange={(e) => {
+                const nextGaps = [...block.gaps];
+                nextGaps[index].caseSensitive = e.target.checked;
+                onUpdate({ gaps: nextGaps });
+              }}
+            />
+            Case
+          </label>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={() =>
+          onUpdate({
+            gaps: [
+              ...block.gaps,
+              { id: `gap${block.gaps.length + 1}`, acceptedAnswers: [''], caseSensitive: false }
+            ]
+          })
+        }
+        className="text-xs font-bold text-blue-600"
+      >
+        + Add Gap
+      </button>
+    </div>
   </div>
 );
 
@@ -38,10 +81,10 @@ export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) =
       {block.instruction || 'Fill the gaps'}
     </p>
     <div className="text-slate-800 text-sm font-serif leading-loose flex flex-wrap items-center gap-y-2">
-      {block.textWithGaps
-        .split(/(\[[^\]]+\])/g)
+      {block.text
+        .split(/(\{\{[^}]+\}\})/g)
         .map((part: string, i: number) =>
-          part.startsWith('[') ? (
+          part.startsWith('{{') ? (
             <input
               key={i}
               type="text"
@@ -54,10 +97,10 @@ export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) =
           )
         )}
     </div>
-    {block.supportWords && block.supportWords.length > 0 && (
+    {block.gaps.length > 0 && (
       <div className="mt-5 pt-3 border-t border-slate-200 flex flex-wrap gap-2 items-center">
         <span className="text-[9px] font-bold text-slate-400 font-mono uppercase">Word Box:</span>
-        {block.supportWords.map((sw: string, i: number) => (
+        {Array.from(new Set(block.gaps.flatMap((gap) => gap.acceptedAnswers))).map((sw: string, i: number) => (
           <span
             key={i}
             className="text-xs bg-white border border-slate-200 px-2 py-1 rounded text-slate-600 font-semibold shadow-2xs"

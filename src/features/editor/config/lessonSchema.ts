@@ -236,8 +236,41 @@ const fillBlankBlockSchema = z.object({
   id: requiredId(),
   type: z.literal('fill-blank'),
   instruction: requiredString().optional(),
-  textWithGaps: requiredString().min(1, 'Campo obrigatório'),
-  supportWords: stringArray().optional()
+  text: requiredString().min(1, 'Campo obrigatório'),
+  gaps: z
+    .array(
+      z.object({
+        id: requiredId(),
+        acceptedAnswers: stringArray().min(1, 'Cada gap deve ter pelo menos uma resposta aceita'),
+        caseSensitive: booleanField()
+      }),
+      { error: 'Deve ser uma lista' }
+    )
+    .min(1, 'Deve conter pelo menos um gap')
+})
+.superRefine((block, ctx) => {
+  const usedGapIds = Array.from(block.text.matchAll(/\{\{([^}]+)\}\}/g)).map((match) => match[1]);
+  const declaredGapIds = block.gaps.map((gap) => gap.id);
+
+  for (const gapId of declaredGapIds) {
+    if (!usedGapIds.includes(gapId)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['gaps'],
+        message: `Gap declarado e não usado no texto: ${gapId}`
+      });
+    }
+  }
+
+  for (const gapId of usedGapIds) {
+    if (!declaredGapIds.includes(gapId)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['text'],
+        message: `Gap usado no texto e não declarado: ${gapId}`
+      });
+    }
+  }
 });
 
 const multipleChoiceBlockSchema = z.object({
@@ -247,11 +280,23 @@ const multipleChoiceBlockSchema = z.object({
   options: z.array(
     z.object({
       id: requiredId(),
-      text: requiredString().min(1, 'Campo obrigatório'),
-      isCorrect: booleanField().optional()
+      text: requiredString().min(1, 'Campo obrigatório')
     }),
     { error: 'Deve ser uma lista' }
-  )
+  ).min(2, 'Deve conter pelo menos duas opções'),
+  correctOptionIds: stringArray().min(1, 'Deve conter pelo menos uma resposta correta')
+}).superRefine((block, ctx) => {
+  const optionIds = new Set(block.options.map((option) => option.id));
+
+  block.correctOptionIds.forEach((optionId, index) => {
+    if (!optionIds.has(optionId)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['correctOptionIds', index],
+        message: `Resposta correta aponta para opção inexistente: ${optionId}`
+      });
+    }
+  });
 });
 
 const rewriteQuestionBlockSchema = z.object({

@@ -397,8 +397,8 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
       id: createId(),
       type: 'fill-blank',
       instruction: 'Complete the sentence with the best option.',
-      textWithGaps: 'This is a [sample] sentence for practice.',
-      supportWords: ['sample', 'practice']
+      text: 'This is a {{gap1}} sentence for practice.',
+      gaps: [{ id: 'gap1', acceptedAnswers: ['sample'], caseSensitive: false }]
     }),
     form: FillBlankForm as BlockFormComponent,
     preview: FillBlankPreview as BlockPreviewComponent
@@ -410,15 +410,20 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     icon: CheckCheck,
     accent: 'text-green-700',
     surface: 'from-green-100 to-white',
-    create: () => ({
-      id: createId(),
-      type: 'multiple-choice',
-      question: 'Choose the best answer.',
-      options: [
-        { id: createId(), text: 'Option A', isCorrect: true },
-        { id: createId(), text: 'Option B', isCorrect: false }
-      ]
-    }),
+    create: () => {
+      const firstOptionId = createId();
+      const secondOptionId = createId();
+      return {
+        id: createId(),
+        type: 'multiple-choice',
+        question: 'Choose the best answer.',
+        options: [
+          { id: firstOptionId, text: 'Option A' },
+          { id: secondOptionId, text: 'Option B' }
+        ],
+        correctOptionIds: [firstOptionId]
+      };
+    },
     form: MultipleChoiceForm as BlockFormComponent,
     preview: MultipleChoicePreview as BlockPreviewComponent
   },

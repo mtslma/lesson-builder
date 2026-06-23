@@ -148,13 +148,18 @@ export interface ImageChoiceBlock extends BaseBlock {
 export interface FillBlankBlock extends BaseBlock {
   type: 'fill-blank';
   instruction?: string;
-  textWithGaps: string;
-  supportWords?: string[];
+  text: string;
+  gaps: {
+    id: string;
+    acceptedAnswers: string[];
+    caseSensitive: boolean;
+  }[];
 }
 export interface MultipleChoiceBlock extends BaseBlock {
   type: 'multiple-choice';
   question: string;
-  options: { id: string; text: string; isCorrect?: boolean }[];
+  options: { id: string; text: string }[];
+  correctOptionIds: string[];
 }
 export interface RewriteQuestionBlock extends BaseBlock {
   type: 'rewrite-question';

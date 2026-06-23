@@ -289,8 +289,29 @@
       "id": "p2-fb1",
       "type": "fill-blank",
       "instruction": "Complete with do.",
-      "textWithGaps": "[Do] you study English?\n[Do] you work?\n[Do] you play sports?\n[Do] you use social media?",
-      "supportWords": ["Do"]
+      "text": "{{gap1}} you study English?\n{{gap2}} you work?\n{{gap3}} you play sports?\n{{gap4}} you use social media?",
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        }
+      ]
     },
     {
       "id": "p2-conv2",
