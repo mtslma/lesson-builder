@@ -86,12 +86,10 @@ export const useLessonEditor = () => {
     });
   };
 
-  const updateBlock = (id: string, updatedFields: Partial<LessonBlock>) => {
+  const updateBlock = <T extends LessonBlock>(id: string, updatedFields: Partial<T>) => {
     setLesson((prev) => ({
       ...prev,
-      blocks: prev.blocks.map((b) =>
-        b.id === id ? ({ ...b, ...updatedFields } as LessonBlock) : b
-      )
+      blocks: prev.blocks.map((b) => (b.id === id ? { ...b, ...updatedFields } : b))
     }));
   };
 

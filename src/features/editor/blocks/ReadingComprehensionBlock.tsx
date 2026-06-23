@@ -1,7 +1,14 @@
-import React from 'react';
 import { SubQuestionsEditor, RenderSubQuestionsPreview } from '../modules/Shared';
+import type {
+  BlockFormProps,
+  BlockPreviewProps,
+  ReadingComprehensionBlock
+} from '../types/index';
 
-export const ReadingComprehensionForm: React.FC<any> = ({ block, onUpdate }) => (
+export const ReadingComprehensionForm = ({
+  block,
+  onUpdate
+}: BlockFormProps<ReadingComprehensionBlock>) => (
   <div className="space-y-3">
     <input
       type="text"
@@ -20,7 +27,9 @@ export const ReadingComprehensionForm: React.FC<any> = ({ block, onUpdate }) => 
   </div>
 );
 
-export const ReadingComprehensionPreview: React.FC<any> = ({ block }) => (
+export const ReadingComprehensionPreview = ({
+  block
+}: BlockPreviewProps<ReadingComprehensionBlock>) => (
   <div className="my-8 bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
     <div className="bg-slate-50 p-6 border-b">
       <span className="text-[10px] font-black uppercase text-slate-400 font-mono">

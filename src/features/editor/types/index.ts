@@ -233,6 +233,17 @@ export type LessonBlock =
   | WritingTaskBlock
   | FinalTaskBlock;
 
+export type BlockByType<T extends BlockType> = Extract<LessonBlock, { type: T }>;
+
+export interface BlockFormProps<T extends LessonBlock> {
+  block: T;
+  onUpdate: (changes: Partial<T>) => void;
+}
+
+export interface BlockPreviewProps<T extends LessonBlock> {
+  block: T;
+}
+
 export interface Lesson {
   schemaVersion: 1;
   id: string;

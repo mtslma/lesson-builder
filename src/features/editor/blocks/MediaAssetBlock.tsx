@@ -1,6 +1,6 @@
-import React from 'react';
+import type { BlockFormProps, BlockPreviewProps, MediaBlock } from '../types/index';
 
-export const MediaForm: React.FC<any> = ({ block, onUpdate }) => (
+export const MediaForm = ({ block, onUpdate }: BlockFormProps<MediaBlock>) => (
   <div className="space-y-2">
     <input
       type="text"
@@ -19,7 +19,7 @@ export const MediaForm: React.FC<any> = ({ block, onUpdate }) => (
   </div>
 );
 
-export const MediaPreview: React.FC<any> = ({ block }) => (
+export const MediaPreview = ({ block }: BlockPreviewProps<MediaBlock>) => (
   <div
     className={`my-6 flex flex-col ${block.position === 'left' ? 'items-start' : block.position === 'right' ? 'items-end' : 'items-center'}`}
   >

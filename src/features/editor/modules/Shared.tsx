@@ -8,7 +8,7 @@ export const SubQuestionsEditor: React.FC<{
   const addQ = () =>
     onChange([...questions, { id: crypto.randomUUID(), type: 'multiple-choice', question: '' }]);
   const removeQ = (idx: number) => onChange(questions.filter((_, index) => index !== idx));
-  const update = (idx: number, field: keyof SubQuestion, val: any) => {
+  const update = <K extends keyof SubQuestion>(idx: number, field: K, val: SubQuestion[K]) => {
     const n = [...questions];
     n[idx] = { ...n[idx], [field]: val };
     onChange(n);
@@ -25,7 +25,7 @@ export const SubQuestionsEditor: React.FC<{
             <select
               className="p-1.5 border rounded text-xs bg-white font-bold text-slate-700"
               value={q.type}
-              onChange={(e) => update(i, 'type', e.target.value)}
+              onChange={(e) => update(i, 'type', e.target.value as SubQuestion['type'])}
             >
               <option value="multiple-choice">A/B/C/D</option>
               <option value="true-false">True / False</option>

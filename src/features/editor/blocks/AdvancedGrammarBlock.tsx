@@ -1,6 +1,9 @@
-import React from 'react';
+import type { AdvancedGrammarBlock, BlockFormProps, BlockPreviewProps } from '../types/index';
 
-export const AdvancedGrammarForm: React.FC<any> = ({ block, onUpdate }) => {
+export const AdvancedGrammarForm = ({
+  block,
+  onUpdate
+}: BlockFormProps<AdvancedGrammarBlock>) => {
   const updateHeader = (i: number, val: string) => {
     const n = [...block.tableHeaders];
     n[i] = val;
@@ -53,7 +56,7 @@ export const AdvancedGrammarForm: React.FC<any> = ({ block, onUpdate }) => {
             +
           </button>
         </div>
-        {block.tableRows.map((r: any, rIdx: number) => (
+        {block.tableRows.map((r, rIdx) => (
           <div key={rIdx} className="flex gap-1">
             {r.elements.map((cell: string, cIdx: number) => (
               <input
@@ -78,7 +81,7 @@ export const AdvancedGrammarForm: React.FC<any> = ({ block, onUpdate }) => {
   );
 };
 
-export const AdvancedGrammarPreview: React.FC<any> = ({ block }) => (
+export const AdvancedGrammarPreview = ({ block }: BlockPreviewProps<AdvancedGrammarBlock>) => (
   <div className="my-8 rounded-2xl border border-slate-900 overflow-hidden shadow-md">
     <div className="bg-slate-900 p-5 text-white">
       <h3 className="text-lg font-serif font-black">{block.title}</h3>
@@ -99,7 +102,7 @@ export const AdvancedGrammarPreview: React.FC<any> = ({ block }) => (
           </tr>
         </thead>
         <tbody>
-          {block.tableRows.map((r: any, i: number) => (
+          {block.tableRows.map((r, i) => (
             <tr key={i} className="border-b last:border-0 hover:bg-slate-50">
               {r.elements.map((c: string, j: number) => (
                 <td

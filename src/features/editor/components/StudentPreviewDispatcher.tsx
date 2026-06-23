@@ -3,7 +3,13 @@ import type { LessonBlock } from '../types/index';
 import { BLOCK_DEFINITION_MAP } from '../config/blockRegistry';
 
 export const StudentPreviewDispatcher: React.FC<{ block: LessonBlock }> = ({ block }) => {
-  const PreviewComponent = BLOCK_DEFINITION_MAP[block.type].preview;
+  const definition = BLOCK_DEFINITION_MAP[block.type];
+
+  if (!definition) {
+    throw new Error(`Unsupported block type: ${block.type}`);
+  }
+
+  const PreviewComponent = definition.preview;
 
   if (PreviewComponent) {
     return <PreviewComponent block={block} />;

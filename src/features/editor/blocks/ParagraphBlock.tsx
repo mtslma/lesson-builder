@@ -1,4 +1,4 @@
-import React from 'react';
+import type { BlockFormProps, BlockPreviewProps, ParagraphBlock } from '../types/index';
 
 const PARAGRAPH_STYLE_OPTIONS = [
   { label: 'Body', value: 'body' },
@@ -7,12 +7,12 @@ const PARAGRAPH_STYLE_OPTIONS = [
   { label: 'Note', value: 'note' }
 ];
 
-export const ParagraphForm: React.FC<any> = ({ block, onUpdate }) => (
+export const ParagraphForm = ({ block, onUpdate }: BlockFormProps<ParagraphBlock>) => (
   <div className="space-y-2">
     <select
       className="w-full p-2 border rounded text-sm"
       value={block.style || 'body'}
-      onChange={(e) => onUpdate({ style: e.target.value })}
+      onChange={(e) => onUpdate({ style: e.target.value as ParagraphBlock['style'] })}
     >
       {PARAGRAPH_STYLE_OPTIONS.map((option) => (
         <option key={option.value} value={option.value}>
@@ -36,6 +36,6 @@ const paragraphStyles: Record<string, string> = {
   note: 'text-sm text-slate-600 leading-7 italic border-l-4 border-slate-300 pl-4 my-4'
 };
 
-export const ParagraphPreview: React.FC<any> = ({ block }) => (
+export const ParagraphPreview = ({ block }: BlockPreviewProps<ParagraphBlock>) => (
   <p className={paragraphStyles[block.style || 'body'] || paragraphStyles.body}>{block.content}</p>
 );

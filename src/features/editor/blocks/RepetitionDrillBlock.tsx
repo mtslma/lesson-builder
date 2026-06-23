@@ -1,12 +1,17 @@
-import React from 'react';
+import type {
+  BlockFormProps,
+  BlockPreviewProps,
+  RepetitionDrillBlock
+} from '../types/index';
 
-export const RepetitionDrillForm: React.FC<any> = ({ block, onUpdate }) => {
+export const RepetitionDrillForm = ({ block, onUpdate }: BlockFormProps<RepetitionDrillBlock>) => {
   const addWord = () => onUpdate({ words: [...block.words, { word: '' }] });
-  const removeWord = (index: number) => onUpdate({ words: block.words.filter((_: any, wordIndex: number) => wordIndex !== index) });
+  const removeWord = (index: number) =>
+    onUpdate({ words: block.words.filter((_, wordIndex) => wordIndex !== index) });
   return (
     <div className="space-y-2">
       <input type="text" className="w-full p-2 border rounded text-sm font-bold" value={block.title} onChange={(e) => onUpdate({ title: e.target.value })} placeholder="Title" />
-      {block.words.map((w: any, i: number) => (
+      {block.words.map((w, i) => (
         <div key={i} className="flex gap-2 border p-2 rounded bg-slate-50">
           <input type="text" className="w-1/3 p-1 border rounded text-xs font-bold" value={w.word} onChange={(e) => {
             const n = [...block.words];
@@ -31,11 +36,11 @@ export const RepetitionDrillForm: React.FC<any> = ({ block, onUpdate }) => {
   );
 };
 
-export const RepetitionDrillPreview: React.FC<any> = ({ block }) => (
+export const RepetitionDrillPreview = ({ block }: BlockPreviewProps<RepetitionDrillBlock>) => (
   <div className="my-6 p-6 border rounded-2xl shadow-sm bg-white">
     <span className="text-[10px] font-black uppercase tracking-widest font-mono block mb-4">Pronunciation: {block.title}</span>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {block.words.map((w: any, i: number) => (
+      {block.words.map((w, i) => (
         <div key={i} className="flex flex-col p-3 border rounded-xl bg-slate-50 hover:border-lime-400 group">
           <span className="text-base font-bold">{w.word}</span>
           <div className="flex justify-between mt-1">

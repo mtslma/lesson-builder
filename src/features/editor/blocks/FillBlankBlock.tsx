@@ -1,6 +1,6 @@
-import React from 'react';
+import type { BlockFormProps, BlockPreviewProps, FillBlankBlock } from '../types/index';
 
-export const FillBlankForm: React.FC<any> = ({ block, onUpdate }) => (
+export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock>) => (
   <div className="space-y-2">
     <input
       type="text"
@@ -32,7 +32,7 @@ export const FillBlankForm: React.FC<any> = ({ block, onUpdate }) => (
   </div>
 );
 
-export const FillBlankPreview: React.FC<any> = ({ block }) => (
+export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) => (
   <div className="p-6 bg-slate-50 border-l-4 border-lime-500 rounded-r-xl my-6 shadow-sm">
     <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mb-3 font-bold">
       {block.instruction || 'Fill the gaps'}

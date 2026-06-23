@@ -1,6 +1,6 @@
-import React from 'react';
+import type { BlockFormProps, BlockPreviewProps, TeacherNoteBlock } from '../types/index';
 
-export const TeacherNoteForm: React.FC<any> = ({ block, onUpdate }) => (
+export const TeacherNoteForm = ({ block, onUpdate }: BlockFormProps<TeacherNoteBlock>) => (
   <div className="space-y-2">
     <input
       type="text"
@@ -18,7 +18,7 @@ export const TeacherNoteForm: React.FC<any> = ({ block, onUpdate }) => (
   </div>
 );
 
-export const TeacherNotePreview: React.FC<any> = ({ block }) => (
+export const TeacherNotePreview = ({ block }: BlockPreviewProps<TeacherNoteBlock>) => (
   <div className="my-6 rounded-2xl border border-amber-200 bg-amber-50/70 p-5 shadow-sm">
     <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-700">
       Student Tip

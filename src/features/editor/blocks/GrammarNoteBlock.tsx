@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { BlockFormProps, BlockPreviewProps, GrammarNoteBlock } from '../types/index';
 
-export const GrammarNoteForm: React.FC<any> = ({ block, onUpdate }) => (
+export const GrammarNoteForm = ({ block, onUpdate }: BlockFormProps<GrammarNoteBlock>) => (
   <div className="space-y-2">
     <input
       type="text"
@@ -31,7 +32,7 @@ export const GrammarNoteForm: React.FC<any> = ({ block, onUpdate }) => (
   </div>
 );
 
-export const GrammarNotePreview: React.FC<any> = ({ block }) => {
+export const GrammarNotePreview = ({ block }: BlockPreviewProps<GrammarNoteBlock>) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="my-6 rounded-xl border border-blue-200 bg-blue-50/40 overflow-hidden shadow-sm">

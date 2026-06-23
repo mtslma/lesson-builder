@@ -1,4 +1,4 @@
-import React from 'react';
+import type { BlockFormProps, BlockPreviewProps, HeadingBlock } from '../types/index';
 
 const HEADING_LEVEL_OPTIONS = [
   { label: 'Heading 1', value: 'h1' },
@@ -7,12 +7,12 @@ const HEADING_LEVEL_OPTIONS = [
   { label: 'Heading 4', value: 'h4' }
 ];
 
-export const HeadingForm: React.FC<any> = ({ block, onUpdate }) => (
+export const HeadingForm = ({ block, onUpdate }: BlockFormProps<HeadingBlock>) => (
   <div className="space-y-2">
     <select
       className="w-full p-2 border rounded text-sm"
       value={block.level || 'h2'}
-      onChange={(e) => onUpdate({ level: e.target.value })}
+      onChange={(e) => onUpdate({ level: e.target.value as HeadingBlock['level'] })}
     >
       {HEADING_LEVEL_OPTIONS.map((option) => (
         <option key={option.value} value={option.value}>
@@ -37,7 +37,7 @@ const headingStyles: Record<string, string> = {
   h4: 'text-base font-bold uppercase tracking-[0.14em] mt-6 mb-2 text-slate-600'
 };
 
-export const HeadingPreview: React.FC<any> = ({ block }) => (
+export const HeadingPreview = ({ block }: BlockPreviewProps<HeadingBlock>) => (
   <h2
     className={`font-serif text-slate-950 ${headingStyles[block.level || 'h2'] || headingStyles.h2}`}
   >

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SubQuestionsEditor, RenderSubQuestionsPreview } from '../modules/Shared';
+import type { BlockFormProps, BlockPreviewProps, ListeningBlock } from '../types/index';
 
-export const ListeningForm: React.FC<any> = ({ block, onUpdate }) => (
+export const ListeningForm = ({ block, onUpdate }: BlockFormProps<ListeningBlock>) => (
   <div className="space-y-3">
     <div className="flex gap-2">
       <input
@@ -29,7 +30,9 @@ export const ListeningForm: React.FC<any> = ({ block, onUpdate }) => (
     <select
       className="w-full p-2 border rounded text-sm"
       value={block.transcriptVisibility || 'hidden'}
-      onChange={(e) => onUpdate({ transcriptVisibility: e.target.value })}
+      onChange={(e) =>
+        onUpdate({ transcriptVisibility: e.target.value as ListeningBlock['transcriptVisibility'] })
+      }
     >
       <option value="hidden">Transcript Hidden</option>
       <option value="after-answer">Show Transcript After Answering</option>
@@ -48,7 +51,7 @@ export const ListeningForm: React.FC<any> = ({ block, onUpdate }) => (
   </div>
 );
 
-export const ListeningPreview: React.FC<any> = ({ block }) => {
+export const ListeningPreview = ({ block }: BlockPreviewProps<ListeningBlock>) => {
   const [plays, setPlays] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const transcriptVisibility = block.transcriptVisibility || 'hidden';

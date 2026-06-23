@@ -7,9 +7,9 @@ type BlockFormComponent = React.ComponentType<{
   onUpdate: (fields: Partial<LessonBlock>) => void;
 }>;
 
-export const blockFormRegistry: Partial<Record<LessonBlock['type'], BlockFormComponent>> =
-  Object.fromEntries(
-    (Object.keys(BLOCK_DEFINITION_MAP) as LessonBlock['type'][])
-      .filter((type) => !!BLOCK_DEFINITION_MAP[type].form)
-      .map((type) => [type, BLOCK_DEFINITION_MAP[type].form as BlockFormComponent])
-  );
+export const blockFormRegistry: Partial<Record<LessonBlock['type'], BlockFormComponent>> = {};
+
+for (const definition of Object.values(BLOCK_DEFINITION_MAP)) {
+  if (!definition.form) continue;
+  blockFormRegistry[definition.type] = definition.form as BlockFormComponent;
+}

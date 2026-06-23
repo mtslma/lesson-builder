@@ -40,18 +40,29 @@ export const normalizeLesson = (input: unknown): Lesson | null => {
   const candidate = input as Partial<Lesson> & { blocks?: unknown[] };
   if (!Array.isArray(candidate.blocks)) return null;
 
-  const normalizedBlocks = candidate.blocks.map((block) => {
-    const normalizedBlock = {
-      ...((block as unknown as Record<string, unknown>) || {}),
-      id:
-        typeof (block as { id?: unknown }).id === 'string'
-          ? (block as { id: string }).id
-          : createId()
-    } as LessonBlock;
+  const normalizedBlocks: LessonBlock[] = [];
 
-    const definition = BLOCK_DEFINITION_MAP[normalizedBlock.type];
-    return definition.normalize ? definition.normalize(normalizedBlock) : normalizedBlock;
-  });
+  for (const rawBlock of candidate.blocks) {
+    if (!rawBlock || typeof rawBlock !== 'object') continue;
+
+    const blockRecord = rawBlock as unknown as Record<string, unknown>;
+    const type = blockRecord.type;
+
+    if (typeof type !== 'string') continue;
+
+    const definition = BLOCK_DEFINITION_MAP[type as BlockType];
+    if (!definition) continue;
+
+    const normalizedBlock = definition.normalize
+      ? definition.normalize({
+          ...blockRecord,
+          id: typeof blockRecord.id === 'string' ? blockRecord.id : createId(),
+          type
+        })
+      : definition.create(nextPageNumber(normalizedBlocks));
+
+    normalizedBlocks.push(normalizedBlock);
+  }
 
   return {
     schemaVersion: 1,
@@ -59,6 +70,6 @@ export const normalizeLesson = (input: unknown): Lesson | null => {
     title: candidate.title || 'Untitled lesson',
     level: candidate.level || '',
     language: candidate.language || 'en',
-    blocks: syncPageBreaks(normalizedBlocks as LessonBlock[])
+    blocks: syncPageBreaks(normalizedBlocks)
   };
 };

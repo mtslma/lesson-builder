@@ -23,7 +23,7 @@ import { MediaForm, MediaPreview, ListeningForm, ListeningPreview, ReadingCompre
 import { VocabularyMatchForm, VocabularyMatchPreview, FlashcardsForm, FlashcardsPreview, RepetitionDrillForm, RepetitionDrillPreview, PhrasalVerbForm, PhrasalVerbPreview } from '../modules/VocabModule';
 import { FillBlankForm, FillBlankPreview, SelectionGridForm, SelectionGridPreview, MultipleChoiceForm, MultipleChoicePreview, ImageChoiceForm, ImageChoicePreview, RewriteQuestionForm, RewriteQuestionPreview, ImageNumberingForm, ImageNumberingPreview } from '../modules/QuizModule';
 import { ConversationForm, ConversationPreview, ConversationPromptsForm, ConversationPromptsPreview, RoleplayForm, RoleplayPreview, TeacherNoteForm, TeacherNotePreview, WritingTaskForm, WritingTaskPreview, FinalTaskForm, FinalTaskPreview } from '../modules/ProductionModule';
-import type { BlockType, LessonBlock, ListeningBlock, FlashcardsBlock } from '../types/index';
+import type { BlockType, LessonBlock } from '../types/index';
 
 const createId = () => crypto.randomUUID();
 
@@ -44,7 +44,7 @@ export interface BlockDefinition {
   create: (pageNumber: number) => LessonBlock;
   form?: BlockFormComponent;
   preview?: BlockPreviewComponent;
-  normalize?: (block: LessonBlock) => LessonBlock;
+  normalize?: (block: Record<string, unknown>) => LessonBlock;
 }
 
 const createSubQuestion = (
@@ -83,7 +83,15 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     create: () => ({ id: createId(), type: 'heading', content: 'Learning Focus', level: 'h2' }),
     form: HeadingForm as BlockFormComponent,
     preview: HeadingPreview as BlockPreviewComponent,
-    normalize: (block) => ({ ...block, level: (block as any).level || 'h2' } as LessonBlock)
+    normalize: (block) => ({
+      id: typeof block.id === 'string' ? block.id : createId(),
+      type: 'heading',
+      content: typeof block.content === 'string' ? block.content : '',
+      level:
+        block.level === 'h1' || block.level === 'h2' || block.level === 'h3' || block.level === 'h4'
+          ? block.level
+          : 'h2'
+    })
   },
   {
     type: 'paragraph',
@@ -100,7 +108,18 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     }),
     form: ParagraphForm as BlockFormComponent,
     preview: ParagraphPreview as BlockPreviewComponent,
-    normalize: (block) => ({ ...block, style: (block as any).style || 'body' } as LessonBlock)
+    normalize: (block) => ({
+      id: typeof block.id === 'string' ? block.id : createId(),
+      type: 'paragraph',
+      content: typeof block.content === 'string' ? block.content : '',
+      style:
+        block.style === 'body' ||
+        block.style === 'intro' ||
+        block.style === 'instruction' ||
+        block.style === 'note'
+          ? block.style
+          : 'body'
+    })
   },
   {
     type: 'teacher-note',
@@ -200,12 +219,21 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     form: ListeningForm as BlockFormComponent,
     preview: ListeningPreview as BlockPreviewComponent,
     normalize: (block) => {
-      const listening = block as ListeningBlock;
       return {
-        ...listening,
-        transcript: listening.transcript || '',
-        transcriptVisibility: listening.transcriptVisibility || 'hidden'
-      } as LessonBlock;
+        id: typeof block.id === 'string' ? block.id : createId(),
+        type: 'listening',
+        audioUrl: typeof block.audioUrl === 'string' ? block.audioUrl : '',
+        maxPlays: typeof block.maxPlays === 'number' ? block.maxPlays : undefined,
+        contextImageUrl: typeof block.contextImageUrl === 'string' ? block.contextImageUrl : undefined,
+        transcript: typeof block.transcript === 'string' ? block.transcript : '',
+        transcriptVisibility:
+          block.transcriptVisibility === 'hidden' ||
+          block.transcriptVisibility === 'after-answer' ||
+          block.transcriptVisibility === 'always'
+            ? block.transcriptVisibility
+            : 'hidden',
+        questions: Array.isArray(block.questions) ? block.questions : []
+      };
     }
   },
   {
@@ -291,33 +319,52 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     form: PhrasalVerbForm as BlockFormComponent,
     preview: PhrasalVerbPreview as BlockPreviewComponent,
     normalize: (block) => {
-      const phrasalBlock = block as any;
-      const typedItems = phrasalBlock.items as
-        | Array<{ id?: string; verb?: string; meaning?: string; examples?: string[] }>
-        | undefined;
+      const typedItems = Array.isArray(block.items) ? block.items : undefined;
 
       const normalizedItems =
         typedItems && typedItems.length > 0
           ? typedItems.slice(0, 6).map((item) => ({
-              id: item.id || createId(),
-              verb: item.verb || '',
-              meaning: item.meaning || '',
-              examples: Array.isArray(item.examples) ? item.examples : []
+              id:
+                item && typeof item === 'object' && typeof item.id === 'string' ? item.id : createId(),
+              verb:
+                item && typeof item === 'object' && typeof item.verb === 'string' ? item.verb : '',
+              meaning:
+                item && typeof item === 'object' && typeof item.meaning === 'string'
+                  ? item.meaning
+                  : '',
+              examples:
+                item && typeof item === 'object' && Array.isArray(item.examples)
+                  ? item.examples.filter(
+                      (example: unknown): example is string => typeof example === 'string'
+                    )
+                  : []
             }))
           : [
               {
                 id: createId(),
-                verb: phrasalBlock.verb || '',
-                meaning: phrasalBlock.meaning || '',
-                examples: Array.isArray(phrasalBlock.examples) ? phrasalBlock.examples : []
+                verb: typeof block.verb === 'string' ? block.verb : '',
+                meaning: typeof block.meaning === 'string' ? block.meaning : '',
+                examples: Array.isArray(block.examples)
+                  ? block.examples.filter(
+                      (example: unknown): example is string => typeof example === 'string'
+                    )
+                  : []
               }
             ];
 
       return {
-        ...phrasalBlock,
-        title: phrasalBlock.title || 'Phrasal Verb Set',
+        id: typeof block.id === 'string' ? block.id : createId(),
+        type: 'phrasal-verb-focus',
+        title: typeof block.title === 'string' ? block.title : 'Phrasal Verb Set',
+        verb: typeof block.verb === 'string' ? block.verb : undefined,
+        meaning: typeof block.meaning === 'string' ? block.meaning : undefined,
+        examples: Array.isArray(block.examples)
+          ? block.examples.filter(
+              (example: unknown): example is string => typeof example === 'string'
+            )
+          : undefined,
         items: normalizedItems
-      } as LessonBlock;
+      };
     }
   },
   {
@@ -462,19 +509,45 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     form: ConversationForm as BlockFormComponent,
     preview: ConversationPreview as BlockPreviewComponent,
     normalize: (block) => {
-      const conversation = block as any;
       return {
-        ...conversation,
-        messages: Array.isArray(conversation.messages)
-          ? conversation.messages.map((message: any) => ({
-              id: typeof message.id === 'string' ? message.id : createId(),
-              speaker: message.speaker || '',
-              text: message.text || '',
-              highlighted: Boolean(message.highlighted),
-              ...(message.highlightColor ? { highlightColor: message.highlightColor } : {})
+        id: typeof block.id === 'string' ? block.id : createId(),
+        type: 'conversation',
+        imageUrl: typeof block.imageUrl === 'string' ? block.imageUrl : undefined,
+        messages: Array.isArray(block.messages)
+          ? block.messages.map((message) => ({
+              id:
+                message && typeof message === 'object' && typeof message.id === 'string'
+                  ? message.id
+                  : createId(),
+              speaker:
+                message && typeof message === 'object' && typeof message.speaker === 'string'
+                  ? message.speaker
+                  : '',
+              text:
+                message && typeof message === 'object' && typeof message.text === 'string'
+                  ? message.text
+                  : '',
+              highlighted:
+                message && typeof message === 'object' && typeof message.highlighted === 'boolean'
+                  ? message.highlighted
+                  : false,
+              highlightColor:
+                message && typeof message === 'object' && typeof message.highlightColor === 'string'
+                  ? message.highlightColor
+                  : undefined
             }))
-          : []
-      } as LessonBlock;
+          : [],
+        substitutionBox: Array.isArray(block.substitutionBox)
+          ? block.substitutionBox
+              .filter((item): item is Record<string, unknown> => Boolean(item && typeof item === 'object'))
+              .map((item) => ({
+                original: typeof item.original === 'string' ? item.original : '',
+                alternatives: Array.isArray(item.alternatives)
+                  ? item.alternatives.filter((option): option is string => typeof option === 'string')
+                  : []
+              }))
+          : undefined
+      };
     }
   },
   {
@@ -563,12 +636,26 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     form: FlashcardsForm as BlockFormComponent,
     preview: FlashcardsPreview as BlockPreviewComponent,
     normalize: (block) => {
-      const flashcards = block as FlashcardsBlock;
       return {
-        ...flashcards,
-        category: flashcards.category || '',
-        tags: Array.isArray(flashcards.tags) ? flashcards.tags : []
-      } as LessonBlock;
+        id: typeof block.id === 'string' ? block.id : createId(),
+        type: 'flashcards',
+        title: typeof block.title === 'string' ? block.title : 'Flashcard Set',
+        category: typeof block.category === 'string' ? block.category : '',
+        tags: Array.isArray(block.tags)
+          ? block.tags.filter((tag): tag is string => typeof tag === 'string')
+          : [],
+        cards: Array.isArray(block.cards)
+          ? block.cards
+              .filter((card): card is Record<string, unknown> => Boolean(card && typeof card === 'object'))
+              .map((card) => ({
+                id: typeof card.id === 'string' ? card.id : createId(),
+                frontText: typeof card.frontText === 'string' ? card.frontText : undefined,
+                frontImage: typeof card.frontImage === 'string' ? card.frontImage : undefined,
+                backText: typeof card.backText === 'string' ? card.backText : '',
+                backImage: typeof card.backImage === 'string' ? card.backImage : undefined
+              }))
+          : []
+      };
     }
   }
 ];

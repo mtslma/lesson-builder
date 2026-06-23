@@ -1,6 +1,6 @@
-import React from 'react';
+import type { BlockFormProps, BlockPreviewProps, WritingTaskBlock } from '../types/index';
 
-export const WritingTaskForm: React.FC<any> = ({ block, onUpdate }) => (
+export const WritingTaskForm = ({ block, onUpdate }: BlockFormProps<WritingTaskBlock>) => (
   <div className="space-y-2">
     <input type="text" className="w-full p-2 border rounded text-sm font-bold" value={block.title} onChange={(e) => onUpdate({ title: e.target.value })} placeholder="Title" />
     <textarea className="w-full p-2 border rounded text-sm h-16" value={block.prompt} onChange={(e) => onUpdate({ prompt: e.target.value })} placeholder="Writing Prompt" />
@@ -8,7 +8,7 @@ export const WritingTaskForm: React.FC<any> = ({ block, onUpdate }) => (
   </div>
 );
 
-export const WritingTaskPreview: React.FC<any> = ({ block }) => (
+export const WritingTaskPreview = ({ block }: BlockPreviewProps<WritingTaskBlock>) => (
   <div className="my-8 p-6 border-2 border-slate-900 bg-white rounded-2xl shadow-md space-y-4">
     <div className="border-b-2 border-slate-100 pb-3">
       <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono block mb-1">Writing Assignment</span>
