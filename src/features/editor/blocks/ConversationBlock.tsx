@@ -8,7 +8,19 @@ const HIGHLIGHT_COLOR_OPTIONS = [
 ];
 
 export const ConversationForm: React.FC<any> = ({ block, onUpdate }) => {
-  const addMsg = () => onUpdate({ messages: [...block.messages, { speaker: '', text: '', highlightText: '', highlightColor: '#d9f99d' }] });
+  const addMsg = () =>
+    onUpdate({
+      messages: [
+        ...block.messages,
+        {
+          id: crypto.randomUUID(),
+          speaker: '',
+          text: '',
+          highlighted: false,
+          highlightColor: '#d9f99d'
+        }
+      ]
+    });
   const removeMsg = (index: number) => onUpdate({ messages: block.messages.filter((_: any, messageIndex: number) => messageIndex !== index) });
   return (
     <div className="space-y-2">
@@ -41,18 +53,19 @@ export const ConversationForm: React.FC<any> = ({ block, onUpdate }) => {
   );
 };
 
-const renderHighlightedDialogue = (message: { text: string; highlightText?: string; highlightColor?: string }) => {
+const renderHighlightedDialogue = (message: {
+  text: string;
+  highlighted?: boolean;
+  highlightColor?: string;
+}) => {
   const color = message.highlightColor || '#d9f99d';
+  if (!message.highlighted) return message.text;
   const bracketMatch = message.text.match(/\[([^\]]+)\]/);
   if (bracketMatch) {
     const fullMatch = bracketMatch[0];
     const highlightedContent = bracketMatch[1];
     const [before, after] = message.text.split(fullMatch);
     return <>{before}<span className="px-1 py-0.5 rounded font-bold border-b" style={{ backgroundColor: color, borderColor: color }}>{highlightedContent}</span>{after}</>;
-  }
-  if (message.highlightText && message.text.includes(message.highlightText)) {
-    const [before, ...rest] = message.text.split(message.highlightText);
-    return <>{before}<span className="px-1 py-0.5 rounded font-bold border-b" style={{ backgroundColor: color, borderColor: color }}>{message.highlightText}</span>{rest.join(message.highlightText)}</>;
   }
   return message.text;
 };

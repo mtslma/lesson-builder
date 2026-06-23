@@ -4,6 +4,7 @@ import { BLOCK_DEFINITION_MAP } from './blockRegistry';
 const createId = () => crypto.randomUUID();
 
 export const createEmptyLesson = (): Lesson => ({
+  schemaVersion: 1,
   id: createId(),
   title: 'Untitled lesson',
   level: '',
@@ -53,6 +54,7 @@ export const normalizeLesson = (input: unknown): Lesson | null => {
   });
 
   return {
+    schemaVersion: 1,
     id: candidate.id || createId(),
     title: candidate.title || 'Untitled lesson',
     level: candidate.level || '',

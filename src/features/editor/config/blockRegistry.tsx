@@ -80,9 +80,10 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     icon: NotepadText,
     accent: 'text-sky-700',
     surface: 'from-sky-100 to-white',
-    create: () => ({ id: createId(), type: 'heading', content: 'Learning Focus' }),
+    create: () => ({ id: createId(), type: 'heading', content: 'Learning Focus', level: 'h2' }),
     form: HeadingForm as BlockFormComponent,
-    preview: HeadingPreview as BlockPreviewComponent
+    preview: HeadingPreview as BlockPreviewComponent,
+    normalize: (block) => ({ ...block, level: (block as any).level || 'h2' } as LessonBlock)
   },
   {
     type: 'paragraph',
@@ -94,10 +95,12 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     create: () => ({
       id: createId(),
       type: 'paragraph',
-      content: 'Use this area for neutral instructions, context, or brief lesson guidance.'
+      content: 'Use this area for neutral instructions, context, or brief lesson guidance.',
+      style: 'body'
     }),
     form: ParagraphForm as BlockFormComponent,
-    preview: ParagraphPreview as BlockPreviewComponent
+    preview: ParagraphPreview as BlockPreviewComponent,
+    normalize: (block) => ({ ...block, style: (block as any).style || 'body' } as LessonBlock)
   },
   {
     type: 'teacher-note',
@@ -445,13 +448,34 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
       id: createId(),
       type: 'conversation',
       messages: [
-        { speaker: 'Speaker A', text: 'Hello. Welcome to the activity.' },
-        { speaker: 'Speaker B', text: 'Thanks. I am ready to begin.', highlighted: true }
+        { id: createId(), speaker: 'Speaker A', text: 'Hello. Welcome to the activity.' },
+        {
+          id: createId(),
+          speaker: 'Speaker B',
+          text: '[Thanks]. I am ready to begin.',
+          highlighted: true,
+          highlightColor: '#d9f99d'
+        }
       ],
       substitutionBox: [{ original: 'I am ready to begin.', alternatives: ['Let us start.'] }]
     }),
     form: ConversationForm as BlockFormComponent,
-    preview: ConversationPreview as BlockPreviewComponent
+    preview: ConversationPreview as BlockPreviewComponent,
+    normalize: (block) => {
+      const conversation = block as any;
+      return {
+        ...conversation,
+        messages: Array.isArray(conversation.messages)
+          ? conversation.messages.map((message: any) => ({
+              id: typeof message.id === 'string' ? message.id : createId(),
+              speaker: message.speaker || '',
+              text: message.text || '',
+              highlighted: Boolean(message.highlighted),
+              ...(message.highlightColor ? { highlightColor: message.highlightColor } : {})
+            }))
+          : []
+      } as LessonBlock;
+    }
   },
   {
     type: 'conversation-prompts',
@@ -552,4 +576,3 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
 export const BLOCK_DEFINITION_MAP = Object.fromEntries(
   BLOCK_DEFINITIONS.map((definition) => [definition.type, definition])
 ) as Record<BlockType, BlockDefinition>;
-

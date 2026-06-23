@@ -47,10 +47,12 @@ export interface PageBreakBlock extends BaseBlock {
 export interface HeadingBlock extends BaseBlock {
   type: 'heading';
   content: string;
+  level?: 'h1' | 'h2' | 'h3' | 'h4';
 }
 export interface ParagraphBlock extends BaseBlock {
   type: 'paragraph';
   content: string;
+  style?: 'body' | 'intro' | 'instruction' | 'note';
 }
 export interface TeacherNoteBlock extends BaseBlock {
   type: 'teacher-note';
@@ -101,9 +103,10 @@ export interface ConversationBlock extends BaseBlock {
   type: 'conversation';
   imageUrl?: string;
   messages: {
+    id: string;
     speaker: string;
     text: string;
-    highlightText?: string;
+    highlighted?: boolean;
     highlightColor?: string;
   }[];
   substitutionBox?: { original: string; alternatives: string[] }[];
@@ -231,6 +234,7 @@ export type LessonBlock =
   | FinalTaskBlock;
 
 export interface Lesson {
+  schemaVersion: 1;
   id: string;
   title: string;
   level: string;

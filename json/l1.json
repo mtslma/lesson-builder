@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 1,
   "id": "lesson-1-all-about-you",
   "title": "Lesson 1 - All About You",
   "level": "A1",
@@ -37,37 +38,45 @@
       "imageUrl": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=900",
       "messages": [
         {
+          "id": "p1-conv1-m1",
           "speaker": "Emma",
           "text": "Hello!"
         },
         {
+          "id": "p1-conv1-m2",
           "speaker": "Leo",
           "text": "Hi!",
           "highlighted": true
         },
         {
+          "id": "p1-conv1-m3",
           "speaker": "Emma",
           "text": "Good morning!"
         },
         {
+          "id": "p1-conv1-m4",
           "speaker": "Leo",
           "text": "Good morning!",
           "highlighted": true
         },
         {
+          "id": "p1-conv1-m5",
           "speaker": "Emma",
           "text": "How are you?"
         },
         {
+          "id": "p1-conv1-m6",
           "speaker": "Leo",
           "text": "I am fine, thank you.",
           "highlighted": true
         },
         {
+          "id": "p1-conv1-m7",
           "speaker": "Emma",
           "text": "Nice to meet you."
         },
         {
+          "id": "p1-conv1-m8",
           "speaker": "Leo",
           "text": "Nice to meet you too.",
           "highlighted": true
@@ -199,15 +208,18 @@
       "type": "conversation",
       "messages": [
         {
+          "id": "p2-conv1-m1",
           "speaker": "Model",
           "text": "My name is Ana.",
           "highlighted": true
         },
         {
+          "id": "p2-conv1-m2",
           "speaker": "Model",
           "text": "I am 18 years old."
         },
         {
+          "id": "p2-conv1-m3",
           "speaker": "Model",
           "text": "I am from Brazil.",
           "highlighted": true
@@ -285,19 +297,23 @@
       "type": "conversation",
       "messages": [
         {
+          "id": "p2-conv2-m1",
           "speaker": "Lucas",
           "text": "Do you study English?"
         },
         {
+          "id": "p2-conv2-m2",
           "speaker": "Maria",
           "text": "Yes, I do.",
           "highlighted": true
         },
         {
+          "id": "p2-conv2-m3",
           "speaker": "Lucas",
           "text": "Do you work?"
         },
         {
+          "id": "p2-conv2-m4",
           "speaker": "Maria",
           "text": "No, I do not."
         }
@@ -652,28 +668,34 @@
       "imageUrl": "https://images.unsplash.com/photo-1484712401471-05c7215e66eb?w=900",
       "messages": [
         {
+          "id": "p5-conv1-m1",
           "speaker": "Mia",
           "text": "Are you from Brazil?",
           "highlighted": true
         },
         {
+          "id": "p5-conv1-m2",
           "speaker": "Ben",
           "text": "Yes, I am."
         },
         {
+          "id": "p5-conv1-m3",
           "speaker": "Mia",
           "text": "Are you Brazilian?"
         },
         {
+          "id": "p5-conv1-m4",
           "speaker": "Ben",
           "text": "Yes, I am.",
           "highlighted": true
         },
         {
+          "id": "p5-conv1-m5",
           "speaker": "Mia",
           "text": "Are you from Canada?"
         },
         {
+          "id": "p5-conv1-m6",
           "speaker": "Ben",
           "text": "No, I am not."
         }

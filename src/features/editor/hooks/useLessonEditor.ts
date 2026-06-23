@@ -7,7 +7,7 @@ import {
   normalizeLesson,
   syncPageBreaks
 } from '../config/blockFactory';
-import { lessonImportSchema } from '../config/lessonSchema';
+import { formatImportIssue, lessonImportSchema } from '../config/lessonSchema';
 
 const STORAGE_KEY = 'english-platform-editor.lesson';
 
@@ -43,7 +43,7 @@ export const useLessonEditor = () => {
 
       if (!validated.success) {
         const firstIssue = validated.error.issues[0];
-        setImportError(firstIssue?.message || 'Invalid lesson JSON.');
+        setImportError(firstIssue ? formatImportIssue(firstIssue) : 'Invalid lesson JSON.');
         setJsonFeedback(null);
         return;
       }
