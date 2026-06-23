@@ -85,6 +85,8 @@ export interface ListeningBlock extends BaseBlock {
   audioUrl: string;
   maxPlays?: number;
   contextImageUrl?: string;
+  transcript?: string;
+  transcriptVisibility?: 'hidden' | 'after-answer' | 'always';
   questions: SubQuestion[];
 }
 
@@ -98,13 +100,26 @@ export interface ReadingComprehensionBlock extends BaseBlock {
 export interface ConversationBlock extends BaseBlock {
   type: 'conversation';
   imageUrl?: string;
-  messages: { speaker: string; text: string; highlighted?: boolean }[];
+  messages: {
+    speaker: string;
+    text: string;
+    highlightText?: string;
+    highlightColor?: string;
+  }[];
   substitutionBox?: { original: string; alternatives: string[] }[];
 }
 export interface FlashcardsBlock extends BaseBlock {
   type: 'flashcards';
   title: string;
-  cards: { id: string; frontText?: string; frontImage?: string; backText: string }[];
+  category?: string;
+  tags?: string[];
+  cards: {
+    id: string;
+    frontText?: string;
+    frontImage?: string;
+    backText: string;
+    backImage?: string;
+  }[];
 }
 export interface VocabularyMatchBlock extends BaseBlock {
   type: 'vocabulary-match';

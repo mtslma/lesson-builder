@@ -7,6 +7,7 @@ export const SubQuestionsEditor: React.FC<{
 }> = ({ questions, onChange }) => {
   const addQ = () =>
     onChange([...questions, { id: crypto.randomUUID(), type: 'multiple-choice', question: '' }]);
+  const removeQ = (idx: number) => onChange(questions.filter((_, index) => index !== idx));
   const update = (idx: number, field: keyof SubQuestion, val: any) => {
     const n = [...questions];
     n[idx] = { ...n[idx], [field]: val };
@@ -37,6 +38,13 @@ export const SubQuestionsEditor: React.FC<{
               value={q.question}
               onChange={(e) => update(i, 'question', e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => removeQ(i)}
+              className="rounded border border-red-200 bg-white px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
+            >
+              Remove
+            </button>
           </div>
           {q.type === 'multiple-choice' && (
             <input
@@ -75,12 +83,17 @@ export const SubQuestionsEditor: React.FC<{
   );
 };
 
-export const RenderSubQuestionsPreview: React.FC<{ questions: SubQuestion[] }> = ({
-  questions
-}) => {
+export const RenderSubQuestionsPreview: React.FC<{
+  questions: SubQuestion[];
+  onInteraction?: () => void;
+}> = ({ questions, onInteraction }) => {
   if (!questions || questions.length === 0) return null;
   return (
-    <div className="space-y-6 pt-4 border-t border-slate-100">
+    <div
+      className="space-y-6 pt-4 border-t border-slate-100"
+      onChangeCapture={onInteraction}
+      onClickCapture={onInteraction}
+    >
       {questions.map((q, i) => (
         <div key={q.id} className="space-y-3">
           <label className="text-sm font-bold text-slate-800 block font-sans">

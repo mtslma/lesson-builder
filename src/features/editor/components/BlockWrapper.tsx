@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react';
 import type { LessonBlock } from '../types/index';
 import { blockFormRegistry } from '../config/formRegistry';
+import { BLOCK_LABELS } from '../config/blockMeta';
 
 interface Props {
   block: LessonBlock;
@@ -28,9 +29,14 @@ export const BlockWrapper: React.FC<Props> = ({
     <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-white to-slate-50/70 p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] transition-all hover:border-slate-300 hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent opacity-80"></div>
       <div className="mb-5 flex items-center justify-between border-b border-slate-200 pb-3 select-none">
-        <span className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-sm">
-          Block {index + 1} - {block.type}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-sm">
+            Block {index + 1}
+          </span>
+          <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500">
+            {BLOCK_LABELS[block.type]}
+          </span>
+        </div>
         <div className="flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
           <button
             type="button"

@@ -3,6 +3,7 @@ import {
   Copy,
   ChevronLeft,
   ChevronRight,
+  Eraser,
   FileCode2,
   FileDown,
   FolderUp,
@@ -17,6 +18,7 @@ import { useLessonEditor } from './hooks/useLessonEditor';
 import { BlockWrapper } from './components/BlockWrapper';
 import { StudentPreviewDispatcher } from './components/StudentPreviewDispatcher';
 import { BLOCK_CATEGORIES } from './config/blockCatalog';
+import { BLOCK_LABELS } from './config/blockMeta';
 
 export const LessonEditor: React.FC = () => {
   const {
@@ -41,6 +43,7 @@ export const LessonEditor: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [insertMenuIndex, setInsertMenuIndex] = useState<number | null>(null);
   const [jsonCopied, setJsonCopied] = useState(false);
+  const [previewResetKey, setPreviewResetKey] = useState(0);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const totalPages = Math.max(1, lesson.blocks.filter((b) => b.type === 'page-break').length);
@@ -314,9 +317,19 @@ export const LessonEditor: React.FC = () => {
                       {lesson.title}
                     </h1>
                   </div>
-                  <span className="text-xs text-slate-500">
-                    Page {currentPage} of {totalPages}
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setPreviewResetKey((value) => value + 1)}
+                      className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-600 shadow-sm hover:border-slate-400"
+                      type="button"
+                    >
+                      <Eraser size={13} strokeWidth={2.1} />
+                      Limpar respostas
+                    </button>
+                    <span className="text-xs text-slate-500">
+                      Page {currentPage} of {totalPages}
+                    </span>
+                  </div>
                 </div>
 
                 {previewBlocks.length === 0 ? (
@@ -324,7 +337,16 @@ export const LessonEditor: React.FC = () => {
                     Add blocks to start building a lesson.
                   </p>
                 ) : (
-                  previewBlocks.map((b) => <StudentPreviewDispatcher key={b.id} block={b} />)
+                  previewBlocks.map((b) => (
+                    <div key={`${previewResetKey}-${b.id}`} className="relative">
+                      <div className="mb-2 flex justify-end">
+                        <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                          {BLOCK_LABELS[b.type]}
+                        </span>
+                      </div>
+                      <StudentPreviewDispatcher block={b} />
+                    </div>
+                  ))
                 )}
               </div>
 
