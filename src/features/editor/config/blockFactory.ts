@@ -35,6 +35,13 @@ export const createBlock = (type: BlockType, pageNumber: number): LessonBlock =>
         type,
         content: 'Use this area for neutral instructions, context, or brief lesson guidance.'
       };
+    case 'teacher-note':
+      return {
+        id,
+        type,
+        title: 'Teacher note',
+        content: 'Add a short guidance note or tip for the student here.'
+      };
     case 'grammar-note':
       return {
         id,
@@ -196,9 +203,15 @@ export const createBlock = (type: BlockType, pageNumber: number): LessonBlock =>
       return {
         id,
         type,
-        verb: 'Target expression',
-        meaning: 'Add a short neutral meaning here.',
-        examples: ['Example sentence one.', 'Example sentence two.']
+        title: 'Phrasal Verb Set',
+        items: [
+          {
+            id: createId(),
+            verb: 'Target expression',
+            meaning: 'Add a short neutral meaning here.',
+            examples: ['Example sentence one.', 'Example sentence two.']
+          }
+        ]
       };
     case 'roleplay':
       return {
@@ -252,19 +265,68 @@ export const normalizeLesson = (input: unknown): Lesson | null => {
   const candidate = input as Partial<Lesson> & { blocks?: unknown[] };
   if (!Array.isArray(candidate.blocks)) return null;
 
+  const normalizedBlocks = candidate.blocks.map((block) => {
+    const normalizedBlock = {
+      ...((block as unknown as Record<string, unknown>) || {}),
+      id:
+        typeof (block as { id?: unknown }).id === 'string'
+          ? (block as { id: string }).id
+          : createId()
+    } as LessonBlock;
+
+    if (normalizedBlock.type !== 'phrasal-verb-focus') return normalizedBlock;
+
+    const phrasalBlock = normalizedBlock as LessonBlock & {
+      title?: string;
+      verb?: string;
+      meaning?: string;
+      examples?: string[];
+      items?: Array<{
+        id?: string;
+        verb?: string;
+        meaning?: string;
+        examples?: string[];
+      }>;
+    };
+
+    const typedItems = phrasalBlock.items as
+      | Array<{
+          id?: string;
+          verb?: string;
+          meaning?: string;
+          examples?: string[];
+        }>
+      | undefined;
+
+    const normalizedItems =
+      typedItems && typedItems.length > 0
+        ? typedItems.slice(0, 6).map((item) => ({
+            id: item.id || createId(),
+            verb: item.verb || '',
+            meaning: item.meaning || '',
+            examples: Array.isArray(item.examples) ? item.examples : []
+          }))
+        : [
+            {
+              id: createId(),
+              verb: phrasalBlock.verb || '',
+              meaning: phrasalBlock.meaning || '',
+              examples: Array.isArray(phrasalBlock.examples) ? phrasalBlock.examples : []
+            }
+          ];
+
+    return {
+      ...phrasalBlock,
+      title: phrasalBlock.title || 'Phrasal Verb Set',
+      items: normalizedItems
+    } as LessonBlock;
+  });
+
   return {
     id: candidate.id || createId(),
     title: candidate.title || 'Untitled lesson',
     level: candidate.level || '',
     language: candidate.language || 'en',
-    blocks: syncPageBreaks(
-      candidate.blocks.map((block) => ({
-        ...((block as unknown as Record<string, unknown>) || {}),
-        id:
-          typeof (block as { id?: unknown }).id === 'string'
-            ? (block as { id: string }).id
-            : createId()
-      })) as LessonBlock[]
-    )
+    blocks: syncPageBreaks(normalizedBlocks as LessonBlock[])
   };
 };

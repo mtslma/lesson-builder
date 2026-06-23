@@ -57,6 +57,13 @@ export const BLOCK_CATEGORIES: BlockCatalogCategory[] = [
         surface: 'from-cyan-100 to-white'
       },
       {
+        t: 'teacher-note',
+        i: NotepadText,
+        l: 'Teacher Note',
+        accent: 'text-amber-700',
+        surface: 'from-amber-100 to-white'
+      },
+      {
         t: 'grammar-note',
         i: Sparkles,
         l: 'Simple Grammar',

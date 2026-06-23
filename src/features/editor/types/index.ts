@@ -12,6 +12,7 @@ export type BlockType =
   | 'page-break'
   | 'heading'
   | 'paragraph'
+  | 'teacher-note'
   | 'grammar-note'
   | 'advanced-grammar'
   | 'media-block'
@@ -49,6 +50,11 @@ export interface HeadingBlock extends BaseBlock {
 }
 export interface ParagraphBlock extends BaseBlock {
   type: 'paragraph';
+  content: string;
+}
+export interface TeacherNoteBlock extends BaseBlock {
+  type: 'teacher-note';
+  title: string;
   content: string;
 }
 export interface GrammarNoteBlock extends BaseBlock {
@@ -147,9 +153,16 @@ export interface RepetitionDrillBlock extends BaseBlock {
 
 export interface PhrasalVerbFocusBlock extends BaseBlock {
   type: 'phrasal-verb-focus';
-  verb: string;
-  meaning: string;
-  examples: string[];
+  title?: string;
+  items: {
+    id: string;
+    verb: string;
+    meaning: string;
+    examples: string[];
+  }[];
+  verb?: string;
+  meaning?: string;
+  examples?: string[];
 }
 
 export interface RoleplayBlock extends BaseBlock {
@@ -180,6 +193,7 @@ export type LessonBlock =
   | PageBreakBlock
   | HeadingBlock
   | ParagraphBlock
+  | TeacherNoteBlock
   | GrammarNoteBlock
   | AdvancedGrammarBlock
   | MediaBlock

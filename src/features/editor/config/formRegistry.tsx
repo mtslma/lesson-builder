@@ -21,6 +21,7 @@ import {
   ConversationForm,
   ConversationPromptsForm,
   RoleplayForm,
+  TeacherNoteForm,
   WritingTaskForm,
   FinalTaskForm
 } from '../modules/ProductionModule';
@@ -33,6 +34,7 @@ type BlockFormComponent = React.ComponentType<{
 export const blockFormRegistry: Partial<Record<LessonBlock['type'], BlockFormComponent>> = {
   heading: HeadingForm as BlockFormComponent,
   paragraph: ParagraphForm as BlockFormComponent,
+  'teacher-note': TeacherNoteForm as BlockFormComponent,
   'grammar-note': GrammarNoteForm as BlockFormComponent,
   'advanced-grammar': AdvancedGrammarForm as BlockFormComponent,
   'media-block': MediaForm as BlockFormComponent,

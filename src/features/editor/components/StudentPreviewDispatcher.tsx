@@ -9,6 +9,7 @@ import {
 } from '../modules/MediaModule';
 import {
   VocabularyMatchPreview,
+  FlashcardsPreview,
   RepetitionDrillPreview,
   PhrasalVerbPreview
 } from '../modules/VocabModule';
@@ -24,6 +25,7 @@ import {
   ConversationPreview,
   ConversationPromptsPreview,
   RoleplayPreview,
+  TeacherNotePreview,
   WritingTaskPreview,
   FinalTaskPreview
 } from '../modules/ProductionModule';
@@ -35,6 +37,8 @@ export const StudentPreviewDispatcher: React.FC<{ block: LessonBlock }> = ({ blo
       return <HeadingPreview {...props} />;
     case 'paragraph':
       return <ParagraphPreview {...props} />;
+    case 'teacher-note':
+      return <TeacherNotePreview {...props} />;
     case 'grammar-note':
       return <GrammarNotePreview {...props} />;
     case 'advanced-grammar':
@@ -47,6 +51,8 @@ export const StudentPreviewDispatcher: React.FC<{ block: LessonBlock }> = ({ blo
       return <ListeningPreview {...props} />;
     case 'conversation':
       return <ConversationPreview {...props} />;
+    case 'flashcards':
+      return <FlashcardsPreview {...props} />;
     case 'repetition-drill':
       return <RepetitionDrillPreview {...props} />;
     case 'phrasal-verb-focus':
