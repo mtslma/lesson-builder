@@ -1,0 +1,3204 @@
+{
+  "schemaVersion": 1,
+  "id": "book-1-lesson-1-hello-this-is-me",
+  "title": "Book 1 - Lesson 1 - Hello! This Is Me",
+  "level": "A1",
+  "language": "en",
+  "blocks": [
+    {
+      "id": "p1-title",
+      "type": "heading",
+      "content": "Lesson 1 - Hello! This Is Me",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "p1-intro",
+      "type": "paragraph",
+      "content": "Welcome! In this first lesson, you learn how to start a conversation, say your name, ask simple questions, answer about yourself, and make a short introduction in English.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p1-break",
+      "type": "page-break",
+      "pageNumber": 1,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p1-h1",
+      "type": "heading",
+      "content": "1. First Contact",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p1-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1000",
+      "messages": [
+        {
+          "id": "p1-conv1-m1",
+          "speaker": "Emma",
+          "text": "Hello!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h1",
+              "text": "Hello",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m2",
+          "speaker": "Leo",
+          "text": "Hi!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h2",
+              "text": "Hi",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m3",
+          "speaker": "Emma",
+          "text": "My name is Emma. What's your name?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h3",
+              "text": "My name is Emma",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "p1-conv1-h4",
+              "text": "What's your name",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m4",
+          "speaker": "Leo",
+          "text": "My name is Leo.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h5",
+              "text": "My name is Leo",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m5",
+          "speaker": "Emma",
+          "text": "Nice to meet you, Leo.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h6",
+              "text": "Nice to meet you",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m6",
+          "speaker": "Leo",
+          "text": "Nice to meet you too.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h7",
+              "text": "Nice to meet you too",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m7",
+          "speaker": "Emma",
+          "text": "Bye!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h8",
+              "text": "Bye",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m8",
+          "speaker": "Leo",
+          "text": "See you!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h9",
+              "text": "See you",
+              "color": "#bfdbfe"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Hello!",
+          "alternatives": ["Hi!", "Good morning!", "Good afternoon!"]
+        },
+        {
+          "original": "My name is Emma.",
+          "alternatives": ["I'm Emma.", "I am Emma."]
+        },
+        {
+          "original": "Nice to meet you.",
+          "alternatives": ["Nice to meet you too.", "It's nice to meet you."]
+        },
+        {
+          "original": "Bye!",
+          "alternatives": ["See you!", "See you later!"]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fc1",
+      "type": "flashcards",
+      "title": "Essential Greeting Expressions",
+      "category": "Greetings",
+      "tags": [],
+      "cards": [
+        {
+          "id": "p1-fc1-c1",
+          "expressions": ["Hello! / Hi!"],
+          "frontImage": "",
+          "backText": "Use these expressions to start a conversation.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c2",
+          "expressions": ["Good morning! / Good afternoon! / Good evening!"],
+          "frontImage": "",
+          "backText": "Use these expressions depending on the time of day.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c3",
+          "expressions": ["My name is... / I am... / I'm..."],
+          "frontImage": "",
+          "backText": "Use these expressions to say your name.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c4",
+          "expressions": ["What's your name?"],
+          "frontImage": "",
+          "backText": "Use this question to ask a person's name.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c5",
+          "expressions": ["Nice to meet you. / Nice to meet you too."],
+          "frontImage": "",
+          "backText": "Use these expressions when you meet a person for the first time.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c6",
+          "expressions": ["Bye! / See you!"],
+          "frontImage": "",
+          "backText": "Use these expressions to finish a conversation.",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the mini-dialogue.",
+      "text": "A: Hello!\nB: []!\nA: My name is Ana. What's your []?\nB: My name is Bruno.\nA: Nice to [] you.\nB: Nice to meet you [].",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["Hi", "Hello"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["name"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["meet"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["too"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-mc1",
+      "type": "multiple-choice",
+      "question": "Choose the best answer: Nice to meet you.",
+      "options": [
+        {
+          "id": "p1-mc1-o1",
+          "text": "My name is Ana."
+        },
+        {
+          "id": "p1-mc1-o2",
+          "text": "Nice to meet you too."
+        },
+        {
+          "id": "p1-mc1-o3",
+          "text": "Bye."
+        }
+      ],
+      "correctOptionIds": ["p1-mc1-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p1-prompts1",
+      "type": "conversation-prompts",
+      "title": "First Contact Practice",
+      "prompts": [
+        "Hello!",
+        "What's your name?",
+        "My name is...",
+        "Nice to meet you.",
+        "Nice to meet you too.",
+        "Bye!"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-break",
+      "type": "page-break",
+      "pageNumber": 2,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p2-h1",
+      "type": "heading",
+      "content": "2. Do You...?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p2-p1",
+      "type": "paragraph",
+      "content": "Use Do you...? to ask about actions, routines, and preferences. In this part, use only Do you...? with you.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p2-grammar1",
+      "type": "advanced-grammar",
+      "title": "Question Pattern: Do You...?",
+      "explanation": "Use Do you + action to make a simple question.",
+      "details": "Answer with Yes, I do. or No, I don't.",
+      "tableHeaders": ["Use", "Pattern", "Example"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Ask about study",
+              "highlights": []
+            },
+            {
+              "text": "Do you + study English?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h1",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h2",
+                  "text": "study English",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Do you study English?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h3",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h4",
+                  "text": "study",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Ask about work",
+              "highlights": []
+            },
+            {
+              "text": "Do you + work?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h5",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h6",
+                  "text": "work",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Do you work?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h7",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Ask about likes",
+              "highlights": []
+            },
+            {
+              "text": "Do you + like music?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h8",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h9",
+                  "text": "like",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Do you like music?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h10",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-grammar2",
+      "type": "advanced-grammar",
+      "title": "Short Answers with Do",
+      "explanation": "Use a short answer first. Then you can add extra information.",
+      "details": "Keep the same answer pattern every time in this part.",
+      "tableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Do you study English?",
+              "highlights": [
+                {
+                  "id": "p2-g2-h1",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "p2-g2-h2",
+                  "text": "I do",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I study at night.",
+              "highlights": [
+                {
+                  "id": "p2-g2-h3",
+                  "text": "I do",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work?",
+              "highlights": [
+                {
+                  "id": "p2-g2-h4",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": [
+                {
+                  "id": "p2-g2-h5",
+                  "text": "I don't",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't. I study in the morning.",
+              "highlights": [
+                {
+                  "id": "p2-g2-h6",
+                  "text": "I don't",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you like music?",
+              "highlights": [
+                {
+                  "id": "p2-g2-h7",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "p2-g2-h8",
+                  "text": "I do",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I like pop music.",
+              "highlights": [
+                {
+                  "id": "p2-g2-h9",
+                  "text": "I do",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-fc1",
+      "type": "flashcards",
+      "title": "Action Words for Do You...?",
+      "category": "Actions",
+      "tags": [],
+      "cards": [
+        {
+          "id": "p2-fc1-c1",
+          "expressions": ["study"],
+          "frontImage": "",
+          "backText": "Do you study English?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c2",
+          "expressions": ["work"],
+          "frontImage": "",
+          "backText": "Do you work?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c3",
+          "expressions": ["like"],
+          "frontImage": "",
+          "backText": "Do you like music?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c4",
+          "expressions": ["play"],
+          "frontImage": "",
+          "backText": "Do you play games?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c5",
+          "expressions": ["watch"],
+          "frontImage": "",
+          "backText": "Do you watch movies?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c6",
+          "expressions": ["listen to"],
+          "frontImage": "",
+          "backText": "Do you listen to music?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c7",
+          "expressions": ["read"],
+          "frontImage": "",
+          "backText": "Do you read books?",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c8",
+          "expressions": ["cook"],
+          "frontImage": "",
+          "backText": "Do you cook?",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the pattern.",
+      "text": "[] you study English?\nYes, I [].\nNo, I [].",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["don't", "do not"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-fill2",
+      "type": "fill-blank",
+      "instruction": "Complete with an action word.",
+      "text": "Do you [] English?\nDo you [] music?\nDo you [] games?\nDo you [] movies?",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["study"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["like"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["play"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["watch"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-mc1",
+      "type": "multiple-choice",
+      "question": "Choose the correct answer: Do you work?",
+      "options": [
+        {
+          "id": "p2-mc1-o1",
+          "text": "Yes, I am."
+        },
+        {
+          "id": "p2-mc1-o2",
+          "text": "Yes, I do."
+        },
+        {
+          "id": "p2-mc1-o3",
+          "text": "Yes, I from."
+        }
+      ],
+      "correctOptionIds": ["p2-mc1-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p2-mc2",
+      "type": "multiple-choice",
+      "question": "Choose the correct answer: Do you like music?",
+      "options": [
+        {
+          "id": "p2-mc2-o1",
+          "text": "No, I'm not."
+        },
+        {
+          "id": "p2-mc2-o2",
+          "text": "No, I don't."
+        },
+        {
+          "id": "p2-mc2-o3",
+          "text": "No, I from Brazil."
+        }
+      ],
+      "correctOptionIds": ["p2-mc2-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p2-listen1",
+      "type": "listening",
+      "title": "Listen and Answer: Sofia",
+      "audioUrl": "audio/lesson-1-do-you.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700",
+      "transcript": "Lucas: Hi, Sofia. Do you study English? Sofia: Yes, I do. I study English at night. Lucas: Do you work? Sofia: No, I don't. I'm a student. Lucas: Do you like music? Sofia: Yes, I do. I like pop music. Lucas: Do you play games? Sofia: No, I don't. I watch movies.",
+      "transcriptHighlights": [
+        {
+          "id": "p2-listen-h1",
+          "text": "Yes, I do",
+          "color": "#d9f99d"
+        },
+        {
+          "id": "p2-listen-h2",
+          "text": "No, I don't",
+          "color": "#fde68a"
+        }
+      ],
+      "transcriptVisibility": "after-answer",
+      "questions": [
+        {
+          "id": "p2-listen1-q1",
+          "type": "multiple-choice",
+          "question": "Sofia studies English.",
+          "options": ["True", "False"],
+          "answer": "True"
+        },
+        {
+          "id": "p2-listen1-q2",
+          "type": "multiple-choice",
+          "question": "Sofia works.",
+          "options": ["True", "False"],
+          "answer": "False"
+        },
+        {
+          "id": "p2-listen1-q3",
+          "type": "multiple-choice",
+          "question": "Sofia likes music.",
+          "options": ["True", "False"],
+          "answer": "True"
+        },
+        {
+          "id": "p2-listen1-q4",
+          "type": "open-ended",
+          "question": "What kind of music is in the dialogue?",
+          "answer": "Pop music"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-prompts1",
+      "type": "conversation-prompts",
+      "title": "Do You...? Speaking Round",
+      "prompts": [
+        "Do you study English?",
+        "Do you work?",
+        "Do you like music?",
+        "Do you play games?",
+        "Do you watch movies?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-break",
+      "type": "page-break",
+      "pageNumber": 3,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p3-h1",
+      "type": "heading",
+      "content": "3. More Practice with Do You...?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p3-p1",
+      "type": "paragraph",
+      "content": "This page gives more practice with the same question form. Do not change the pattern yet.",
+      "style": "instruction",
+      "audience": "both"
+    },
+    {
+      "id": "p3-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1000",
+      "messages": [
+        {
+          "id": "p3-conv1-m1",
+          "speaker": "Ana",
+          "text": "Do you study in the morning?",
+          "highlights": [
+            {
+              "id": "p3-conv1-h1",
+              "text": "Do you study",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p3-conv1-m2",
+          "speaker": "Bruno",
+          "text": "No, I don't. I study at night.",
+          "highlights": [
+            {
+              "id": "p3-conv1-h2",
+              "text": "No, I don't",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p3-conv1-m3",
+          "speaker": "Ana",
+          "text": "Do you work at night?",
+          "highlights": [
+            {
+              "id": "p3-conv1-h3",
+              "text": "Do you work",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p3-conv1-m4",
+          "speaker": "Bruno",
+          "text": "No, I don't.",
+          "highlights": [
+            {
+              "id": "p3-conv1-h4",
+              "text": "I don't",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p3-conv1-m5",
+          "speaker": "Ana",
+          "text": "Do you like coffee?",
+          "highlights": [
+            {
+              "id": "p3-conv1-h5",
+              "text": "Do you like",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p3-conv1-m6",
+          "speaker": "Bruno",
+          "text": "Yes, I do. I like coffee.",
+          "highlights": [
+            {
+              "id": "p3-conv1-h6",
+              "text": "Yes, I do",
+              "color": "#d9f99d"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Do you study in the morning?",
+          "alternatives": ["Do you study at night?", "Do you study online?", "Do you study here?"]
+        },
+        {
+          "original": "Do you like coffee?",
+          "alternatives": ["Do you like music?", "Do you like movies?", "Do you like games?"]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the questions.",
+      "text": "[] you study at night?\n[] you work in the morning?\n[] you like coffee?\n[] you watch series?\n[] you read books?",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-4",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-mc1",
+      "type": "multiple-choice",
+      "question": "Select the question about an action.",
+      "options": [
+        {
+          "id": "p3-mc1-o1",
+          "text": "Do you study English?"
+        },
+        {
+          "id": "p3-mc1-o2",
+          "text": "Are you happy?"
+        },
+        {
+          "id": "p3-mc1-o3",
+          "text": "Where are you from?"
+        }
+      ],
+      "correctOptionIds": ["p3-mc1-o1"],
+      "audience": "both"
+    },
+    {
+      "id": "p3-mc2",
+      "type": "multiple-choice",
+      "question": "Select the correct short answer.",
+      "options": [
+        {
+          "id": "p3-mc2-o1",
+          "text": "Yes, I do."
+        },
+        {
+          "id": "p3-mc2-o2",
+          "text": "Yes, I student."
+        },
+        {
+          "id": "p3-mc2-o3",
+          "text": "Yes, from Brazil."
+        }
+      ],
+      "correctOptionIds": ["p3-mc2-o1"],
+      "audience": "both"
+    },
+    {
+      "id": "p3-read1",
+      "type": "reading-comprehension",
+      "title": "A Short Routine",
+      "text": "Hi! My name is Pedro. I study English at night. I work in the afternoon. I like music and movies. I don't play games, but I watch series on Saturday.",
+      "questions": [
+        {
+          "id": "p3-read1-q1",
+          "type": "multiple-choice",
+          "question": "Pedro studies English at night.",
+          "options": ["True", "False"],
+          "answer": "True"
+        },
+        {
+          "id": "p3-read1-q2",
+          "type": "multiple-choice",
+          "question": "Pedro works in the morning.",
+          "options": ["True", "False"],
+          "answer": "False"
+        },
+        {
+          "id": "p3-read1-q3",
+          "type": "multiple-choice",
+          "question": "Pedro likes music and movies.",
+          "options": ["True", "False"],
+          "answer": "True"
+        },
+        {
+          "id": "p3-read1-q4",
+          "type": "open-ended",
+          "question": "What activity is on Saturday?",
+          "answer": "He watches series."
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-prompts1",
+      "type": "conversation-prompts",
+      "title": "Fast Question Practice",
+      "prompts": [
+        "Ask: Do you study at night?",
+        "Answer: Yes, I do. / No, I don't.",
+        "Ask: Do you work?",
+        "Answer: Yes, I do. / No, I don't.",
+        "Ask: Do you like music?",
+        "Answer: Yes, I do. / No, I don't."
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-break",
+      "type": "page-break",
+      "pageNumber": 4,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p4-h1",
+      "type": "heading",
+      "content": "4. How Are You?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p4-p1",
+      "type": "paragraph",
+      "content": "After saying hello, people often ask how you are. Use a short feeling word to answer.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p4-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1000",
+      "messages": [
+        {
+          "id": "p4-conv1-m1",
+          "speaker": "Leo",
+          "text": "Hi, Emma. How are you?",
+          "highlights": [
+            {
+              "id": "p4-conv1-h1",
+              "text": "How are you",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m2",
+          "speaker": "Emma",
+          "text": "I'm good, thanks. And you?",
+          "highlights": [
+            {
+              "id": "p4-conv1-h2",
+              "text": "I'm good, thanks",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "p4-conv1-h3",
+              "text": "And you",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m3",
+          "speaker": "Leo",
+          "text": "I'm great!",
+          "highlights": [
+            {
+              "id": "p4-conv1-h4",
+              "text": "I'm great",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m4",
+          "speaker": "Emma",
+          "text": "That's good!",
+          "highlights": []
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "I'm good.",
+          "alternatives": ["I'm great.", "I'm okay.", "I'm tired.", "I'm happy.", "I'm nervous."]
+        },
+        {
+          "original": "And you?",
+          "alternatives": ["How about you?", "What about you?"]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-fc1",
+      "type": "flashcards",
+      "title": "Feeling Words",
+      "category": "Feelings",
+      "tags": [],
+      "cards": [
+        {
+          "id": "p4-fc1-c1",
+          "expressions": ["I'm good."],
+          "frontImage": "",
+          "backText": "A simple positive answer.",
+          "backImage": ""
+        },
+        {
+          "id": "p4-fc1-c2",
+          "expressions": ["I'm great."],
+          "frontImage": "",
+          "backText": "A very positive answer.",
+          "backImage": ""
+        },
+        {
+          "id": "p4-fc1-c3",
+          "expressions": ["I'm okay."],
+          "frontImage": "",
+          "backText": "A neutral answer.",
+          "backImage": ""
+        },
+        {
+          "id": "p4-fc1-c4",
+          "expressions": ["I'm tired."],
+          "frontImage": "",
+          "backText": "Use this when you need rest.",
+          "backImage": ""
+        },
+        {
+          "id": "p4-fc1-c5",
+          "expressions": ["I'm happy."],
+          "frontImage": "",
+          "backText": "Use this when you feel happy.",
+          "backImage": ""
+        },
+        {
+          "id": "p4-fc1-c6",
+          "expressions": ["I'm nervous."],
+          "frontImage": "",
+          "backText": "Use this before a test, presentation, or new situation.",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-grammar1",
+      "type": "grammar-note",
+      "title": "How Are You?",
+      "ruleContext": "Ask: How are you? Answer: I'm + feeling. Then ask back: And you?",
+      "expandableTitle": "See the model",
+      "expandableContent": "A: How are you?\nB: I'm good, thanks. And you?\nA: I'm fine.",
+      "audience": "both"
+    },
+    {
+      "id": "p4-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the mini-dialogue.",
+      "text": "A: How [] you?\nB: I'm [], thanks. And []?\nA: I'm fine.",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["are"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["good", "great", "okay", "fine", "tired", "happy", "nervous"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["you"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-mc1",
+      "type": "multiple-choice",
+      "question": "Choose the best answer: How are you?",
+      "options": [
+        {
+          "id": "p4-mc1-o1",
+          "text": "I'm good, thanks."
+        },
+        {
+          "id": "p4-mc1-o2",
+          "text": "My name is Ana."
+        },
+        {
+          "id": "p4-mc1-o3",
+          "text": "Brazil."
+        }
+      ],
+      "correctOptionIds": ["p4-mc1-o1"],
+      "audience": "both"
+    },
+    {
+      "id": "p4-prompts1",
+      "type": "conversation-prompts",
+      "title": "Check-in Practice",
+      "prompts": [
+        "Hi! How are you?",
+        "I'm good, thanks. And you?",
+        "I'm okay.",
+        "I'm tired, but I'm fine.",
+        "I'm happy today."
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-break",
+      "type": "page-break",
+      "pageNumber": 5,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p5-h1",
+      "type": "heading",
+      "content": "5. Are You...?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p5-p1",
+      "type": "paragraph",
+      "content": "Now use Are you...? for identity, feelings, condition, nationality, and origin. This is a different question pattern from Do you...?.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p5-grammar1",
+      "type": "advanced-grammar",
+      "title": "Question Pattern: Are You...?",
+      "explanation": "Use Are you + information to ask about a person.",
+      "details": "Use this pattern for a student, a teacher, tired, happy, Brazilian, and from Brazil.",
+      "tableHeaders": ["Use", "Question", "Short Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Identity",
+              "highlights": []
+            },
+            {
+              "text": "Are you a student?",
+              "highlights": [
+                {
+                  "id": "p5-g1-h1",
+                  "text": "Are you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p5-g1-h2",
+                  "text": "a student",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am. / No, I'm not.",
+              "highlights": [
+                {
+                  "id": "p5-g1-h3",
+                  "text": "I am",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "p5-g1-h4",
+                  "text": "I'm not",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Feeling",
+              "highlights": []
+            },
+            {
+              "text": "Are you tired?",
+              "highlights": [
+                {
+                  "id": "p5-g1-h5",
+                  "text": "Are you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p5-g1-h6",
+                  "text": "tired",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am. / No, I'm not.",
+              "highlights": [
+                {
+                  "id": "p5-g1-h7",
+                  "text": "I am",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Origin",
+              "highlights": []
+            },
+            {
+              "text": "Are you from Brazil?",
+              "highlights": [
+                {
+                  "id": "p5-g1-h8",
+                  "text": "Are you",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p5-g1-h9",
+                  "text": "from Brazil",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am. / No, I'm not.",
+              "highlights": [
+                {
+                  "id": "p5-g1-h10",
+                  "text": "I'm not",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-compare1",
+      "type": "advanced-grammar",
+      "title": "Do You...? or Are You...?",
+      "explanation": "Use Do you...? for actions. Use Are you...? for information about the person.",
+      "details": "Look at the first words and the answer.",
+      "tableHeaders": ["Question", "Use", "Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Do you study English?",
+              "highlights": [
+                {
+                  "id": "p5-c1-h1",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Action",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "p5-c1-h2",
+                  "text": "I do",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work?",
+              "highlights": [
+                {
+                  "id": "p5-c1-h3",
+                  "text": "Do you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Action",
+              "highlights": []
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": [
+                {
+                  "id": "p5-c1-h4",
+                  "text": "I don't",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Are you a student?",
+              "highlights": [
+                {
+                  "id": "p5-c1-h5",
+                  "text": "Are you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Identity",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I am.",
+              "highlights": [
+                {
+                  "id": "p5-c1-h6",
+                  "text": "I am",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Are you tired?",
+              "highlights": [
+                {
+                  "id": "p5-c1-h7",
+                  "text": "Are you",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Feeling",
+              "highlights": []
+            },
+            {
+              "text": "No, I'm not.",
+              "highlights": [
+                {
+                  "id": "p5-c1-h8",
+                  "text": "I'm not",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the Are you...? questions.",
+      "text": "[] you a student?\n[] you tired?\n[] you happy?\n[] you from Brazil?",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["Are"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["Are"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["Are"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["Are"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-fill2",
+      "type": "fill-blank",
+      "instruction": "Complete the short answers.",
+      "text": "Are you a student?\nYes, I [].\nAre you tired?\nNo, I'm [].\nAre you from Brazil?\nYes, I [].",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["am"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["not"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["am"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-mc1",
+      "type": "multiple-choice",
+      "question": "Choose the correct answer: Are you a student?",
+      "options": [
+        {
+          "id": "p5-mc1-o1",
+          "text": "Yes, I do."
+        },
+        {
+          "id": "p5-mc1-o2",
+          "text": "Yes, I am."
+        },
+        {
+          "id": "p5-mc1-o3",
+          "text": "Yes, I study."
+        }
+      ],
+      "correctOptionIds": ["p5-mc1-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p5-mc2",
+      "type": "multiple-choice",
+      "question": "Choose the correct answer: Are you tired?",
+      "options": [
+        {
+          "id": "p5-mc2-o1",
+          "text": "No, I don't."
+        },
+        {
+          "id": "p5-mc2-o2",
+          "text": "No, I'm not."
+        },
+        {
+          "id": "p5-mc2-o3",
+          "text": "No, I work."
+        }
+      ],
+      "correctOptionIds": ["p5-mc2-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p5-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000",
+      "messages": [
+        {
+          "id": "p5-conv1-m1",
+          "speaker": "Ana",
+          "text": "Are you a student?",
+          "highlights": [
+            {
+              "id": "p5-conv1-h1",
+              "text": "Are you",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p5-conv1-m2",
+          "speaker": "Bruno",
+          "text": "Yes, I am.",
+          "highlights": [
+            {
+              "id": "p5-conv1-h2",
+              "text": "Yes, I am",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p5-conv1-m3",
+          "speaker": "Ana",
+          "text": "Are you tired today?",
+          "highlights": [
+            {
+              "id": "p5-conv1-h3",
+              "text": "Are you tired",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p5-conv1-m4",
+          "speaker": "Bruno",
+          "text": "No, I'm not. I'm good.",
+          "highlights": [
+            {
+              "id": "p5-conv1-h4",
+              "text": "No, I'm not",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p5-conv1-m5",
+          "speaker": "Ana",
+          "text": "Do you study English at night?",
+          "highlights": [
+            {
+              "id": "p5-conv1-h5",
+              "text": "Do you study",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p5-conv1-m6",
+          "speaker": "Bruno",
+          "text": "Yes, I do.",
+          "highlights": [
+            {
+              "id": "p5-conv1-h6",
+              "text": "Yes, I do",
+              "color": "#d9f99d"
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-prompts1",
+      "type": "conversation-prompts",
+      "title": "Are You...? Speaking Round",
+      "prompts": [
+        "Are you a student?",
+        "Are you happy today?",
+        "Are you tired today?",
+        "Are you from Brazil?",
+        "Answer with Yes, I am. or No, I'm not."
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-break",
+      "type": "page-break",
+      "pageNumber": 6,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p6-h1",
+      "type": "heading",
+      "content": "6. Are You From...?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p6-p1",
+      "type": "paragraph",
+      "content": "Use Are you from...? to check a country or city. Use Where are you from? when you need the place.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p6-grammar1",
+      "type": "advanced-grammar",
+      "title": "Origin Questions",
+      "explanation": "Use from with a country or city.",
+      "details": "Use Are you from...? for yes/no. Use Where are you from? for information.",
+      "tableHeaders": ["Question", "Answer", "Example"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Are you from Brazil?",
+              "highlights": [
+                {
+                  "id": "p6-g1-h1",
+                  "text": "Are you from",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am.",
+              "highlights": [
+                {
+                  "id": "p6-g1-h2",
+                  "text": "I am",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am. I'm from Brazil.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Are you from Canada?",
+              "highlights": [
+                {
+                  "id": "p6-g1-h3",
+                  "text": "Are you from",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "No, I'm not.",
+              "highlights": [
+                {
+                  "id": "p6-g1-h4",
+                  "text": "I'm not",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "No, I'm not. I'm from Brazil.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Where are you from?",
+              "highlights": [
+                {
+                  "id": "p6-g1-h5",
+                  "text": "Where are you from",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "I'm from + place.",
+              "highlights": [
+                {
+                  "id": "p6-g1-h6",
+                  "text": "I'm from",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "I'm from São Paulo, Brazil.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-fc1",
+      "type": "flashcards",
+      "title": "Countries and Nationalities",
+      "category": "Countries",
+      "tags": [],
+      "cards": [
+        {
+          "id": "p6-fc1-c1",
+          "expressions": ["Brazil / Brazilian"],
+          "frontImage": "",
+          "backText": "I'm from Brazil. I'm Brazilian.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c2",
+          "expressions": ["Canada / Canadian"],
+          "frontImage": "",
+          "backText": "I'm from Canada. I'm Canadian.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c3",
+          "expressions": ["Japan / Japanese"],
+          "frontImage": "",
+          "backText": "I'm from Japan. I'm Japanese.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c4",
+          "expressions": ["Mexico / Mexican"],
+          "frontImage": "",
+          "backText": "I'm from Mexico. I'm Mexican.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c5",
+          "expressions": ["Italy / Italian"],
+          "frontImage": "",
+          "backText": "I'm from Italy. I'm Italian.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c6",
+          "expressions": ["France / French"],
+          "frontImage": "",
+          "backText": "I'm from France. I'm French.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c7",
+          "expressions": ["Spain / Spanish"],
+          "frontImage": "",
+          "backText": "I'm from Spain. I'm Spanish.",
+          "backImage": ""
+        },
+        {
+          "id": "p6-fc1-c8",
+          "expressions": ["Portugal / Portuguese"],
+          "frontImage": "",
+          "backText": "I'm from Portugal. I'm Portuguese.",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-vocab1",
+      "type": "vocabulary-match",
+      "title": "Match the Country and the Nationality",
+      "pairs": [
+        {
+          "left": "Brazil",
+          "leftType": "text",
+          "right": "Brazilian"
+        },
+        {
+          "left": "Canada",
+          "leftType": "text",
+          "right": "Canadian"
+        },
+        {
+          "left": "Japan",
+          "leftType": "text",
+          "right": "Japanese"
+        },
+        {
+          "left": "Mexico",
+          "leftType": "text",
+          "right": "Mexican"
+        },
+        {
+          "left": "Italy",
+          "leftType": "text",
+          "right": "Italian"
+        },
+        {
+          "left": "France",
+          "leftType": "text",
+          "right": "French"
+        },
+        {
+          "left": "Spain",
+          "leftType": "text",
+          "right": "Spanish"
+        },
+        {
+          "left": "Portugal",
+          "leftType": "text",
+          "right": "Portuguese"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-grid1",
+      "type": "selection-grid",
+      "instruction": "Select only the countries.",
+      "isMultiSelect": true,
+      "items": [
+        {
+          "id": "p6-grid1-i1",
+          "text": "Brazil",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid1-i2",
+          "text": "Brazilian",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid1-i3",
+          "text": "Japan",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid1-i4",
+          "text": "Japanese",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid1-i5",
+          "text": "Mexico",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid1-i6",
+          "text": "Mexican",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid1-i7",
+          "text": "Portugal",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid1-i8",
+          "text": "Portuguese",
+          "isCorrect": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-grid2",
+      "type": "selection-grid",
+      "instruction": "Select only the nationalities.",
+      "isMultiSelect": true,
+      "items": [
+        {
+          "id": "p6-grid2-i1",
+          "text": "Canada",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid2-i2",
+          "text": "Canadian",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid2-i3",
+          "text": "Italy",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid2-i4",
+          "text": "Italian",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid2-i5",
+          "text": "France",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid2-i6",
+          "text": "French",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid2-i7",
+          "text": "Spain",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid2-i8",
+          "text": "Spanish",
+          "isCorrect": true
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the questions and answers.",
+      "text": "A: Are you [] Brazil?\nB: Yes, I [].\nA: Where are you []?\nB: I'm [] São Paulo.\nA: Are you Brazilian?\nB: Yes, I [].",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["from"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["am"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["from"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["from"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-4",
+          "acceptedAnswers": ["am"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=1000",
+      "messages": [
+        {
+          "id": "p6-conv1-m1",
+          "speaker": "Mia",
+          "text": "Are you from Canada?",
+          "highlights": [
+            {
+              "id": "p6-conv1-h1",
+              "text": "Are you from Canada",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p6-conv1-m2",
+          "speaker": "Ben",
+          "text": "Yes, I am. I'm from Toronto.",
+          "highlights": [
+            {
+              "id": "p6-conv1-h2",
+              "text": "Yes, I am",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "p6-conv1-h3",
+              "text": "I'm from Toronto",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p6-conv1-m3",
+          "speaker": "Mia",
+          "text": "Are you Canadian?",
+          "highlights": [
+            {
+              "id": "p6-conv1-h4",
+              "text": "Canadian",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p6-conv1-m4",
+          "speaker": "Ben",
+          "text": "Yes, I am. And you?",
+          "highlights": [
+            {
+              "id": "p6-conv1-h5",
+              "text": "Yes, I am",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p6-conv1-m5",
+          "speaker": "Mia",
+          "text": "I'm from Japan. I'm Japanese.",
+          "highlights": [
+            {
+              "id": "p6-conv1-h6",
+              "text": "I'm from Japan",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "p6-conv1-h7",
+              "text": "I'm Japanese",
+              "color": "#fde68a"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Are you from Canada?",
+          "alternatives": ["Are you from Brazil?", "Are you from Japan?", "Are you from Mexico?"]
+        },
+        {
+          "original": "I'm from Toronto.",
+          "alternatives": ["I'm from São Paulo.", "I'm from Tokyo.", "I'm from Mexico City."]
+        },
+        {
+          "original": "I'm Japanese.",
+          "alternatives": ["I'm Brazilian.", "I'm Canadian.", "I'm Mexican."]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-listen1",
+      "type": "listening",
+      "title": "Listen: Countries and Cities",
+      "audioUrl": "audio/lesson-1-origin.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=700",
+      "transcript": "Hello! I'm Kenji. I'm from Japan. I'm Japanese. This is Laura. She is from Mexico. She is Mexican. We study English together.",
+      "transcriptHighlights": [
+        {
+          "id": "p6-listen-h1",
+          "text": "Japan",
+          "color": "#fde68a"
+        },
+        {
+          "id": "p6-listen-h2",
+          "text": "Japanese",
+          "color": "#bfdbfe"
+        },
+        {
+          "id": "p6-listen-h3",
+          "text": "Mexico",
+          "color": "#fde68a"
+        },
+        {
+          "id": "p6-listen-h4",
+          "text": "Mexican",
+          "color": "#bfdbfe"
+        }
+      ],
+      "transcriptVisibility": "after-answer",
+      "questions": [
+        {
+          "id": "p6-listen1-q1",
+          "type": "multiple-choice",
+          "question": "Kenji is from...",
+          "options": ["Brazil", "Japan", "Mexico", "Canada"],
+          "answer": "Japan"
+        },
+        {
+          "id": "p6-listen1-q2",
+          "type": "multiple-choice",
+          "question": "Kenji is...",
+          "options": ["Brazilian", "Japanese", "Mexican", "Canadian"],
+          "answer": "Japanese"
+        },
+        {
+          "id": "p6-listen1-q3",
+          "type": "multiple-choice",
+          "question": "Laura is from...",
+          "options": ["Italy", "France", "Mexico", "Spain"],
+          "answer": "Mexico"
+        },
+        {
+          "id": "p6-listen1-q4",
+          "type": "multiple-choice",
+          "question": "Laura is...",
+          "options": ["Mexican", "French", "Spanish", "Italian"],
+          "answer": "Mexican"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-prompts1",
+      "type": "conversation-prompts",
+      "title": "Origin Practice",
+      "prompts": [
+        "Are you from Brazil?",
+        "Where are you from?",
+        "I'm from...",
+        "Are you Brazilian?",
+        "Yes, I am. / No, I'm not."
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-break",
+      "type": "page-break",
+      "pageNumber": 7,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p7-h1",
+      "type": "heading",
+      "content": "7. All About Me",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p7-p1",
+      "type": "paragraph",
+      "content": "Now connect the lesson pieces to make a short personal profile.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p7-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900",
+      "messages": [
+        {
+          "id": "p7-conv1-m1",
+          "speaker": "Maya",
+          "text": "Hi! My name is Maya.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h1",
+              "text": "My name is Maya",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m2",
+          "speaker": "Maya",
+          "text": "I'm 21 years old.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h2",
+              "text": "I'm 21 years old",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m3",
+          "speaker": "Maya",
+          "text": "I'm from Brazil.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h3",
+              "text": "I'm from Brazil",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m4",
+          "speaker": "Maya",
+          "text": "I'm Brazilian.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h4",
+              "text": "I'm Brazilian",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m5",
+          "speaker": "Maya",
+          "text": "I'm a student.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h5",
+              "text": "I'm a student",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m6",
+          "speaker": "Maya",
+          "text": "I study English at night.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h6",
+              "text": "I study English",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m7",
+          "speaker": "Maya",
+          "text": "I like music and movies.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h7",
+              "text": "I like music and movies",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p7-conv1-m8",
+          "speaker": "Maya",
+          "text": "I'm happy today.",
+          "highlights": [
+            {
+              "id": "p7-conv1-h8",
+              "text": "I'm happy",
+              "color": "#fbcfe8"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "I'm 21 years old.",
+          "alternatives": ["I'm 18 years old.", "I'm 25 years old.", "I'm 30 years old."]
+        },
+        {
+          "original": "I'm a student.",
+          "alternatives": ["I'm a teacher.", "I'm a developer.", "I work in sales."]
+        },
+        {
+          "original": "I like music and movies.",
+          "alternatives": [
+            "I like games and sports.",
+            "I like reading and music.",
+            "I like movies and travel."
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-grammar1",
+      "type": "grammar-note",
+      "title": "Personal Profile Patterns",
+      "ruleContext": "Use these sentence models to build a first personal introduction.",
+      "expandableTitle": "See model examples",
+      "expandableContent": "My name is Julia.\nI'm 22 years old.\nI'm from Brazil.\nI'm Brazilian.\nI'm a student.\nI study English at night.\nI like music and coffee.\nI'm good today.",
+      "audience": "both"
+    },
+    {
+      "id": "p7-grammar2",
+      "type": "advanced-grammar",
+      "title": "Personal Information",
+      "explanation": "Use one short sentence for each piece of information.",
+      "details": "Replace the examples with real information.",
+      "tableHeaders": ["Information", "Pattern", "Example"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Name",
+              "highlights": []
+            },
+            {
+              "text": "My name is + name",
+              "highlights": []
+            },
+            {
+              "text": "My name is Maya.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Age",
+              "highlights": []
+            },
+            {
+              "text": "I'm + number + years old",
+              "highlights": []
+            },
+            {
+              "text": "I'm 21 years old.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Origin",
+              "highlights": []
+            },
+            {
+              "text": "I'm from + place",
+              "highlights": []
+            },
+            {
+              "text": "I'm from Brazil.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Nationality",
+              "highlights": []
+            },
+            {
+              "text": "I'm + nationality",
+              "highlights": []
+            },
+            {
+              "text": "I'm Brazilian.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Occupation",
+              "highlights": []
+            },
+            {
+              "text": "I'm a/an + job",
+              "highlights": []
+            },
+            {
+              "text": "I'm a student.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Interest",
+              "highlights": []
+            },
+            {
+              "text": "I like + interest",
+              "highlights": []
+            },
+            {
+              "text": "I like music.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-read1",
+      "type": "reading-comprehension",
+      "title": "Meet Daniel",
+      "text": "Hello! My name is Daniel. I'm 23 years old. I'm from Recife, Brazil. I'm Brazilian. I'm a student. I study English in the evening. I like soccer, music, and movies. I'm happy today.",
+      "questions": [
+        {
+          "id": "p7-read1-q1",
+          "type": "multiple-choice",
+          "question": "Daniel is...",
+          "options": ["20", "21", "23", "25"],
+          "answer": "23"
+        },
+        {
+          "id": "p7-read1-q2",
+          "type": "multiple-choice",
+          "question": "Daniel is from...",
+          "options": ["Recife, Brazil", "Toronto, Canada", "Tokyo, Japan", "Lima, Peru"],
+          "answer": "Recife, Brazil"
+        },
+        {
+          "id": "p7-read1-q3",
+          "type": "multiple-choice",
+          "question": "Daniel is...",
+          "options": ["Mexican", "Brazilian", "Japanese", "Canadian"],
+          "answer": "Brazilian"
+        },
+        {
+          "id": "p7-read1-q4",
+          "type": "open-ended",
+          "question": "Name two things Daniel likes.",
+          "answer": "Soccer and music"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the profile.",
+      "text": "Hello! My [] is Ana.\nI'm 21 years [].\nI'm [] São Paulo, Brazil.\nI'm Brazilian.\nI'm a [].\nI [] English at night.\nI [] music and movies.\nI'm happy today.",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["name"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["old"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["from"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["student"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-4",
+          "acceptedAnswers": ["study"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-5",
+          "acceptedAnswers": ["like"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-writing1",
+      "type": "writing-task",
+      "title": "Write a Mini Profile",
+      "prompt": "Write 5 to 7 short sentences about yourself. Include your name, age, city or country, nationality, occupation, one thing you study, and one thing you like.",
+      "audience": "both",
+      "minWords": 50
+    },
+    {
+      "id": "p8-break",
+      "type": "page-break",
+      "pageNumber": 8,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p8-h1",
+      "type": "heading",
+      "content": "8. Short Interview",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p8-p1",
+      "type": "paragraph",
+      "content": "This interview connects greetings, Do you...?, Are you...?, and Where are you from?.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p8-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=900",
+      "messages": [
+        {
+          "id": "p8-conv1-m1",
+          "speaker": "Lucas",
+          "text": "Hi! What's your name?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h1",
+              "text": "What's your name",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m2",
+          "speaker": "Sofia",
+          "text": "My name is Sofia.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h2",
+              "text": "My name is Sofia",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m3",
+          "speaker": "Lucas",
+          "text": "Nice to meet you, Sofia.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h3",
+              "text": "Nice to meet you",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m4",
+          "speaker": "Sofia",
+          "text": "Nice to meet you too.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h4",
+              "text": "Nice to meet you too",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m5",
+          "speaker": "Lucas",
+          "text": "Are you from Brazil?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h5",
+              "text": "Are you from Brazil",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m6",
+          "speaker": "Sofia",
+          "text": "Yes, I am. I'm from São Paulo.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h6",
+              "text": "Yes, I am",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "p8-conv1-h7",
+              "text": "I'm from São Paulo",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m7",
+          "speaker": "Lucas",
+          "text": "Are you a student?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h8",
+              "text": "Are you a student",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m8",
+          "speaker": "Sofia",
+          "text": "Yes, I am.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h9",
+              "text": "Yes, I am",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m9",
+          "speaker": "Lucas",
+          "text": "Do you study English?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h10",
+              "text": "Do you study English",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m10",
+          "speaker": "Sofia",
+          "text": "Yes, I do.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h11",
+              "text": "Yes, I do",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m11",
+          "speaker": "Lucas",
+          "text": "Do you work?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h12",
+              "text": "Do you work",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m12",
+          "speaker": "Sofia",
+          "text": "No, I don't.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h13",
+              "text": "No, I don't",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m13",
+          "speaker": "Lucas",
+          "text": "How are you today?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h14",
+              "text": "How are you",
+              "color": "#fbcfe8"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m14",
+          "speaker": "Sofia",
+          "text": "I'm good, thanks.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h15",
+              "text": "I'm good",
+              "color": "#fbcfe8"
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-interview-table",
+      "type": "advanced-grammar",
+      "title": "Interview Models",
+      "explanation": "Use these questions to learn basic information about another person.",
+      "details": "Notice the answer pattern for each question.",
+      "tableHeaders": ["Question", "Answer Type", "Model Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "What's your name?",
+              "highlights": []
+            },
+            {
+              "text": "Name",
+              "highlights": []
+            },
+            {
+              "text": "My name is Sofia.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Are you from Brazil?",
+              "highlights": []
+            },
+            {
+              "text": "Yes / No",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I am.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Where are you from?",
+              "highlights": []
+            },
+            {
+              "text": "Place",
+              "highlights": []
+            },
+            {
+              "text": "I'm from São Paulo.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Are you a student?",
+              "highlights": []
+            },
+            {
+              "text": "Yes / No",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I am.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you study English?",
+              "highlights": []
+            },
+            {
+              "text": "Yes / No",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work?",
+              "highlights": []
+            },
+            {
+              "text": "Yes / No",
+              "highlights": []
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "How are you today?",
+              "highlights": []
+            },
+            {
+              "text": "Feeling",
+              "highlights": []
+            },
+            {
+              "text": "I'm good, thanks.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the interview.",
+      "text": "A: What's your []?\nB: My name is Carla.\nA: Are you [] Brazil?\nB: Yes, I [].\nA: Where are you from?\nB: I'm [] São Paulo.\nA: Do you [] English?\nB: Yes, I [].\nA: Are you a student?\nB: Yes, I [].",
+      "gaps": [
+        {
+          "id": "gap-0",
+          "acceptedAnswers": ["name"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-1",
+          "acceptedAnswers": ["from"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-2",
+          "acceptedAnswers": ["am"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-3",
+          "acceptedAnswers": ["from"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-4",
+          "acceptedAnswers": ["study"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-5",
+          "acceptedAnswers": ["do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap-6",
+          "acceptedAnswers": ["am"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-mc1",
+      "type": "multiple-choice",
+      "question": "Are you from Brazil?",
+      "options": [
+        {
+          "id": "p8-mc1-o1",
+          "text": "Yes, I do."
+        },
+        {
+          "id": "p8-mc1-o2",
+          "text": "Yes, I am."
+        },
+        {
+          "id": "p8-mc1-o3",
+          "text": "Yes, I like."
+        }
+      ],
+      "correctOptionIds": ["p8-mc1-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p8-mc2",
+      "type": "multiple-choice",
+      "question": "Do you study English?",
+      "options": [
+        {
+          "id": "p8-mc2-o1",
+          "text": "Yes, I do."
+        },
+        {
+          "id": "p8-mc2-o2",
+          "text": "Yes, I am."
+        },
+        {
+          "id": "p8-mc2-o3",
+          "text": "Yes, I from."
+        }
+      ],
+      "correctOptionIds": ["p8-mc2-o1"],
+      "audience": "both"
+    },
+    {
+      "id": "p8-mc3",
+      "type": "multiple-choice",
+      "question": "Are you tired?",
+      "options": [
+        {
+          "id": "p8-mc3-o1",
+          "text": "No, I don't."
+        },
+        {
+          "id": "p8-mc3-o2",
+          "text": "No, I'm not."
+        },
+        {
+          "id": "p8-mc3-o3",
+          "text": "No, I study."
+        }
+      ],
+      "correctOptionIds": ["p8-mc3-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p8-mc4",
+      "type": "multiple-choice",
+      "question": "Do you like music?",
+      "options": [
+        {
+          "id": "p8-mc4-o1",
+          "text": "No, I'm not."
+        },
+        {
+          "id": "p8-mc4-o2",
+          "text": "No, I don't."
+        },
+        {
+          "id": "p8-mc4-o3",
+          "text": "No, I am."
+        }
+      ],
+      "correctOptionIds": ["p8-mc4-o2"],
+      "audience": "both"
+    },
+    {
+      "id": "p8-listen1",
+      "type": "listening",
+      "title": "Listen: A Short Personal Introduction",
+      "audioUrl": "audio/lesson-1-final-listening.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=700",
+      "transcript": "Hi! My name is Sofia. I'm 20 years old. I'm from São Paulo, Brazil. I'm Brazilian. I'm a student. I study English at night. I like music and movies. I'm good today.",
+      "transcriptHighlights": [
+        {
+          "id": "p8-listen-h1",
+          "text": "My name is Sofia",
+          "color": "#d9f99d"
+        },
+        {
+          "id": "p8-listen-h2",
+          "text": "I'm from São Paulo",
+          "color": "#fde68a"
+        },
+        {
+          "id": "p8-listen-h3",
+          "text": "I study English",
+          "color": "#bfdbfe"
+        }
+      ],
+      "transcriptVisibility": "after-answer",
+      "questions": [
+        {
+          "id": "p8-listen1-q1",
+          "type": "open-ended",
+          "question": "What is her name?",
+          "answer": "Sofia"
+        },
+        {
+          "id": "p8-listen1-q2",
+          "type": "multiple-choice",
+          "question": "Sofia is from...",
+          "options": ["São Paulo, Brazil", "Recife, Brazil", "Tokyo, Japan", "Toronto, Canada"],
+          "answer": "São Paulo, Brazil"
+        },
+        {
+          "id": "p8-listen1-q3",
+          "type": "multiple-choice",
+          "question": "Sofia studies English...",
+          "options": ["in the morning", "at night", "on Sunday", "online only"],
+          "answer": "at night"
+        },
+        {
+          "id": "p8-listen1-q4",
+          "type": "multiple-choice",
+          "question": "Sofia likes...",
+          "options": [
+            "games and coffee",
+            "music and movies",
+            "books and sports",
+            "cars and series"
+          ],
+          "answer": "music and movies"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-prompts1",
+      "type": "conversation-prompts",
+      "title": "Interview Practice",
+      "prompts": [
+        "What's your name?",
+        "Are you from Brazil?",
+        "Where are you from?",
+        "Are you a student?",
+        "Do you study English?",
+        "Do you work?",
+        "How are you today?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-break",
+      "type": "page-break",
+      "pageNumber": 9,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p9-h1",
+      "type": "heading",
+      "content": "9. Review and Final Challenge",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p9-p1",
+      "type": "paragraph",
+      "content": "Review the main chunks. Then produce a short introduction and a short interview.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p9-drill1",
+      "type": "repetition-drill",
+      "title": "Key Lesson Chunks",
+      "words": [
+        {
+          "word": "Hello! My name is Ana.",
+          "phonetic": "/heh-loh mai neim iz a-na/",
+          "translation": "Olá! Meu nome é Ana."
+        },
+        {
+          "word": "How are you?",
+          "phonetic": "/hau ar yu/",
+          "translation": "Como você está?"
+        },
+        {
+          "word": "I'm fine, thanks.",
+          "phonetic": "/aim fain thanks/",
+          "translation": "Estou bem, obrigado/obrigada."
+        },
+        {
+          "word": "Do you study English?",
+          "phonetic": "/du yu stu-di ing-glish/",
+          "translation": "Você estuda inglês?"
+        },
+        {
+          "word": "Are you a student?",
+          "phonetic": "/ar yu a stu-dent/",
+          "translation": "Você é estudante?"
+        },
+        {
+          "word": "Are you from Brazil?",
+          "phonetic": "/ar yu from bra-zil/",
+          "translation": "Você é do Brasil?"
+        },
+        {
+          "word": "I'm from Brazil. I'm Brazilian.",
+          "phonetic": "/aim from bra-zil aim bra-zil-ian/",
+          "translation": "Eu sou do Brasil. Eu sou brasileiro/brasileira."
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-read1",
+      "type": "reading-comprehension",
+      "title": "Final Reading: Meet Camila",
+      "text": "Hi! My name is Camila. I'm 24 years old. I'm from Curitiba, Brazil. I'm Brazilian. I'm a receptionist. I study English after work. I like music, series, and coffee. I'm usually busy, but I'm happy today.",
+      "questions": [
+        {
+          "id": "p9-read1-q1",
+          "type": "multiple-choice",
+          "question": "Camila is...",
+          "options": ["20", "22", "24", "25"],
+          "answer": "24"
+        },
+        {
+          "id": "p9-read1-q2",
+          "type": "multiple-choice",
+          "question": "Camila is from...",
+          "options": ["Curitiba, Brazil", "São Paulo, Brazil", "Recife, Brazil", "Toronto, Canada"],
+          "answer": "Curitiba, Brazil"
+        },
+        {
+          "id": "p9-read1-q3",
+          "type": "multiple-choice",
+          "question": "Camila is...",
+          "options": ["a teacher", "a receptionist", "a doctor", "a driver"],
+          "answer": "a receptionist"
+        },
+        {
+          "id": "p9-read1-q4",
+          "type": "multiple-choice",
+          "question": "Camila studies English...",
+          "options": ["in the morning", "after work", "on Sunday", "before school"],
+          "answer": "after work"
+        },
+        {
+          "id": "p9-read1-q5",
+          "type": "open-ended",
+          "question": "Name two things Camila likes.",
+          "answer": "Music and series"
+        },
+        {
+          "id": "p9-read1-q6",
+          "type": "multiple-choice",
+          "question": "Camila is happy today.",
+          "options": ["True", "False"],
+          "answer": "True"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-final1",
+      "type": "final-task",
+      "title": "Final Profile Card",
+      "fields": [
+        "Greeting",
+        "Name",
+        "Age",
+        "City or Country",
+        "Nationality",
+        "Occupation",
+        "Do you study English?",
+        "What do you like?",
+        "How are you today?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-writing1",
+      "type": "writing-task",
+      "title": "My First English Introduction",
+      "prompt": "Write a final self-introduction with 6 to 8 sentences. Include a greeting, your name, age, city or country, nationality, what you do, one or two things you like, and how you feel today.",
+      "audience": "both",
+      "minWords": 70
+    },
+    {
+      "id": "p9-prompts1",
+      "type": "conversation-prompts",
+      "title": "Final Speaking Round",
+      "prompts": [
+        "Introduce yourself in English.",
+        "Ask your partner how they are.",
+        "Ask where your partner is from.",
+        "Ask if your partner studies English.",
+        "Say one thing from your profile."
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-model1",
+      "type": "grammar-note",
+      "title": "Final Output Model",
+      "ruleContext": "Use this model as the final expected production for Lesson 1.",
+      "expandableTitle": "Model text",
+      "expandableContent": "Hello!\nMy name is Ana.\nI'm 21 years old.\nI'm from São Paulo, Brazil.\nI'm Brazilian.\nI'm a student.\nI study English at night.\nI like music and movies.\nI'm happy today.",
+      "audience": "both"
+    }
+  ]
+}

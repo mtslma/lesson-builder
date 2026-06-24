@@ -1,0 +1,1624 @@
+{
+  "schemaVersion": 1,
+  "id": "book-1-lesson-2-fast-food-restaurant",
+  "title": "Lesson 2 - At a Fast Food Restaurant",
+  "level": "A1",
+  "language": "en",
+  "blocks": [
+    {
+      "id": "p1-h1",
+      "type": "heading",
+      "content": "Lesson 2 - At a Fast Food Restaurant",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p1-intro",
+      "type": "paragraph",
+      "content": "In this lesson, students review simple questions with do, learn food vocabulary, numbers from 10 to 99, prices, ordering food, preferences, eating habits, and simple questions with does for he, she, and it.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "p1-break",
+      "type": "page-break",
+      "pageNumber": 1,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p1-h2",
+      "type": "heading",
+      "content": "1. Welcome to Burger Town",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p1-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1550547660-d9450f859349?w=1000",
+      "messages": [
+        {
+          "id": "p1-conv1-m1",
+          "speaker": "Cashier",
+          "text": "Hi! Welcome to Burger Town.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h1",
+              "text": "Welcome",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m2",
+          "speaker": "Maya",
+          "text": "Hi! Can I see the menu, please?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h2",
+              "text": "Can I see the menu, please",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m3",
+          "speaker": "Cashier",
+          "text": "Sure. Do you want a burger or a sandwich?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h3",
+              "text": "Do you want",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m4",
+          "speaker": "Maya",
+          "text": "I want a burger and fries, please.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h4",
+              "text": "I want",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m5",
+          "speaker": "Cashier",
+          "text": "Do you want a drink?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h5",
+              "text": "Do you want",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m6",
+          "speaker": "Maya",
+          "text": "Yes, I do. I want orange juice.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h6",
+              "text": "Yes, I do",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m7",
+          "speaker": "Cashier",
+          "text": "Great. That's twelve dollars.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h7",
+              "text": "twelve dollars",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m8",
+          "speaker": "Maya",
+          "text": "Here you go.",
+          "highlights": []
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "I want a burger and fries.",
+          "alternatives": [
+            "I want a sandwich and fries.",
+            "I want a salad and water.",
+            "I want chicken nuggets and soda."
+          ]
+        },
+        {
+          "original": "Do you want a drink?",
+          "alternatives": ["Do you want fries?", "Do you want ketchup?", "Do you want dessert?"]
+        },
+        {
+          "original": "That's twelve dollars.",
+          "alternatives": [
+            "That's ten dollars.",
+            "That's fifteen dollars.",
+            "That's twenty dollars."
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fc1",
+      "type": "flashcards",
+      "title": "Fast Food Words",
+      "category": "Food",
+      "tags": ["fast food", "restaurant", "lesson 2"],
+      "cards": [
+        {
+          "id": "p1-fc1-c1",
+          "expressions": ["burger"],
+          "frontImage": "",
+          "backText": "A common fast food item with bread, meat, cheese, and vegetables.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c2",
+          "expressions": ["fries"],
+          "frontImage": "",
+          "backText": "Long thin pieces of fried potato.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c3",
+          "expressions": ["sandwich"],
+          "frontImage": "",
+          "backText": "Food between two pieces of bread.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c4",
+          "expressions": ["soda / juice / water"],
+          "frontImage": "",
+          "backText": "Common drinks in a restaurant.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c5",
+          "expressions": ["menu"],
+          "frontImage": "",
+          "backText": "The list of food and drinks in a restaurant.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c6",
+          "expressions": ["price"],
+          "frontImage": "",
+          "backText": "How much something costs.",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-break",
+      "type": "page-break",
+      "pageNumber": 2,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p2-h1",
+      "type": "heading",
+      "content": "2. Review: Do You...?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p2-grammar1",
+      "type": "advanced-grammar",
+      "title": "DO + YOU / WE / THEY + VERB",
+      "explanation": "Use do to ask questions with you, we, and they. Keep the action in the simple form.",
+      "details": "Use Yes, I do / No, I don't for you questions. Use Yes, we do / No, we don't for we questions. Use Yes, they do / No, they don't for they questions.",
+      "tableHeaders": ["Person", "Question", "Short answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "you",
+              "highlights": [
+                {
+                  "id": "p2-g1-a",
+                  "text": "you",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Do you like burgers?",
+              "highlights": [
+                {
+                  "id": "p2-g1-b",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-c",
+                  "text": "like",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. / No, I don't.",
+              "highlights": [
+                {
+                  "id": "p2-g1-d",
+                  "text": "I do",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "p2-g1-e",
+                  "text": "I don't",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "we",
+              "highlights": [
+                {
+                  "id": "p2-g1-f",
+                  "text": "we",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Do we have fries?",
+              "highlights": [
+                {
+                  "id": "p2-g1-g",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h",
+                  "text": "have",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, we do. / No, we don't.",
+              "highlights": [
+                {
+                  "id": "p2-g1-i",
+                  "text": "we do",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "p2-g1-j",
+                  "text": "we don't",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "they",
+              "highlights": [
+                {
+                  "id": "p2-g1-k",
+                  "text": "they",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Do they eat fast food?",
+              "highlights": [
+                {
+                  "id": "p2-g1-l",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-m",
+                  "text": "eat",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, they do. / No, they don't.",
+              "highlights": [
+                {
+                  "id": "p2-g1-n",
+                  "text": "they do",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "p2-g1-o",
+                  "text": "they don't",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the questions with do.",
+      "text": "1. [] you like burgers?\n2. [] you want fries?\n3. [] we have soda?\n4. [] they eat pizza?\n5. [] you drink juice?\n6. [] they like sandwiches?",
+      "columns": 2,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap6",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-rewrite1",
+      "type": "rewrite-question",
+      "instruction": "Create questions with do.",
+      "examples": [
+        {
+          "input": "you / like / burgers",
+          "output": "Do you like burgers?"
+        }
+      ],
+      "items": [
+        "you / want / fries",
+        "you / drink / soda",
+        "we / have / ketchup",
+        "they / eat / fast food",
+        "they / like / pizza"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-prompts1",
+      "type": "conversation-prompts",
+      "title": "Ask About Fast Food",
+      "prompts": [
+        "Do you like burgers?",
+        "Do you like fries?",
+        "Do you drink soda?",
+        "Do you eat fast food?",
+        "Do you prefer pizza or sandwiches?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-break",
+      "type": "page-break",
+      "pageNumber": 3,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p3-h1",
+      "type": "heading",
+      "content": "3. Numbers and Prices",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p3-drill1",
+      "type": "repetition-drill",
+      "title": "Numbers 10 to 99",
+      "words": [
+        {
+          "word": "ten",
+          "phonetic": "/ten/"
+        },
+        {
+          "word": "eleven",
+          "phonetic": "/ih-lev-en/"
+        },
+        {
+          "word": "twelve",
+          "phonetic": "/twelv/"
+        },
+        {
+          "word": "thirteen",
+          "phonetic": "/thur-teen/"
+        },
+        {
+          "word": "twenty",
+          "phonetic": "/twen-tee/"
+        },
+        {
+          "word": "thirty",
+          "phonetic": "/thur-tee/"
+        },
+        {
+          "word": "forty",
+          "phonetic": "/for-tee/"
+        },
+        {
+          "word": "fifty",
+          "phonetic": "/fif-tee/"
+        },
+        {
+          "word": "sixty",
+          "phonetic": "/siks-tee/"
+        },
+        {
+          "word": "seventy",
+          "phonetic": "/sev-en-tee/"
+        },
+        {
+          "word": "eighty",
+          "phonetic": "/ay-tee/"
+        },
+        {
+          "word": "ninety",
+          "phonetic": "/nain-tee/"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-grammar1",
+      "type": "grammar-note",
+      "title": "Prices",
+      "ruleContext": "Use How much is it? to ask the price of one item. Use It's + price to answer.",
+      "expandableTitle": "See price examples",
+      "expandableContent": "How much is it?\nIt's ten dollars.\nIt's twelve dollars.\nIt's twenty-five dollars.\nIt's ninety-nine cents.",
+      "audience": "both"
+    },
+    {
+      "id": "p3-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the prices.",
+      "text": "1. $10 = [] dollars\n2. $12 = [] dollars\n3. $20 = [] dollars\n4. $35 = []-five dollars\n5. $99 = []-nine dollars",
+      "columns": 2,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["ten"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["twelve"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["twenty"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["thirty"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": ["ninety"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-listen1",
+      "type": "listening",
+      "title": "Listen: Prices at Burger Town",
+      "audioUrl": "audio/lesson-2-prices.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=700",
+      "transcript": "The burger is twelve dollars. The fries are five dollars. The sandwich is ten dollars. The soda is three dollars. The combo is fifteen dollars.",
+      "transcriptHighlights": [
+        {
+          "id": "p3-listen1-h1",
+          "text": "twelve dollars",
+          "color": "#bfdbfe"
+        },
+        {
+          "id": "p3-listen1-h2",
+          "text": "five dollars",
+          "color": "#d9f99d"
+        },
+        {
+          "id": "p3-listen1-h3",
+          "text": "fifteen dollars",
+          "color": "#fde68a"
+        }
+      ],
+      "transcriptVisibility": "after-answer",
+      "questions": [
+        {
+          "id": "p3-listen1-q1",
+          "question": "How much is the burger?",
+          "type": "open-ended",
+          "answer": "Twelve dollars"
+        },
+        {
+          "id": "p3-listen1-q2",
+          "question": "How much are the fries?",
+          "type": "open-ended",
+          "answer": "Five dollars"
+        },
+        {
+          "id": "p3-listen1-q3",
+          "question": "How much is the combo?",
+          "type": "open-ended",
+          "answer": "Fifteen dollars"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-break",
+      "type": "page-break",
+      "pageNumber": 4,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p4-h1",
+      "type": "heading",
+      "content": "4. Ordering Food",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p4-grammar1",
+      "type": "grammar-note",
+      "title": "Ordering Politely",
+      "ruleContext": "Use I want... for a simple order. Use please to sound polite. Use Can I have...? for a more natural order.",
+      "expandableTitle": "Ordering models",
+      "expandableContent": "I want a burger, please.\nI want fries, please.\nCan I have a sandwich, please?\nCan I have water, please?",
+      "audience": "both"
+    },
+    {
+      "id": "p4-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1000",
+      "messages": [
+        {
+          "id": "p4-conv1-m1",
+          "speaker": "Cashier",
+          "text": "Hi! What do you want?",
+          "highlights": [
+            {
+              "id": "p4-conv1-h1",
+              "text": "What do you want",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m2",
+          "speaker": "Leo",
+          "text": "Can I have a chicken sandwich, please?",
+          "highlights": [
+            {
+              "id": "p4-conv1-h2",
+              "text": "Can I have",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m3",
+          "speaker": "Cashier",
+          "text": "Sure. Do you want fries?",
+          "highlights": [
+            {
+              "id": "p4-conv1-h3",
+              "text": "Do you want",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m4",
+          "speaker": "Leo",
+          "text": "Yes, I do.",
+          "highlights": [
+            {
+              "id": "p4-conv1-h4",
+              "text": "Yes, I do",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m5",
+          "speaker": "Cashier",
+          "text": "Do you want soda or juice?",
+          "highlights": []
+        },
+        {
+          "id": "p4-conv1-m6",
+          "speaker": "Leo",
+          "text": "Juice, please.",
+          "highlights": [
+            {
+              "id": "p4-conv1-h5",
+              "text": "please",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p4-conv1-m7",
+          "speaker": "Cashier",
+          "text": "That's eighteen dollars.",
+          "highlights": [
+            {
+              "id": "p4-conv1-h6",
+              "text": "eighteen dollars",
+              "color": "#bfdbfe"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Can I have a chicken sandwich, please?",
+          "alternatives": [
+            "Can I have a burger, please?",
+            "Can I have a salad, please?",
+            "Can I have nuggets, please?"
+          ]
+        },
+        {
+          "original": "Juice, please.",
+          "alternatives": ["Soda, please.", "Water, please.", "Orange juice, please."]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the order.",
+      "text": "A: Hi! What do you want?\nB: Can I [] a burger, please?\nA: Sure. Do you want []?\nB: Yes, I do.\nA: Do you want a []?\nB: Water, please.\nA: That's fifteen [].",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["have"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["fries"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["drink"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["dollars"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-roleplay1",
+      "type": "roleplay",
+      "characters": [
+        {
+          "name": "Student A",
+          "details": [
+            {
+              "label": "Role",
+              "value": "You are the cashier. Ask about food, drink, and price."
+            }
+          ]
+        },
+        {
+          "name": "Student B",
+          "details": [
+            {
+              "label": "Role",
+              "value": "You are the customer. Order food and answer with short answers."
+            }
+          ]
+        }
+      ],
+      "tips": "Use: Can I have..., please? / Do you want...? / Yes, I do. / No, I don't. / That's ... dollars.",
+      "audience": "both"
+    },
+    {
+      "id": "p5-break",
+      "type": "page-break",
+      "pageNumber": 5,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p5-h1",
+      "type": "heading",
+      "content": "5. Preferences and Eating Habits",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p5-grammar1",
+      "type": "advanced-grammar",
+      "title": "LIKE / WANT / EAT / DRINK",
+      "explanation": "Use these actions to talk about preferences and eating habits.",
+      "details": "At this point, keep the focus on I, you, we, and they.",
+      "tableHeaders": ["Action", "Question", "Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "like",
+              "highlights": []
+            },
+            {
+              "text": "Do you like pizza?",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I do. I like pizza.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "want",
+              "highlights": []
+            },
+            {
+              "text": "Do you want fries?",
+              "highlights": []
+            },
+            {
+              "text": "No, I don't. I want a salad.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "eat",
+              "highlights": []
+            },
+            {
+              "text": "Do they eat fast food?",
+              "highlights": []
+            },
+            {
+              "text": "Yes, they do. They eat fast food on Fridays.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "drink",
+              "highlights": []
+            },
+            {
+              "text": "Do you drink soda?",
+              "highlights": []
+            },
+            {
+              "text": "No, I don't. I drink water.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-rewrite1",
+      "type": "rewrite-question",
+      "instruction": "Create questions about preferences and habits.",
+      "examples": [
+        {
+          "input": "you / like / pizza",
+          "output": "Do you like pizza?"
+        }
+      ],
+      "items": [
+        "you / like / burgers",
+        "you / drink / soda",
+        "you / eat / fast food",
+        "we / want / fries",
+        "they / like / chicken"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-read1",
+      "type": "reading-comprehension",
+      "title": "Fast Food Habits",
+      "text": "I like fast food, but I don't eat it every day. I usually eat rice, beans, chicken, and salad at home. On Fridays, my friends and I eat burgers or pizza. We drink juice or water. We don't drink soda every day.",
+      "questions": [
+        {
+          "id": "p5-read1-q1",
+          "type": "multiple-choice",
+          "question": "Does the person eat fast food every day?",
+          "options": ["Yes", "No"],
+          "answer": "No"
+        },
+        {
+          "id": "p5-read1-q2",
+          "type": "open-ended",
+          "question": "What does the person usually eat at home?",
+          "answer": "Rice, beans, chicken, and salad"
+        },
+        {
+          "id": "p5-read1-q3",
+          "type": "open-ended",
+          "question": "What do the friends eat on Fridays?",
+          "answer": "Burgers or pizza"
+        },
+        {
+          "id": "p5-read1-q4",
+          "type": "open-ended",
+          "question": "Do they drink soda every day?",
+          "answer": "No"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-break",
+      "type": "page-break",
+      "pageNumber": 6,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p6-h1",
+      "type": "heading",
+      "content": "6. He, She, It",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p6-p1",
+      "type": "paragraph",
+      "content": "Now students learn three new words: he, she, and it. Use he for a man or boy, she for a woman or girl, and it for one thing, one animal, one place, or one food item.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "p6-grammar1",
+      "type": "advanced-grammar",
+      "title": "HE / SHE / IT",
+      "explanation": "Use he, she, and it to talk about one person or one thing.",
+      "details": "This page prepares students for questions with does.",
+      "tableHeaders": ["Word", "Use", "Example"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "he",
+              "highlights": [
+                {
+                  "id": "p6-g1-a",
+                  "text": "he",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "one man or boy",
+              "highlights": []
+            },
+            {
+              "text": "He is Lucas.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "she",
+              "highlights": [
+                {
+                  "id": "p6-g1-b",
+                  "text": "she",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "one woman or girl",
+              "highlights": []
+            },
+            {
+              "text": "She is Sofia.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "it",
+              "highlights": [
+                {
+                  "id": "p6-g1-c",
+                  "text": "it",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "one thing, food item, animal, or place",
+              "highlights": []
+            },
+            {
+              "text": "It is a burger.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-grid1",
+      "type": "selection-grid",
+      "instruction": "Select the correct word.",
+      "isMultiSelect": false,
+      "items": [
+        {
+          "id": "p6-grid1-i1",
+          "text": "Lucas = he",
+          "isCorrect": true
+        },
+        {
+          "id": "p6-grid1-i2",
+          "text": "Lucas = she",
+          "isCorrect": false
+        },
+        {
+          "id": "p6-grid1-i3",
+          "text": "Lucas = it",
+          "isCorrect": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete with he, she, or it.",
+      "text": "1. Sofia is a student. [] likes English.\n2. Leo is hungry. [] wants a burger.\n3. The sandwich is good. [] is ten dollars.\n4. Emma is thirsty. [] wants water.\n5. The restaurant is open. [] is popular.",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["She"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["He"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["It"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["She"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": ["It"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-break",
+      "type": "page-break",
+      "pageNumber": 7,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p7-h1",
+      "type": "heading",
+      "content": "7. Introducing Does",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p7-grammar1",
+      "type": "advanced-grammar",
+      "title": "DOES + HE / SHE / IT + VERB",
+      "explanation": "Use does to ask questions with he, she, and it.",
+      "details": "In questions with does, keep the action in the simple form: Does she like pizza? Not: Does she likes pizza?",
+      "tableHeaders": ["Person", "Question", "Short answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "he",
+              "highlights": []
+            },
+            {
+              "text": "Does he like burgers?",
+              "highlights": [
+                {
+                  "id": "p7-g1-a",
+                  "text": "Does",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p7-g1-b",
+                  "text": "like",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, he does. / No, he doesn't.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "she",
+              "highlights": []
+            },
+            {
+              "text": "Does she want fries?",
+              "highlights": [
+                {
+                  "id": "p7-g1-c",
+                  "text": "Does",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p7-g1-d",
+                  "text": "want",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, she does. / No, she doesn't.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "it",
+              "highlights": []
+            },
+            {
+              "text": "Does it cost ten dollars?",
+              "highlights": [
+                {
+                  "id": "p7-g1-e",
+                  "text": "Does",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p7-g1-f",
+                  "text": "cost",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, it does. / No, it doesn't.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-grammar2",
+      "type": "advanced-grammar",
+      "title": "DO or DOES?",
+      "explanation": "Use do with I, you, we, and they. Use does with he, she, and it.",
+      "details": "This is a comparison page. Keep answers short and clear.",
+      "tableHeaders": ["Use", "Question", "Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "you",
+              "highlights": []
+            },
+            {
+              "text": "Do you like burgers?",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "they",
+              "highlights": []
+            },
+            {
+              "text": "Do they eat pizza?",
+              "highlights": []
+            },
+            {
+              "text": "No, they don't.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "he",
+              "highlights": []
+            },
+            {
+              "text": "Does he drink soda?",
+              "highlights": []
+            },
+            {
+              "text": "Yes, he does.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "she",
+              "highlights": []
+            },
+            {
+              "text": "Does she want fries?",
+              "highlights": []
+            },
+            {
+              "text": "No, she doesn't.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete with do or does.",
+      "text": "1. [] you like pizza?\n2. [] she want fries?\n3. [] they eat fast food?\n4. [] he drink soda?\n5. [] it cost ten dollars?\n6. [] we have ketchup?",
+      "columns": 2,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["Does"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["Does"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": ["Does"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap6",
+          "acceptedAnswers": ["Do"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-rewrite1",
+      "type": "rewrite-question",
+      "instruction": "Create questions with does.",
+      "examples": [
+        {
+          "input": "she / like / pizza",
+          "output": "Does she like pizza?"
+        }
+      ],
+      "items": [
+        "he / want / a burger",
+        "she / drink / juice",
+        "it / cost / fifteen dollars",
+        "he / eat / fast food",
+        "she / like / salad"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-break",
+      "type": "page-break",
+      "pageNumber": 8,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p8-h1",
+      "type": "heading",
+      "content": "8. Food Preferences: He and She",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p8-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000",
+      "messages": [
+        {
+          "id": "p8-conv1-m1",
+          "speaker": "Lucas",
+          "text": "Does Emma like burgers?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h1",
+              "text": "Does Emma like",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m2",
+          "speaker": "Sofia",
+          "text": "Yes, she does. She likes cheese burgers.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h2",
+              "text": "Yes, she does",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m3",
+          "speaker": "Lucas",
+          "text": "Does Leo drink soda?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h3",
+              "text": "Does Leo drink",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m4",
+          "speaker": "Sofia",
+          "text": "No, he doesn't. He drinks water.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h4",
+              "text": "No, he doesn't",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m5",
+          "speaker": "Lucas",
+          "text": "Does the combo cost twenty dollars?",
+          "highlights": [
+            {
+              "id": "p8-conv1-h5",
+              "text": "Does the combo cost",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p8-conv1-m6",
+          "speaker": "Sofia",
+          "text": "No, it doesn't. It costs fifteen dollars.",
+          "highlights": [
+            {
+              "id": "p8-conv1-h6",
+              "text": "No, it doesn't",
+              "color": "#fde68a"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Does Emma like burgers?",
+          "alternatives": [
+            "Does Emma like pizza?",
+            "Does Emma like salad?",
+            "Does Emma like fries?"
+          ]
+        },
+        {
+          "original": "No, he doesn't. He drinks water.",
+          "alternatives": ["Yes, he does. He drinks soda.", "No, he doesn't. He drinks juice."]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-listen1",
+      "type": "listening",
+      "title": "Listen: What Do They Like?",
+      "audioUrl": "audio/lesson-2-food-preferences.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=700",
+      "transcript": "Leo likes burgers, but he doesn't like soda. He drinks water. Emma likes pizza and fries. She doesn't eat fast food every day. The combo costs fifteen dollars.",
+      "transcriptHighlights": [
+        {
+          "id": "p8-listen1-h1",
+          "text": "he doesn't like soda",
+          "color": "#fde68a"
+        },
+        {
+          "id": "p8-listen1-h2",
+          "text": "She doesn't eat fast food every day",
+          "color": "#bfdbfe"
+        },
+        {
+          "id": "p8-listen1-h3",
+          "text": "fifteen dollars",
+          "color": "#d9f99d"
+        }
+      ],
+      "transcriptVisibility": "after-answer",
+      "questions": [
+        {
+          "id": "p8-listen1-q1",
+          "question": "Does Leo like burgers?",
+          "type": "open-ended",
+          "answer": "Yes"
+        },
+        {
+          "id": "p8-listen1-q2",
+          "question": "Does Leo drink soda?",
+          "type": "open-ended",
+          "answer": "No"
+        },
+        {
+          "id": "p8-listen1-q3",
+          "question": "Does Emma eat fast food every day?",
+          "type": "open-ended",
+          "answer": "No"
+        },
+        {
+          "id": "p8-listen1-q4",
+          "question": "How much does the combo cost?",
+          "type": "open-ended",
+          "answer": "Fifteen dollars"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-prompts1",
+      "type": "conversation-prompts",
+      "title": "Ask About Another Person",
+      "prompts": [
+        "Does your friend like burgers?",
+        "Does your friend drink soda?",
+        "Does your friend eat pizza?",
+        "Does your friend like salad?",
+        "Does your friend eat fast food every week?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-break",
+      "type": "page-break",
+      "pageNumber": 9,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p9-h1",
+      "type": "heading",
+      "content": "9. Review and Final Challenge",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p9-read1",
+      "type": "reading-comprehension",
+      "title": "Final Reading: Lunch at Burger Town",
+      "text": "Lucas and Emma are at Burger Town. Lucas wants a chicken sandwich and water. He doesn't drink soda. Emma wants a cheese burger, fries, and orange juice. She likes burgers, but she doesn't eat fast food every day. The sandwich is ten dollars. The burger combo is fifteen dollars.",
+      "questions": [
+        {
+          "id": "p9-read1-q1",
+          "type": "multiple-choice",
+          "question": "Where are Lucas and Emma?",
+          "options": ["At school", "At Burger Town", "At home"],
+          "answer": "At Burger Town"
+        },
+        {
+          "id": "p9-read1-q2",
+          "type": "open-ended",
+          "question": "What does Lucas want?",
+          "answer": "A chicken sandwich and water"
+        },
+        {
+          "id": "p9-read1-q3",
+          "type": "open-ended",
+          "question": "Does Lucas drink soda?",
+          "answer": "No"
+        },
+        {
+          "id": "p9-read1-q4",
+          "type": "open-ended",
+          "question": "What does Emma want?",
+          "answer": "A cheese burger, fries, and orange juice"
+        },
+        {
+          "id": "p9-read1-q5",
+          "type": "open-ended",
+          "question": "How much is the burger combo?",
+          "answer": "Fifteen dollars"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-roleplay1",
+      "type": "roleplay",
+      "characters": [
+        {
+          "name": "Student A",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Cashier: greet, ask the order, ask about drink and fries, say the price."
+            }
+          ]
+        },
+        {
+          "name": "Student B",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Customer: order food, answer questions, ask the price, pay politely."
+            }
+          ]
+        }
+      ],
+      "tips": "Use at least one price from 10 to 99 and at least two short answers.",
+      "audience": "both"
+    },
+    {
+      "id": "p9-writing1",
+      "type": "writing-task",
+      "title": "My Fast Food Profile",
+      "prompt": "Write 5 to 7 sentences about your food preferences. Include what you like, what you don't like, what you drink, one price, and one sentence about a friend using he or she.",
+      "minWords": 55,
+      "audience": "both"
+    },
+    {
+      "id": "p9-final1",
+      "type": "final-task",
+      "title": "Final Restaurant Order",
+      "fields": [
+        "Greeting",
+        "Food order",
+        "Drink order",
+        "Do you want fries?",
+        "Price",
+        "Does your friend like fast food?",
+        "Short answer with does"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p10-break",
+      "type": "page-break",
+      "pageNumber": 10,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p10-h1",
+      "type": "heading",
+      "content": "10. Answer Key",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p10-key1",
+      "type": "paragraph",
+      "content": "This page keeps the answer key inside the authoring JSON. Remove it from the public export if needed.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "p10-grammar1",
+      "type": "grammar-note",
+      "title": "Core Answers",
+      "ruleContext": "Do you...? → Yes, I do. / No, I don't. Does he/she/it...? → Yes, he/she/it does. / No, he/she/it doesn't.",
+      "expandableTitle": "Main corrections",
+      "expandableContent": "Page 2 Fill: Do, Do, Do, Do, Do, Do.\nPage 3 Prices: ten, twelve, twenty, thirty, ninety.\nPage 4 Fill: have, fries, drink, dollars.\nPage 6 Fill: She, He, It, She, It.\nPage 7 Fill: Do, Does, Do, Does, Does, Do.",
+      "audience": "both"
+    }
+  ]
+}

@@ -1,0 +1,1988 @@
+{
+  "schemaVersion": 1,
+  "id": "book-1-lesson-3-daily-routines",
+  "title": "Lesson 3 - Daily Routines",
+  "level": "A1",
+  "language": "en",
+  "blocks": [
+    {
+      "id": "p1-h1",
+      "type": "heading",
+      "content": "Lesson 3 - Daily Routines",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p1-intro",
+      "type": "paragraph",
+      "content": "In this lesson, students learn routine actions, days of the week, basic time, long answers with do and does, what and what time questions, and simple social expressions for favors, surprise, thanks, and asking what is going on.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "p1-break",
+      "type": "page-break",
+      "pageNumber": 1,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p1-h2",
+      "type": "heading",
+      "content": "1. What's Going On?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p1-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000",
+      "messages": [
+        {
+          "id": "p1-conv1-m1",
+          "speaker": "Leo",
+          "text": "Hi, Emma. What's going on?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h1",
+              "text": "What's going on",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m2",
+          "speaker": "Emma",
+          "text": "Not much. I'm getting ready for school.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h2",
+              "text": "Not much",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "p1-conv1-h3",
+              "text": "getting ready",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m3",
+          "speaker": "Leo",
+          "text": "Really? What time do you go to school?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h4",
+              "text": "Really",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "p1-conv1-h5",
+              "text": "What time",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m4",
+          "speaker": "Emma",
+          "text": "I go to school at eight o'clock.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h6",
+              "text": "at eight o'clock",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m5",
+          "speaker": "Leo",
+          "text": "Wow! That's early.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h7",
+              "text": "Wow",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m6",
+          "speaker": "Emma",
+          "text": "Can you help me with my bag?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h8",
+              "text": "Can you help me",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m7",
+          "speaker": "Leo",
+          "text": "Sure.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h9",
+              "text": "Sure",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m8",
+          "speaker": "Emma",
+          "text": "Thanks!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h10",
+              "text": "Thanks",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m9",
+          "speaker": "Leo",
+          "text": "No problem.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h11",
+              "text": "No problem",
+              "color": "#fde68a"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "What's going on?",
+          "alternatives": ["What's happening?", "What are you doing?", "What's up?"]
+        },
+        {
+          "original": "Really?",
+          "alternatives": ["Wow!", "Oh, really?", "That's interesting!"]
+        },
+        {
+          "original": "Can you help me?",
+          "alternatives": [
+            "Can you open the door?",
+            "Can you repeat, please?",
+            "Can you help me with this?"
+          ]
+        },
+        {
+          "original": "Thanks!",
+          "alternatives": ["Thank you!", "Thanks a lot!", "Thank you very much!"]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fc1",
+      "type": "flashcards",
+      "title": "Useful Social Expressions",
+      "category": "Social English",
+      "tags": ["routines", "favors", "thanks"],
+      "cards": [
+        {
+          "id": "p1-fc1-c1",
+          "expressions": ["What's going on?"],
+          "frontImage": "",
+          "backText": "Use this to ask what is happening.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c2",
+          "expressions": ["Not much."],
+          "frontImage": "",
+          "backText": "A simple answer when nothing special is happening.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c3",
+          "expressions": ["Really? / Wow!"],
+          "frontImage": "",
+          "backText": "Use these expressions to show surprise.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c4",
+          "expressions": ["Can you help me?"],
+          "frontImage": "",
+          "backText": "Use this to ask for a favor.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c5",
+          "expressions": ["Sure. / Of course."],
+          "frontImage": "",
+          "backText": "Use these expressions to accept a favor request.",
+          "backImage": ""
+        },
+        {
+          "id": "p1-fc1-c6",
+          "expressions": ["Thanks. / You're welcome. / No problem."],
+          "frontImage": "",
+          "backText": "Use these to thank someone and respond to thanks.",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the mini-dialogue.",
+      "text": "A: What's [] on?\nB: Not much.\nA: Can you [] me?\nB: Sure.\nA: Thanks!\nB: No [].",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["going"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["help"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["problem"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-break",
+      "type": "page-break",
+      "pageNumber": 2,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p2-h1",
+      "type": "heading",
+      "content": "2. Routine Actions",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p2-fc1",
+      "type": "flashcards",
+      "title": "Daily Routine Actions",
+      "category": "Routines",
+      "tags": ["daily routine", "actions"],
+      "cards": [
+        {
+          "id": "p2-fc1-c1",
+          "expressions": ["wake up"],
+          "frontImage": "",
+          "backText": "To stop sleeping.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c2",
+          "expressions": ["get up"],
+          "frontImage": "",
+          "backText": "To get out of bed.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c3",
+          "expressions": ["take a shower"],
+          "frontImage": "",
+          "backText": "To wash your body.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c4",
+          "expressions": ["brush my teeth"],
+          "frontImage": "",
+          "backText": "To clean your teeth.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c5",
+          "expressions": ["have breakfast"],
+          "frontImage": "",
+          "backText": "To eat in the morning.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c6",
+          "expressions": ["go to school"],
+          "frontImage": "",
+          "backText": "To go to classes.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c7",
+          "expressions": ["go to work"],
+          "frontImage": "",
+          "backText": "To go to your job.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c8",
+          "expressions": ["have lunch"],
+          "frontImage": "",
+          "backText": "To eat in the middle of the day.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c9",
+          "expressions": ["study"],
+          "frontImage": "",
+          "backText": "To learn or practice.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c10",
+          "expressions": ["go home"],
+          "frontImage": "",
+          "backText": "To return to your house.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c11",
+          "expressions": ["have dinner"],
+          "frontImage": "",
+          "backText": "To eat at night.",
+          "backImage": ""
+        },
+        {
+          "id": "p2-fc1-c12",
+          "expressions": ["go to bed"],
+          "frontImage": "",
+          "backText": "To go to sleep.",
+          "backImage": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-vocab1",
+      "type": "vocabulary-match",
+      "title": "Match the Routine Action",
+      "pairs": [
+        {
+          "left": "wake up",
+          "leftType": "text",
+          "right": "stop sleeping"
+        },
+        {
+          "left": "have breakfast",
+          "leftType": "text",
+          "right": "eat in the morning"
+        },
+        {
+          "left": "go to school",
+          "leftType": "text",
+          "right": "go to classes"
+        },
+        {
+          "left": "have lunch",
+          "leftType": "text",
+          "right": "eat in the afternoon"
+        },
+        {
+          "left": "go home",
+          "leftType": "text",
+          "right": "return to your house"
+        },
+        {
+          "left": "go to bed",
+          "leftType": "text",
+          "right": "go to sleep"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-drill1",
+      "type": "repetition-drill",
+      "title": "Routine Chunks",
+      "words": [
+        {
+          "word": "I wake up.",
+          "phonetic": "/ai weik ap/"
+        },
+        {
+          "word": "I get up.",
+          "phonetic": "/ai get ap/"
+        },
+        {
+          "word": "I take a shower.",
+          "phonetic": "/ai teik a shau-er/"
+        },
+        {
+          "word": "I have breakfast.",
+          "phonetic": "/ai hav brek-fast/"
+        },
+        {
+          "word": "I go to school.",
+          "phonetic": "/ai go tu skul/"
+        },
+        {
+          "word": "I study English.",
+          "phonetic": "/ai stu-di ing-glish/"
+        },
+        {
+          "word": "I go home.",
+          "phonetic": "/ai go hom/"
+        },
+        {
+          "word": "I go to bed.",
+          "phonetic": "/ai go tu bed/"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-break",
+      "type": "page-break",
+      "pageNumber": 3,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p3-h1",
+      "type": "heading",
+      "content": "3. What Do You Do?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p3-grammar1",
+      "type": "advanced-grammar",
+      "title": "WHAT + DO + YOU + DO?",
+      "explanation": "Use what to ask for information about an action or activity.",
+      "details": "In this lesson, students use What do you do...? to ask about routines.",
+      "tableHeaders": ["Question", "Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "What do you do in the morning?",
+              "highlights": [
+                {
+                  "id": "p3-g1-a",
+                  "text": "What",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p3-g1-b",
+                  "text": "do you do",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "I have breakfast.",
+              "highlights": [
+                {
+                  "id": "p3-g1-c",
+                  "text": "have breakfast",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "What do you do after school?",
+              "highlights": [
+                {
+                  "id": "p3-g1-d",
+                  "text": "What",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "I go home.",
+              "highlights": [
+                {
+                  "id": "p3-g1-e",
+                  "text": "go home",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "What do you do at night?",
+              "highlights": [
+                {
+                  "id": "p3-g1-f",
+                  "text": "What",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "I study English.",
+              "highlights": [
+                {
+                  "id": "p3-g1-g",
+                  "text": "study English",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the questions with what or do.",
+      "text": "1. [] do you do in the morning?\n2. What [] you do after school?\n3. What do you [] at night?\n4. [] do you do on Saturdays?",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["What"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["What"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p3-rewrite1",
+      "type": "rewrite-question",
+      "instruction": "Create routine questions with what do you do.",
+      "examples": [
+        {
+          "input": "in the morning",
+          "output": "What do you do in the morning?"
+        }
+      ],
+      "items": ["after school", "at night", "on Saturdays", "after work", "in the afternoon"],
+      "audience": "both"
+    },
+    {
+      "id": "p3-prompts1",
+      "type": "conversation-prompts",
+      "title": "Your Routine",
+      "prompts": [
+        "What do you do in the morning?",
+        "What do you do after school?",
+        "What do you do after work?",
+        "What do you do at night?",
+        "What do you do on Saturdays?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-break",
+      "type": "page-break",
+      "pageNumber": 4,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p4-h1",
+      "type": "heading",
+      "content": "4. Long Answers with Do and Does",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p4-grammar1",
+      "type": "advanced-grammar",
+      "title": "SHORT ANSWER + LONG ANSWER",
+      "explanation": "A short answer is good, but a long answer gives more information.",
+      "details": "Keep the short answer first. Then add one simple sentence.",
+      "tableHeaders": ["Question", "Short answer", "Long answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Do you study English?",
+              "highlights": []
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "p4-g1-a",
+                  "text": "Yes, I do",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I study English at night.",
+              "highlights": [
+                {
+                  "id": "p4-g1-b",
+                  "text": "I study English at night",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work?",
+              "highlights": []
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": [
+                {
+                  "id": "p4-g1-c",
+                  "text": "No, I don't",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't. I study full time.",
+              "highlights": [
+                {
+                  "id": "p4-g1-d",
+                  "text": "I study full time",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Does Leo wake up early?",
+              "highlights": []
+            },
+            {
+              "text": "Yes, he does.",
+              "highlights": [
+                {
+                  "id": "p4-g1-e",
+                  "text": "Yes, he does",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Yes, he does. He wakes up at seven.",
+              "highlights": [
+                {
+                  "id": "p4-g1-f",
+                  "text": "He wakes up at seven",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Does Emma work?",
+              "highlights": []
+            },
+            {
+              "text": "No, she doesn't.",
+              "highlights": [
+                {
+                  "id": "p4-g1-g",
+                  "text": "No, she doesn't",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "No, she doesn't. She goes to school.",
+              "highlights": [
+                {
+                  "id": "p4-g1-h",
+                  "text": "She goes to school",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the long answers.",
+      "text": "1. Do you study English?\nYes, I []. I study English at night.\n\n2. Do you work?\nNo, I []. I go to school.\n\n3. Does Leo wake up early?\nYes, he []. He wakes up at seven.\n\n4. Does Emma work?\nNo, she []. She studies full time.",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["don't"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["does"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["doesn't"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p4-rewrite1",
+      "type": "rewrite-question",
+      "instruction": "Turn the short answer into a long answer.",
+      "examples": [
+        {
+          "input": "Do you study English? / Yes",
+          "output": "Yes, I do. I study English at night."
+        }
+      ],
+      "items": [
+        "Do you wake up early? / Yes",
+        "Do you work on Saturdays? / No",
+        "Does Leo have breakfast? / Yes",
+        "Does Emma study at night? / No",
+        "Does the restaurant open early? / Yes"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-break",
+      "type": "page-break",
+      "pageNumber": 5,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p5-h1",
+      "type": "heading",
+      "content": "5. He, She, It in Statements",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p5-p1",
+      "type": "paragraph",
+      "content": "Now students learn one important idea: when we talk about he, she, or it in simple sentences, the action usually changes a little.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "p5-grammar1",
+      "type": "advanced-grammar",
+      "title": "HE / SHE / IT + ACTION + S",
+      "explanation": "Use the simple action with I, you, we, and they. Add -s or -es with he, she, and it in affirmative sentences.",
+      "details": "Keep this page simple. Do not overexplain spelling rules yet. Focus on common routine verbs.",
+      "tableHeaders": ["I / You / We / They", "He / She / It"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "I wake up at seven.",
+              "highlights": [
+                {
+                  "id": "p5-g1-a",
+                  "text": "wake up",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "He wakes up at seven.",
+              "highlights": [
+                {
+                  "id": "p5-g1-b",
+                  "text": "wakes up",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "I go to school.",
+              "highlights": [
+                {
+                  "id": "p5-g1-c",
+                  "text": "go",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "She goes to school.",
+              "highlights": [
+                {
+                  "id": "p5-g1-d",
+                  "text": "goes",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "They study English.",
+              "highlights": [
+                {
+                  "id": "p5-g1-e",
+                  "text": "study",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "He studies English.",
+              "highlights": [
+                {
+                  "id": "p5-g1-f",
+                  "text": "studies",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "We have lunch.",
+              "highlights": [
+                {
+                  "id": "p5-g1-g",
+                  "text": "have",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "She has lunch.",
+              "highlights": [
+                {
+                  "id": "p5-g1-h",
+                  "text": "has",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "You brush your teeth.",
+              "highlights": [
+                {
+                  "id": "p5-g1-i",
+                  "text": "brush",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "He brushes his teeth.",
+              "highlights": [
+                {
+                  "id": "p5-g1-j",
+                  "text": "brushes",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the sentences.",
+      "text": "1. I wake up at seven. He [] up at seven.\n2. I go to school. She [] to school.\n3. They study English. He [] English.\n4. We have lunch. She [] lunch.\n5. I brush my teeth. He [] his teeth.",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["wakes"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["goes"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["studies"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["has"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": ["brushes"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p5-grammar2",
+      "type": "advanced-grammar",
+      "title": "DOES QUESTIONS: NO -S ON THE ACTION",
+      "explanation": "In questions with does, the action goes back to the simple form.",
+      "details": "This prevents the common mistake: Does she studies?",
+      "tableHeaders": ["Statement", "Question"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "She studies English.",
+              "highlights": [
+                {
+                  "id": "p5-g2-a",
+                  "text": "studies",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Does she study English?",
+              "highlights": [
+                {
+                  "id": "p5-g2-b",
+                  "text": "Does",
+                  "color": "#fde68a"
+                },
+                {
+                  "id": "p5-g2-c",
+                  "text": "study",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "He wakes up early.",
+              "highlights": [
+                {
+                  "id": "p5-g2-d",
+                  "text": "wakes",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Does he wake up early?",
+              "highlights": [
+                {
+                  "id": "p5-g2-e",
+                  "text": "Does",
+                  "color": "#fde68a"
+                },
+                {
+                  "id": "p5-g2-f",
+                  "text": "wake",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "She goes to school.",
+              "highlights": [
+                {
+                  "id": "p5-g2-g",
+                  "text": "goes",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Does she go to school?",
+              "highlights": [
+                {
+                  "id": "p5-g2-h",
+                  "text": "Does",
+                  "color": "#fde68a"
+                },
+                {
+                  "id": "p5-g2-i",
+                  "text": "go",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-break",
+      "type": "page-break",
+      "pageNumber": 6,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p6-h1",
+      "type": "heading",
+      "content": "6. Days of the Week",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p6-drill1",
+      "type": "repetition-drill",
+      "title": "Days of the Week",
+      "words": [
+        {
+          "word": "Monday",
+          "phonetic": "/mun-day/"
+        },
+        {
+          "word": "Tuesday",
+          "phonetic": "/tuz-day/"
+        },
+        {
+          "word": "Wednesday",
+          "phonetic": "/wenz-day/"
+        },
+        {
+          "word": "Thursday",
+          "phonetic": "/thurz-day/"
+        },
+        {
+          "word": "Friday",
+          "phonetic": "/frai-day/"
+        },
+        {
+          "word": "Saturday",
+          "phonetic": "/sa-ter-day/"
+        },
+        {
+          "word": "Sunday",
+          "phonetic": "/sun-day/"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-vocab1",
+      "type": "vocabulary-match",
+      "title": "Put the Days in Order",
+      "pairs": [
+        {
+          "left": "1",
+          "leftType": "text",
+          "right": "Monday"
+        },
+        {
+          "left": "2",
+          "leftType": "text",
+          "right": "Tuesday"
+        },
+        {
+          "left": "3",
+          "leftType": "text",
+          "right": "Wednesday"
+        },
+        {
+          "left": "4",
+          "leftType": "text",
+          "right": "Thursday"
+        },
+        {
+          "left": "5",
+          "leftType": "text",
+          "right": "Friday"
+        },
+        {
+          "left": "6",
+          "leftType": "text",
+          "right": "Saturday"
+        },
+        {
+          "left": "7",
+          "leftType": "text",
+          "right": "Sunday"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p6-grammar1",
+      "type": "grammar-note",
+      "title": "On + Day",
+      "ruleContext": "Use on before a day of the week.",
+      "expandableTitle": "Examples",
+      "expandableContent": "I study English on Mondays.\nI work on Fridays.\nShe goes to school on weekdays.\nHe plays games on Saturdays.",
+      "audience": "both"
+    },
+    {
+      "id": "p6-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete with on.",
+      "text": "1. I study English [] Mondays.\n2. She works [] Fridays.\n3. He plays soccer [] Saturdays.\n4. We go to school [] weekdays.",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["on"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["on"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["on"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["on"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-break",
+      "type": "page-break",
+      "pageNumber": 7,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p7-h1",
+      "type": "heading",
+      "content": "7. What Time Is It?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p7-grammar1",
+      "type": "grammar-note",
+      "title": "Basic Time",
+      "ruleContext": "Use o'clock for exact hours.",
+      "expandableTitle": "Examples",
+      "expandableContent": "1:00 = one o'clock\n2:00 = two o'clock\n7:00 = seven o'clock\n10:00 = ten o'clock\n12:00 = twelve o'clock",
+      "audience": "both"
+    },
+    {
+      "id": "p7-drill1",
+      "type": "repetition-drill",
+      "title": "Times",
+      "words": [
+        {
+          "word": "one o'clock",
+          "phonetic": "/wun o-klok/"
+        },
+        {
+          "word": "two o'clock",
+          "phonetic": "/tu o-klok/"
+        },
+        {
+          "word": "three o'clock",
+          "phonetic": "/three o-klok/"
+        },
+        {
+          "word": "four o'clock",
+          "phonetic": "/for o-klok/"
+        },
+        {
+          "word": "five o'clock",
+          "phonetic": "/faiv o-klok/"
+        },
+        {
+          "word": "six o'clock",
+          "phonetic": "/siks o-klok/"
+        },
+        {
+          "word": "seven o'clock",
+          "phonetic": "/sev-en o-klok/"
+        },
+        {
+          "word": "eight o'clock",
+          "phonetic": "/eit o-klok/"
+        },
+        {
+          "word": "nine o'clock",
+          "phonetic": "/nain o-klok/"
+        },
+        {
+          "word": "ten o'clock",
+          "phonetic": "/ten o-klok/"
+        },
+        {
+          "word": "eleven o'clock",
+          "phonetic": "/ih-lev-en o-klok/"
+        },
+        {
+          "word": "twelve o'clock",
+          "phonetic": "/twelv o-klok/"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p7-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the times.",
+      "text": "1. 7:00 = seven []\n2. 8:00 = eight []\n3. 10:00 = ten []\n4. 12:00 = twelve []",
+      "columns": 2,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["o'clock"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["o'clock"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["o'clock"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["o'clock"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-break",
+      "type": "page-break",
+      "pageNumber": 8,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p8-h1",
+      "type": "heading",
+      "content": "8. What Time Do You...?",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p8-grammar1",
+      "type": "advanced-grammar",
+      "title": "WHAT TIME + DO / DOES",
+      "explanation": "Use what time to ask about the hour of an action.",
+      "details": "Use at before the time.",
+      "tableHeaders": ["Question", "Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "What time do you wake up?",
+              "highlights": [
+                {
+                  "id": "p8-g1-a",
+                  "text": "What time",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p8-g1-b",
+                  "text": "do you",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "I wake up at seven o'clock.",
+              "highlights": [
+                {
+                  "id": "p8-g1-c",
+                  "text": "at seven o'clock",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "What time do you go to school?",
+              "highlights": [
+                {
+                  "id": "p8-g1-d",
+                  "text": "What time",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "I go to school at eight o'clock.",
+              "highlights": [
+                {
+                  "id": "p8-g1-e",
+                  "text": "at eight o'clock",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "What time does she have lunch?",
+              "highlights": [
+                {
+                  "id": "p8-g1-f",
+                  "text": "does she",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "She has lunch at twelve o'clock.",
+              "highlights": [
+                {
+                  "id": "p8-g1-g",
+                  "text": "has lunch",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p8-g1-h",
+                  "text": "at twelve o'clock",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "What time does he go to bed?",
+              "highlights": [
+                {
+                  "id": "p8-g1-i",
+                  "text": "does he",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "He goes to bed at ten o'clock.",
+              "highlights": [
+                {
+                  "id": "p8-g1-j",
+                  "text": "goes to bed",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p8-g1-k",
+                  "text": "at ten o'clock",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete with what time, do, does, or at.",
+      "text": "1. [] do you wake up?\n2. What time [] you go to school?\n3. What time [] she have lunch?\n4. I wake up [] seven o'clock.\n5. He goes to bed [] ten o'clock.",
+      "columns": 1,
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": ["What time"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": ["do"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": ["does"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": ["at"],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": ["at"],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-rewrite1",
+      "type": "rewrite-question",
+      "instruction": "Create what time questions.",
+      "examples": [
+        {
+          "input": "you / wake up",
+          "output": "What time do you wake up?"
+        }
+      ],
+      "items": [
+        "you / have breakfast",
+        "you / go to school",
+        "she / have lunch",
+        "he / go home",
+        "he / go to bed"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p8-prompts1",
+      "type": "conversation-prompts",
+      "title": "Ask About Time",
+      "prompts": [
+        "What time do you wake up?",
+        "What time do you have breakfast?",
+        "What time do you go to school or work?",
+        "What time do you have dinner?",
+        "What time do you go to bed?"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-break",
+      "type": "page-break",
+      "pageNumber": 9,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p9-h1",
+      "type": "heading",
+      "content": "9. Favors, Thanks, and Surprise",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p9-grammar1",
+      "type": "advanced-grammar",
+      "title": "SOCIAL ENGLISH",
+      "explanation": "Use these expressions in everyday situations.",
+      "details": "These phrases are useful in class, at home, and at work.",
+      "tableHeaders": ["Function", "Expression", "Response"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Ask what is happening",
+              "highlights": []
+            },
+            {
+              "text": "What's going on?",
+              "highlights": [
+                {
+                  "id": "p9-g1-a",
+                  "text": "What's going on",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Not much. / I'm studying.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Express surprise",
+              "highlights": []
+            },
+            {
+              "text": "Really? / Wow!",
+              "highlights": [
+                {
+                  "id": "p9-g1-b",
+                  "text": "Really",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes! / I know!",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Ask for a favor",
+              "highlights": []
+            },
+            {
+              "text": "Can you help me?",
+              "highlights": [
+                {
+                  "id": "p9-g1-c",
+                  "text": "Can you help me",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Sure. / Of course.",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Thank someone",
+              "highlights": []
+            },
+            {
+              "text": "Thanks. / Thank you.",
+              "highlights": [
+                {
+                  "id": "p9-g1-d",
+                  "text": "Thanks",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "You're welcome. / No problem.",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-conv1",
+      "type": "conversation",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000",
+      "messages": [
+        {
+          "id": "p9-conv1-m1",
+          "speaker": "Ana",
+          "text": "Hey, Bruno. What's going on?",
+          "highlights": [
+            {
+              "id": "p9-conv1-h1",
+              "text": "What's going on",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p9-conv1-m2",
+          "speaker": "Bruno",
+          "text": "I'm studying for my English test.",
+          "highlights": [
+            {
+              "id": "p9-conv1-h2",
+              "text": "studying",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p9-conv1-m3",
+          "speaker": "Ana",
+          "text": "Really? The test is today?",
+          "highlights": [
+            {
+              "id": "p9-conv1-h3",
+              "text": "Really",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p9-conv1-m4",
+          "speaker": "Bruno",
+          "text": "Yes! Can you help me?",
+          "highlights": [
+            {
+              "id": "p9-conv1-h4",
+              "text": "Can you help me",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p9-conv1-m5",
+          "speaker": "Ana",
+          "text": "Sure.",
+          "highlights": [
+            {
+              "id": "p9-conv1-h5",
+              "text": "Sure",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p9-conv1-m6",
+          "speaker": "Bruno",
+          "text": "Thanks a lot.",
+          "highlights": [
+            {
+              "id": "p9-conv1-h6",
+              "text": "Thanks a lot",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p9-conv1-m7",
+          "speaker": "Ana",
+          "text": "You're welcome.",
+          "highlights": [
+            {
+              "id": "p9-conv1-h7",
+              "text": "You're welcome",
+              "color": "#fde68a"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Can you help me?",
+          "alternatives": [
+            "Can you repeat, please?",
+            "Can you open the book?",
+            "Can you speak slowly?"
+          ]
+        },
+        {
+          "original": "Sure.",
+          "alternatives": ["Of course.", "No problem.", "Yes, sure."]
+        },
+        {
+          "original": "You're welcome.",
+          "alternatives": ["No problem.", "Anytime.", "Sure."]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p9-roleplay1",
+      "type": "roleplay",
+      "characters": [
+        {
+          "name": "Student A",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Ask what is going on, show surprise, and ask for a favor."
+            }
+          ]
+        },
+        {
+          "name": "Student B",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Answer, accept the favor request, and respond to thanks."
+            }
+          ]
+        }
+      ],
+      "tips": "Use: What's going on? / Really? / Can you help me? / Sure. / Thanks. / You're welcome.",
+      "audience": "both"
+    },
+    {
+      "id": "p10-break",
+      "type": "page-break",
+      "pageNumber": 10,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p10-h1",
+      "type": "heading",
+      "content": "10. Reading and Listening",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p10-read1",
+      "type": "reading-comprehension",
+      "title": "A Day in Leo's Life",
+      "text": "Leo wakes up at seven o'clock. He has breakfast at seven thirty. He goes to school on Mondays, Tuesdays, Wednesdays, Thursdays, and Fridays. He studies English on Mondays and Wednesdays. After school, he goes home and does homework. At night, he has dinner with his family. He goes to bed at ten o'clock.",
+      "questions": [
+        {
+          "id": "p10-read1-q1",
+          "type": "multiple-choice",
+          "question": "What time does Leo wake up?",
+          "options": ["Six o'clock", "Seven o'clock", "Eight o'clock"],
+          "answer": "Seven o'clock"
+        },
+        {
+          "id": "p10-read1-q2",
+          "type": "open-ended",
+          "question": "Does Leo go to school on Mondays?",
+          "answer": "Yes, he does."
+        },
+        {
+          "id": "p10-read1-q3",
+          "type": "open-ended",
+          "question": "What days does Leo study English?",
+          "answer": "Mondays and Wednesdays"
+        },
+        {
+          "id": "p10-read1-q4",
+          "type": "open-ended",
+          "question": "What does Leo do after school?",
+          "answer": "He goes home and does homework."
+        },
+        {
+          "id": "p10-read1-q5",
+          "type": "open-ended",
+          "question": "What time does Leo go to bed?",
+          "answer": "Ten o'clock"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p10-listen1",
+      "type": "listening",
+      "title": "Listen: Emma's Routine",
+      "audioUrl": "audio/lesson-3-emma-routine.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=700",
+      "transcript": "Emma wakes up at six o'clock. She takes a shower and has breakfast. She goes to school at eight o'clock. She studies English on Tuesdays and Thursdays. At night, she reads a book and goes to bed at ten o'clock.",
+      "transcriptHighlights": [
+        {
+          "id": "p10-listen1-h1",
+          "text": "wakes up at six o'clock",
+          "color": "#bfdbfe"
+        },
+        {
+          "id": "p10-listen1-h2",
+          "text": "goes to school at eight o'clock",
+          "color": "#d9f99d"
+        },
+        {
+          "id": "p10-listen1-h3",
+          "text": "on Tuesdays and Thursdays",
+          "color": "#fde68a"
+        }
+      ],
+      "transcriptVisibility": "after-answer",
+      "questions": [
+        {
+          "id": "p10-listen1-q1",
+          "question": "What time does Emma wake up?",
+          "type": "open-ended",
+          "answer": "Six o'clock"
+        },
+        {
+          "id": "p10-listen1-q2",
+          "question": "What time does Emma go to school?",
+          "type": "open-ended",
+          "answer": "Eight o'clock"
+        },
+        {
+          "id": "p10-listen1-q3",
+          "question": "What days does Emma study English?",
+          "type": "open-ended",
+          "answer": "Tuesdays and Thursdays"
+        },
+        {
+          "id": "p10-listen1-q4",
+          "question": "What time does Emma go to bed?",
+          "type": "open-ended",
+          "answer": "Ten o'clock"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p11-break",
+      "type": "page-break",
+      "pageNumber": 11,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p11-h1",
+      "type": "heading",
+      "content": "11. Final Challenge",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p11-roleplay1",
+      "type": "roleplay",
+      "characters": [
+        {
+          "name": "Student A",
+          "details": [
+            {
+              "label": "Mission",
+              "value": "Interview a classmate about routine, days, and time."
+            }
+          ]
+        },
+        {
+          "name": "Student B",
+          "details": [
+            {
+              "label": "Mission",
+              "value": "Answer with long answers and ask two questions back."
+            }
+          ]
+        }
+      ],
+      "tips": "Use What do you do...? / What time do you...? / Do you...? / Yes, I do. I... / No, I don't. I...",
+      "audience": "both"
+    },
+    {
+      "id": "p11-prompts1",
+      "type": "conversation-prompts",
+      "title": "Final Speaking Round",
+      "prompts": [
+        "What do you do in the morning?",
+        "What time do you wake up?",
+        "What time do you go to school or work?",
+        "What days do you study English?",
+        "Do you study English at night?",
+        "What does your friend do after school?",
+        "What time does your friend go to bed?",
+        "Ask your partner for one favor."
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p11-writing1",
+      "type": "writing-task",
+      "title": "My Daily Routine",
+      "prompt": "Write 7 to 9 short sentences about your routine. Include what you do in the morning, one time, one day of the week, one long answer with do, and one sentence about another person using he or she.",
+      "minWords": 70,
+      "audience": "both"
+    },
+    {
+      "id": "p11-final1",
+      "type": "final-task",
+      "title": "Final Routine Card",
+      "fields": [
+        "Morning routine",
+        "Wake-up time",
+        "School or work time",
+        "English study days",
+        "Long answer with do",
+        "Sentence about he/she",
+        "Question with does",
+        "Favor expression",
+        "Thanks / response to thanks"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p12-break",
+      "type": "page-break",
+      "pageNumber": 12,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p12-h1",
+      "type": "heading",
+      "content": "12. Answer Key",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "p12-key-note",
+      "type": "paragraph",
+      "content": "This page keeps the answer key inside the authoring JSON. Remove it from the public export if needed.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "p12-key1",
+      "type": "grammar-note",
+      "title": "Answer Key",
+      "ruleContext": "Core answers for the controlled activities in Lesson 3.",
+      "expandableTitle": "Show answers",
+      "expandableContent": "Page 1 Fill: going, help, problem.\nPage 3 Fill: What, do, do, What.\nPage 4 Fill: do, don't, does, doesn't.\nPage 5 Fill: wakes, goes, studies, has, brushes.\nPage 6 Fill: on, on, on, on.\nPage 7 Fill: o'clock, o'clock, o'clock, o'clock.\nPage 8 Fill: What time, do, does, at, at.\nReading: seven o'clock; yes, he does; Mondays and Wednesdays; he goes home and does homework; ten o'clock.\nListening: six o'clock; eight o'clock; Tuesdays and Thursdays; ten o'clock.",
+      "audience": "both"
+    }
+  ]
+}
