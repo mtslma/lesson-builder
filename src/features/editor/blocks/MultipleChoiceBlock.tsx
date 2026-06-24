@@ -1,11 +1,13 @@
 import type { BlockFormProps, BlockPreviewProps, MultipleChoiceBlock } from '../types/index';
+import { createMultipleChoiceOption } from '../domain/blockDefaults';
+import { removeItemAt, updateItemAt } from '../domain/collections';
 
 export const MultipleChoiceForm = ({ block, onUpdate }: BlockFormProps<MultipleChoiceBlock>) => {
   const addOption = () =>
-    onUpdate({ options: [...block.options, { id: crypto.randomUUID(), text: '' }] });
+    onUpdate({ options: [...block.options, createMultipleChoiceOption()] });
   const removeOption = (index: number) =>
     onUpdate({
-      options: block.options.filter((_, optionIndex) => optionIndex !== index),
+      options: removeItemAt(block.options, index),
       correctOptionIds: block.correctOptionIds.filter((optionId) => optionId !== block.options[index]?.id)
     });
   return (
@@ -26,9 +28,12 @@ export const MultipleChoiceForm = ({ block, onUpdate }: BlockFormProps<MultipleC
               }
             />
             <input type="text" className="flex-1 p-1 text-xs border rounded" value={o.text} onChange={(e) => {
-              const n = [...block.options];
-              n[i].text = e.target.value;
-              onUpdate({ options: n });
+              onUpdate({
+                options: updateItemAt(block.options, i, (option) => ({
+                  ...option,
+                  text: e.target.value
+                }))
+              });
             }} placeholder="Option text" />
             <button type="button" onClick={() => removeOption(i)} className="rounded border border-red-200 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500">Remove</button>
           </div>

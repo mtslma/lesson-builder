@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   Copy,
   ChevronLeft,
@@ -8,7 +8,9 @@ import {
   FileDown,
   FolderUp,
   Plus,
+  Redo2,
   RotateCcw,
+  Undo2,
   ScissorsLineDashed,
   Tags,
   Wand2,
@@ -30,16 +32,25 @@ export const LessonEditor: React.FC = () => {
     setJsonInput,
     importError,
     jsonFeedback,
+    saveStatus,
+    lastSavedAt,
     handleImport,
     loadLessonIntoJson,
     formatJsonInput,
-    exportJson,
+    exportAuthoringJson,
+    exportPublicJson,
     resetLesson,
     addBlock,
+    duplicateExistingBlock,
     moveBlock,
     updateBlock,
     removeBlock,
-    updateTitle
+    updateTitle,
+    canUndo,
+    canRedo,
+    saveLesson,
+    undo,
+    redo
   } = useLessonEditor();
   const [currentPage, setCurrentPage] = useState(1);
   const [insertMenuIndex, setInsertMenuIndex] = useState<number | null>(null);
@@ -52,15 +63,54 @@ export const LessonEditor: React.FC = () => {
 
   const totalPages = Math.max(1, lesson.blocks.filter((b) => b.type === 'page-break').length);
 
-  const previewBlocks = (() => {
-    const blocks: typeof lesson.blocks = [];
-    let cPage = 1;
-    lesson.blocks.forEach((b) => {
-      if (b.type === 'page-break') cPage = (b as PageBreakBlock).pageNumber;
-      else if (cPage === currentPage) blocks.push(b);
+  const pageScopedData = useMemo(() => {
+    const previewPageBlocks: typeof lesson.blocks = [];
+    const editorEntries: Array<
+      | { kind: 'block'; block: (typeof lesson.blocks)[number]; index: number }
+      | { kind: 'page-break'; block: PageBreakBlock; index: number }
+    > = [];
+
+    let activePage = 1;
+    let hasMatchingBreak = false;
+
+    lesson.blocks.forEach((block, index) => {
+      if (block.type === 'page-break') {
+        activePage = (block as PageBreakBlock).pageNumber;
+        if (activePage === currentPage) {
+          hasMatchingBreak = true;
+          editorEntries.push({ kind: 'page-break', block: block as PageBreakBlock, index });
+        }
+        return;
+      }
+
+      if (activePage === currentPage) {
+        previewPageBlocks.push(block);
+        editorEntries.push({ kind: 'block', block, index });
+      }
     });
-    return blocks;
-  })();
+
+    return {
+      previewBlocks: previewPageBlocks,
+      editorEntries,
+      showInitialInserter: lesson.blocks.length === 0 || (currentPage === 1 && !hasMatchingBreak)
+    };
+  }, [currentPage, lesson]);
+
+  const previewBlocks = pageScopedData.previewBlocks;
+
+  const saveStatusLabel =
+    saveStatus === 'saving'
+      ? 'Saving...'
+      : saveStatus === 'saved'
+        ? lastSavedAt
+          ? `Saved ${new Date(lastSavedAt).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            })}`
+          : 'Saved'
+        : saveStatus === 'error'
+          ? 'Save failed'
+          : 'Unsaved changes';
 
   const handleJsonFileImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -84,12 +134,22 @@ export const LessonEditor: React.FC = () => {
     });
   };
 
-  const renderPageControls = () => (
-    <div className="flex items-center justify-between gap-4">
+  const renderPageControls = (surface: 'light' | 'dark' = 'light') => (
+    <div
+      className={`flex items-center justify-between gap-4 rounded-2xl border px-4 py-3 ${
+        surface === 'dark'
+          ? 'border-slate-800 bg-slate-950/70'
+          : 'border-slate-200 bg-white shadow-[0_10px_30px_-22px_rgba(15,23,42,0.35)]'
+      }`}
+    >
       <button
         disabled={currentPage === 1}
         onClick={() => goToPage(currentPage - 1)}
-        className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs text-slate-600 shadow-sm disabled:opacity-35"
+        className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs shadow-sm disabled:opacity-35 ${
+          surface === 'dark'
+            ? 'border border-slate-700 bg-slate-900 text-slate-200'
+            : 'border border-slate-300 bg-white text-slate-600'
+        }`}
         type="button"
       >
         <ChevronLeft size={14} strokeWidth={2.3} />
@@ -100,7 +160,15 @@ export const LessonEditor: React.FC = () => {
           <button
             key={i}
             onClick={() => goToPage(i + 1)}
-            className={`h-8 w-8 rounded-md text-xs shadow-sm ${currentPage === i + 1 ? 'bg-slate-900 text-white' : 'border border-slate-300 bg-white text-slate-500'}`}
+            className={`h-8 w-8 rounded-md text-xs shadow-sm ${
+              currentPage === i + 1
+                ? surface === 'dark'
+                  ? 'bg-white text-slate-900'
+                  : 'bg-slate-900 text-white'
+                : surface === 'dark'
+                  ? 'border border-slate-700 bg-slate-900 text-slate-400'
+                  : 'border border-slate-300 bg-white text-slate-500'
+            }`}
             type="button"
           >
             {i + 1}
@@ -110,7 +178,11 @@ export const LessonEditor: React.FC = () => {
       <button
         disabled={currentPage === totalPages}
         onClick={() => goToPage(currentPage + 1)}
-        className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-xs text-white shadow-sm disabled:opacity-35"
+        className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs shadow-sm disabled:opacity-35 ${
+          surface === 'dark'
+            ? 'bg-white text-slate-900'
+            : 'bg-slate-900 text-white'
+        }`}
         type="button"
       >
         Next
@@ -204,8 +276,32 @@ export const LessonEditor: React.FC = () => {
         style={{ width: `${100 - previewWidth}%` }}
       >
         <div className="shrink-0 border-b border-slate-200 px-6 py-5">
-          <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-            Lesson Editor
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Lesson Editor
+            </div>
+            <div className="flex items-center gap-2">
+              <span
+                className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+                  saveStatus === 'saved'
+                    ? 'bg-emerald-50 text-emerald-700'
+                    : saveStatus === 'saving'
+                      ? 'bg-amber-50 text-amber-700'
+                      : saveStatus === 'error'
+                        ? 'bg-red-50 text-red-700'
+                        : 'bg-slate-100 text-slate-600'
+                }`}
+              >
+                {saveStatusLabel}
+              </span>
+              <button
+                type="button"
+                onClick={saveLesson}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-700 shadow-sm"
+              >
+                Save
+              </button>
+            </div>
           </div>
           <input
             type="text"
@@ -217,6 +313,7 @@ export const LessonEditor: React.FC = () => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-6">
+          <div className="mb-5">{renderPageControls()}</div>
           <div className="mb-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_10px_30px_-22px_rgba(15,23,42,0.35)]">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
@@ -226,6 +323,24 @@ export const LessonEditor: React.FC = () => {
                 <p className="mt-1 text-sm text-slate-600">Import, edit, validate and export.</p>
               </div>
               <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={undo}
+                  disabled={!canUndo}
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 shadow-sm disabled:opacity-40"
+                >
+                  <Undo2 size={14} strokeWidth={2.1} />
+                  Undo
+                </button>
+                <button
+                  type="button"
+                  onClick={redo}
+                  disabled={!canRedo}
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 shadow-sm disabled:opacity-40"
+                >
+                  <Redo2 size={14} strokeWidth={2.1} />
+                  Redo
+                </button>
                 <button type="button" onClick={loadLessonIntoJson} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 shadow-sm">
                   <FileCode2 size={14} strokeWidth={2.1} />
                   Load
@@ -238,9 +353,13 @@ export const LessonEditor: React.FC = () => {
                   <FolderUp size={14} strokeWidth={2.1} />
                   File
                 </button>
-                <button type="button" onClick={exportJson} className="inline-flex items-center gap-2 rounded-lg border border-slate-900 bg-slate-900 px-3 py-2 text-xs text-white shadow-sm">
+                <button type="button" onClick={exportAuthoringJson} className="inline-flex items-center gap-2 rounded-lg border border-slate-900 bg-slate-900 px-3 py-2 text-xs text-white shadow-sm">
                   <FileDown size={14} strokeWidth={2.1} />
-                  Export
+                  Authoring
+                </button>
+                <button type="button" onClick={exportPublicJson} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 shadow-sm">
+                  <FileDown size={14} strokeWidth={2.1} />
+                  Public
                 </button>
                 <button type="button" onClick={resetLesson} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 shadow-sm">
                   <RotateCcw size={14} strokeWidth={2.1} />
@@ -271,19 +390,28 @@ export const LessonEditor: React.FC = () => {
           </div>
 
           <div className="pb-24">
-            {lesson.blocks.length === 0 && renderInlineInserter(0)}
-            {lesson.blocks.map((block, i) => (
-              <React.Fragment key={block.id}>
-                {renderInlineInserter(i)}
-                {block.type === 'page-break' ? (
+            {pageScopedData.showInitialInserter && renderInlineInserter(0)}
+            {pageScopedData.editorEntries.map((entry) => (
+              <React.Fragment
+                key={entry.kind === 'block' ? entry.block.id : `page-break-${entry.block.id}`}
+              >
+                {renderInlineInserter(entry.index)}
+                {entry.kind === 'page-break' ? (
                   <div className="group relative flex items-center justify-center py-4">
                     <div className="absolute w-full border-t border-dashed border-slate-300"></div>
                     <span className="relative inline-flex items-center gap-2 rounded-full border border-slate-300 bg-gradient-to-r from-white to-slate-50 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm">
                       <ScissorsLineDashed size={12} strokeWidth={2.3} />
-                      Page {block.pageNumber}
+                      Page {entry.block.pageNumber}
                     </span>
                     <button
-                      onClick={() => removeBlock(block.id)}
+                      onClick={() => duplicateExistingBlock(entry.block.id)}
+                      className="absolute right-20 rounded bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 opacity-0 group-hover:opacity-100"
+                      type="button"
+                    >
+                      Duplicate
+                    </button>
+                    <button
+                      onClick={() => removeBlock(entry.block.id)}
                       className="absolute right-0 rounded bg-red-50 px-2 py-1 text-[10px] font-semibold text-red-600 opacity-0 group-hover:opacity-100"
                       type="button"
                     >
@@ -292,19 +420,21 @@ export const LessonEditor: React.FC = () => {
                   </div>
                 ) : (
                   <BlockWrapper
-                    block={block}
-                    index={i}
-                    isFirst={i === 0}
-                    isLast={i === lesson.blocks.length - 1}
+                    block={entry.block}
+                    index={entry.index}
+                    isFirst={entry.index === 0}
+                    isLast={entry.index === lesson.blocks.length - 1}
                     onUpdate={updateBlock}
                     onRemove={removeBlock}
+                    onDuplicate={duplicateExistingBlock}
                     onMove={moveBlock}
                   />
                 )}
               </React.Fragment>
             ))}
-            {lesson.blocks.length > 0 && renderInlineInserter(lesson.blocks.length)}
+            {lesson.blocks.length > 0 && renderInlineInserter(pageScopedData.editorEntries.at(-1)?.index !== undefined ? pageScopedData.editorEntries.at(-1)!.index + 1 : lesson.blocks.length)}
           </div>
+          <div className="mt-6">{renderPageControls()}</div>
         </div>
       </div>
 
@@ -406,7 +536,7 @@ export const LessonEditor: React.FC = () => {
                   </div>
                 </div>
 
-                {renderPageControls()}
+                {renderPageControls('dark')}
 
                 {previewBlocks.length === 0 ? (
                   <p className="py-16 text-center text-sm text-slate-400">
@@ -428,8 +558,8 @@ export const LessonEditor: React.FC = () => {
                 )}
               </div>
 
-              <div className="mt-10 flex items-center justify-between border-t border-slate-200 pt-5">
-                {renderPageControls()}
+              <div className="mt-8">
+                {renderPageControls('dark')}
               </div>
             </div>
           )}

@@ -1,1 +1,118 @@
-@import 'tailwindcss'
+@import 'tailwindcss';
+
+:root {
+  --editor-bg: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  --editor-focus: #0ea5e9;
+  --note-border-soft: #fcd34d;
+  --note-bg: linear-gradient(135deg, rgba(254, 243, 199, 0.9) 0%, rgba(255, 251, 235, 0.98) 100%);
+  --note-accent: #b45309;
+  --note-text: #78350f;
+}
+
+@layer base {
+  body {
+    background: var(--editor-bg);
+    color: #1e293b;
+  }
+}
+
+@layer components {
+  .editor-form-grid input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  .editor-form-grid textarea,
+  .editor-form-grid select {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    background: rgba(248, 250, 252, 0.88);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #0f172a;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .editor-form-grid textarea {
+    min-height: 6rem;
+    resize: vertical;
+  }
+
+  .editor-form-grid input:focus,
+  .editor-form-grid textarea:focus,
+  .editor-form-grid select:focus {
+    outline: none;
+    border-color: color-mix(in srgb, var(--editor-focus) 68%, white);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
+    background: #fff;
+  }
+
+  .editor-form-grid input::placeholder,
+  .editor-form-grid textarea::placeholder {
+    color: #94a3b8;
+  }
+
+  .editor-note-panel {
+    border: 1px solid color-mix(in srgb, var(--note-border-soft) 72%, white);
+    background: var(--note-bg);
+    border-radius: 1.5rem;
+    padding: 1.35rem;
+    box-shadow: 0 14px 34px -24px rgba(180, 83, 9, 0.34);
+  }
+
+  .editor-note-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .editor-note-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.74);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: var(--note-accent);
+    font-weight: 800;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .editor-note-eyebrow {
+    display: block;
+    font-size: 0.625rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--note-accent);
+  }
+
+  .editor-note-title {
+    margin-top: 0.35rem;
+    color: var(--note-text);
+  }
+
+  .editor-note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(251, 191, 36, 0.24);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .editor-note-marker {
+    color: var(--note-accent);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+  }
+}

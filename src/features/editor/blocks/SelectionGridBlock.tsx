@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import type { BlockFormProps, BlockPreviewProps, SelectionGridBlock } from '../types/index';
+import { createSelectionGridItem } from '../domain/blockDefaults';
+import { removeItemAt, updateItemAt } from '../domain/collections';
+import { shuffleArray } from '../domain/shuffle';
 
 export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionGridBlock>) => {
   const addItem = () =>
     onUpdate({
-      items: [...block.items, { id: crypto.randomUUID(), text: '', isCorrect: false }]
+      items: [...block.items, createSelectionGridItem()]
     });
 
   const removeItem = (index: number) =>
-    onUpdate({ items: block.items.filter((_, itemIndex) => itemIndex !== index) });
+    onUpdate({ items: removeItemAt(block.items, index) });
 
   return (
     <div className="space-y-2">
@@ -44,9 +47,12 @@ export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionG
               className="w-full rounded border p-1 text-xs"
               value={item.text}
               onChange={(e) => {
-                const nextItems = [...block.items];
-                nextItems[index].text = e.target.value;
-                onUpdate({ items: nextItems });
+                onUpdate({
+                  items: updateItemAt(block.items, index, (item) => ({
+                    ...item,
+                    text: e.target.value
+                  }))
+                });
               }}
               placeholder="Text"
             />
@@ -55,9 +61,12 @@ export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionG
               className="w-full rounded border p-1 text-xs"
               value={item.imageUrl || ''}
               onChange={(e) => {
-                const nextItems = [...block.items];
-                nextItems[index].imageUrl = e.target.value;
-                onUpdate({ items: nextItems });
+                onUpdate({
+                  items: updateItemAt(block.items, index, (item) => ({
+                    ...item,
+                    imageUrl: e.target.value
+                  }))
+                });
               }}
               placeholder="Img URL"
             />
@@ -66,9 +75,12 @@ export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionG
                 type="checkbox"
                 checked={Boolean(item.isCorrect)}
                 onChange={(e) => {
-                  const nextItems = [...block.items];
-                  nextItems[index].isCorrect = e.target.checked;
-                  onUpdate({ items: nextItems });
+                  onUpdate({
+                    items: updateItemAt(block.items, index, (item) => ({
+                      ...item,
+                      isCorrect: e.target.checked
+                    }))
+                  });
                 }}
               />
               Correct?
@@ -85,6 +97,7 @@ export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionG
 
 export const SelectionGridPreview = ({ block }: BlockPreviewProps<SelectionGridBlock>) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [shuffledItems] = useState(() => shuffleArray(block.items, `${block.id}:selection-grid`));
 
   const toggleItem = (itemId: string) =>
     setSelectedIds((prev) =>
@@ -103,7 +116,7 @@ export const SelectionGridPreview = ({ block }: BlockPreviewProps<SelectionGridB
         Check and Say: {block.instruction}
       </p>
       <div className="grid grid-cols-2 gap-3">
-        {block.items.map((item) => {
+        {shuffledItems.map((item) => {
           const selected = selectedIds.includes(item.id);
 
           return (

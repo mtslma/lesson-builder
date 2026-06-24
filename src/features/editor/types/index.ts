@@ -1,4 +1,5 @@
 export type QuestionType = 'multiple-choice' | 'true-false' | 'open-ended';
+export type BlockAudience = 'student' | 'teacher' | 'both';
 
 export interface SubQuestion {
   id: string;
@@ -37,6 +38,7 @@ export type BlockType =
 export interface BaseBlock {
   id: string;
   type: BlockType;
+  audience?: BlockAudience;
 }
 
 export interface PageBreakBlock extends BaseBlock {
@@ -71,8 +73,9 @@ export interface AdvancedGrammarBlock extends BaseBlock {
   type: 'advanced-grammar';
   title: string;
   explanation: string;
+  details?: string;
   tableHeaders: string[];
-  tableRows: { elements: string[] }[];
+  tableRows: { cells: { text: string; highlights: ConversationHighlight[] }[] }[];
 }
 
 export interface MediaBlock extends BaseBlock {
@@ -84,10 +87,11 @@ export interface MediaBlock extends BaseBlock {
 
 export interface ListeningBlock extends BaseBlock {
   type: 'listening';
+  title?: string;
   audioUrl: string;
-  maxPlays?: number;
   contextImageUrl?: string;
   transcript?: string;
+  transcriptHighlights?: ConversationHighlight[];
   transcriptVisibility?: 'hidden' | 'after-answer' | 'always';
   questions: SubQuestion[];
 }
@@ -99,18 +103,31 @@ export interface ReadingComprehensionBlock extends BaseBlock {
   questions: SubQuestion[];
 }
 
+export interface ConversationHighlight {
+  id: string;
+  text: string;
+  color: string;
+}
+
+export interface ConversationMessage {
+  id: string;
+  speaker: string;
+  text: string;
+  highlights: ConversationHighlight[];
+}
+
+export interface ConversationSubstitution {
+  original: string;
+  alternatives: string[];
+}
+
 export interface ConversationBlock extends BaseBlock {
   type: 'conversation';
   imageUrl?: string;
-  messages: {
-    id: string;
-    speaker: string;
-    text: string;
-    highlighted?: boolean;
-    highlightColor?: string;
-  }[];
-  substitutionBox?: { original: string; alternatives: string[] }[];
+  messages: ConversationMessage[];
+  substitutionBox?: ConversationSubstitution[];
 }
+
 export interface FlashcardsBlock extends BaseBlock {
   type: 'flashcards';
   title: string;
@@ -118,7 +135,7 @@ export interface FlashcardsBlock extends BaseBlock {
   tags?: string[];
   cards: {
     id: string;
-    frontText?: string;
+    expressions: string[];
     frontImage?: string;
     backText: string;
     backImage?: string;
@@ -149,9 +166,11 @@ export interface FillBlankBlock extends BaseBlock {
   type: 'fill-blank';
   instruction?: string;
   text: string;
+  columns?: 1 | 2;
   gaps: {
     id: string;
     acceptedAnswers: string[];
+    suggestions?: string[];
     caseSensitive: boolean;
   }[];
 }
@@ -190,8 +209,8 @@ export interface PhrasalVerbFocusBlock extends BaseBlock {
 
 export interface RoleplayBlock extends BaseBlock {
   type: 'roleplay';
-  characters: { name: string; country?: string; city?: string; activity?: string }[];
-  prompts: string[];
+  characters: { name: string; details: { label: string; value: string }[] }[];
+  tips: string;
 }
 
 export interface ConversationPromptsBlock extends BaseBlock {
@@ -256,4 +275,13 @@ export interface Lesson {
   level: string;
   language: string;
   blocks: LessonBlock[];
+}
+
+export interface PublicLesson {
+  schemaVersion: 1;
+  id: string;
+  title: string;
+  level: string;
+  language: string;
+  blocks: unknown[];
 }

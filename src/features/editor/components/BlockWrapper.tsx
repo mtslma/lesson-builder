@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react';
-import type { LessonBlock } from '../types/index';
+import { ArrowDown, ArrowUp, Copy, Trash2 } from 'lucide-react';
+import type { BlockAudience, LessonBlock } from '../types/index';
 import { blockFormRegistry } from '../config/formRegistry';
 import { BLOCK_LABELS } from '../config/blockMeta';
 
@@ -11,6 +11,7 @@ interface Props {
   isLast: boolean;
   onUpdate: (id: string, fields: Partial<LessonBlock>) => void;
   onRemove: (id: string) => void;
+  onDuplicate: (id: string) => void;
   onMove: (index: number, direction: 'up' | 'down') => void;
 }
 
@@ -21,6 +22,7 @@ export const BlockWrapper: React.FC<Props> = ({
   isLast,
   onUpdate,
   onRemove,
+  onDuplicate,
   onMove
 }) => {
   const FormComponent = blockFormRegistry[block.type];
@@ -36,6 +38,17 @@ export const BlockWrapper: React.FC<Props> = ({
           <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500">
             {BLOCK_LABELS[block.type]}
           </span>
+          <select
+            value={block.audience || 'both'}
+            onChange={(event) =>
+              onUpdate(block.id, { audience: event.target.value as BlockAudience })
+            }
+            className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500"
+          >
+            <option value="both">Both</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
         </div>
         <div className="flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
           <button
@@ -57,6 +70,14 @@ export const BlockWrapper: React.FC<Props> = ({
           <div className="mx-1 h-4 w-px bg-slate-200"></div>
           <button
             type="button"
+            onClick={() => onDuplicate(block.id)}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-700"
+          >
+            <Copy size={12} strokeWidth={2.2} />
+            Duplicate
+          </button>
+          <button
+            type="button"
             onClick={() => onRemove(block.id)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-red-100 bg-white px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-red-500 shadow-sm transition-colors hover:bg-red-50 hover:text-red-700"
           >
@@ -65,7 +86,7 @@ export const BlockWrapper: React.FC<Props> = ({
           </button>
         </div>
       </div>
-      <div>
+      <div className="editor-form-grid">
         {FormComponent ? (
           <FormComponent block={block} onUpdate={(f) => onUpdate(block.id, f)} />
         ) : (

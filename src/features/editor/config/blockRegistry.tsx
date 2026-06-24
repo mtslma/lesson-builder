@@ -24,8 +24,9 @@ import { VocabularyMatchForm, VocabularyMatchPreview, FlashcardsForm, Flashcards
 import { FillBlankForm, FillBlankPreview, SelectionGridForm, SelectionGridPreview, MultipleChoiceForm, MultipleChoicePreview, ImageChoiceForm, ImageChoicePreview, RewriteQuestionForm, RewriteQuestionPreview, ImageNumberingForm, ImageNumberingPreview } from '../modules/QuizModule';
 import { ConversationForm, ConversationPreview, ConversationPromptsForm, ConversationPromptsPreview, RoleplayForm, RoleplayPreview, TeacherNoteForm, TeacherNotePreview, WritingTaskForm, WritingTaskPreview, FinalTaskForm, FinalTaskPreview } from '../modules/ProductionModule';
 import type { BlockType, LessonBlock } from '../types/index';
-
-const createId = () => crypto.randomUUID();
+import { createConversationBlockDefaults, normalizeConversationHighlights } from '../domain/conversation';
+import { createEditorId } from '../domain/ids';
+import { createFlashcard, createSubQuestion } from '../domain/blockDefaults';
 
 type BlockFormComponent = React.ComponentType<{
   block: LessonBlock;
@@ -47,17 +48,6 @@ export interface BlockDefinition {
   normalize?: (block: Record<string, unknown>) => LessonBlock;
 }
 
-const createSubQuestion = (
-  type: 'multiple-choice' | 'true-false' | 'open-ended',
-  question: string,
-  options?: string[]
-) => ({
-  id: createId(),
-  type,
-  question,
-  ...(options ? { options } : {})
-});
-
 export const BLOCK_DEFINITIONS: BlockDefinition[] = [
   {
     type: 'page-break',
@@ -67,7 +57,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-slate-700',
     surface: 'from-slate-100 to-slate-50',
     create: (pageNumber) => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'page-break',
       pageNumber,
       estimatedTime: '45 min'
@@ -80,11 +70,11 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     icon: NotepadText,
     accent: 'text-sky-700',
     surface: 'from-sky-100 to-white',
-    create: () => ({ id: createId(), type: 'heading', content: 'Learning Focus', level: 'h2' }),
+    create: () => ({ id: createEditorId(), type: 'heading', content: 'Learning Focus', level: 'h2' }),
     form: HeadingForm as BlockFormComponent,
     preview: HeadingPreview as BlockPreviewComponent,
     normalize: (block) => ({
-      id: typeof block.id === 'string' ? block.id : createId(),
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
       type: 'heading',
       content: typeof block.content === 'string' ? block.content : '',
       level:
@@ -101,7 +91,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-cyan-700',
     surface: 'from-cyan-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'paragraph',
       content: 'Use this area for neutral instructions, context, or brief lesson guidance.',
       style: 'body'
@@ -109,7 +99,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     form: ParagraphForm as BlockFormComponent,
     preview: ParagraphPreview as BlockPreviewComponent,
     normalize: (block) => ({
-      id: typeof block.id === 'string' ? block.id : createId(),
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
       type: 'paragraph',
       content: typeof block.content === 'string' ? block.content : '',
       style:
@@ -129,8 +119,9 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-amber-700',
     surface: 'from-amber-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'teacher-note',
+      audience: 'teacher',
       title: 'Teacher note',
       content: 'Add a short guidance note or tip for the student here.'
     }),
@@ -145,7 +136,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-blue-700',
     surface: 'from-blue-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'grammar-note',
       title: 'Grammar Note',
       ruleContext: 'Add a short and neutral explanation of the language pattern here.',
@@ -163,18 +154,67 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-indigo-700',
     surface: 'from-indigo-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'advanced-grammar',
       title: 'Grammar Reference',
       explanation: 'Summarize the structure or contrast in a concise way.',
+      details: '',
       tableHeaders: ['Form', 'Structure', 'Example'],
       tableRows: [
-        { elements: ['Affirmative', 'Subject + verb', 'Example sentence'] },
-        { elements: ['Negative', 'Subject + do not + verb', 'Example sentence'] }
+        {
+          cells: [
+            { text: 'Affirmative', highlights: [] },
+            { text: 'Subject + verb', highlights: [] },
+            { text: 'Example sentence', highlights: [] }
+          ]
+        },
+        {
+          cells: [
+            { text: 'Negative', highlights: [] },
+            { text: 'Subject + do not + verb', highlights: [] },
+            { text: 'Example sentence', highlights: [] }
+          ]
+        }
       ]
     }),
     form: AdvancedGrammarForm as BlockFormComponent,
-    preview: AdvancedGrammarPreview as BlockPreviewComponent
+    preview: AdvancedGrammarPreview as BlockPreviewComponent,
+    normalize: (block) => ({
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
+      type: 'advanced-grammar',
+      title: typeof block.title === 'string' ? block.title : 'Grammar Reference',
+      explanation: typeof block.explanation === 'string' ? block.explanation : '',
+      details: typeof block.details === 'string' ? block.details : '',
+      tableHeaders: Array.isArray(block.tableHeaders)
+        ? block.tableHeaders.filter((header): header is string => typeof header === 'string')
+        : [],
+      tableRows: Array.isArray(block.tableRows)
+        ? block.tableRows
+            .filter((row): row is Record<string, unknown> => Boolean(row && typeof row === 'object'))
+            .map((row) => ({
+              cells: Array.isArray(row.cells)
+                ? row.cells
+                    .filter((cell): cell is Record<string, unknown> => Boolean(cell && typeof cell === 'object'))
+                    .map((cell) => ({
+                      text: typeof cell.text === 'string' ? cell.text : '',
+                      highlights: Array.isArray(cell.highlights)
+                        ? cell.highlights
+                            .filter((highlight): highlight is Record<string, unknown> => Boolean(highlight && typeof highlight === 'object'))
+                            .map((highlight) => ({
+                              id: typeof highlight.id === 'string' ? highlight.id : createEditorId(),
+                              text: typeof highlight.text === 'string' ? highlight.text : '',
+                              color: typeof highlight.color === 'string' ? highlight.color : '#d9f99d'
+                            }))
+                        : []
+                    }))
+                : Array.isArray(row.elements)
+                  ? row.elements
+                      .filter((cell): cell is string => typeof cell === 'string')
+                      .map((cell) => ({ text: cell, highlights: [] }))
+                  : []
+            }))
+        : []
+    })
   },
   {
     type: 'media-block',
@@ -184,7 +224,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-amber-700',
     surface: 'from-amber-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'media-block',
       url: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=900',
       position: 'center',
@@ -201,11 +241,12 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-rose-700',
     surface: 'from-rose-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'listening',
+      title: 'Listening Track',
       audioUrl: 'audio-track.mp3',
-      maxPlays: 2,
       transcript: '',
+      transcriptHighlights: [],
       transcriptVisibility: 'hidden',
       questions: [
         createSubQuestion('true-false', 'The speaker agrees with the main idea.'),
@@ -220,12 +261,16 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     preview: ListeningPreview as BlockPreviewComponent,
     normalize: (block) => {
       return {
-        id: typeof block.id === 'string' ? block.id : createId(),
+        id: typeof block.id === 'string' ? block.id : createEditorId(),
         type: 'listening',
+        title: typeof block.title === 'string' ? block.title : '',
         audioUrl: typeof block.audioUrl === 'string' ? block.audioUrl : '',
-        maxPlays: typeof block.maxPlays === 'number' ? block.maxPlays : undefined,
         contextImageUrl: typeof block.contextImageUrl === 'string' ? block.contextImageUrl : undefined,
         transcript: typeof block.transcript === 'string' ? block.transcript : '',
+        transcriptHighlights: normalizeConversationHighlights({
+          text: typeof block.transcript === 'string' ? block.transcript : '',
+          highlights: block.transcriptHighlights
+        }),
         transcriptVisibility:
           block.transcriptVisibility === 'hidden' ||
           block.transcriptVisibility === 'after-answer' ||
@@ -244,7 +289,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-emerald-700',
     surface: 'from-emerald-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'reading-comprehension',
       title: 'Reading Task',
       text: 'Insert a short neutral text here for reading practice and comprehension work.',
@@ -268,7 +313,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-fuchsia-700',
     surface: 'from-fuchsia-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'vocabulary-match',
       title: 'Match the related items',
       pairs: [{ left: 'Word', leftType: 'text', right: 'Meaning' }]
@@ -284,13 +329,13 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-lime-700',
     surface: 'from-lime-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'selection-grid',
       instruction: 'Select the items that match the prompt.',
       isMultiSelect: true,
       items: [
-        { id: createId(), text: 'Correct option', isCorrect: true },
-        { id: createId(), text: 'Distractor option', isCorrect: false }
+        { id: createEditorId(), text: 'Correct option', isCorrect: true },
+        { id: createEditorId(), text: 'Distractor option', isCorrect: false }
       ]
     }),
     form: SelectionGridForm as BlockFormComponent,
@@ -304,12 +349,12 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-violet-700',
     surface: 'from-violet-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'phrasal-verb-focus',
       title: 'Phrasal Verb Set',
       items: [
         {
-          id: createId(),
+          id: createEditorId(),
           verb: 'Target expression',
           meaning: 'Add a short neutral meaning here.',
           examples: ['Example sentence one.', 'Example sentence two.']
@@ -325,7 +370,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
         typedItems && typedItems.length > 0
           ? typedItems.slice(0, 6).map((item) => ({
               id:
-                item && typeof item === 'object' && typeof item.id === 'string' ? item.id : createId(),
+                item && typeof item === 'object' && typeof item.id === 'string' ? item.id : createEditorId(),
               verb:
                 item && typeof item === 'object' && typeof item.verb === 'string' ? item.verb : '',
               meaning:
@@ -341,7 +386,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
             }))
           : [
               {
-                id: createId(),
+                id: createEditorId(),
                 verb: typeof block.verb === 'string' ? block.verb : '',
                 meaning: typeof block.meaning === 'string' ? block.meaning : '',
                 examples: Array.isArray(block.examples)
@@ -353,7 +398,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
             ];
 
       return {
-        id: typeof block.id === 'string' ? block.id : createId(),
+        id: typeof block.id === 'string' ? block.id : createEditorId(),
         type: 'phrasal-verb-focus',
         title: typeof block.title === 'string' ? block.title : 'Phrasal Verb Set',
         verb: typeof block.verb === 'string' ? block.verb : undefined,
@@ -375,7 +420,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-orange-700',
     surface: 'from-orange-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'repetition-drill',
       title: 'Pronunciation Drill',
       words: [
@@ -394,14 +439,51 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-teal-700',
     surface: 'from-teal-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'fill-blank',
       instruction: 'Complete the sentence with the best option.',
-      text: 'This is a {{gap1}} sentence for practice.',
-      gaps: [{ id: 'gap1', acceptedAnswers: ['sample'], caseSensitive: false }]
+      text: 'This is a [] sentence for practice.',
+      columns: 1,
+      gaps: [{ id: 'gap1', acceptedAnswers: ['sample'], suggestions: ['sample'], caseSensitive: false }]
     }),
     form: FillBlankForm as BlockFormComponent,
-    preview: FillBlankPreview as BlockPreviewComponent
+    preview: FillBlankPreview as BlockPreviewComponent,
+    normalize: (block) => {
+      const normalizedText =
+        typeof block.text === 'string'
+          ? block.text.replace(/\{\{[^}]+\}\}/g, '[]')
+          : '';
+
+      const placeholderCount = (normalizedText.match(/\[\]/g) || []).length;
+      const rawGaps = Array.isArray(block.gaps)
+        ? block.gaps.filter((gap): gap is Record<string, unknown> => Boolean(gap && typeof gap === 'object'))
+        : [];
+
+      return {
+        id: typeof block.id === 'string' ? block.id : createEditorId(),
+        type: 'fill-blank',
+        instruction: typeof block.instruction === 'string' ? block.instruction : '',
+        text: normalizedText,
+        columns: block.columns === 2 ? 2 : 1,
+        gaps: Array.from({ length: placeholderCount }, (_, index) => {
+          const gap = rawGaps[index];
+
+          return {
+            id: gap && typeof gap.id === 'string' ? gap.id : `gap${index + 1}`,
+            acceptedAnswers:
+              gap && Array.isArray(gap.acceptedAnswers)
+                ? gap.acceptedAnswers.filter((answer): answer is string => typeof answer === 'string')
+                : [''],
+            suggestions:
+              gap && Array.isArray(gap.suggestions)
+                ? gap.suggestions.filter((suggestion): suggestion is string => typeof suggestion === 'string')
+                : undefined,
+            caseSensitive:
+              gap && typeof gap.caseSensitive === 'boolean' ? gap.caseSensitive : false
+          };
+        })
+      };
+    }
   },
   {
     type: 'multiple-choice',
@@ -411,10 +493,10 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-green-700',
     surface: 'from-green-100 to-white',
     create: () => {
-      const firstOptionId = createId();
-      const secondOptionId = createId();
+      const firstOptionId = createEditorId();
+      const secondOptionId = createEditorId();
       return {
-        id: createId(),
+        id: createEditorId(),
         type: 'multiple-choice',
         question: 'Choose the best answer.',
         options: [
@@ -435,7 +517,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-slate-700',
     surface: 'from-slate-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'rewrite-question',
       instruction: 'Rewrite each sentence according to the instruction.',
       examples: [{ input: 'Sample statement.', output: 'Sample transformed version.' }],
@@ -452,12 +534,12 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-yellow-700',
     surface: 'from-yellow-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'image-choice',
       question: 'Select the image that matches the prompt.',
       options: [
         {
-          id: createId(),
+          id: createEditorId(),
           text: 'Option A',
           imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=300'
         }
@@ -474,12 +556,12 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-yellow-700',
     surface: 'from-yellow-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'image-numbering',
       title: 'Sequence the visuals',
       items: [
         {
-          id: createId(),
+          id: createEditorId(),
           imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=300',
           correctNumber: 1,
           label: 'Step label'
@@ -497,25 +579,15 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-cyan-700',
     surface: 'from-cyan-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'conversation',
-      messages: [
-        { id: createId(), speaker: 'Speaker A', text: 'Hello. Welcome to the activity.' },
-        {
-          id: createId(),
-          speaker: 'Speaker B',
-          text: '[Thanks]. I am ready to begin.',
-          highlighted: true,
-          highlightColor: '#d9f99d'
-        }
-      ],
-      substitutionBox: [{ original: 'I am ready to begin.', alternatives: ['Let us start.'] }]
+      ...createConversationBlockDefaults()
     }),
     form: ConversationForm as BlockFormComponent,
     preview: ConversationPreview as BlockPreviewComponent,
     normalize: (block) => {
       return {
-        id: typeof block.id === 'string' ? block.id : createId(),
+        id: typeof block.id === 'string' ? block.id : createEditorId(),
         type: 'conversation',
         imageUrl: typeof block.imageUrl === 'string' ? block.imageUrl : undefined,
         messages: Array.isArray(block.messages)
@@ -523,7 +595,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
               id:
                 message && typeof message === 'object' && typeof message.id === 'string'
                   ? message.id
-                  : createId(),
+                  : createEditorId(),
               speaker:
                 message && typeof message === 'object' && typeof message.speaker === 'string'
                   ? message.speaker
@@ -532,14 +604,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
                 message && typeof message === 'object' && typeof message.text === 'string'
                   ? message.text
                   : '',
-              highlighted:
-                message && typeof message === 'object' && typeof message.highlighted === 'boolean'
-                  ? message.highlighted
-                  : false,
-              highlightColor:
-                message && typeof message === 'object' && typeof message.highlightColor === 'string'
-                  ? message.highlightColor
-                  : undefined
+              highlights: normalizeConversationHighlights(message)
             }))
           : [],
         substitutionBox: Array.isArray(block.substitutionBox)
@@ -563,7 +628,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-sky-700',
     surface: 'from-sky-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'conversation-prompts',
       title: 'Discussion Prompts',
       prompts: ['What is your opinion on the topic?', 'What example can you share?']
@@ -579,16 +644,54 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-red-700',
     surface: 'from-red-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'roleplay',
       characters: [
-        { name: 'Participant A', activity: 'Starting the discussion' },
-        { name: 'Participant B', activity: 'Responding to the situation' }
+        { name: 'Participant A', details: [{ label: 'Role', value: 'Starts the discussion' }] },
+        { name: 'Participant B', details: [{ label: 'Role', value: 'Responds to the situation' }] }
       ],
-      prompts: ['Introduce the scenario.', 'Respond with a follow-up question.']
+      tips: 'Introduce the scenario and keep the conversation moving naturally.'
     }),
     form: RoleplayForm as BlockFormComponent,
-    preview: RoleplayPreview as BlockPreviewComponent
+    preview: RoleplayPreview as BlockPreviewComponent,
+    normalize: (block) => ({
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
+      type: 'roleplay',
+      characters: Array.isArray(block.characters)
+        ? block.characters
+            .filter((character): character is Record<string, unknown> => Boolean(character && typeof character === 'object'))
+            .map((character) => {
+              const legacyDetails = [
+                ['Country', character.country],
+                ['City', character.city],
+                ['Activity', character.activity]
+              ]
+                .filter(([, value]) => typeof value === 'string' && value.trim().length > 0)
+                .map(([label, value]) => ({
+                  label: label as string,
+                  value: value as string
+                }));
+
+              return {
+                name: typeof character.name === 'string' ? character.name : '',
+                details: Array.isArray(character.details)
+                  ? character.details
+                      .filter((detail): detail is Record<string, unknown> => Boolean(detail && typeof detail === 'object'))
+                      .map((detail) => ({
+                        label: typeof detail.label === 'string' ? detail.label : '',
+                        value: typeof detail.value === 'string' ? detail.value : ''
+                      }))
+                  : legacyDetails
+              };
+            })
+        : [],
+      tips:
+        typeof block.tips === 'string'
+          ? block.tips
+          : Array.isArray(block.prompts)
+            ? block.prompts.filter((prompt): prompt is string => typeof prompt === 'string').join('\n')
+            : ''
+    })
   },
   {
     type: 'writing-task',
@@ -598,7 +701,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-stone-700',
     surface: 'from-stone-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'writing-task',
       title: 'Writing Task',
       prompt: 'Write a short response using the target language from the lesson.',
@@ -615,7 +718,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-neutral-700',
     surface: 'from-neutral-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'final-task',
       title: 'Final Task',
       fields: ['Name', 'Response', 'Reflection']
@@ -631,18 +734,18 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
     accent: 'text-fuchsia-700',
     surface: 'from-fuchsia-100 to-white',
     create: () => ({
-      id: createId(),
+      id: createEditorId(),
       type: 'flashcards',
       title: 'Flashcard Set',
       category: '',
       tags: [],
-      cards: [{ id: createId(), frontText: 'Target word', backText: 'Meaning or explanation' }]
+      cards: [{ ...createFlashcard(), expressions: ['Target word'], backText: 'Meaning or explanation' }]
     }),
     form: FlashcardsForm as BlockFormComponent,
     preview: FlashcardsPreview as BlockPreviewComponent,
     normalize: (block) => {
       return {
-        id: typeof block.id === 'string' ? block.id : createId(),
+        id: typeof block.id === 'string' ? block.id : createEditorId(),
         type: 'flashcards',
         title: typeof block.title === 'string' ? block.title : 'Flashcard Set',
         category: typeof block.category === 'string' ? block.category : '',
@@ -653,8 +756,14 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
           ? block.cards
               .filter((card): card is Record<string, unknown> => Boolean(card && typeof card === 'object'))
               .map((card) => ({
-                id: typeof card.id === 'string' ? card.id : createId(),
-                frontText: typeof card.frontText === 'string' ? card.frontText : undefined,
+                id: typeof card.id === 'string' ? card.id : createEditorId(),
+                expressions: Array.isArray(card.expressions)
+                  ? card.expressions.filter(
+                      (expression): expression is string => typeof expression === 'string'
+                    )
+                  : typeof card.frontText === 'string'
+                    ? [card.frontText]
+                    : [],
                 frontImage: typeof card.frontImage === 'string' ? card.frontImage : undefined,
                 backText: typeof card.backText === 'string' ? card.backText : '',
                 backImage: typeof card.backImage === 'string' ? card.backImage : undefined

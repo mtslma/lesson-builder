@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import type { BlockFormProps, BlockPreviewProps, ImageChoiceBlock } from '../types/index';
+import { createImageChoiceOption } from '../domain/blockDefaults';
+import { removeItemAt, updateItemAt } from '../domain/collections';
+import { shuffleArray } from '../domain/shuffle';
 
 export const ImageChoiceForm = ({ block, onUpdate }: BlockFormProps<ImageChoiceBlock>) => {
   const addOption = () =>
     onUpdate({
-      options: [...block.options, { id: crypto.randomUUID(), text: '', imageUrl: '' }]
+      options: [...block.options, createImageChoiceOption()]
     });
 
   const removeOption = (index: number) =>
-    onUpdate({ options: block.options.filter((_, optionIndex) => optionIndex !== index) });
+    onUpdate({ options: removeItemAt(block.options, index) });
 
   return (
     <div className="space-y-2">
@@ -35,9 +39,12 @@ export const ImageChoiceForm = ({ block, onUpdate }: BlockFormProps<ImageChoiceB
               className="w-full rounded border p-1 text-xs"
               value={option.text}
               onChange={(e) => {
-                const nextOptions = [...block.options];
-                nextOptions[index].text = e.target.value;
-                onUpdate({ options: nextOptions });
+                onUpdate({
+                  options: updateItemAt(block.options, index, (option) => ({
+                    ...option,
+                    text: e.target.value
+                  }))
+                });
               }}
               placeholder="Text"
             />
@@ -46,9 +53,12 @@ export const ImageChoiceForm = ({ block, onUpdate }: BlockFormProps<ImageChoiceB
               className="w-full rounded border p-1 text-xs"
               value={option.imageUrl || ''}
               onChange={(e) => {
-                const nextOptions = [...block.options];
-                nextOptions[index].imageUrl = e.target.value;
-                onUpdate({ options: nextOptions });
+                onUpdate({
+                  options: updateItemAt(block.options, index, (option) => ({
+                    ...option,
+                    imageUrl: e.target.value
+                  }))
+                });
               }}
               placeholder="Img URL"
             />
@@ -62,25 +72,29 @@ export const ImageChoiceForm = ({ block, onUpdate }: BlockFormProps<ImageChoiceB
   );
 };
 
-export const ImageChoicePreview = ({ block }: BlockPreviewProps<ImageChoiceBlock>) => (
-  <div className="my-6 space-y-4 rounded-2xl border bg-white p-6 shadow-sm">
-    <p className="font-serif text-sm font-bold text-slate-800">{block.question}</p>
-    <div className="grid grid-cols-2 gap-3">
-      {block.options.map((option) => (
-        <div
-          key={option.id}
-          className="flex cursor-pointer flex-col items-center rounded-xl border-2 border-slate-100 p-3 transition-colors hover:border-lime-400 hover:bg-lime-50"
-        >
-          {option.imageUrl && (
-            <img
-              src={option.imageUrl}
-              alt=""
-              className="mb-2 h-24 w-full rounded-lg object-cover"
-            />
-          )}
-          <span className="text-xs font-bold text-slate-700">{option.text}</span>
-        </div>
-      ))}
+export const ImageChoicePreview = ({ block }: BlockPreviewProps<ImageChoiceBlock>) => {
+  const [shuffledOptions] = useState(() => shuffleArray(block.options, `${block.id}:image-choice`));
+
+  return (
+    <div className="my-6 space-y-4 rounded-2xl border bg-white p-6 shadow-sm">
+      <p className="font-serif text-sm font-bold text-slate-800">{block.question}</p>
+      <div className="grid grid-cols-2 gap-3">
+        {shuffledOptions.map((option) => (
+          <div
+            key={option.id}
+            className="flex cursor-pointer flex-col items-center rounded-xl border-2 border-slate-100 p-3 transition-colors hover:border-lime-400 hover:bg-lime-50"
+          >
+            {option.imageUrl && (
+              <img
+                src={option.imageUrl}
+                alt=""
+                className="mb-2 h-24 w-full rounded-lg object-cover"
+              />
+            )}
+            <span className="text-xs font-bold text-slate-700">{option.text}</span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};

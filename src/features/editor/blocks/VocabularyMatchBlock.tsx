@@ -4,16 +4,19 @@ import type {
   BlockPreviewProps,
   VocabularyMatchBlock
 } from '../types/index';
+import { createVocabularyPair } from '../domain/blockDefaults';
+import { removeItemAt, updateItemAt } from '../domain/collections';
+import { shuffleArray } from '../domain/shuffle';
 
 export const VocabularyMatchForm = ({
   block,
   onUpdate
 }: BlockFormProps<VocabularyMatchBlock>) => {
   const addPair = () =>
-    onUpdate({ pairs: [...block.pairs, { left: '', leftType: 'text', right: '' }] });
+    onUpdate({ pairs: [...block.pairs, createVocabularyPair()] });
 
   const removePair = (index: number) =>
-    onUpdate({ pairs: block.pairs.filter((_, pairIndex) => pairIndex !== index) });
+    onUpdate({ pairs: removeItemAt(block.pairs, index) });
 
   return (
     <div className="space-y-2">
@@ -30,9 +33,12 @@ export const VocabularyMatchForm = ({
             className="rounded border text-xs"
             value={pair.leftType}
             onChange={(e) => {
-              const nextPairs = [...block.pairs];
-              nextPairs[index].leftType = e.target.value as (typeof pair.leftType);
-              onUpdate({ pairs: nextPairs });
+              onUpdate({
+                pairs: updateItemAt(block.pairs, index, (currentPair) => ({
+                  ...currentPair,
+                  leftType: e.target.value as typeof pair.leftType
+                }))
+              });
             }}
           >
             <option value="text">TXT</option>
@@ -43,9 +49,12 @@ export const VocabularyMatchForm = ({
             className="flex-1 rounded border p-1 text-xs"
             value={pair.left}
             onChange={(e) => {
-              const nextPairs = [...block.pairs];
-              nextPairs[index].left = e.target.value;
-              onUpdate({ pairs: nextPairs });
+              onUpdate({
+                pairs: updateItemAt(block.pairs, index, (currentPair) => ({
+                  ...currentPair,
+                  left: e.target.value
+                }))
+              });
             }}
             placeholder="Left"
           />
@@ -54,9 +63,12 @@ export const VocabularyMatchForm = ({
             className="flex-1 rounded border p-1 text-xs"
             value={pair.right}
             onChange={(e) => {
-              const nextPairs = [...block.pairs];
-              nextPairs[index].right = e.target.value;
-              onUpdate({ pairs: nextPairs });
+              onUpdate({
+                pairs: updateItemAt(block.pairs, index, (currentPair) => ({
+                  ...currentPair,
+                  right: e.target.value
+                }))
+              });
             }}
             placeholder="Right"
           />
@@ -79,8 +91,12 @@ export const VocabularyMatchForm = ({
 export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMatchBlock>) => {
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<Record<string, string>>({});
+  const [leftItems] = useState(() => shuffleArray(block.pairs, `${block.id}:vocabulary-left`));
   const [rightItems] = useState(() =>
-    [...block.pairs].map((pair) => pair.right).sort(() => Math.random() - 0.5)
+    shuffleArray(
+      block.pairs.map((pair) => pair.right),
+      `${block.id}:vocabulary-right`
+    )
   );
 
   const handleRightClick = (right: string) => {
@@ -101,7 +117,7 @@ export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMa
       </div>
       <div className="grid grid-cols-2 gap-8">
         <div className="space-y-3">
-          {block.pairs.map((pair, index) => {
+          {leftItems.map((pair, index) => {
             const matched = Boolean(matchedPairs[pair.left]);
             const selected = selectedLeft === pair.left;
 

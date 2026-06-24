@@ -1,17 +1,21 @@
 import React from 'react';
 import type { SubQuestion } from '../types/index';
+import { createSubQuestion } from '../domain/blockDefaults';
+import { removeItemAt, updateItemAt } from '../domain/collections';
 
 export const SubQuestionsEditor: React.FC<{
   questions: SubQuestion[];
   onChange: (q: SubQuestion[]) => void;
 }> = ({ questions, onChange }) => {
-  const addQ = () =>
-    onChange([...questions, { id: crypto.randomUUID(), type: 'multiple-choice', question: '' }]);
-  const removeQ = (idx: number) => onChange(questions.filter((_, index) => index !== idx));
+  const addQ = () => onChange([...questions, createSubQuestion()]);
+  const removeQ = (idx: number) => onChange(removeItemAt(questions, idx));
   const update = <K extends keyof SubQuestion>(idx: number, field: K, val: SubQuestion[K]) => {
-    const n = [...questions];
-    n[idx] = { ...n[idx], [field]: val };
-    onChange(n);
+    onChange(
+      updateItemAt(questions, idx, (question) => ({
+        ...question,
+        [field]: val
+      }))
+    );
   };
 
   return (

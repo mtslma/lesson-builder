@@ -3,6 +3,8 @@ import type {
   BlockPreviewProps,
   PhrasalVerbFocusBlock
 } from '../types/index';
+import { createPhrasalVerbItem } from '../domain/blockDefaults';
+import { removeItemAt, updateItemAt } from '../domain/collections';
 
 type PhrasalVerbItem = PhrasalVerbFocusBlock['items'][number];
 
@@ -14,20 +16,23 @@ export const PhrasalVerbForm = ({ block, onUpdate }: BlockFormProps<PhrasalVerbF
     field: K,
     value: PhrasalVerbItem[K]
   ) => {
-    const nextItems = [...items];
-    nextItems[index] = { ...nextItems[index], [field]: value };
-    onUpdate({ items: nextItems });
+    onUpdate({
+      items: updateItemAt(items, index, (item) => ({
+        ...item,
+        [field]: value
+      }))
+    });
   };
 
   const addItem = () => {
     if (items.length >= 6) return;
     onUpdate({
-      items: [...items, { id: crypto.randomUUID(), verb: '', meaning: '', examples: [] }]
+      items: [...items, createPhrasalVerbItem()]
     });
   };
 
   const removeItem = (index: number) =>
-    onUpdate({ items: items.filter((_, itemIndex) => itemIndex !== index) });
+    onUpdate({ items: removeItemAt(items, index) });
 
   return (
     <div className="space-y-3">

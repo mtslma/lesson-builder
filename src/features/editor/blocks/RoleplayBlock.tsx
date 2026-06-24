@@ -1,17 +1,51 @@
 import type { BlockFormProps, BlockPreviewProps, RoleplayBlock } from '../types/index';
+import { removeItemAt, updateItemAt } from '../domain/collections';
+
+type RoleplayCharacter = RoleplayBlock['characters'][number];
+type RoleplayDetail = RoleplayCharacter['details'][number];
+
+const createCharacter = (): RoleplayCharacter => ({
+  name: '',
+  details: []
+});
+
+const createDetail = (): RoleplayDetail => ({
+  label: '',
+  value: ''
+});
 
 export const RoleplayForm = ({ block, onUpdate }: BlockFormProps<RoleplayBlock>) => {
-  const addChar = () => onUpdate({ characters: [...block.characters, { name: '' }] });
+  const addChar = () => onUpdate({ characters: [...block.characters, createCharacter()] });
 
   const removeChar = (index: number) =>
-    onUpdate({ characters: block.characters.filter((_, charIndex) => charIndex !== index) });
+    onUpdate({ characters: removeItemAt(block.characters, index) });
+
+  const addDetail = (characterIndex: number) => {
+    const character = block.characters[characterIndex];
+
+    onUpdate({
+      characters: updateItemAt(block.characters, characterIndex, (currentCharacter) => ({
+        ...currentCharacter,
+        details: [...character.details, createDetail()]
+      }))
+    });
+  };
+
+  const removeDetail = (characterIndex: number, detailIndex: number) => {
+    onUpdate({
+      characters: updateItemAt(block.characters, characterIndex, (character) => ({
+        ...character,
+        details: removeItemAt(character.details, detailIndex)
+      }))
+    });
+  };
 
   return (
     <div className="space-y-3">
       <div className="space-y-2">
         <span className="block text-[10px] font-bold uppercase text-slate-500">Characters</span>
         {block.characters.map((character, index) => (
-          <div key={index} className="space-y-1 rounded border bg-slate-50 p-2">
+          <div key={index} className="space-y-2 rounded border bg-slate-50 p-3">
             <div className="flex justify-end">
               <button
                 type="button"
@@ -21,52 +55,77 @@ export const RoleplayForm = ({ block, onUpdate }: BlockFormProps<RoleplayBlock>)
                 Remove
               </button>
             </div>
+
             <input
               type="text"
-              className="w-full rounded border p-1 text-xs font-bold"
+              className="w-full rounded border p-1.5 text-xs font-bold"
               value={character.name}
-              onChange={(e) => {
-                const nextCharacters = [...block.characters];
-                nextCharacters[index].name = e.target.value;
-                onUpdate({ characters: nextCharacters });
-              }}
+              onChange={(e) =>
+                onUpdate({
+                  characters: updateItemAt(block.characters, index, (currentCharacter) => ({
+                    ...currentCharacter,
+                    name: e.target.value
+                  }))
+                })
+              }
               placeholder="Character Name"
             />
-            <div className="flex gap-1">
-              <input
-                type="text"
-                className="flex-1 rounded border p-1 text-xs"
-                value={character.country || ''}
-                onChange={(e) => {
-                  const nextCharacters = [...block.characters];
-                  nextCharacters[index].country = e.target.value;
-                  onUpdate({ characters: nextCharacters });
-                }}
-                placeholder="Country"
-              />
-              <input
-                type="text"
-                className="flex-1 rounded border p-1 text-xs"
-                value={character.city || ''}
-                onChange={(e) => {
-                  const nextCharacters = [...block.characters];
-                  nextCharacters[index].city = e.target.value;
-                  onUpdate({ characters: nextCharacters });
-                }}
-                placeholder="City"
-              />
+
+            <div className="space-y-2">
+              {character.details.map((detail, detailIndex) => (
+                <div key={detailIndex} className="flex gap-2">
+                  <input
+                    type="text"
+                    className="w-32 rounded border p-1.5 text-xs"
+                    value={detail.label}
+                    onChange={(e) =>
+                      onUpdate({
+                        characters: updateItemAt(block.characters, index, (currentCharacter) => ({
+                          ...currentCharacter,
+                          details: updateItemAt(currentCharacter.details, detailIndex, (currentDetail) => ({
+                            ...currentDetail,
+                            label: e.target.value
+                          }))
+                        }))
+                      })
+                    }
+                    placeholder="Label"
+                  />
+                  <input
+                    type="text"
+                    className="flex-1 rounded border p-1.5 text-xs"
+                    value={detail.value}
+                    onChange={(e) =>
+                      onUpdate({
+                        characters: updateItemAt(block.characters, index, (currentCharacter) => ({
+                          ...currentCharacter,
+                          details: updateItemAt(currentCharacter.details, detailIndex, (currentDetail) => ({
+                            ...currentDetail,
+                            value: e.target.value
+                          }))
+                        }))
+                      })
+                    }
+                    placeholder="Value"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeDetail(index, detailIndex)}
+                    className="rounded border border-red-200 bg-white px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+
+              <button
+                type="button"
+                onClick={() => addDetail(index)}
+                className="rounded bg-slate-200 px-2 py-0.5 text-[10px] font-bold"
+              >
+                + Add item
+              </button>
             </div>
-            <input
-              type="text"
-              className="w-full rounded border p-1 text-xs"
-              value={character.activity || ''}
-              onChange={(e) => {
-                const nextCharacters = [...block.characters];
-                nextCharacters[index].activity = e.target.value;
-                onUpdate({ characters: nextCharacters });
-              }}
-              placeholder="Activity"
-            />
           </div>
         ))}
         <button
@@ -77,20 +136,14 @@ export const RoleplayForm = ({ block, onUpdate }: BlockFormProps<RoleplayBlock>)
           + Add Character
         </button>
       </div>
+
       <div className="space-y-1">
-        <span className="block text-[10px] font-bold uppercase text-slate-500">Prompts</span>
+        <span className="block text-[10px] font-bold uppercase text-slate-500">Tips</span>
         <textarea
-          className="h-16 w-full rounded border p-2 text-sm"
-          value={block.prompts.join('\n')}
-          onChange={(e) =>
-            onUpdate({
-              prompts: e.target.value
-                .split('\n')
-                .map((prompt) => prompt.trim())
-                .filter(Boolean)
-            })
-          }
-          placeholder="Prompts (One per line)"
+          className="h-20 w-full rounded border p-2 text-sm"
+          value={block.tips}
+          onChange={(e) => onUpdate({ tips: e.target.value })}
+          placeholder="Optional tips for the roleplay"
         />
       </div>
     </div>
@@ -106,35 +159,26 @@ export const RoleplayPreview = ({ block }: BlockPreviewProps<RoleplayBlock>) => 
       {block.characters.map((character, index) => (
         <div
           key={index}
-          className="space-y-1 rounded-xl border border-indigo-100 bg-white p-4 shadow-xs"
+          className="space-y-2 rounded-xl border border-indigo-100 bg-white p-4 shadow-xs"
         >
           <p className="font-bold text-slate-900">{character.name}</p>
-          {character.country && (
-            <p className="text-xs text-slate-500">
-              <strong className="text-indigo-400">Origin:</strong> {character.country}
-            </p>
-          )}
-          {character.activity && (
-            <p className="text-xs text-slate-500">
-              <strong className="text-indigo-400">Activity:</strong> {character.activity}
-            </p>
-          )}
+          {character.details
+            .filter((detail) => detail.label.trim().length > 0 || detail.value.trim().length > 0)
+            .map((detail, detailIndex) => (
+              <p key={detailIndex} className="text-xs text-slate-500">
+                {detail.label.trim().length > 0 && (
+                  <strong className="text-indigo-400">{detail.label}:</strong>
+                )}{' '}
+                {detail.value}
+              </p>
+            ))}
         </div>
       ))}
     </div>
-    {block.prompts.length > 0 && (
+    {block.tips.trim().length > 0 && (
       <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <span className="mb-2 block text-[10px] font-bold uppercase text-slate-400">
-          Prompts to use:
-        </span>
-        <ul className="space-y-1">
-          {block.prompts.map((prompt, index) => (
-            <li key={index} className="flex gap-2 font-serif text-sm text-slate-600">
-              <span className="text-indigo-400">*</span>
-              {prompt}
-            </li>
-          ))}
-        </ul>
+        <span className="mb-2 block text-[10px] font-bold uppercase text-slate-400">Tips</span>
+        <p className="whitespace-pre-wrap font-serif text-sm text-slate-600">{block.tips}</p>
       </div>
     )}
   </div>
