@@ -14,7 +14,7 @@
   },
   "blocks": [
     {
-      "id": "15c854c0-f101-404b-a1a3-3cb5db5a8f18",
+      "id": "37df2e1a-414a-4271-81c7-dae5f9743eef",
       "type": "page-break",
       "pageNumber": 1,
       "estimatedTime": "45 min",
@@ -638,7 +638,7 @@
       "audience": "both"
     },
     {
-      "id": "2207334e-9511-45a0-b72d-65893de07d5f",
+      "id": "577765ce-bb39-4d75-9c0a-3769913706f9",
       "type": "page-break",
       "pageNumber": 2,
       "estimatedTime": "45 min",
@@ -1182,37 +1182,37 @@
       "audience": "both"
     },
     {
-      "id": "55c7a478-e694-4e06-b8f7-98130b2a3b1a",
+      "id": "15d32b1b-42d8-440e-80a2-c98d68ece137",
       "type": "multiple-choice",
-      "question": "Choose the best answer.",
+      "question": "Do you understand?",
       "options": [
         {
-          "id": "5dae764a-571f-4758-b9e4-f7bb20378021",
-          "text": "Option A"
+          "id": "230eb2da-af0f-40eb-90f5-c52dbf31ffbb",
+          "text": "Yes, I do."
         },
         {
-          "id": "916e3e7e-435f-4ce9-9e58-bdbaf73fa963",
-          "text": "Option B"
+          "id": "f8f54e61-cfbb-4e9b-b080-f7b2251ee895",
+          "text": "No, I don't."
         }
       ],
-      "correctOptionIds": ["5dae764a-571f-4758-b9e4-f7bb20378021"],
+      "correctOptionIds": ["230eb2da-af0f-40eb-90f5-c52dbf31ffbb"],
       "audience": "both"
     },
     {
-      "id": "64deac59-6a1b-48c3-9c3b-1f1c57fc835d",
+      "id": "c31ab714-bdfc-4e71-8f26-c1d21bc8a94a",
       "type": "multiple-choice",
-      "question": "Choose the best answer.",
+      "question": "Do you have questions?",
       "options": [
         {
-          "id": "8c83ea72-a1a4-41e6-a92e-c69ba5586168",
-          "text": "Option A"
+          "id": "b3d64c74-8baf-447a-9f7e-f368059b190d",
+          "text": "Yes, I do."
         },
         {
-          "id": "6c87b315-9ddb-4bbb-9313-c354e3ac303b",
-          "text": "Option B"
+          "id": "26c006c9-f519-4619-9fda-055d5fd125bb",
+          "text": "No, I don't."
         }
       ],
-      "correctOptionIds": ["8c83ea72-a1a4-41e6-a92e-c69ba5586168"],
+      "correctOptionIds": ["b3d64c74-8baf-447a-9f7e-f368059b190d"],
       "audience": "both"
     },
     {
@@ -1494,7 +1494,7 @@
       "audience": "both"
     },
     {
-      "id": "99a5e893-86da-4ac2-8086-378fa3bcc498",
+      "id": "72269471-98b5-4617-95b3-8b443f5ccd01",
       "type": "page-break",
       "pageNumber": 3,
       "estimatedTime": "45 min",
@@ -1519,27 +1519,65 @@
       "type": "vocabulary-match",
       "title": "Match the related items",
       "instruction": "Connect each item on the left to its related item on the right.",
-      "variant": "two-column",
-      "matchMode": "audio-to-word",
+      "variant": "classic",
+      "matchMode": "image-to-word",
       "shuffleLeft": true,
       "shuffleRight": true,
+      "shuffleVersion": 3,
       "showReferenceBadges": true,
+      "showCorrectMatches": true,
       "pairs": [
         {
-          "id": "3e2218c7-8600-4b4b-a33b-aa5e9aa730e3",
-          "left": "Word",
+          "id": "4e0cdca0-1e95-45de-b1a0-e1fac156bda3",
+          "left": "https://images.pexels.com/photos/8107172/pexels-photo-8107172.jpeg",
           "leftType": "image",
           "leftLabel": "",
-          "right": "Meaning",
+          "right": "Have breakfast",
           "rightType": "text",
           "rightLabel": ""
         },
         {
-          "id": "e801cb63-220d-48cc-803f-12cc306d4c2a",
-          "left": "Phrase",
-          "leftType": "text",
+          "id": "3cd7d0ca-d662-4506-a9fa-b3afe15ed2c6",
+          "left": "https://images.pexels.com/photos/6763078/pexels-photo-6763078.jpeg",
+          "leftType": "image",
           "leftLabel": "",
-          "right": "Response",
+          "right": "Brush your teeth",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "640e46d8-0154-4364-b204-ccd7a9a008d8",
+          "left": "https://images.pexels.com/photos/13396812/pexels-photo-13396812.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Take a shower",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "9738755f-37f6-435f-806e-02c0154fb830",
+          "left": "https://images.pexels.com/photos/4963351/pexels-photo-4963351.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Go to school/ work",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "cd9bab7c-ed3e-4264-b393-113b1643f330",
+          "left": "https://images.pexels.com/photos/34529777/pexels-photo-34529777.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Check your phone",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "f85b9c14-6293-4519-b0d9-79605426b1ce",
+          "left": "https://images.pexels.com/photos/6760856/pexels-photo-6760856.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Watch TV",
           "rightType": "text",
           "rightLabel": ""
         }
@@ -1547,7 +1585,574 @@
       "audience": "both"
     },
     {
-      "id": "f2982f30-40b9-4bb2-89cd-aa18d4b53123",
+      "id": "07213c79-a073-48ed-a7ad-ada77c8b5c3e",
+      "type": "heading",
+      "content": "Adding more details to questions",
+      "level": "h2",
+      "audience": "both"
+    },
+    {
+      "id": "c5b277d9-7fb5-4c2c-88db-9ce6e5c072ab",
+      "type": "paragraph",
+      "content": "We can add extra information to say when or how often an activity happens.",
+      "style": "body",
+      "audience": "both"
+    },
+    {
+      "id": "5b09f75b-4a43-48d3-8979-f0fea038e169",
+      "type": "advanced-grammar",
+      "title": "Grammar Reference",
+      "explanation": "Summarize the structure or contrast in a concise way.",
+      "details": "",
+      "structureTitle": "Structure table",
+      "structureTableHeaders": ["Form", "Structure", "Example"],
+      "structureTableRows": [
+        {
+          "cells": [
+            {
+              "text": "Affirmative",
+              "highlights": []
+            },
+            {
+              "text": "Subject + verb",
+              "highlights": []
+            },
+            {
+              "text": "Example sentence",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Negative",
+              "highlights": []
+            },
+            {
+              "text": "Subject + do not + verb",
+              "highlights": []
+            },
+            {
+              "text": "Example sentence",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "examples": ["She studies English every day."],
+      "commonMistakes": ["Do not forget the auxiliary verb."],
+      "comparisons": [
+        {
+          "id": "f29f4500-da89-49da-a410-b0deaeeb217e",
+          "label": "Compare",
+          "detail": "Use this form, not that form."
+        }
+      ],
+      "miniPractice": ["Write one sentence using the target structure."],
+      "tableHeaders": ["Form", "Structure", "Example"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Question",
+              "highlights": []
+            },
+            {
+              "text": "Subject + verb",
+              "highlights": []
+            },
+            {
+              "text": "Example sentence",
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Negative",
+              "highlights": []
+            },
+            {
+              "text": "Subject + do not + verb",
+              "highlights": []
+            },
+            {
+              "text": "Example sentence",
+              "highlights": []
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "f1891d01-4ffe-424d-848d-5767b7f0ec5d",
+      "type": "question-set",
+      "title": "Make 3 questions with DO + YOU and Routine Activities",
+      "instruction": "Example: Do you brush you teeth?",
+      "questions": [
+        {
+          "id": "8cea2964-e20d-4976-9602-87fdca0fb2f4",
+          "type": "open-ended",
+          "question": "",
+          "acceptedAnswers": [],
+          "instructions": "",
+          "correctOptionIds": [],
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "c2f2b04f-1fa2-49ba-b78d-477ae8a4aeca",
+          "type": "open-ended",
+          "question": "",
+          "acceptedAnswers": [],
+          "correctOptionIds": [],
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "d91d2f07-5d8d-4e60-a68a-2f79fe11baef",
+          "type": "open-ended",
+          "question": "",
+          "acceptedAnswers": [],
+          "correctOptionIds": [],
+          "wordSuggestions": [],
+          "sequence": []
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "bab3a656-c902-40f6-8942-d7eda6a0d252",
+      "type": "advanced-grammar",
+      "title": "More ways to answer",
+      "explanation": "Use a short answer first. Then you can add extra information.",
+      "details": "Keep the same answer pattern every time in this part.",
+      "structureTitle": "Structure table",
+      "structureTableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "structureTableRows": [],
+      "examples": [],
+      "commonMistakes": [],
+      "comparisons": [],
+      "miniPractice": [],
+      "tableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Do you study English?",
+              "highlights": [
+                {
+                  "id": "d05caa2c-2691-4543-b121-4f1a4063f85d",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "9c013853-a88f-4f7c-9e91-b7e496bf5028",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "d73f6a3a-924e-400e-877c-5dce03165c06",
+                  "text": "study English",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "4afe9a30-2307-47f5-b3b1-8796a4df0c42",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "4b16238c-9bd9-46ae-9bb8-cd4ff919f98c",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I study at night.",
+              "highlights": [
+                {
+                  "id": "09d07bfc-1444-4df8-aacd-640fa82994cb",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "b2698834-8d03-4e2c-8ae7-65a070831560",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "e7108c5f-8723-4617-b326-ac1813a1567a",
+                  "text": "study at night",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work?",
+              "highlights": [
+                {
+                  "id": "34234ee5-0ad2-4e08-b94a-fe33d063c5b0",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "c4f5a15e-7a98-4e15-9b37-cae0a59c621a",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "0067e63f-0985-4b86-976c-a780af83e7cd",
+                  "text": "work",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": [
+                {
+                  "id": "674e4be7-2e81-4d7c-be60-7115540ab9bb",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "591d526a-adc0-4b0c-9c99-072f10ada032",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't. I study in the morning.",
+              "highlights": [
+                {
+                  "id": "a0b7528a-9468-4d9a-83dc-7162927d738c",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "25953762-06b0-484d-9fe3-16577c483d2b",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "4a0ef563-8de6-48cd-9020-af877d330502",
+                  "text": "study in the morning",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you like music?",
+              "highlights": [
+                {
+                  "id": "25e943ae-b3b3-4d8e-936e-4f5295eb4173",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "4c07157f-182b-4dad-b7e0-25d835ff2574",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "13996fac-a58b-42b5-bb50-4464ac9733ee",
+                  "text": "like music",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "18fe4c6c-8f9e-4283-ac87-7fcd8cdd401b",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "6ad56f2d-ade3-4fc4-9b1c-56a9bf6e7574",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I like pop music.",
+              "highlights": [
+                {
+                  "id": "2598fda2-b3ab-4717-bb92-a47cd9892e0e",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "7f20dfc6-a394-4107-9792-f3bba019cab2",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "ecbc836a-5e25-49d1-8b94-21af2fedb5a9",
+                  "text": "like pop music",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "4c7447d0-2174-41a2-b1a7-12b4c00725d8",
+      "type": "advanced-grammar",
+      "title": "More ways to answer",
+      "explanation": "Use a short answer first. Then you can add extra information.",
+      "details": "Keep the same answer pattern every time in this part.",
+      "structureTitle": "Structure table",
+      "structureTableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "structureTableRows": [],
+      "examples": [],
+      "commonMistakes": [],
+      "comparisons": [],
+      "miniPractice": [],
+      "tableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Do you study English?",
+              "highlights": [
+                {
+                  "id": "defea165-40eb-4ef5-92d1-b991c965137c",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "7797c4f2-996d-4133-91d6-647083ade750",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "28b5e24c-1c31-4360-a9c5-98cf09a0f7b0",
+                  "text": "study English",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "141fe0d7-2e26-4027-b5c4-27dff0f04bd7",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "8bdb1fc7-af10-4bfe-9b3f-0d41eac5b3a1",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I study at night.",
+              "highlights": [
+                {
+                  "id": "1319a5ef-a247-4837-a509-7d11236f316c",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "e3599501-bf0f-43ed-b211-949a7dc77b76",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "22e01580-374e-4cb1-9435-ebdad7eacfce",
+                  "text": "study at night",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work?",
+              "highlights": [
+                {
+                  "id": "63881bd4-ee78-4ee9-ade1-c57efc1223f8",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "a7d203fc-eb4c-4604-ae54-f317c4f3fed1",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "efd31091-5cf6-4d0c-a85b-42398a75809f",
+                  "text": "work",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": [
+                {
+                  "id": "a467ecec-880c-4bdd-88b5-a07d15440a21",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "3986ab08-186b-4394-8121-efb7226b642c",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't. I study in the morning.",
+              "highlights": [
+                {
+                  "id": "4df44bf7-15ee-4917-9d87-384cc6599ccc",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "ed9be542-104c-4222-b18a-8b6d874b869c",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "648e3db6-2b47-461c-95e4-1caa03281c15",
+                  "text": "study in the morning",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you like music?",
+              "highlights": [
+                {
+                  "id": "eff301c8-4079-4206-8797-433b7905a46e",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "d445c673-27da-4c0c-92c6-20c3416ea99f",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "4bf8a011-8993-43d8-908a-0665be55e9ed",
+                  "text": "like music",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "f0825645-12e2-4138-8fd5-19fe900e1be9",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "3993db65-9531-4ece-bed2-55b22ed77d0f",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I like pop music.",
+              "highlights": [
+                {
+                  "id": "92175c9e-0944-4dd3-9e02-23710d6119e2",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "764baf8e-daab-417d-b2d8-6a87950d9c06",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "212e9e2e-cdf9-4cfe-9e91-5fb82cda85cb",
+                  "text": "like pop music",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "15892511-6596-425e-9b15-8930c6965c3a",
+      "type": "question-set",
+      "title": "Make 3 questions with DO + YOU and Routine Activities",
+      "instruction": "Example: Do you brush you teeth?",
+      "questions": [
+        {
+          "id": "be869aaa-4897-4eb4-81dc-546d12bcb039",
+          "type": "open-ended",
+          "question": "",
+          "acceptedAnswers": [],
+          "instructions": "",
+          "correctOptionIds": [],
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "9b817e06-f536-42f6-b851-5ac75fec3b58",
+          "type": "open-ended",
+          "question": "",
+          "acceptedAnswers": [],
+          "correctOptionIds": [],
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "39e9e867-9df8-4837-9b48-c749d632f794",
+          "type": "open-ended",
+          "question": "",
+          "acceptedAnswers": [],
+          "correctOptionIds": [],
+          "wordSuggestions": [],
+          "sequence": []
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "0a1d16cc-0ae3-44d9-8f46-cfa4ce3e5daf",
       "type": "page-break",
       "pageNumber": 4,
       "estimatedTime": "45 min",
@@ -1725,7 +2330,7 @@
       "audience": "both"
     },
     {
-      "id": "0333edb4-7d90-4ec4-8bf2-d9e81aff27fb",
+      "id": "70518d31-71aa-428a-8c46-68ac2024799e",
       "type": "grammar-note",
       "title": "Grammar Note",
       "ruleContext": "Add a short and neutral explanation of the language pattern here.",
@@ -1760,20 +2365,20 @@
       "audience": "both"
     },
     {
-      "id": "1c78006f-1928-45e2-b58a-371aeaa66c85",
+      "id": "3b4590bf-fbd3-4ffe-851f-c8f0d8e45fac",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "0031ba7e-66b4-4874-8415-aa667abdce06",
+          "id": "4cb69261-822d-445f-9a34-f656d581aece",
           "text": "Option A"
         },
         {
-          "id": "ab524b7e-5513-4437-9ee3-06436d4f5805",
+          "id": "c052a9c5-ad56-4f07-97aa-62b1b0aa9ef7",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["0031ba7e-66b4-4874-8415-aa667abdce06"],
+      "correctOptionIds": ["4cb69261-822d-445f-9a34-f656d581aece"],
       "audience": "both"
     },
     {
@@ -1808,7 +2413,7 @@
       "audience": "both"
     },
     {
-      "id": "88300eb7-2d4f-4ab2-a491-3590a32ebd4b",
+      "id": "85c2bb6f-4d5e-4cf9-bd53-b1f88f78768b",
       "type": "page-break",
       "pageNumber": 5,
       "estimatedTime": "45 min",
@@ -2138,37 +2743,37 @@
       "audience": "both"
     },
     {
-      "id": "d0b14dc5-83e5-4405-a165-a0e14ecde8dd",
+      "id": "e5fa6730-9b5e-46c6-bc8f-f18079a7db04",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "83f02c52-ff25-41f7-8bb9-7857b9e4ed5d",
+          "id": "fad93d6b-60c0-49d3-8d89-68b469a86446",
           "text": "Option A"
         },
         {
-          "id": "850e825a-26a5-4b08-a617-c81bfdce0260",
+          "id": "4d02b2a6-9644-46f7-9d51-4aeb5d935750",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["83f02c52-ff25-41f7-8bb9-7857b9e4ed5d"],
+      "correctOptionIds": ["fad93d6b-60c0-49d3-8d89-68b469a86446"],
       "audience": "both"
     },
     {
-      "id": "e31a75f5-1ba9-48ea-b2e1-0ec4a17fa140",
+      "id": "b1da5f41-eec5-4d16-ba51-a6d57321889f",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "9bca42da-2fe2-4721-8e44-4c7b6b414e9a",
+          "id": "be971277-7270-4a0b-abc7-c0196bc74396",
           "text": "Option A"
         },
         {
-          "id": "dfd98303-44b6-4b0a-bfa8-9990a0ec7a1b",
+          "id": "3fb1b6fb-5c30-4a99-9cb6-69064f6d1f64",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["9bca42da-2fe2-4721-8e44-4c7b6b414e9a"],
+      "correctOptionIds": ["be971277-7270-4a0b-abc7-c0196bc74396"],
       "audience": "both"
     },
     {
@@ -2286,7 +2891,7 @@
       "audience": "both"
     },
     {
-      "id": "924a8ce2-a1f9-45dd-bfe1-45014ade95eb",
+      "id": "e0ee80f0-40df-434d-a6cf-06606204c6af",
       "type": "page-break",
       "pageNumber": 6,
       "estimatedTime": "45 min",
@@ -2527,32 +3132,40 @@
       "id": "ce0033ec-e18b-476e-8d22-910162d4da01",
       "type": "vocabulary-match",
       "title": "Match the related items",
+      "instruction": "Connect each item on the left to its related item on the right.",
       "variant": "classic",
       "matchMode": "word-to-meaning",
+      "shuffleLeft": true,
+      "shuffleRight": true,
+      "shuffleVersion": 0,
+      "showReferenceBadges": false,
+      "showCorrectMatches": false,
       "pairs": [
         {
           "id": "3913d93f-b197-49e1-b473-59bf59af1fef",
           "left": "Word",
           "leftType": "text",
+          "leftLabel": "",
           "right": "Meaning",
-          "rightType": "text"
+          "rightType": "text",
+          "rightLabel": ""
         }
       ],
       "audience": "both"
     },
     {
-      "id": "76211584-df27-4fed-92af-23fd0cdaf86f",
+      "id": "3d28cd70-4ec1-4a90-ab0b-04991bf03d2b",
       "type": "selection-grid",
       "instruction": "Select the items that match the prompt.",
       "isMultiSelect": true,
       "items": [
         {
-          "id": "227879fa-aa2c-4ebd-ae74-aabae64c9060",
+          "id": "067193ae-b634-4b0d-8e2b-0c6d8bfe1867",
           "text": "Correct option",
           "isCorrect": true
         },
         {
-          "id": "e63115cb-4d32-437b-9cde-478a5e92eccf",
+          "id": "0a11adf3-e6e9-400c-869e-c1a2b233257f",
           "text": "Distractor option",
           "isCorrect": false
         }
@@ -2560,18 +3173,18 @@
       "audience": "both"
     },
     {
-      "id": "443b9c6e-feb1-462b-8869-d7c4d2b59e47",
+      "id": "5aee2ca5-aade-4d55-9f4a-000bf69a953b",
       "type": "selection-grid",
       "instruction": "Select the items that match the prompt.",
       "isMultiSelect": true,
       "items": [
         {
-          "id": "0e28060c-7cc9-479d-8a39-de84e69ccdab",
+          "id": "efa03f3f-4a56-456f-bbb4-2f68a19bf6ba",
           "text": "Correct option",
           "isCorrect": true
         },
         {
-          "id": "5abbd4e5-ed36-45d0-8ceb-e7ce6d6b9f54",
+          "id": "b423f36b-5bce-4d18-b162-ece7c17df383",
           "text": "Distractor option",
           "isCorrect": false
         }
@@ -2873,7 +3486,7 @@
       "audience": "both"
     },
     {
-      "id": "2eeec23b-bafc-4b47-b6ae-015d23e5ad67",
+      "id": "8aaac223-344c-44a6-bc43-5dd261a5d1a1",
       "type": "page-break",
       "pageNumber": 7,
       "estimatedTime": "45 min",
@@ -3019,7 +3632,7 @@
       "audience": "both"
     },
     {
-      "id": "e7a7a768-1423-4dc6-9983-4aa0a90c0d3a",
+      "id": "31c56231-b7a6-40dc-ad26-07f752af4e46",
       "type": "grammar-note",
       "title": "Grammar Note",
       "ruleContext": "Add a short and neutral explanation of the language pattern here.",
@@ -3242,7 +3855,7 @@
       "audience": "both"
     },
     {
-      "id": "e6f3970f-3487-429c-b6be-210306913d48",
+      "id": "9de09e4b-e8b5-4943-a5e2-cbcfa1e0074a",
       "type": "page-break",
       "pageNumber": 8,
       "estimatedTime": "45 min",
@@ -3623,71 +4236,71 @@
       "audience": "both"
     },
     {
-      "id": "315bb3bd-5b7a-4d20-b716-4bd720b07dea",
+      "id": "b6c36a47-746f-4268-b718-8198bb2172d5",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "c898ae26-5a7d-4079-8616-4ebe8ba7df2b",
+          "id": "2f39b692-8836-4490-807b-d39f5b3b82de",
           "text": "Option A"
         },
         {
-          "id": "e504e8d9-41ba-4e66-a0b8-b1e0d242903b",
+          "id": "a98ca56a-0aa5-4f83-a637-9d9fb2d1d67d",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["c898ae26-5a7d-4079-8616-4ebe8ba7df2b"],
+      "correctOptionIds": ["2f39b692-8836-4490-807b-d39f5b3b82de"],
       "audience": "both"
     },
     {
-      "id": "24b39a94-fb7a-4f17-86e6-3574d8b44f85",
+      "id": "6a55f26b-ebf9-459c-8879-d00b0ce500a7",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "5e267e00-077e-4ebc-87eb-a6d405f6a447",
+          "id": "489c0e68-9766-45ed-b3be-cf1af0f6e90e",
           "text": "Option A"
         },
         {
-          "id": "9da515e1-4394-4a68-97c7-58e5623d3bae",
+          "id": "4784cf3d-6b2a-48c6-8c56-e3078611e4b3",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["5e267e00-077e-4ebc-87eb-a6d405f6a447"],
+      "correctOptionIds": ["489c0e68-9766-45ed-b3be-cf1af0f6e90e"],
       "audience": "both"
     },
     {
-      "id": "e62f3606-cc06-4796-be57-bda84815a40e",
+      "id": "88cd5bf2-47bb-4ebc-9de1-60529cf047f1",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "7ff93393-ccea-4da9-9088-7a87f758edce",
+          "id": "87900ede-8d7a-40fa-aed5-575a270346d9",
           "text": "Option A"
         },
         {
-          "id": "b2b8df75-be0f-4192-993f-85e8ccbd356d",
+          "id": "7f67c3a7-cff8-410b-af93-2781eec9e0a5",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["7ff93393-ccea-4da9-9088-7a87f758edce"],
+      "correctOptionIds": ["87900ede-8d7a-40fa-aed5-575a270346d9"],
       "audience": "both"
     },
     {
-      "id": "3543e25f-f9cd-41c5-93fc-926dde926f8a",
+      "id": "75ffdef6-38aa-4966-9aef-7db57f49e488",
       "type": "multiple-choice",
       "question": "Choose the best answer.",
       "options": [
         {
-          "id": "25478471-c9ca-4aef-a52e-4540bef98715",
+          "id": "700ca17e-a076-4a9a-9889-b364f5b16919",
           "text": "Option A"
         },
         {
-          "id": "c3bcecc7-1eee-484d-b820-e2b40fc5ec33",
+          "id": "02d44ee9-f18d-4dba-a11f-e3c84c1b2c9b",
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["25478471-c9ca-4aef-a52e-4540bef98715"],
+      "correctOptionIds": ["700ca17e-a076-4a9a-9889-b364f5b16919"],
       "audience": "both"
     },
     {
@@ -3836,7 +4449,7 @@
       "audience": "both"
     },
     {
-      "id": "7bd74dd9-62bd-4c0b-8640-bcb2cd6d84ac",
+      "id": "c81e9fd0-7ab7-4c4e-9d01-0b6937c90c7b",
       "type": "page-break",
       "pageNumber": 9,
       "estimatedTime": "45 min",
@@ -3857,7 +4470,7 @@
       "audience": "both"
     },
     {
-      "id": "1bb74a47-34d6-4d62-bd7b-85ef9604a949",
+      "id": "b4931804-d089-42cc-af5c-d44363caf13f",
       "type": "repetition-drill",
       "title": "Pronunciation Drill",
       "words": [
@@ -3919,7 +4532,7 @@
       "audience": "both"
     },
     {
-      "id": "d55ddf85-cf57-4d17-82a0-d632fc5be436",
+      "id": "01360cf0-b78d-4745-ae0e-72ad7f9653f6",
       "type": "final-task",
       "title": "Final Task",
       "fields": ["Name", "Response", "Reflection"],
@@ -3970,7 +4583,7 @@
       "audience": "both"
     },
     {
-      "id": "7c5e7b08-9e7f-44fe-a0a0-db43fdc94a06",
+      "id": "a14b8afa-dd2d-4d2d-86a9-b6c913c4da87",
       "type": "grammar-note",
       "title": "Grammar Note",
       "ruleContext": "Add a short and neutral explanation of the language pattern here.",

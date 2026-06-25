@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ArrowUp, Copy, Trash2 } from 'lucide-react';
+import { ArrowDown, ArrowUp, ClipboardPaste, Copy, Trash2 } from 'lucide-react';
 import type { BlockAudience, LessonBlock } from '../types/index';
 import { blockFormRegistry } from '../config/formRegistry';
 import { BLOCK_LABELS } from '../config/blockMeta';
@@ -11,8 +11,11 @@ interface Props {
   isLast: boolean;
   onUpdate: (id: string, fields: Partial<LessonBlock>) => void;
   onRemove: (id: string) => void;
+  onCopy: (id: string) => void;
   onDuplicate: (id: string) => void;
   onMove: (index: number, direction: 'up' | 'down') => void;
+  onPaste: (index: number, position: 'before' | 'after') => void;
+  canPaste: boolean;
 }
 
 export const BlockWrapper: React.FC<Props> = ({
@@ -22,16 +25,19 @@ export const BlockWrapper: React.FC<Props> = ({
   isLast,
   onUpdate,
   onRemove,
+  onCopy,
   onDuplicate,
-  onMove
+  onMove,
+  onPaste,
+  canPaste
 }) => {
   const FormComponent = blockFormRegistry[block.type];
 
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-white to-slate-50/70 p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] transition-all hover:border-slate-300 hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.35)]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent opacity-80"></div>
-      <div className="mb-5 flex items-center justify-between border-b border-slate-200 pb-3 select-none">
-        <div className="flex items-center gap-2">
+      <div className="mb-5 space-y-3 border-b border-slate-200 pb-3 select-none">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-sm">
             Block {index + 1}
           </span>
@@ -50,28 +56,55 @@ export const BlockWrapper: React.FC<Props> = ({
             <option value="teacher">Teacher</option>
           </select>
         </div>
-        <div className="flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/80 p-1 shadow-sm">
+            <button
+              type="button"
+              disabled={isFirst}
+              onClick={() => onMove(index, 'up')}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:border-sky-200 hover:text-sky-700 disabled:opacity-30"
+            >
+              <ArrowUp size={14} strokeWidth={2.2} />
+            </button>
+            <button
+              type="button"
+              disabled={isLast}
+              onClick={() => onMove(index, 'down')}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:border-sky-200 hover:text-sky-700 disabled:opacity-30"
+            >
+              <ArrowDown size={14} strokeWidth={2.2} />
+            </button>
+          </div>
           <button
             type="button"
-            disabled={isFirst}
-            onClick={() => onMove(index, 'up')}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition-colors hover:border-sky-200 hover:text-sky-700 disabled:opacity-30"
+            onClick={() => onCopy(block.id)}
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-700"
           >
-            <ArrowUp size={14} strokeWidth={2.2} />
+            <Copy size={12} strokeWidth={2.2} />
+            Copy
           </button>
           <button
             type="button"
-            disabled={isLast}
-            onClick={() => onMove(index, 'down')}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition-colors hover:border-sky-200 hover:text-sky-700 disabled:opacity-30"
+            disabled={!canPaste}
+            onClick={() => onPaste(index, 'before')}
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-700 disabled:opacity-40"
           >
-            <ArrowDown size={14} strokeWidth={2.2} />
+            <ClipboardPaste size={12} strokeWidth={2.2} />
+            Paste Above
           </button>
-          <div className="mx-1 h-4 w-px bg-slate-200"></div>
+          <button
+            type="button"
+            disabled={!canPaste}
+            onClick={() => onPaste(index, 'after')}
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-700 disabled:opacity-40"
+          >
+            <ClipboardPaste size={12} strokeWidth={2.2} />
+            Paste Below
+          </button>
           <button
             type="button"
             onClick={() => onDuplicate(block.id)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-700"
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-700"
           >
             <Copy size={12} strokeWidth={2.2} />
             Duplicate
@@ -79,7 +112,7 @@ export const BlockWrapper: React.FC<Props> = ({
           <button
             type="button"
             onClick={() => onRemove(block.id)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-red-100 bg-white px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-red-500 shadow-sm transition-colors hover:bg-red-50 hover:text-red-700"
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-red-100 bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-red-500 shadow-sm transition-colors hover:bg-red-50 hover:text-red-700"
           >
             <Trash2 size={12} strokeWidth={2.2} />
             Remove

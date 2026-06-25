@@ -271,6 +271,7 @@ export interface VocabularyMatchBlock extends BaseBlock {
   instruction?: string;
   shuffleLeft?: boolean;
   shuffleRight?: boolean;
+  shuffleVersion?: number;
   showReferenceBadges?: boolean;
   showCorrectMatches?: boolean;
   pairs: {

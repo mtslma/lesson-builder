@@ -23,6 +23,7 @@ export const vocabularyMatchBlockDefinition: BlockDefinition = {
     matchMode: 'word-to-meaning',
     shuffleLeft: false,
     shuffleRight: true,
+    shuffleVersion: 0,
     showReferenceBadges: true,
     showCorrectMatches: false,
     pairs: [
@@ -69,6 +70,7 @@ export const vocabularyMatchBlockDefinition: BlockDefinition = {
         : 'word-to-meaning',
     shuffleLeft: typeof block.shuffleLeft === 'boolean' ? block.shuffleLeft : false,
     shuffleRight: typeof block.shuffleRight === 'boolean' ? block.shuffleRight : true,
+    shuffleVersion: typeof block.shuffleVersion === 'number' ? block.shuffleVersion : 0,
     showReferenceBadges:
       typeof block.showReferenceBadges === 'boolean' ? block.showReferenceBadges : true,
     showCorrectMatches:

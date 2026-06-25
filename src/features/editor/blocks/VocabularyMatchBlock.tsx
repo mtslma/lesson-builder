@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { createPreviewStorageKey } from '../domain/previewState';
 import type {
   BlockFormProps,
@@ -10,162 +10,305 @@ import { removeItemAt, updateItemAt } from '../domain/collections';
 import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import { shuffleArray } from '../domain/shuffle';
 
-type MatchSide = 'left' | 'right';
-type MatchItemType = VocabularyMatchBlock['pairs'][number]['leftType'];
-
-type MatchCard = {
-  pairId: string;
-  side: MatchSide;
-  value: string;
-  type: MatchItemType;
-  label?: string;
-  badge: number;
+type MatchMode = NonNullable<VocabularyMatchBlock['matchMode']>;
+type Pair = VocabularyMatchBlock['pairs'][number];
+type MatchTone = {
+  badge: string;
 };
 
-const MATCH_TYPE_OPTIONS: Array<{ value: MatchItemType; label: string }> = [
-  { value: 'text', label: 'Text' },
-  { value: 'image', label: 'Image' },
-  { value: 'audio', label: 'Audio' },
-  { value: 'category', label: 'Category' }
+const MATCH_TONES: MatchTone[] = [
+  { badge: 'bg-[#d9f99d]' },
+  { badge: 'bg-[#ead5f7]' },
+  { badge: 'bg-[#bfdbfe]' },
+  { badge: 'bg-[#fde68a]' },
+  { badge: 'bg-[#fecdd3]' },
+  { badge: 'bg-[#fbcfe8]' }
 ];
 
-const VARIANT_CLASS_MAP: Record<NonNullable<VocabularyMatchBlock['variant']>, string> = {
-  classic: 'rounded-2xl',
-  cards: 'rounded-[28px]',
-  'two-column': 'rounded-2xl'
+const MATCH_MODE_OPTIONS: Array<{ value: MatchMode; label: string }> = [
+  { value: 'image-to-word', label: 'Images' },
+  { value: 'audio-to-word', label: 'Audio' },
+  { value: 'word-to-meaning', label: 'Text' }
+];
+
+const getResolvedMode = (matchMode?: VocabularyMatchBlock['matchMode']): MatchMode => {
+  if (matchMode === 'image-to-word') return 'image-to-word';
+  if (matchMode === 'audio-to-word') return 'audio-to-word';
+  return 'word-to-meaning';
 };
 
-const getPromptByType = (side: MatchSide, type: MatchItemType) => {
-  if (type === 'image') return `${side === 'left' ? 'Left' : 'Right'} image URL`;
-  if (type === 'audio') return `${side === 'left' ? 'Left' : 'Right'} audio URL`;
-  return `${side === 'left' ? 'Left' : 'Right'} content`;
-};
-
-const getLabelPromptByType = (side: MatchSide, type: MatchItemType) => {
-  if (type === 'image') return `${side === 'left' ? 'Left' : 'Right'} caption`;
-  if (type === 'audio') return `${side === 'left' ? 'Left' : 'Right'} helper text`;
-  return `${side === 'left' ? 'Left' : 'Right'} helper label`;
-};
-
-const renderEditorCardContent = (item: MatchCard, compact = false) => {
-  if (item.type === 'image') {
-    return (
-      <div className="flex w-full flex-col gap-2">
-        {item.value ? (
-          <img
-            src={item.value}
-            alt={item.label || 'Match item'}
-            className={`w-full rounded-xl border border-slate-200 bg-slate-100 object-cover shadow-sm ${compact ? 'h-24 max-w-[180px]' : 'h-28 max-w-[220px]'}`}
-          />
-        ) : (
-          <div className={`flex w-full items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-100 text-[11px] uppercase tracking-[0.16em] text-slate-400 ${compact ? 'h-24 max-w-[180px]' : 'h-28 max-w-[220px]'}`}>
-            Add image
-          </div>
-        )}
-        {item.label ? <span className="text-xs font-medium text-slate-500">{item.label}</span> : null}
-      </div>
-    );
+const getModeHelpText = (mode: MatchMode) => {
+  if (mode === 'image-to-word') {
+    return 'Images appear shuffled on top. Text options stay below in automatic number order.';
   }
 
-  if (item.type === 'audio') {
-    return (
-      <div className="flex w-full flex-col gap-2">
-        {item.label ? <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{item.label}</span> : null}
-        {item.value ? (
-          <audio controls className="w-full">
-            <source src={item.value} />
-          </audio>
-        ) : (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-3 py-4 text-center text-sm text-slate-400">
-            Add audio URL
-          </div>
-        )}
-      </div>
-    );
+  if (mode === 'audio-to-word') {
+    return 'Audio prompts stay on the left. Numbered text options stay on the right.';
   }
 
-  return (
-    <div className="flex w-full flex-col gap-1">
-      {item.label ? <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{item.label}</span> : null}
-      <span className="text-sm font-semibold leading-5 text-slate-800">{item.value || 'Empty item'}</span>
-    </div>
-  );
+  return 'A compact two-column layout for words, phrases, meanings, or numbers.';
 };
 
-const renderPreviewCardContent = (item: MatchCard) => {
-  if (item.type === 'image') {
-    return item.value ? (
+const normalizePairForMode = (pair: Pair, mode: MatchMode): Pair => {
+  if (mode === 'image-to-word') {
+    return {
+      ...pair,
+      leftType: 'image',
+      rightType: 'text'
+    };
+  }
+
+  if (mode === 'audio-to-word') {
+    return {
+      ...pair,
+      leftType: 'audio',
+      rightType: 'text'
+    };
+  }
+
+  return {
+    ...pair,
+    leftType: 'text',
+    rightType: 'text'
+  };
+};
+
+const createPairForMode = (mode: MatchMode): Pair =>
+  normalizePairForMode(createVocabularyPair(), mode);
+
+const getRightNumber = (index: number) => String(index + 1);
+const getTone = (index: number) => MATCH_TONES[index % MATCH_TONES.length];
+const getToneByNumber = (value: string, max: number) => {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < 1 || parsed > max) return null;
+  return getTone(parsed - 1);
+};
+const sanitizeAnswerValue = (rawValue: string, max: number) => {
+  const digits = rawValue.replace(/\D/g, '');
+  if (!digits) return '';
+
+  const parsed = Number(digits);
+  if (!Number.isInteger(parsed) || parsed < 1 || parsed > max) return '';
+
+  return String(parsed);
+};
+
+const renderImageCard = (
+  pair: Pair,
+  index: number,
+  value: string,
+  onChange: (next: string) => void,
+  showFeedback: boolean,
+  isCorrect: boolean,
+  optionCount: number
+) => (
+  <div
+    key={pair.id}
+    className={`mx-auto flex w-full max-w-[220px] flex-col items-center justify-center gap-2 rounded-[18px] border bg-white p-3 shadow-sm ${
+      showFeedback
+        ? isCorrect
+          ? 'border-emerald-300'
+          : value
+            ? 'border-amber-300'
+            : 'border-slate-200'
+        : 'border-slate-200'
+    }`}
+  >
+    {pair.left ? (
       <img
-        src={item.value}
-        alt={item.label || 'Match item'}
-        className="h-32 w-full rounded-2xl bg-slate-100 object-cover"
+        src={pair.left}
+        alt={pair.leftLabel || `Image ${index + 1}`}
+        className="h-32 w-full max-w-[200px] rounded-xl bg-slate-100 object-cover"
       />
     ) : (
-      <div className="flex h-32 w-full items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-100 text-[11px] uppercase tracking-[0.14em] text-slate-400">
-        Add image
+      <div className="flex h-32 w-full max-w-[200px] items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-100 text-[10px] uppercase tracking-[0.14em] text-slate-400">
+        Image
       </div>
-    );
-  }
-
-  if (item.type === 'audio') {
-    return (
-      <div className="space-y-2">
-        {item.label ? <div className="text-xs text-slate-500">{item.label}</div> : null}
-        {item.value ? (
-          <audio controls className="w-full">
-            <source src={item.value} />
-          </audio>
-        ) : (
-          <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-3 py-5 text-center text-sm text-slate-400">
-            Add audio URL
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-1">
-      <div className="text-sm font-medium leading-5 text-slate-800">{item.value || 'Empty item'}</div>
-      {item.label ? <div className="text-xs text-slate-500">{item.label}</div> : null}
+    )}
+    <div className="flex items-center gap-2">
+      <span
+        className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${
+          getToneByNumber(value, optionCount)?.badge || 'bg-slate-100'
+        }`}
+      >
+        {value || '#'}
+      </span>
+      <input
+        type="text"
+        inputMode="numeric"
+        maxLength={3}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder="#"
+        className="h-8 w-11 rounded-lg border border-slate-300 bg-white text-center text-xs font-bold text-slate-700 outline-none transition focus:border-slate-500"
+      />
     </div>
-  );
-};
+    {pair.leftLabel ? <div className="text-[11px] leading-4 text-slate-500">{pair.leftLabel}</div> : null}
+  </div>
+);
 
-const buildCards = (block: VocabularyMatchBlock, side: MatchSide): MatchCard[] =>
-  block.pairs.map((pair, index) => ({
-    pairId: pair.id,
-    side,
-    value: side === 'left' ? pair.left : pair.right,
-    type: side === 'left' ? pair.leftType : pair.rightType || 'text',
-    label: side === 'left' ? pair.leftLabel : pair.rightLabel,
-    badge: index + 1
-  }));
+const renderTextOption = (pair: Pair, index: number) => (
+  <div
+    key={pair.id}
+    className="grid min-h-[44px] grid-cols-[28px_minmax(0,1fr)] items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+  >
+    <span className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${getTone(index).badge}`}>
+      {getRightNumber(index)}
+    </span>
+    <div className="min-w-0">
+      <div className="font-medium leading-4 text-slate-800">{pair.right || 'Option'}</div>
+      {pair.rightLabel ? <div className="text-[11px] text-slate-500">{pair.rightLabel}</div> : null}
+    </div>
+  </div>
+);
 
-const getOptionNumber = (
-  item: MatchCard,
-  index: number,
-  showReferenceBadges: VocabularyMatchBlock['showReferenceBadges']
-) => (showReferenceBadges === false ? index + 1 : item.badge);
+const renderAudioPrompt = (
+  pair: Pair,
+  value: string,
+  onChange: (next: string) => void,
+  showFeedback: boolean,
+  isCorrect: boolean,
+  optionCount: number
+) => (
+  <div
+    key={pair.id}
+    className={`grid min-h-[72px] items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_84px_minmax(0,1fr)] ${
+      showFeedback
+        ? isCorrect
+          ? 'border-emerald-300'
+          : value
+            ? 'border-amber-300'
+            : 'border-slate-200'
+        : 'border-slate-200'
+    }`}
+  >
+    <div className="flex min-w-0">
+      {pair.left ? (
+        <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+          {pair.leftLabel ? (
+            <div className="mr-3 max-w-[120px] truncate text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+              {pair.leftLabel}
+            </div>
+          ) : null}
+          <audio controls className="h-9 min-w-0 flex-1">
+            <source src={pair.left} />
+          </audio>
+        </div>
+      ) : (
+        <div className="flex min-h-[56px] w-full items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-center text-sm text-slate-400">
+          Add audio URL
+        </div>
+      )}
+    </div>
+    <div className="flex min-h-[56px] h-full flex-col items-center justify-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
+      <span
+        className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${
+          getToneByNumber(value, optionCount)?.badge || 'bg-slate-200'
+        }`}
+      >
+        {value || '#'}
+      </span>
+      <input
+        type="text"
+        inputMode="numeric"
+        maxLength={3}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder="#"
+        className="h-8 w-11 rounded-md border border-slate-300 bg-white text-center text-sm font-bold text-slate-700 outline-none transition focus:border-slate-500"
+      />
+    </div>
+    <div className="flex min-w-0">
+      <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+        <div className="min-w-0">
+          {pair.right || 'Option'}
+          {pair.rightLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div> : null}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const renderAlignedTextPrompt = (
+  pair: Pair,
+  value: string,
+  onChange: (next: string) => void,
+  showFeedback: boolean,
+  isCorrect: boolean,
+  optionCount: number
+) => (
+  <div
+    key={pair.id}
+    className={`grid min-h-[72px] items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_84px_minmax(0,1fr)] ${
+      showFeedback
+        ? isCorrect
+          ? 'border-emerald-300'
+          : value
+            ? 'border-amber-300'
+            : 'border-slate-200'
+        : 'border-slate-200'
+    }`}
+  >
+    <div className="flex min-w-0">
+      <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+        <div className="min-w-0">
+          {pair.left || 'Empty item'}
+          {pair.leftLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.leftLabel}</div> : null}
+        </div>
+      </div>
+    </div>
+    <div className="flex min-h-[56px] h-full items-center justify-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
+      <span
+        className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${
+          getToneByNumber(value, optionCount)?.badge || 'bg-slate-200'
+        }`}
+      >
+        {value || '#'}
+      </span>
+      <input
+        type="text"
+        inputMode="numeric"
+        maxLength={3}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder="#"
+        className="h-8 w-11 rounded-md border border-slate-300 bg-white text-center text-sm font-bold text-slate-700 outline-none transition focus:border-slate-500"
+      />
+    </div>
+    <div className="flex min-w-0">
+      <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+        <div className="min-w-0">
+          {pair.right || 'Option'}
+          {pair.rightLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div> : null}
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 export const VocabularyMatchForm = ({
   block,
   onUpdate
 }: BlockFormProps<VocabularyMatchBlock>) => {
+  const mode = getResolvedMode(block.matchMode);
+
+  const updateMode = (nextMode: MatchMode) =>
+    onUpdate({
+      matchMode: nextMode,
+      pairs: block.pairs.map((pair) => normalizePairForMode(pair, nextMode))
+    });
+
   const addPair = () =>
-    onUpdate({ pairs: [...block.pairs, createVocabularyPair()] });
+    onUpdate({ pairs: [...block.pairs, createPairForMode(mode)] });
 
   const removePair = (index: number) =>
     onUpdate({ pairs: removeItemAt(block.pairs, index) });
 
-  const updatePair = (
-    index: number,
-    updater: (
-      currentPair: VocabularyMatchBlock['pairs'][number]
-    ) => VocabularyMatchBlock['pairs'][number]
-  ) =>
+  const updatePair = (index: number, updater: (currentPair: Pair) => Pair) =>
     onUpdate({
-      pairs: updateItemAt(block.pairs, index, updater)
+      pairs: updateItemAt(block.pairs, index, (currentPair) =>
+        normalizePairForMode(updater(currentPair), mode)
+      )
     });
 
   return (
@@ -183,136 +326,131 @@ export const VocabularyMatchForm = ({
         onChange={(e) => onUpdate({ instruction: e.target.value })}
         placeholder="Instruction..."
       />
-      <div className="grid gap-2 md:grid-cols-2">
+      <div className="grid gap-2 md:grid-cols-[220px_minmax(0,1fr)]">
         <select
           className="rounded border p-2 text-xs"
-          value={block.matchMode || 'word-to-meaning'}
-          onChange={(e) => onUpdate({ matchMode: e.target.value as VocabularyMatchBlock['matchMode'] })}
+          value={mode}
+          onChange={(e) => updateMode(e.target.value as MatchMode)}
         >
-          <option value="text-to-text">Text to text</option>
-          <option value="image-to-word">Image to word</option>
-          <option value="audio-to-word">Audio to word</option>
-          <option value="word-to-meaning">Word to meaning</option>
-          <option value="phrase-to-response">Phrase to response</option>
-          <option value="category-matching">Category matching</option>
+          {MATCH_MODE_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
-        <select
-          className="rounded border p-2 text-xs"
-          value={block.variant || 'classic'}
-          onChange={(e) => onUpdate({ variant: e.target.value as VocabularyMatchBlock['variant'] })}
+        <div className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
+          {getModeHelpText(mode)}
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() =>
+            onUpdate({
+              shuffleVersion: (block.shuffleVersion || 0) + 1
+            })
+          }
+          className="rounded border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700"
         >
-          <option value="classic">Classic</option>
-          <option value="cards">Cards</option>
-          <option value="two-column">Two-column</option>
-        </select>
+          Shuffle Options
+        </button>
+        <span className="text-xs text-slate-500">
+          Reorders the numbered options in preview.
+        </span>
       </div>
-      <div className="grid gap-2 md:grid-cols-4">
-        <label className="flex items-center gap-2 rounded border bg-slate-50 px-3 py-2 text-xs text-slate-700">
-          <input
-            type="checkbox"
-            checked={block.shuffleLeft ?? false}
-            onChange={(e) => onUpdate({ shuffleLeft: e.target.checked })}
-          />
-          Shuffle left
-        </label>
-        <label className="flex items-center gap-2 rounded border bg-slate-50 px-3 py-2 text-xs text-slate-700">
-          <input
-            type="checkbox"
-            checked={block.shuffleRight ?? true}
-            onChange={(e) => onUpdate({ shuffleRight: e.target.checked })}
-          />
-          Shuffle right
-        </label>
-        <label className="flex items-center gap-2 rounded border bg-slate-50 px-3 py-2 text-xs text-slate-700">
-          <input
-            type="checkbox"
-            checked={block.showReferenceBadges ?? true}
-            onChange={(e) => onUpdate({ showReferenceBadges: e.target.checked })}
-          />
-          Show numbers
-        </label>
-        <label className="flex items-center gap-2 rounded border bg-slate-50 px-3 py-2 text-xs text-slate-700">
-          <input
-            type="checkbox"
-            checked={block.showCorrectMatches ?? false}
-            onChange={(e) => onUpdate({ showCorrectMatches: e.target.checked })}
-          />
-          Show correct matches
-        </label>
-      </div>
-      {block.pairs.map((pair, index) => (
-        <div key={pair.id} className="space-y-3 rounded-xl border bg-slate-50 p-3">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-              Pair {index + 1}
-            </span>
+      <label className="flex items-center gap-2 rounded border bg-slate-50 px-3 py-2 text-xs text-slate-700">
+        <input
+          type="checkbox"
+          checked={block.showCorrectMatches ?? false}
+          onChange={(e) => onUpdate({ showCorrectMatches: e.target.checked })}
+        />
+        Show answer feedback in preview
+      </label>
+
+      <div className="space-y-2">
+        {block.pairs.map((pair, index) => (
+          <div
+            key={pair.id}
+            className="grid gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 md:grid-cols-[32px_minmax(0,1fr)_minmax(0,1fr)_auto]"
+          >
+            <div className="flex items-center justify-center rounded-lg bg-white text-xs font-bold text-slate-500">
+              {index + 1}
+            </div>
+            <div className="space-y-2">
+              <input
+                type="text"
+                className="w-full rounded border p-2 text-xs"
+                value={pair.left}
+                onChange={(e) =>
+                  updatePair(index, (currentPair) => ({
+                    ...currentPair,
+                    left: e.target.value
+                  }))
+                }
+                placeholder={
+                  mode === 'image-to-word'
+                    ? 'Image URL'
+                    : mode === 'audio-to-word'
+                      ? 'Audio URL'
+                      : 'Left text'
+                }
+              />
+              <input
+                type="text"
+                className="w-full rounded border p-2 text-xs"
+                value={pair.leftLabel || ''}
+                onChange={(e) =>
+                  updatePair(index, (currentPair) => ({
+                    ...currentPair,
+                    leftLabel: e.target.value
+                  }))
+                }
+                placeholder={
+                  mode === 'image-to-word'
+                    ? 'Optional caption'
+                    : mode === 'audio-to-word'
+                      ? 'Optional audio label'
+                      : 'Optional helper label'
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <input
+                type="text"
+                className="w-full rounded border p-2 text-xs"
+                value={pair.right}
+                onChange={(e) =>
+                  updatePair(index, (currentPair) => ({
+                    ...currentPair,
+                    right: e.target.value
+                  }))
+                }
+                placeholder={mode === 'audio-to-word' ? 'Answer text' : 'Right text'}
+              />
+              <input
+                type="text"
+                className="w-full rounded border p-2 text-xs"
+                value={pair.rightLabel || ''}
+                onChange={(e) =>
+                  updatePair(index, (currentPair) => ({
+                    ...currentPair,
+                    rightLabel: e.target.value
+                  }))
+                }
+                placeholder="Optional helper label"
+              />
+            </div>
             <button
               type="button"
               onClick={() => removePair(index)}
-              className="rounded border border-red-200 bg-white px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
+              className="rounded border border-red-200 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
             >
               Remove
             </button>
           </div>
-          <div className="grid gap-3 md:grid-cols-2">
-            {(['left', 'right'] as const).map((side) => {
-              const typeKey = side === 'left' ? 'leftType' : 'rightType';
-              const valueKey = side === 'left' ? 'left' : 'right';
-              const labelKey = side === 'left' ? 'leftLabel' : 'rightLabel';
-              const type = pair[typeKey] || 'text';
+        ))}
+      </div>
 
-              return (
-                <div key={side} className="space-y-2 rounded-lg border border-slate-200 bg-white p-3">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-                    {side === 'left' ? 'Left side' : 'Right side'}
-                  </div>
-                  <select
-                    className="w-full rounded border p-2 text-xs"
-                    value={type}
-                    onChange={(e) =>
-                      updatePair(index, (currentPair) => ({
-                        ...currentPair,
-                        [typeKey]: e.target.value as MatchItemType
-                      }))
-                    }
-                  >
-                    {MATCH_TYPE_OPTIONS.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="text"
-                    className="w-full rounded border p-2 text-xs"
-                    value={pair[valueKey]}
-                    onChange={(e) =>
-                      updatePair(index, (currentPair) => ({
-                        ...currentPair,
-                        [valueKey]: e.target.value
-                      }))
-                    }
-                    placeholder={getPromptByType(side, type)}
-                  />
-                  <input
-                    type="text"
-                    className="w-full rounded border p-2 text-xs"
-                    value={pair[labelKey] || ''}
-                    onChange={(e) =>
-                      updatePair(index, (currentPair) => ({
-                        ...currentPair,
-                        [labelKey]: e.target.value
-                      }))
-                    }
-                    placeholder={getLabelPromptByType(side, type)}
-                  />
-                  <div className="pt-1">{renderEditorCardContent(buildCards({ ...block, pairs: [pair] }, side)[0], true)}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
       <button type="button" onClick={addPair} className="text-xs font-bold text-blue-600">
         + Add Pair
       </button>
@@ -321,74 +459,56 @@ export const VocabularyMatchForm = ({
 };
 
 export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMatchBlock>) => {
-  const variant = block.variant || 'classic';
-  const [shuffleRound, setShuffleRound] = useState(0);
-  const leftBase = buildCards(block, 'left');
-  const rightBase = buildCards(block, 'right');
-
-  const leftItems = useMemo(
-    () =>
-      block.shuffleLeft
-        ? shuffleArray(leftBase, `${block.id}:vocabulary-left:${shuffleRound}`)
-        : leftBase,
-    [block.id, block.shuffleLeft, leftBase, shuffleRound]
-  );
-  const rightItems = useMemo(
-    () =>
-      block.shuffleRight === false
-        ? rightBase
-        : shuffleArray(rightBase, `${block.id}:vocabulary-right:${shuffleRound}`),
-    [block.id, block.shuffleRight, rightBase, shuffleRound]
-  );
-
+  const mode = getResolvedMode(block.matchMode);
   const [answers, setAnswers] = usePersistedPreviewState<Record<string, string>>(
     createPreviewStorageKey(block.id, 'vocabulary-match.answers'),
     {}
   );
 
-  const evaluateAnswer = (item: MatchCard) => {
-    const typedNumber = answers[item.pairId]?.trim() || '';
-    if (!typedNumber) {
-      return { typedNumber, hasAnswer: false, isCorrect: false };
+  const normalizedPairs = useMemo(
+    () => block.pairs.map((pair) => normalizePairForMode(pair, mode)),
+    [block.pairs, mode]
+  );
+
+  const leftPairs = useMemo(() => {
+    if (mode === 'image-to-word') {
+      return shuffleArray(normalizedPairs, `${block.id}:vocabulary-left:${block.shuffleVersion || 0}`);
     }
 
-    const matchedOption = rightItems.find(
-      (option, optionIndex) =>
-        String(getOptionNumber(option, optionIndex, block.showReferenceBadges)) === typedNumber
-    );
+    return normalizedPairs;
+  }, [block.id, block.shuffleVersion, mode, normalizedPairs]);
 
-    return {
-      typedNumber,
-      hasAnswer: true,
-      isCorrect: matchedOption?.pairId === item.pairId
-    };
-  };
+  const rightPairs = useMemo(() => {
+    if (mode === 'image-to-word' || mode === 'audio-to-word' || mode === 'word-to-meaning') {
+      return shuffleArray(normalizedPairs, `${block.id}:vocabulary-right:${block.shuffleVersion || 0}`);
+    }
 
-  const matchedCount = leftItems.filter((item) => evaluateAnswer(item).isCorrect).length;
+    return normalizedPairs;
+  }, [block.id, block.shuffleVersion, mode, normalizedPairs]);
+
+  const matchedCount = normalizedPairs.filter((pair) => {
+    const typedValue = answers[pair.id]?.trim();
+    if (!typedValue) return false;
+    const selectedPair = rightPairs[Number(typedValue) - 1];
+    return selectedPair?.id === pair.id;
+  }).length;
 
   return (
-    <div
-      className={`my-6 space-y-5 border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] p-6 shadow-sm ${VARIANT_CLASS_MAP[variant]}`}
-    >
+    <div className="my-6 space-y-5 rounded-[28px] border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] p-6 shadow-sm">
       <div className="flex items-start justify-between gap-4 border-b border-slate-200 pb-3">
         <div className="space-y-1">
           <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
             Match Pairs
           </span>
           <h3 className="text-lg font-semibold text-slate-900">{block.title}</h3>
-          {block.instruction ? <p className="text-sm leading-6 text-slate-600">{block.instruction}</p> : null}
+          {block.instruction ? (
+            <p className="text-sm leading-6 text-slate-600">{block.instruction}</p>
+          ) : null}
         </div>
         <div className="flex items-center gap-2">
           <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold text-slate-700">
-            {matchedCount} / {block.pairs.length}
+            {matchedCount} / {normalizedPairs.length}
           </span>
-          <button
-            type="button"
-            onClick={() => setShuffleRound((current) => current + 1)}
-            className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 shadow-sm hover:border-slate-300"
-          >
-            Reshuffle
-          </button>
           <button
             type="button"
             onClick={() => setAnswers({})}
@@ -399,73 +519,89 @@ export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMa
         </div>
       </div>
 
-      <div className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {leftItems.map((item) => {
-            const { typedNumber, hasAnswer, isCorrect } = evaluateAnswer(item);
-            const showFeedback = block.showCorrectMatches ?? false;
+      {mode === 'image-to-word' ? (
+        <div className="space-y-4">
+          <div className="grid justify-items-center gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            {leftPairs.map((pair, index) => {
+              const typedValue = answers[pair.id] || '';
+              const selectedPair = rightPairs[Number(typedValue) - 1];
+              const isCorrect = Boolean(typedValue) && selectedPair?.id === pair.id;
 
-            return (
-              <div
-                key={item.pairId}
-                className={`relative overflow-hidden rounded-[24px] border bg-white p-3 shadow-sm ${
-                  showFeedback && isCorrect
-                    ? 'border-emerald-300'
-                    : showFeedback && hasAnswer
-                      ? 'border-amber-300'
-                      : 'border-slate-200'
-                }`}
-              >
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={3}
-                  value={typedNumber}
-                  onChange={(e) =>
-                    setAnswers((current) => ({
-                      ...current,
-                      [item.pairId]: e.target.value.replace(/\D/g, '')
-                    }))
-                  }
-                  placeholder="#"
-                  className="absolute left-4 top-4 z-10 h-10 w-10 rounded-xl border border-slate-300 bg-white/96 text-center text-sm font-bold text-slate-700 outline-none transition focus:border-slate-500"
-                />
-                <div className="pt-3">{renderPreviewCardContent(item)}</div>
-                {item.label && item.type === 'image' ? (
-                  <div className="pt-2 text-xs text-slate-500">{item.label}</div>
-                ) : null}
-                {showFeedback ? (
-                  <div
-                    className={`mt-3 rounded-xl px-3 py-2 text-xs font-medium ${
-                      isCorrect
-                        ? 'bg-emerald-50 text-emerald-700'
-                        : hasAnswer
-                          ? 'bg-amber-50 text-amber-700'
-                          : 'bg-slate-50 text-slate-500'
-                    }`}
-                  >
-                    {isCorrect ? 'Correct match' : hasAnswer ? 'Incorrect match' : 'Type a number'}
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
+              return renderImageCard(
+                pair,
+                index,
+                typedValue,
+                (next) =>
+                  setAnswers((current) => ({
+                    ...current,
+                    [pair.id]: sanitizeAnswerValue(next, rightPairs.length)
+                  })),
+                block.showCorrectMatches ?? false,
+                isCorrect,
+                rightPairs.length
+              );
+            })}
+          </div>
+          <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
+            {rightPairs.map((pair, index) => renderTextOption(pair, index))}
+          </div>
         </div>
+      ) : null}
 
-        <div className="flex flex-wrap gap-3">
-          {rightItems.map((item, index) => (
-            <div
-              key={item.pairId}
-              className="inline-flex min-h-[52px] min-w-[140px] items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm"
-            >
-              <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[11px] font-bold text-slate-700">
-                {getOptionNumber(item, index, block.showReferenceBadges)}
-              </span>
-              <div className="min-w-0 flex-1">{renderPreviewCardContent(item)}</div>
-            </div>
-          ))}
+      {mode === 'audio-to-word' ? (
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <div className="space-y-3">
+            {normalizedPairs.map((pair) => {
+              const typedValue = answers[pair.id] || '';
+              const selectedPair = rightPairs[Number(typedValue) - 1];
+              const isCorrect = Boolean(typedValue) && selectedPair?.id === pair.id;
+
+              return renderAudioPrompt(
+                pair,
+                typedValue,
+                (next) =>
+                  setAnswers((current) => ({
+                    ...current,
+                    [pair.id]: sanitizeAnswerValue(next, rightPairs.length)
+                  })),
+                block.showCorrectMatches ?? false,
+                isCorrect,
+                rightPairs.length
+              );
+            })}
+          </div>
+          <div className="space-y-2">
+            {rightPairs.map((pair, index) => renderTextOption(pair, index))}
+          </div>
         </div>
-      </div>
+      ) : null}
+
+      {mode !== 'image-to-word' && mode !== 'audio-to-word' ? (
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <div className="space-y-3">
+            {normalizedPairs.map((pair) => {
+              const typedValue = answers[pair.id] || '';
+              const selectedPair = rightPairs[Number(typedValue) - 1];
+              const isCorrect = Boolean(typedValue) && selectedPair?.id === pair.id;
+              return renderAlignedTextPrompt(
+                pair,
+                typedValue,
+                (next) =>
+                  setAnswers((current) => ({
+                    ...current,
+                    [pair.id]: sanitizeAnswerValue(next, rightPairs.length)
+                  })),
+                block.showCorrectMatches ?? false,
+                isCorrect,
+                rightPairs.length
+              );
+            })}
+          </div>
+          <div className="space-y-2">
+            {rightPairs.map((pair, index) => renderTextOption(pair, index))}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

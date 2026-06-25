@@ -78,6 +78,7 @@ export const useLessonEditor = () => {
   const [jsonInput, setJsonInput] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
   const [jsonFeedback, setJsonFeedback] = useState<string | null>(null);
+  const [copiedBlock, setCopiedBlock] = useState<LessonBlock | null>(null);
   const [history, setHistory] = useState<HistoryState>(() => {
     const lesson = readStoredLesson();
     return { past: [], present: lesson, future: [] };
@@ -253,6 +254,27 @@ export const useLessonEditor = () => {
     commitLesson({ ...lesson, blocks: syncPageBreaks(nextBlocks) });
   };
 
+  const copyExistingBlock = (id: string) => {
+    const blockToCopy = lesson.blocks.find((block) => block.id === id);
+    if (!blockToCopy) return;
+
+    setCopiedBlock(structuredClone(blockToCopy));
+    setJsonFeedback('Block copied. Choose where to paste it.');
+    setImportError(null);
+  };
+
+  const pasteCopiedBlock = (targetIndex: number, position: 'before' | 'after' = 'after') => {
+    if (!copiedBlock) return;
+
+    const safeIndex = Math.max(0, Math.min(targetIndex, lesson.blocks.length - 1));
+    const insertIndex = position === 'before' ? safeIndex : safeIndex + 1;
+    const nextBlocks = [...lesson.blocks];
+    nextBlocks.splice(insertIndex, 0, duplicateBlock(copiedBlock));
+    commitLesson({ ...lesson, blocks: syncPageBreaks(nextBlocks) });
+    setJsonFeedback('Block pasted.');
+    setImportError(null);
+  };
+
   const moveBlock = (index: number, direction: 'up' | 'down') => {
     const newBlocks = [...lesson.blocks];
     if (direction === 'up' && index > 0)
@@ -371,8 +393,11 @@ export const useLessonEditor = () => {
     exportPublicJson,
     resetLesson,
     addBlock,
+    copyExistingBlock,
+    copiedBlock,
     duplicateExistingBlock,
     moveBlock,
+    pasteCopiedBlock,
     updateBlock,
     removeBlock,
     updateTitle

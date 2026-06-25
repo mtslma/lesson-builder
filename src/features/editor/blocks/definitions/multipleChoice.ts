@@ -6,6 +6,7 @@ import type {
   BlockPreviewComponent
 } from '../../config/blockDefinition';
 import { createEditorId } from '../../domain/ids';
+import { createMultipleChoiceOption } from '../../domain/blockDefaults';
 
 export const multipleChoiceBlockDefinition: BlockDefinition = {
   type: 'multiple-choice',
@@ -30,5 +31,31 @@ export const multipleChoiceBlockDefinition: BlockDefinition = {
     };
   },
   form: MultipleChoiceForm as BlockFormComponent,
-  preview: MultipleChoicePreview as BlockPreviewComponent
+  preview: MultipleChoicePreview as BlockPreviewComponent,
+  normalize: (block) => {
+    const options = Array.isArray(block.options)
+      ? block.options
+          .filter((option): option is Record<string, unknown> => Boolean(option && typeof option === 'object'))
+          .map((option) => ({
+            ...createMultipleChoiceOption(),
+            id: typeof option.id === 'string' ? option.id : createEditorId(),
+            text: typeof option.text === 'string' ? option.text : ''
+          }))
+      : [];
+
+    const validOptionIds = new Set(options.map((option) => option.id));
+
+    return {
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
+      type: 'multiple-choice',
+      question: typeof block.question === 'string' ? block.question : '',
+      options,
+      correctOptionIds: Array.isArray(block.correctOptionIds)
+        ? block.correctOptionIds.filter(
+            (optionId): optionId is string =>
+              typeof optionId === 'string' && validOptionIds.has(optionId)
+          )
+        : []
+    };
+  }
 };

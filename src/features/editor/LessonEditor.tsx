@@ -41,8 +41,11 @@ export const LessonEditor: React.FC = () => {
     exportPublicJson,
     resetLesson,
     addBlock,
+    copyExistingBlock,
+    copiedBlock,
     duplicateExistingBlock,
     moveBlock,
+    pasteCopiedBlock,
     updateBlock,
     removeBlock,
     updateTitle,
@@ -409,26 +412,45 @@ export const LessonEditor: React.FC = () => {
               >
                 {renderInlineInserter(entry.index)}
                 {entry.kind === 'page-break' ? (
-                  <div className="group relative flex items-center justify-center py-4">
-                    <div className="absolute w-full border-t border-dashed border-slate-300"></div>
-                    <span className="relative inline-flex items-center gap-2 rounded-full border border-slate-300 bg-gradient-to-r from-white to-slate-50 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm">
-                      <ScissorsLineDashed size={12} strokeWidth={2.3} />
-                      Page {entry.block.pageNumber}
-                    </span>
-                    <button
-                      onClick={() => duplicateExistingBlock(entry.block.id)}
-                      className="absolute right-20 rounded bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 opacity-0 group-hover:opacity-100"
-                      type="button"
-                    >
-                      Duplicate
-                    </button>
-                    <button
-                      onClick={() => removeBlock(entry.block.id)}
-                      className="absolute right-0 rounded bg-red-50 px-2 py-1 text-[10px] font-semibold text-red-600 opacity-0 group-hover:opacity-100"
-                      type="button"
-                    >
-                      Remove
-                    </button>
+                  <div className="relative rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 shadow-[0_10px_30px_-22px_rgba(15,23,42,0.25)]">
+                    <div className="absolute inset-x-4 top-1/2 -z-10 border-t border-dashed border-slate-300"></div>
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <span className="relative inline-flex items-center gap-2 rounded-full border border-slate-300 bg-gradient-to-r from-white to-slate-50 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm">
+                        <ScissorsLineDashed size={12} strokeWidth={2.3} />
+                        Page {entry.block.pageNumber}
+                      </span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <button
+                          onClick={() => copyExistingBlock(entry.block.id)}
+                          className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm"
+                          type="button"
+                        >
+                          Copy
+                        </button>
+                        <button
+                          onClick={() => pasteCopiedBlock(entry.index, 'after')}
+                          disabled={!copiedBlock}
+                          className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm disabled:opacity-30"
+                          type="button"
+                        >
+                          Paste
+                        </button>
+                        <button
+                          onClick={() => duplicateExistingBlock(entry.block.id)}
+                          className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-600 shadow-sm"
+                          type="button"
+                        >
+                          Duplicate
+                        </button>
+                        <button
+                          onClick={() => removeBlock(entry.block.id)}
+                          className="rounded-lg border border-red-100 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-red-600 shadow-sm"
+                          type="button"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <BlockWrapper
@@ -438,8 +460,11 @@ export const LessonEditor: React.FC = () => {
                     isLast={entry.index === lesson.blocks.length - 1}
                     onUpdate={updateBlock}
                     onRemove={removeBlock}
+                    onCopy={copyExistingBlock}
                     onDuplicate={duplicateExistingBlock}
                     onMove={moveBlock}
+                    onPaste={pasteCopiedBlock}
+                    canPaste={Boolean(copiedBlock)}
                   />
                 )}
               </React.Fragment>
