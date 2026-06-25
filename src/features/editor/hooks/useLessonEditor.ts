@@ -18,6 +18,7 @@ import {
 } from '../config/lessonSchema';
 
 const STORAGE_KEY = 'english-platform-editor.lesson';
+const STORAGE_BACKUP_KEY = 'english-platform-editor.lesson.backup';
 
 type SaveStatus = 'saved' | 'saving' | 'unsaved' | 'error';
 
@@ -32,10 +33,19 @@ const readStoredLesson = () => {
 
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (!stored) return createEmptyLesson();
+    const backup = window.localStorage.getItem(STORAGE_BACKUP_KEY);
 
-    const parsed = JSON.parse(stored);
-    return normalizeLesson(parsed) || createEmptyLesson();
+    const tryParseLesson = (value: string | null) => {
+      if (!value) return null;
+
+      try {
+        return normalizeLesson(JSON.parse(value));
+      } catch {
+        return null;
+      }
+    };
+
+    return tryParseLesson(stored) || tryParseLesson(backup) || createEmptyLesson();
   } catch {
     return createEmptyLesson();
   }
@@ -43,7 +53,12 @@ const readStoredLesson = () => {
 
 const persistLessonToStorage = (lesson: Lesson) => {
   if (typeof window === 'undefined') return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lesson));
+
+  const normalizedLesson = normalizeLesson(prepareLessonForExport(lesson)) || lesson;
+  const payload = JSON.stringify(normalizedLesson);
+
+  window.localStorage.setItem(STORAGE_KEY, payload);
+  window.localStorage.setItem(STORAGE_BACKUP_KEY, payload);
 };
 
 const downloadLessonJson = (lesson: Lesson | PublicLesson, suffix?: string) => {
@@ -213,7 +228,7 @@ export const useLessonEditor = () => {
       setImportError(null);
       setJsonFeedback('Lesson imported successfully.');
       setJsonInput(JSON.stringify(validated.data, null, 2));
-      commitLesson(validated.data, { markDirty: false, resetHistory: true });
+      commitLesson(validated.data as unknown as Lesson, { markDirty: false, resetHistory: true });
     } catch {
       setImportError('Invalid JSON syntax. Review the structure and try again.');
       setJsonFeedback(null);
@@ -292,7 +307,7 @@ export const useLessonEditor = () => {
       return;
     }
 
-    downloadLessonJson(validated.data, 'authoring');
+    downloadLessonJson(validated.data as unknown as Lesson, 'authoring');
     setJsonFeedback('Authoring JSON exported successfully.');
     setImportError(null);
     setIsDirty(false);

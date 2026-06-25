@@ -53,11 +53,14 @@ export const MultipleChoicePreview = ({ block }: BlockPreviewProps<MultipleChoic
   );
 
   return (
-    <div className="my-6 p-5 border bg-slate-50 rounded-2xl shadow-sm space-y-3">
+    <div className="my-6 space-y-3 rounded-3xl border border-slate-200 bg-[linear-gradient(180deg,#f8fafc_0%,#f1f5f9_100%)] p-5 shadow-sm">
       <p className="text-sm font-bold text-slate-800 font-serif">{block.question}</p>
       <div className="space-y-2">
         {block.options.map((o) => (
-          <label key={o.id} className="flex items-center gap-3 p-3 bg-white border rounded-xl cursor-pointer hover:border-lime-400">
+          <label
+            key={o.id}
+            className="flex cursor-pointer items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/90 p-3 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] transition hover:border-slate-300"
+          >
             <input
               type="radio"
               name={block.id}

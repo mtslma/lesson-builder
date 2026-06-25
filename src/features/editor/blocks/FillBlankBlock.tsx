@@ -17,6 +17,7 @@ const syncGapsWithText = (block: FillBlankBlock, text: string): FillBlankBlock['
       id: existingGap?.id || `gap${index + 1}`,
       acceptedAnswers: existingGap?.acceptedAnswers || [],
       suggestions: existingGap?.suggestions,
+      hint: existingGap?.hint,
       caseSensitive: existingGap?.caseSensitive ?? false
     };
   });
@@ -68,6 +69,7 @@ const renderSection = (
   section: string,
   startGapIndex: number,
   gaps: FillBlankBlock['gaps'],
+  mode: FillBlankBlock['mode'],
   answers: string[],
   setAnswers: (answers: string[]) => void,
   gapCountRef: { current: number }
@@ -91,20 +93,42 @@ const renderSection = (
             <span key={`${startGapIndex}-${lineIndex}-${partIndex}`}>
               {part}
               {shouldRenderGap && (
-                <input
-                  type="text"
-                  value={answers[currentGapIndex] || ''}
-                  onChange={(event) => {
-                    const nextAnswers = [...answers];
-                    nextAnswers[currentGapIndex] = event.target.value;
-                    setAnswers(nextAnswers);
-                  }}
-                  className={`mx-1 inline-block ${getGapWidthClass(
-                    gaps,
-                    currentGapIndex
-                  )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
-                  placeholder="..."
-                />
+                mode === 'dropdown' && (gaps[currentGapIndex]?.suggestions || []).length > 0 ? (
+                  <select
+                    value={answers[currentGapIndex] || ''}
+                    onChange={(event) => {
+                      const nextAnswers = [...answers];
+                      nextAnswers[currentGapIndex] = event.target.value;
+                      setAnswers(nextAnswers);
+                    }}
+                    className={`mx-1 inline-block ${getGapWidthClass(
+                      gaps,
+                      currentGapIndex
+                    )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
+                  >
+                    <option value="">Select</option>
+                    {(gaps[currentGapIndex]?.suggestions || []).map((suggestion) => (
+                      <option key={suggestion} value={suggestion}>
+                        {suggestion}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    value={answers[currentGapIndex] || ''}
+                    onChange={(event) => {
+                      const nextAnswers = [...answers];
+                      nextAnswers[currentGapIndex] = event.target.value;
+                      setAnswers(nextAnswers);
+                    }}
+                    className={`mx-1 inline-block ${getGapWidthClass(
+                      gaps,
+                      currentGapIndex
+                    )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
+                    placeholder={gaps[currentGapIndex]?.hint || '...'}
+                  />
+                )
               )}
             </span>
           );
@@ -133,6 +157,14 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
       >
         <option value={1}>1 column</option>
         <option value={2}>2 columns</option>
+      </select>
+      <select
+        className="rounded border p-2 text-sm"
+        value={block.mode || 'typing'}
+        onChange={(e) => onUpdate({ mode: e.target.value as FillBlankBlock['mode'] })}
+      >
+        <option value="typing">Typing mode</option>
+        <option value="dropdown">Dropdown mode</option>
       </select>
     </div>
 
@@ -190,6 +222,18 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
               />
             </div>
 
+            <input
+              type="text"
+              className="mt-3 w-full rounded border p-2 text-xs"
+              value={gap.hint || ''}
+              onChange={(e) => {
+                const nextGaps = [...block.gaps];
+                nextGaps[index].hint = e.target.value;
+                onUpdate({ gaps: nextGaps });
+              }}
+              placeholder="Optional hint"
+            />
+
             <p className="mt-2 text-[11px] text-slate-500">
               Leave expected answers empty if you want an open gap with only suggestions or free
               writing.
@@ -244,6 +288,7 @@ export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) =
                   section,
                   gapCountRef.current,
                   block.gaps,
+                  block.mode,
                   answers,
                   setAnswers,
                   gapCountRef

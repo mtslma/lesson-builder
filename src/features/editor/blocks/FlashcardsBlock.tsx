@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronIcon } from '../components/ChevronIcon';
 import { createPreviewStorageKey } from '../domain/previewState';
 import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
@@ -13,106 +13,315 @@ const getCardExpressions = (card: Flashcard) => {
   return expressions.length > 0 ? expressions : [''];
 };
 
+const compactFieldClass = 'w-full rounded border p-2 text-xs';
+
+const IMAGE_FIT_OPTIONS: Array<{ value: NonNullable<Flashcard['imageFit']>; label: string }> = [
+  { value: 'cover', label: 'Fill area' },
+  { value: 'contain', label: 'Show full image' }
+];
+
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
 export const FlashcardsForm = ({ block, onUpdate }: BlockFormProps<FlashcardsBlock>) => {
-  const addCard = () =>
+  const [editorCardIndex, setEditorCardIndex] = useState(0);
+
+  useEffect(() => {
+    setEditorCardIndex((current) => Math.min(current, Math.max(0, block.cards.length - 1)));
+  }, [block.cards.length]);
+
+  const addCard = () => {
     onUpdate({
       cards: [...block.cards, createFlashcard()]
     });
+    setEditorCardIndex(block.cards.length);
+  };
 
-  const removeCard = (index: number) => onUpdate({ cards: removeItemAt(block.cards, index) });
+  const removeCard = (index: number) => {
+    onUpdate({ cards: removeItemAt(block.cards, index) });
+    setEditorCardIndex((current) => Math.max(0, Math.min(current, block.cards.length - 2)));
+  };
+
+  const currentCard = block.cards[editorCardIndex];
 
   return (
-    <div className="space-y-2">
-      <input
-        type="text"
-        className="w-full rounded border p-2 text-sm font-bold"
-        value={block.title}
-        onChange={(e) => onUpdate({ title: e.target.value })}
-        placeholder="Deck Title"
-      />
-      <input
-        type="text"
-        className="w-full rounded border p-2 text-sm"
-        value={block.category || ''}
-        onChange={(e) => onUpdate({ category: e.target.value })}
-        placeholder="Category (optional)"
-      />
-      <input
-        type="text"
-        className="w-full rounded border p-2 text-sm"
-        value={(block.tags || []).join(', ')}
-        onChange={(e) =>
-          onUpdate({
-            tags: e.target.value
-              .split(',')
-              .map((tag) => tag.trim())
-              .filter(Boolean)
-          })
-        }
-        placeholder="Tags (comma separated)"
-      />
-      {block.cards.map((card, index) => (
-        <div key={card.id} className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-              Card {index + 1}
+    <div className="space-y-3">
+      <div className="grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
+        <input
+          type="text"
+          className="w-full rounded border p-2 text-sm font-bold"
+          value={block.title}
+          onChange={(e) => onUpdate({ title: e.target.value })}
+          placeholder="Deck Title"
+        />
+        <select
+          className="w-full rounded border p-2 text-sm"
+          value={block.variant || 'grid'}
+          onChange={(e) => onUpdate({ variant: e.target.value as FlashcardsBlock['variant'] })}
+        >
+          <option value="grid">Grid</option>
+          <option value="list">List</option>
+          <option value="carousel">Carousel</option>
+          <option value="study">Study mode</option>
+        </select>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2">
+        <input
+          type="text"
+          className="w-full rounded border p-2 text-sm"
+          value={block.category || ''}
+          onChange={(e) => onUpdate({ category: e.target.value })}
+          placeholder="Category"
+        />
+        <input
+          type="text"
+          className="w-full rounded border p-2 text-sm"
+          value={(block.tags || []).join(', ')}
+          onChange={(e) =>
+            onUpdate({
+              tags: e.target.value
+                .split(',')
+                .map((tag) => tag.trim())
+                .filter(Boolean)
+            })
+          }
+          placeholder="Tags (comma separated)"
+        />
+      </div>
+
+      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <span className="block text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+              Card editor
             </span>
+            <span className="text-xs text-slate-400">
+              {block.cards.length === 0 ? 'No cards yet.' : `Card ${editorCardIndex + 1} of ${block.cards.length}`}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => removeCard(index)}
-              className="text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
+              onClick={() => setEditorCardIndex((current) => Math.max(0, current - 1))}
+              disabled={editorCardIndex === 0}
+              className="rounded border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-600 disabled:opacity-40"
             >
-              Remove
+              Prev
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setEditorCardIndex((current) => Math.min(block.cards.length - 1, current + 1))
+              }
+              disabled={editorCardIndex >= block.cards.length - 1}
+              className="rounded border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-600 disabled:opacity-40"
+            >
+              Next
+            </button>
+            <button
+              type="button"
+              onClick={addCard}
+              className="rounded border border-sky-200 bg-white px-2 py-1 text-[10px] font-semibold text-sky-600"
+            >
+              + Add card
             </button>
           </div>
-
-          <textarea
-            className="h-24 w-full rounded border p-2 text-xs font-bold"
-            value={card.expressions.join('\n')}
-            onChange={(e) => {
-              onUpdate({
-                cards: updateItemAt(block.cards, index, (currentCard) => ({
-                  ...currentCard,
-                  expressions: e.target.value.split('\n')
-                }))
-              });
-            }}
-            placeholder="Expressions, one per line"
-          />
-
-          <textarea
-            className="h-20 w-full rounded border border-lime-200 bg-lime-50 p-2 text-xs text-lime-800"
-            value={card.backText}
-            onChange={(e) => {
-              onUpdate({
-                cards: updateItemAt(block.cards, index, (currentCard) => ({
-                  ...currentCard,
-                  backText: e.target.value
-                }))
-              });
-            }}
-            placeholder="Meaning or example"
-          />
-
-          <input
-            type="text"
-            className="w-full rounded border p-1.5 text-xs"
-            value={card.backImage || ''}
-            onChange={(e) => {
-              onUpdate({
-                cards: updateItemAt(block.cards, index, (currentCard) => ({
-                  ...currentCard,
-                  backImage: e.target.value
-                }))
-              });
-            }}
-            placeholder="Back Image URL"
-          />
         </div>
-      ))}
-      <button type="button" onClick={addCard} className="text-xs font-bold text-blue-600">
-        + Add Card
-      </button>
+
+        {currentCard && (
+          <div className="mt-3 space-y-3 rounded-xl border border-slate-200 bg-white p-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+                Current card
+              </span>
+              <button
+                type="button"
+                onClick={() => removeCard(editorCardIndex)}
+                className="text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
+              >
+                Remove
+              </button>
+            </div>
+
+            <div className="grid gap-3 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-3">
+                <textarea
+                  className="min-h-[68px] w-full rounded border p-2 text-xs font-semibold"
+                  value={currentCard.expressions.join('\n')}
+                  onChange={(e) => {
+                    onUpdate({
+                      cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                        ...card,
+                        expressions: e.target.value.split('\n')
+                      }))
+                    });
+                  }}
+                  placeholder="Expressions, one per line"
+                />
+
+                <textarea
+                  className="min-h-[64px] w-full rounded border border-lime-200 bg-lime-50 p-2 text-xs text-lime-800"
+                  value={currentCard.shortMeaning || currentCard.backText}
+                  onChange={(e) => {
+                    onUpdate({
+                      cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                        ...card,
+                        shortMeaning: e.target.value,
+                        backText: e.target.value
+                      }))
+                    });
+                  }}
+                  placeholder="Short meaning"
+                />
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  <input
+                    type="text"
+                    className={compactFieldClass}
+                    value={currentCard.translation || ''}
+                    onChange={(e) =>
+                      onUpdate({
+                        cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                          ...card,
+                          translation: e.target.value
+                        }))
+                      })
+                    }
+                    placeholder="Translation"
+                  />
+                  <input
+                    type="text"
+                    className={compactFieldClass}
+                    value={currentCard.audioUrl || ''}
+                    onChange={(e) =>
+                      onUpdate({
+                        cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                          ...card,
+                          audioUrl: e.target.value
+                        }))
+                      })
+                    }
+                    placeholder="Audio URL"
+                  />
+                </div>
+
+                <textarea
+                  className="min-h-[64px] w-full rounded border p-2 text-xs"
+                  value={currentCard.exampleSentence || ''}
+                  onChange={(e) =>
+                    onUpdate({
+                      cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                        ...card,
+                        exampleSentence: e.target.value
+                      }))
+                    })
+                  }
+                  placeholder="Example sentence"
+                />
+              </div>
+
+              <div className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  Image
+                </div>
+                <input
+                  type="text"
+                  className={compactFieldClass}
+                  value={currentCard.frontImage || currentCard.backImage || ''}
+                  onChange={(e) =>
+                    onUpdate({
+                      cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                        ...card,
+                        backImage: e.target.value
+                      }))
+                    })
+                  }
+                  placeholder="Image URL"
+                />
+
+                <select
+                  className={compactFieldClass}
+                  value={currentCard.imageFit || 'cover'}
+                  onChange={(e) =>
+                    onUpdate({
+                      cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                        ...card,
+                        imageFit: e.target.value as Flashcard['imageFit']
+                      }))
+                    })
+                  }
+                >
+                  {IMAGE_FIT_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      Image mode: {option.label}
+                    </option>
+                  ))}
+                </select>
+
+                <label className="block text-[11px] text-slate-600">
+                  Zoom: {Math.round(currentCard.imageZoom || 100)}%
+                  <input
+                    type="range"
+                    min={50}
+                    max={200}
+                    step={5}
+                    value={currentCard.imageZoom || 100}
+                    onChange={(e) =>
+                      onUpdate({
+                        cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                          ...card,
+                          imageZoom: clamp(Number(e.target.value), 50, 200)
+                        }))
+                      })
+                    }
+                    className="mt-1 w-full"
+                  />
+                </label>
+
+                <label className="block text-[11px] text-slate-600">
+                  Horizontal: {Math.round(currentCard.imagePositionX || 50)}%
+                  <input
+                    type="range"
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={currentCard.imagePositionX || 50}
+                    onChange={(e) =>
+                      onUpdate({
+                        cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                          ...card,
+                          imagePositionX: clamp(Number(e.target.value), 0, 100)
+                        }))
+                      })
+                    }
+                    className="mt-1 w-full"
+                  />
+                </label>
+
+                <label className="block text-[11px] text-slate-600">
+                  Vertical: {Math.round(currentCard.imagePositionY || 50)}%
+                  <input
+                    type="range"
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={currentCard.imagePositionY || 50}
+                    onChange={(e) =>
+                      onUpdate({
+                        cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                          ...card,
+                          imagePositionY: clamp(Number(e.target.value), 0, 100)
+                        }))
+                      })
+                    }
+                    className="mt-1 w-full"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -126,19 +335,25 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
     createPreviewStorageKey(block.id, 'flashcards.expression-index'),
     0
   );
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     setCurrentCardIndex(0);
     setCurrentExpressionIndex(0);
-  }, [block.id, block.cards.length]);
+  }, [block.id, block.cards.length, setCurrentCardIndex, setCurrentExpressionIndex]);
 
   if (block.cards.length === 0) return null;
 
   const currentCard = block.cards[Math.min(currentCardIndex, block.cards.length - 1)];
   const expressions = getCardExpressions(currentCard);
   const currentExpression = expressions[Math.min(currentExpressionIndex, expressions.length - 1)];
-  const hasMeaningContent =
-    currentCard.backText.trim().length > 0 || Boolean(currentCard.backImage?.trim().length);
+  const hasImage = Boolean(currentCard.backImage?.trim().length);
+  const hasSupportContent = Boolean(currentCard.exampleSentence) || Boolean(currentCard.audioUrl);
+  const imageIdentity = `${currentCard.id}:${currentCard.backImage || ''}:${currentExpressionIndex}`;
+
+  useEffect(() => {
+    setImageLoaded(!hasImage);
+  }, [imageIdentity, hasImage]);
 
   const goToCard = (nextIndex: number) => {
     setCurrentCardIndex(nextIndex);
@@ -150,10 +365,10 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
   };
 
   return (
-    <div className="my-6 space-y-4 rounded-2xl border bg-slate-50 p-6 text-center shadow-sm">
-      <div className="flex items-center justify-between border-b pb-2">
+    <div className="my-6 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+      <div className="flex items-center justify-between border-b border-slate-200 pb-2">
         <div className="text-left">
-          <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
             {block.title}
           </span>
           {(block.category || (block.tags || []).length > 0) && (
@@ -174,102 +389,122 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
             </div>
           )}
         </div>
-        <span className="font-mono text-xs text-slate-600">
+        <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">
           {currentCardIndex + 1} / {block.cards.length}
         </span>
       </div>
 
-      <div className="mx-auto max-w-3xl">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="rounded-xl border border-slate-100 bg-slate-50 px-5 py-6">
-            <p className="font-serif text-xl font-bold text-slate-900">{currentExpression}</p>
-          </div>
-
-          {hasMeaningContent && (
-            <div className="mt-4 rounded-xl border border-lime-100 bg-lime-50 px-5 py-4 text-left">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-lime-700">
-                Meaning / Example
-              </div>
-              {currentCard.backImage && (
-                <img
-                  src={currentCard.backImage}
-                  alt=""
-                  className="mt-3 h-32 w-full rounded-xl object-cover"
-                />
-              )}
-              {currentCard.backText.trim().length > 0 && (
-                <p className="mt-3 whitespace-pre-wrap text-sm font-medium leading-6 text-slate-700">
-                  {currentCard.backText}
-                </p>
-              )}
-            </div>
-          )}
-
-          {expressions.length > 1 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {expressions.map((expression, index) => (
-                <button
-                  key={`${currentCard.id}-${index}`}
-                  type="button"
-                  onClick={() => goToExpression(index)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-                    index === currentExpressionIndex
-                      ? 'bg-slate-900 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                  title={expression}
-                >
-                  Expr. {index + 1}
-                </button>
-              ))}
-            </div>
-          )}
-
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      <div className="mx-auto max-w-2xl">
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="relative rounded-2xl border border-slate-100 bg-slate-50 p-4">
             <button
               type="button"
               onClick={() => goToCard(Math.max(0, currentCardIndex - 1))}
               disabled={currentCardIndex === 0}
-              className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 text-xs font-bold text-slate-700 disabled:opacity-40"
+              className="absolute left-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 shadow-sm disabled:opacity-35"
+              aria-label="Previous card"
             >
               <ChevronIcon className="h-4 w-4 rotate-180" />
-              Prev card
             </button>
+
             <button
               type="button"
               onClick={() => goToCard(Math.min(block.cards.length - 1, currentCardIndex + 1))}
               disabled={currentCardIndex === block.cards.length - 1}
-              className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 text-xs font-bold text-slate-700 disabled:opacity-40"
+              className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 shadow-sm disabled:opacity-35"
+              aria-label="Next card"
             >
-              Next card
               <ChevronIcon className="h-4 w-4" />
             </button>
-          </div>
 
-          {expressions.length > 1 && (
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <button
-                type="button"
-                onClick={() => goToExpression(Math.max(0, currentExpressionIndex - 1))}
-                disabled={currentExpressionIndex === 0}
-                className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 text-xs font-bold text-slate-700 disabled:opacity-40"
-              >
-                <ChevronIcon className="h-4 w-4 rotate-180" />
-                Prev expression
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  goToExpression(Math.min(expressions.length - 1, currentExpressionIndex + 1))
-                }
-                disabled={currentExpressionIndex === expressions.length - 1}
-                className="inline-flex items-center justify-center gap-2 rounded-md border bg-white px-3 py-2 text-xs font-bold text-slate-700 disabled:opacity-40"
-              >
-                Next expression
-                <ChevronIcon className="h-4 w-4" />
-              </button>
-            </div>
-          )}
+            {hasImage ? (
+              <div className="flex flex-col items-center text-center">
+                <div className="flex h-[112px] w-full items-center justify-center overflow-hidden rounded-xl">
+                  <div
+                    className="h-full overflow-hidden rounded-xl"
+                    style={{
+                      width: '60%'
+                    }}
+                  >
+                    {!imageLoaded && (
+                      <div className="h-full w-full animate-pulse rounded-xl bg-slate-200" />
+                    )}
+                    <img
+                      key={imageIdentity}
+                      src={currentCard.backImage}
+                      alt=""
+                      className={`h-full w-full rounded-xl ${
+                        currentCard.imageFit === 'contain' ? 'object-contain' : 'object-cover'
+                      } ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
+                      style={{
+                        objectPosition: `${currentCard.imagePositionX ?? 50}% ${currentCard.imagePositionY ?? 50}%`,
+                        transform: `scale(${(currentCard.imageZoom ?? 100) / 100})`
+                      }}
+                      onLoad={() => setImageLoaded(true)}
+                      onError={() => setImageLoaded(true)}
+                    />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="text-xl font-semibold text-slate-900">{currentExpression}</p>
+                  {currentCard.shortMeaning && (
+                    <p className="mt-2 text-sm text-slate-600">{currentCard.shortMeaning}</p>
+                  )}
+                  {currentCard.translation && (
+                    <p className="mt-1 text-sm text-slate-500">{currentCard.translation}</p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="flex min-h-[128px] flex-col items-center justify-center text-center">
+                <p className="text-[1.45rem] font-semibold tracking-tight text-slate-900">
+                  {currentExpression}
+                </p>
+                {currentCard.shortMeaning && (
+                  <p className="mt-3 max-w-xl text-sm text-slate-600">{currentCard.shortMeaning}</p>
+                )}
+                {currentCard.translation && (
+                  <p className="mt-1 max-w-xl text-sm text-slate-500">{currentCard.translation}</p>
+                )}
+              </div>
+            )}
+
+            {hasSupportContent && (
+              <div className="mt-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left">
+                {currentCard.exampleSentence && (
+                  <p className="text-sm text-slate-700">{currentCard.exampleSentence}</p>
+                )}
+                {currentCard.audioUrl && (
+                  <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                    <audio controls className="flashcard-audio w-full">
+                      <source src={currentCard.audioUrl} />
+                    </audio>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {expressions.length > 1 && (
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                {expressions.map((expression, index) => (
+                  <button
+                    key={`${currentCard.id}-${index}`}
+                    type="button"
+                    onClick={() => goToExpression(index)}
+                    className={`rounded-full border px-3.5 py-2 text-sm font-semibold transition ${
+                      index === currentExpressionIndex
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                    }`}
+                    aria-label={`Expression ${index + 1}`}
+                    title={expression}
+                  >
+                    #{index + 1}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

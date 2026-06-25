@@ -56,7 +56,7 @@ export const LessonEditor: React.FC = () => {
   const [insertMenuIndex, setInsertMenuIndex] = useState<number | null>(null);
   const [jsonCopied, setJsonCopied] = useState(false);
   const [previewResetKey, setPreviewResetKey] = useState(0);
-  const [showBlockLabels, setShowBlockLabels] = useState(true);
+  const [showBlockLabels, setShowBlockLabels] = useState(false);
   const [previewWidth, setPreviewWidth] = useState(56);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const previewScrollRef = useRef<HTMLDivElement | null>(null);
@@ -281,6 +281,18 @@ export const LessonEditor: React.FC = () => {
               Lesson Editor
             </div>
             <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setShowBlockLabels((value) => !value)}
+                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] shadow-sm ${
+                  showBlockLabels
+                    ? 'border-slate-900 bg-slate-900 text-white'
+                    : 'border-slate-300 bg-white text-slate-700'
+                }`}
+              >
+                <Tags size={13} strokeWidth={2.1} />
+                {showBlockLabels ? 'Ocultar tipos' : 'Mostrar tipos'}
+              </button>
               <span
                 className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
                   saveStatus === 'saved'
@@ -521,14 +533,6 @@ export const LessonEditor: React.FC = () => {
                     >
                       <Eraser size={13} strokeWidth={2.1} />
                       Limpar respostas
-                    </button>
-                    <button
-                      onClick={() => setShowBlockLabels((value) => !value)}
-                      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs shadow-sm ${showBlockLabels ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-300 bg-white text-slate-600 hover:border-slate-400'}`}
-                      type="button"
-                    >
-                      <Tags size={13} strokeWidth={2.1} />
-                      {showBlockLabels ? 'Ocultar tipos' : 'Mostrar tipos'}
                     </button>
                     <span className="text-xs text-slate-500">
                       Page {currentPage} of {totalPages}

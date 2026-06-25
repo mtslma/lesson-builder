@@ -17,50 +17,93 @@ export const roleplayBlockDefinition: BlockDefinition = {
   create: () => ({
     id: createEditorId(),
     type: 'roleplay',
-    characters: [
-      { name: 'Participant A', details: [{ label: 'Role', value: 'Starts the discussion' }] },
-      { name: 'Participant B', details: [{ label: 'Role', value: 'Responds to the situation' }] }
-    ],
-    tips: 'Introduce the scenario and keep the conversation moving naturally.'
+    title: 'Roleplay',
+    objective: 'Complete the speaking task with your partner.',
+    customFields: [],
+    characters: [],
+    tips: ''
   }),
   form: RoleplayForm as BlockFormComponent,
   preview: RoleplayPreview as BlockPreviewComponent,
-  normalize: (block) => ({
-    id: typeof block.id === 'string' ? block.id : createEditorId(),
-    type: 'roleplay',
-    characters: Array.isArray(block.characters)
-      ? block.characters
-          .filter((character): character is Record<string, unknown> => Boolean(character && typeof character === 'object'))
-          .map((character) => {
-            const legacyDetails = [
-              ['Country', character.country],
-              ['City', character.city],
-              ['Activity', character.activity]
-            ]
-              .filter(([, value]) => typeof value === 'string' && value.trim().length > 0)
-              .map(([label, value]) => ({
-                label: label as string,
-                value: value as string
-              }));
+  normalize: (block) => {
+    const customFields =
+      Array.isArray(block.customFields)
+      ? block.customFields
+          .filter((field): field is Record<string, unknown> => Boolean(field && typeof field === 'object'))
+          .map((field) => ({
+            id: typeof field.id === 'string' ? field.id : createEditorId(),
+            label: typeof field.label === 'string' ? field.label : '',
+            value: typeof field.value === 'string' ? field.value : ''
+          }))
+      : (() => {
+          const fallbackFields: { id: string; label: string; value: string }[] = [];
 
-            return {
-              name: typeof character.name === 'string' ? character.name : '',
-              details: Array.isArray(character.details)
-                ? character.details
-                    .filter((detail): detail is Record<string, unknown> => Boolean(detail && typeof detail === 'object'))
-                    .map((detail) => ({
-                      label: typeof detail.label === 'string' ? detail.label : '',
-                      value: typeof detail.value === 'string' ? detail.value : ''
-                    }))
-                : legacyDetails
-            };
-          })
-      : [],
-    tips:
-      typeof block.tips === 'string'
-        ? block.tips
-        : Array.isArray(block.prompts)
-          ? block.prompts.filter((prompt): prompt is string => typeof prompt === 'string').join('\n')
-          : ''
-  })
+          if (typeof block.scenario === 'string' && block.scenario.trim()) {
+            fallbackFields.push({ id: createEditorId(), label: 'Scenario', value: block.scenario });
+          }
+
+          if (typeof block.studentACard === 'string' && block.studentACard.trim()) {
+            fallbackFields.push({ id: createEditorId(), label: 'Student A', value: block.studentACard });
+          }
+
+          if (typeof block.studentBCard === 'string' && block.studentBCard.trim()) {
+            fallbackFields.push({ id: createEditorId(), label: 'Student B', value: block.studentBCard });
+          }
+
+          if (Array.isArray(block.usefulPhrases) && block.usefulPhrases.length > 0) {
+            fallbackFields.push({
+              id: createEditorId(),
+              label: 'Useful phrases',
+              value: block.usefulPhrases.join('\n')
+            });
+          }
+
+          if (Array.isArray(block.vocabularySupport) && block.vocabularySupport.length > 0) {
+            fallbackFields.push({
+              id: createEditorId(),
+              label: 'Vocabulary support',
+              value: block.vocabularySupport.join('\n')
+            });
+          }
+
+          if (typeof block.teacherNotes === 'string' && block.teacherNotes.trim()) {
+            fallbackFields.push({
+              id: createEditorId(),
+              label: 'Teacher notes',
+              value: block.teacherNotes
+            });
+          }
+
+          if (typeof block.timerMinutes === 'number') {
+            fallbackFields.push({
+              id: createEditorId(),
+              label: 'Timer',
+              value: `${block.timerMinutes} min`
+            });
+          }
+
+          return fallbackFields;
+        })();
+
+    return {
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
+      type: 'roleplay',
+      title: typeof block.title === 'string' ? block.title : 'Roleplay',
+      objective: typeof block.objective === 'string' ? block.objective : '',
+      customFields,
+      scenario: typeof block.scenario === 'string' ? block.scenario : undefined,
+      studentACard: typeof block.studentACard === 'string' ? block.studentACard : undefined,
+      studentBCard: typeof block.studentBCard === 'string' ? block.studentBCard : undefined,
+      usefulPhrases: Array.isArray(block.usefulPhrases)
+        ? block.usefulPhrases.filter((item): item is string => typeof item === 'string')
+        : [],
+      vocabularySupport: Array.isArray(block.vocabularySupport)
+        ? block.vocabularySupport.filter((item): item is string => typeof item === 'string')
+        : [],
+      teacherNotes: typeof block.teacherNotes === 'string' ? block.teacherNotes : '',
+      timerMinutes: typeof block.timerMinutes === 'number' ? block.timerMinutes : undefined,
+      characters: Array.isArray(block.characters) ? block.characters : [],
+      tips: typeof block.tips === 'string' ? block.tips : ''
+    };
+  }
 };

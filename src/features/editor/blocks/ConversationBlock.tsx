@@ -81,6 +81,29 @@ export const ConversationForm = ({ block, onUpdate }: BlockFormProps<Conversatio
       <input
         type="text"
         className="w-full rounded border p-2 text-sm"
+        value={block.title || ''}
+        onChange={(event) => onUpdate({ title: event.target.value })}
+        placeholder="Dialogue title"
+      />
+      <textarea
+        className="min-h-[70px] w-full rounded border p-2 text-sm"
+        value={block.instruction || ''}
+        onChange={(event) => onUpdate({ instruction: event.target.value })}
+        placeholder="Instruction or roleplay prompt"
+      />
+      <select
+        className="w-full rounded border p-2 text-sm"
+        value={block.layout || 'script'}
+        onChange={(event) => onUpdate({ layout: event.target.value as ConversationBlock['layout'] })}
+      >
+        <option value="script">Script</option>
+        <option value="chat">Chat</option>
+        <option value="cards">Cards</option>
+        <option value="classroom">Classroom</option>
+      </select>
+      <input
+        type="text"
+        className="w-full rounded border p-2 text-sm"
         value={block.imageUrl ?? ''}
         onChange={(event) =>
           onUpdate({
@@ -135,6 +158,13 @@ export const ConversationForm = ({ block, onUpdate }: BlockFormProps<Conversatio
                 value={message.text}
                 onChange={(event) => updateMessage(messageIndex, 'text', event.target.value)}
                 placeholder="Dialogue"
+              />
+              <input
+                type="text"
+                className="w-1/4 rounded border p-2 text-xs"
+                value={message.audioUrl || ''}
+                onChange={(event) => updateMessage(messageIndex, 'audioUrl', event.target.value)}
+                placeholder="Line audio URL"
               />
 
               <button
@@ -261,6 +291,14 @@ const renderHighlightedDialogue = (message: ConversationMessage) => {
 
 export const ConversationPreview = ({ block }: BlockPreviewProps<ConversationBlock>) => (
   <div className="my-6 space-y-4 rounded-2xl border border-slate-200 bg-slate-50/80 p-6 shadow-sm">
+    {(block.title || block.instruction) && (
+      <div>
+        {block.title && <h3 className="text-lg font-semibold text-slate-900">{block.title}</h3>}
+        {block.instruction && (
+          <p className="mt-1 whitespace-pre-wrap text-sm text-slate-600">{block.instruction}</p>
+        )}
+      </div>
+    )}
     {block.imageUrl && (
       <img
         src={block.imageUrl}
@@ -270,12 +308,24 @@ export const ConversationPreview = ({ block }: BlockPreviewProps<ConversationBlo
     )}
 
     {block.messages.map((message) => (
-      <div key={message.id} className="flex gap-4 font-sans text-sm">
+      <div
+        key={message.id}
+        className={`flex gap-4 font-sans text-sm ${
+          block.layout === 'chat' ? 'rounded-2xl bg-white p-3' : ''
+        }`}
+      >
         <span className="min-w-[60px] text-xs font-extrabold uppercase tracking-wide text-slate-900">
           {message.speaker}:
         </span>
 
-        <p className="text-slate-800">{renderHighlightedDialogue(message)}</p>
+        <div className="flex-1">
+          <p className="text-slate-800">{renderHighlightedDialogue(message)}</p>
+          {message.audioUrl && (
+            <audio controls className="mt-2 w-full">
+              <source src={message.audioUrl} />
+            </audio>
+          )}
+        </div>
       </div>
     ))}
   </div>

@@ -21,7 +21,16 @@ export const flashcardsBlockDefinition: BlockDefinition = {
     title: 'Flashcard Set',
     category: '',
     tags: [],
-    cards: [{ ...createFlashcard(), expressions: ['Target word'], backText: 'Meaning or explanation' }]
+    variant: 'grid',
+    cards: [
+      {
+        ...createFlashcard(),
+        expressions: ['Target word'],
+        shortMeaning: 'Meaning or explanation',
+        backText: 'Meaning or explanation',
+        exampleSentence: 'Example sentence here.'
+      }
+    ]
   }),
   form: FlashcardsForm as BlockFormComponent,
   preview: FlashcardsPreview as BlockPreviewComponent,
@@ -30,6 +39,10 @@ export const flashcardsBlockDefinition: BlockDefinition = {
     type: 'flashcards',
     title: typeof block.title === 'string' ? block.title : 'Flashcard Set',
     category: typeof block.category === 'string' ? block.category : '',
+    variant:
+      block.variant === 'grid' || block.variant === 'list' || block.variant === 'carousel' || block.variant === 'study'
+        ? block.variant
+        : 'grid',
     tags: Array.isArray(block.tags)
       ? block.tags.filter((tag): tag is string => typeof tag === 'string')
       : [],
@@ -47,7 +60,33 @@ export const flashcardsBlockDefinition: BlockDefinition = {
                 : [],
             frontImage: typeof card.frontImage === 'string' ? card.frontImage : undefined,
             backText: typeof card.backText === 'string' ? card.backText : '',
-            backImage: typeof card.backImage === 'string' ? card.backImage : undefined
+            backImage: typeof card.backImage === 'string' ? card.backImage : undefined,
+            imageFit: card.imageFit === 'contain' ? 'contain' : 'cover',
+            imagePositionX:
+              typeof card.imagePositionX === 'number' && Number.isFinite(card.imagePositionX)
+                ? Math.min(Math.max(card.imagePositionX, 0), 100)
+                : 50,
+            imagePositionY:
+              typeof card.imagePositionY === 'number' && Number.isFinite(card.imagePositionY)
+                ? Math.min(Math.max(card.imagePositionY, 0), 100)
+                : 50,
+            imageZoom:
+              typeof card.imageZoom === 'number' && Number.isFinite(card.imageZoom)
+                ? Math.min(Math.max(card.imageZoom, 50), 200)
+                : 100,
+            audioUrl: typeof card.audioUrl === 'string' ? card.audioUrl : undefined,
+            exampleSentence: typeof card.exampleSentence === 'string' ? card.exampleSentence : undefined,
+            translation: typeof card.translation === 'string' ? card.translation : undefined,
+            shortMeaning:
+              typeof card.shortMeaning === 'string'
+                ? card.shortMeaning
+                : typeof card.backText === 'string'
+                  ? card.backText
+                  : undefined,
+            category: typeof card.category === 'string' ? card.category : undefined,
+            tags: Array.isArray(card.tags)
+              ? card.tags.filter((tag): tag is string => typeof tag === 'string')
+              : []
           }))
       : []
   })

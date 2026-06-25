@@ -18,6 +18,9 @@ export const conversationBlockDefinition: BlockDefinition = {
   create: () => ({
     id: createEditorId(),
     type: 'conversation',
+    title: 'Conversation Model',
+    instruction: 'Read, listen and practice the dialogue.',
+    layout: 'script',
     ...createConversationBlockDefaults()
   }),
   form: ConversationForm as BlockFormComponent,
@@ -25,7 +28,16 @@ export const conversationBlockDefinition: BlockDefinition = {
   normalize: (block) => ({
     id: typeof block.id === 'string' ? block.id : createEditorId(),
     type: 'conversation',
+    title: typeof block.title === 'string' ? block.title : 'Conversation Model',
+    instruction: typeof block.instruction === 'string' ? block.instruction : '',
     imageUrl: typeof block.imageUrl === 'string' ? block.imageUrl : undefined,
+    layout:
+      block.layout === 'script' ||
+      block.layout === 'chat' ||
+      block.layout === 'cards' ||
+      block.layout === 'classroom'
+        ? block.layout
+        : 'script',
     messages: Array.isArray(block.messages)
       ? block.messages.map((message) => ({
           id:
@@ -40,6 +52,14 @@ export const conversationBlockDefinition: BlockDefinition = {
             message && typeof message === 'object' && typeof message.text === 'string'
               ? message.text
               : '',
+          avatarUrl:
+            message && typeof message === 'object' && typeof message.avatarUrl === 'string'
+              ? message.avatarUrl
+              : undefined,
+          audioUrl:
+            message && typeof message === 'object' && typeof message.audioUrl === 'string'
+              ? message.audioUrl
+              : undefined,
           highlights: normalizeConversationHighlights(message)
         }))
       : [],

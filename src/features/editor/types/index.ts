@@ -1,4 +1,16 @@
-export type QuestionType = 'multiple-choice' | 'true-false' | 'open-ended';
+export type QuestionType =
+  | 'multiple-choice'
+  | 'true-false'
+  | 'open-ended'
+  | 'short-answer'
+  | 'checkbox'
+  | 'fill-in-the-blank'
+  | 'matching'
+  | 'ordering'
+  | 'correct-false'
+  | 'table-completion'
+  | 'image-choice'
+  | 'find-in-text';
 export type BlockAudience = 'student' | 'teacher' | 'both';
 export type LessonDocumentType = 'lesson-authoring' | 'lesson-public';
 
@@ -11,18 +23,70 @@ export interface LessonMeta {
   sourceFormatVersion?: number;
 }
 
+export interface ConversationHighlight {
+  id: string;
+  text: string;
+  color: string;
+  kind?: 'grammar' | 'vocabulary' | 'phrasal-verb' | 'custom';
+  note?: string;
+}
+
+export interface MediaAsset {
+  url: string;
+  caption?: string;
+}
+
+export interface GlossaryItem {
+  id: string;
+  term: string;
+  meaning: string;
+}
+
+export interface SharedQuestionOption {
+  id: string;
+  text: string;
+  imageUrl?: string;
+  audioUrl?: string;
+  matchKey?: string;
+}
+
+export interface SharedQuestionTable {
+  headers: string[];
+  rows: {
+    id: string;
+    cells: string[];
+  }[];
+}
+
+export interface SharedQuestionGap {
+  id: string;
+}
+
 export interface SubQuestion {
   id: string;
   type: QuestionType;
   question: string;
-  options?: string[]; // Para A, B, C, D...
+  instructions?: string;
+  columns?: 1 | 2;
+  mode?: 'typing' | 'dropdown';
+  options?: SharedQuestionOption[];
   answer?: string;
+  acceptedAnswers?: string[];
+  correctOptionIds?: string[];
+  allowMultiple?: boolean;
+  wordSuggestions?: string[];
+  pairs?: { id: string; left: string; right: string }[];
+  sequence?: string[];
+  gaps?: SharedQuestionGap[];
+  table?: SharedQuestionTable;
+  feedback?: string;
 }
 
 export type BlockType =
   | 'page-break'
   | 'heading'
   | 'paragraph'
+  | 'letter-number'
   | 'teacher-note'
   | 'grammar-note'
   | 'advanced-grammar'
@@ -43,6 +107,13 @@ export type BlockType =
   | 'roleplay'
   | 'conversation-prompts'
   | 'writing-task'
+  | 'question-set'
+  | 'word-order'
+  | 'table-completion'
+  | 'image-label'
+  | 'mini-map'
+  | 'timeline'
+  | 'calendar-clock'
   | 'final-task';
 
 export interface BaseBlock {
@@ -66,6 +137,19 @@ export interface ParagraphBlock extends BaseBlock {
   content: string;
   style?: 'body' | 'intro' | 'instruction' | 'note';
 }
+export interface LetterNumberBlock extends BaseBlock {
+  type: 'letter-number';
+  title: string;
+  instruction?: string;
+  variant?: 'letters' | 'numbers' | 'mixed';
+  density?: 'compact' | 'regular';
+  itemsPerRow?: number;
+  items: {
+    id: string;
+    symbol: string;
+    label?: string;
+  }[];
+}
 export interface TeacherNoteBlock extends BaseBlock {
   type: 'teacher-note';
   title: string;
@@ -84,6 +168,13 @@ export interface AdvancedGrammarBlock extends BaseBlock {
   title: string;
   explanation: string;
   details?: string;
+  structureTitle?: string;
+  structureTableHeaders: string[];
+  structureTableRows: { cells: { text: string; highlights: ConversationHighlight[] }[] }[];
+  examples: string[];
+  commonMistakes: string[];
+  comparisons: { id: string; label: string; detail: string }[];
+  miniPractice: string[];
   tableHeaders: string[];
   tableRows: { cells: { text: string; highlights: ConversationHighlight[] }[] }[];
 }
@@ -95,6 +186,15 @@ export interface MediaBlock extends BaseBlock {
   position: 'left' | 'center' | 'right';
 }
 
+export interface ConversationMessage {
+  id: string;
+  speaker: string;
+  text: string;
+  highlights: ConversationHighlight[];
+  avatarUrl?: string;
+  audioUrl?: string;
+}
+
 export interface ListeningBlock extends BaseBlock {
   type: 'listening';
   title?: string;
@@ -102,8 +202,6 @@ export interface ListeningBlock extends BaseBlock {
   audioUrl: string;
   contextImageUrl?: string;
   script?: ConversationMessage[];
-  transcript?: string;
-  transcriptHighlights?: ConversationHighlight[];
   transcriptVisibility?: 'hidden' | 'after-answer' | 'always';
   questions: SubQuestion[];
 }
@@ -112,20 +210,12 @@ export interface ReadingComprehensionBlock extends BaseBlock {
   type: 'reading-comprehension';
   title: string;
   text: string;
+  imageUrl?: string;
+  audioUrl?: string;
+  textHighlights?: ConversationHighlight[];
+  glossaryItems?: GlossaryItem[];
+  discussionQuestions?: string[];
   questions: SubQuestion[];
-}
-
-export interface ConversationHighlight {
-  id: string;
-  text: string;
-  color: string;
-}
-
-export interface ConversationMessage {
-  id: string;
-  speaker: string;
-  text: string;
-  highlights: ConversationHighlight[];
 }
 
 export interface ConversationSubstitution {
@@ -135,7 +225,10 @@ export interface ConversationSubstitution {
 
 export interface ConversationBlock extends BaseBlock {
   type: 'conversation';
+  title?: string;
+  instruction?: string;
   imageUrl?: string;
+  layout?: 'script' | 'chat' | 'cards' | 'classroom';
   messages: ConversationMessage[];
   substitutionBox?: ConversationSubstitution[];
 }
@@ -145,18 +238,50 @@ export interface FlashcardsBlock extends BaseBlock {
   title: string;
   category?: string;
   tags?: string[];
+  variant?: 'grid' | 'list' | 'carousel' | 'study';
   cards: {
     id: string;
     expressions: string[];
     frontImage?: string;
     backText: string;
     backImage?: string;
+    imageFit?: 'cover' | 'contain';
+    imagePositionX?: number;
+    imagePositionY?: number;
+    imageZoom?: number;
+    audioUrl?: string;
+    exampleSentence?: string;
+    translation?: string;
+    shortMeaning?: string;
+    category?: string;
+    tags?: string[];
   }[];
 }
 export interface VocabularyMatchBlock extends BaseBlock {
   type: 'vocabulary-match';
   title: string;
-  pairs: { left: string; leftType: 'text' | 'image'; right: string }[];
+  variant?: 'classic' | 'cards' | 'two-column';
+  matchMode?:
+    | 'text-to-text'
+    | 'image-to-word'
+    | 'audio-to-word'
+    | 'word-to-meaning'
+    | 'phrase-to-response'
+    | 'category-matching';
+  instruction?: string;
+  shuffleLeft?: boolean;
+  shuffleRight?: boolean;
+  showReferenceBadges?: boolean;
+  showCorrectMatches?: boolean;
+  pairs: {
+    id: string;
+    left: string;
+    leftType: 'text' | 'image' | 'audio' | 'category';
+    leftLabel?: string;
+    right: string;
+    rightType?: 'text' | 'image' | 'audio' | 'category';
+    rightLabel?: string;
+  }[];
 }
 export interface ImageNumberingBlock extends BaseBlock {
   type: 'image-numbering';
@@ -179,10 +304,12 @@ export interface FillBlankBlock extends BaseBlock {
   instruction?: string;
   text: string;
   columns?: 1 | 2;
+  mode?: 'typing' | 'dropdown';
   gaps: {
     id: string;
     acceptedAnswers: string[];
     suggestions?: string[];
+    hint?: string;
     caseSensitive: boolean;
   }[];
 }
@@ -221,6 +348,16 @@ export interface PhrasalVerbFocusBlock extends BaseBlock {
 
 export interface RoleplayBlock extends BaseBlock {
   type: 'roleplay';
+  title?: string;
+  objective: string;
+  customFields: { id: string; label: string; value: string }[];
+  scenario?: string;
+  studentACard?: string;
+  studentBCard?: string;
+  usefulPhrases?: string[];
+  vocabularySupport?: string[];
+  teacherNotes?: string;
+  timerMinutes?: number;
   characters: { name: string; details: { label: string; value: string }[] }[];
   tips: string;
 }
@@ -228,15 +365,81 @@ export interface RoleplayBlock extends BaseBlock {
 export interface ConversationPromptsBlock extends BaseBlock {
   type: 'conversation-prompts';
   title: string;
+  instruction?: string;
+  speakers: { id: string; name: string }[];
+  speakerMode?: 'single' | 'pair';
   prompts: string[];
+  exchanges: { id: string; speakerId: string; text: string }[];
 }
 
 export interface WritingTaskBlock extends BaseBlock {
   type: 'writing-task';
   title: string;
   prompt: string;
+  sentenceStarters?: string[];
+  suggestedVocabulary?: string[];
+  grammarReminder?: string;
+  checklist?: string[];
   minWords?: number;
+  rubric?: string;
 }
+
+export interface QuestionSetBlock extends BaseBlock {
+  type: 'question-set';
+  title: string;
+  instruction: string;
+  questions: SubQuestion[];
+}
+
+export interface WordOrderBlock extends BaseBlock {
+  type: 'word-order';
+  title: string;
+  instruction: string;
+  items: { id: string; prompt: string; sequence: string[] }[];
+}
+
+export interface TableCompletionBlock extends BaseBlock {
+  type: 'table-completion';
+  title: string;
+  instruction: string;
+  headers: string[];
+  rows: { id: string; cells: string[] }[];
+  questions?: SubQuestion[];
+}
+
+export interface ImageLabelBlock extends BaseBlock {
+  type: 'image-label';
+  title: string;
+  instruction: string;
+  imageUrl: string;
+  labels: { id: string; prompt: string; answer: string }[];
+}
+
+export interface MiniMapBlock extends BaseBlock {
+  type: 'mini-map';
+  title: string;
+  instruction: string;
+  imageUrl: string;
+  markers: { id: string; label: string; clue?: string }[];
+  questions: SubQuestion[];
+}
+
+export interface TimelineBlock extends BaseBlock {
+  type: 'timeline';
+  title: string;
+  events: { id: string; label: string; time: string }[];
+  questions?: SubQuestion[];
+}
+
+export interface CalendarClockBlock extends BaseBlock {
+  type: 'calendar-clock';
+  title: string;
+  instruction: string;
+  calendarNotes: string[];
+  clockTimes: string[];
+  questions: SubQuestion[];
+}
+
 export interface FinalTaskBlock extends BaseBlock {
   type: 'final-task';
   title: string;
@@ -247,6 +450,7 @@ export type LessonBlock =
   | PageBreakBlock
   | HeadingBlock
   | ParagraphBlock
+  | LetterNumberBlock
   | TeacherNoteBlock
   | GrammarNoteBlock
   | AdvancedGrammarBlock
@@ -267,6 +471,13 @@ export type LessonBlock =
   | RoleplayBlock
   | ConversationPromptsBlock
   | WritingTaskBlock
+  | QuestionSetBlock
+  | WordOrderBlock
+  | TableCompletionBlock
+  | ImageLabelBlock
+  | MiniMapBlock
+  | TimelineBlock
+  | CalendarClockBlock
   | FinalTaskBlock;
 
 export type BlockByType<T extends BlockType> = Extract<LessonBlock, { type: T }>;

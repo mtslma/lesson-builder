@@ -38,15 +38,25 @@ const paragraphStyles: Record<string, string> = {
 };
 
 const renderInlineFormatting = (text: string): ReactNode[] => {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  const parts: ReactNode[] = [];
+  const pattern = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
 
-  return parts.filter(Boolean).map((part, index) => {
-    if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
-      return <strong key={index}>{part.slice(2, -2)}</strong>;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
     }
 
-    return part;
-  });
+    parts.push(<strong key={`${match.index}-${match[0]}`}>{match[1]}</strong>);
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : [text];
 };
 
 const renderParagraphContent = (content: string) =>
@@ -70,7 +80,7 @@ const renderParagraphContent = (content: string) =>
     });
 
 export const ParagraphPreview = ({ block }: BlockPreviewProps<ParagraphBlock>) => (
-  <div className={paragraphStyles[block.style || 'body'] || paragraphStyles.body}>
+  <div className={`${paragraphStyles[block.style || 'body'] || paragraphStyles.body} space-y-3`}>
     {renderParagraphContent(block.content)}
   </div>
 );

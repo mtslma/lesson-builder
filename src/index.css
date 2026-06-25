@@ -7,12 +7,29 @@
   --note-bg: linear-gradient(135deg, rgba(254, 243, 199, 0.9) 0%, rgba(255, 251, 235, 0.98) 100%);
   --note-accent: #b45309;
   --note-text: #78350f;
+  --editor-font-stack:
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 @layer base {
+  html {
+    font-family: var(--editor-font-stack);
+  }
+
   body {
     background: var(--editor-bg);
     color: #1e293b;
+    font-family: var(--editor-font-stack);
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
   }
 }
 
@@ -114,5 +131,19 @@
     font-weight: 900;
     line-height: 1.1;
     letter-spacing: 0.04em;
+  }
+
+  .flashcard-audio {
+    height: 2.5rem;
+    border-radius: 0.9rem;
+    filter: saturate(0.9);
+  }
+}
+
+@layer utilities {
+  .font-serif,
+  .font-sans,
+  .font-mono {
+    font-family: var(--editor-font-stack);
   }
 }

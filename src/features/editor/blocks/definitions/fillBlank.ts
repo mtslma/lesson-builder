@@ -20,7 +20,8 @@ export const fillBlankBlockDefinition: BlockDefinition = {
     instruction: 'Complete the sentence with the best option.',
     text: 'This is a [] sentence for practice.',
     columns: 1,
-    gaps: [{ id: 'gap1', acceptedAnswers: [], suggestions: ['sample'], caseSensitive: false }]
+    mode: 'typing',
+    gaps: [{ id: 'gap1', acceptedAnswers: [], suggestions: ['sample'], hint: 'Use the word bank', caseSensitive: false }]
   }),
   form: FillBlankForm as BlockFormComponent,
   preview: FillBlankPreview as BlockPreviewComponent,
@@ -39,6 +40,7 @@ export const fillBlankBlockDefinition: BlockDefinition = {
       instruction: typeof block.instruction === 'string' ? block.instruction : '',
       text: normalizedText,
       columns: block.columns === 2 ? 2 : 1,
+      mode: block.mode === 'dropdown' ? 'dropdown' : 'typing',
       gaps: Array.from({ length: placeholderCount }, (_, index) => {
         const gap = rawGaps[index];
 
@@ -52,6 +54,7 @@ export const fillBlankBlockDefinition: BlockDefinition = {
             gap && Array.isArray(gap.suggestions)
               ? gap.suggestions.filter((suggestion): suggestion is string => typeof suggestion === 'string')
               : undefined,
+          hint: gap && typeof gap.hint === 'string' ? gap.hint : undefined,
           caseSensitive: gap && typeof gap.caseSensitive === 'boolean' ? gap.caseSensitive : false
         };
       })

@@ -5,7 +5,7 @@ import type {
   BlockFormComponent,
   BlockPreviewComponent
 } from '../../config/blockDefinition';
-import { createSubQuestion } from '../../domain/blockDefaults';
+import { createSubQuestion, normalizeSubQuestions } from '../../domain/blockDefaults';
 import {
   createConversationMessage,
   normalizeConversationHighlights,
@@ -30,23 +30,15 @@ export const listeningBlockDefinition: BlockDefinition = {
       createConversationMessage({ speaker: 'Speaker A', text: 'Hello. Welcome to the listening activity.' }),
       createConversationMessage({ speaker: 'Speaker B', text: 'Thank you. I am ready.' })
     ],
-    transcript: '',
-    transcriptHighlights: [],
     transcriptVisibility: 'hidden',
     questions: [
-      createSubQuestion('true-false', 'The speaker agrees with the main idea.'),
-      createSubQuestion('multiple-choice', 'What is the speaker describing?', [
-        'A routine',
-        'A place',
-        'A preference'
-      ])
+      createSubQuestion('open-ended', 'What is one thing Speaker A says?'),
+      createSubQuestion('multiple-choice', 'What is the speaker describing?', ['A routine', 'A place', 'A preference'])
     ]
   }),
   form: ListeningForm as BlockFormComponent,
   preview: ListeningPreview as BlockPreviewComponent,
   normalize: (block) => {
-    const transcript = typeof block.transcript === 'string' ? block.transcript : '';
-
     const rawScript = Array.isArray(block.script)
       ? block.script.filter((message): message is Record<string, unknown> => Boolean(message && typeof message === 'object'))
       : [];
@@ -63,7 +55,7 @@ export const listeningBlockDefinition: BlockDefinition = {
               highlights: normalizeConversationHighlights(normalized)
             };
           })
-        : transcript
+        : (typeof block.transcript === 'string' ? block.transcript : '')
             .split('\n')
             .map((line) => line.trim())
             .filter(Boolean)
@@ -85,18 +77,13 @@ export const listeningBlockDefinition: BlockDefinition = {
       audioUrl: typeof block.audioUrl === 'string' ? block.audioUrl : '',
       contextImageUrl: typeof block.contextImageUrl === 'string' ? block.contextImageUrl : undefined,
       script,
-      transcript,
-      transcriptHighlights: normalizeConversationHighlights({
-        text: transcript,
-        highlights: block.transcriptHighlights
-      }),
       transcriptVisibility:
         block.transcriptVisibility === 'hidden' ||
         block.transcriptVisibility === 'after-answer' ||
         block.transcriptVisibility === 'always'
           ? block.transcriptVisibility
           : 'hidden',
-      questions: Array.isArray(block.questions) ? block.questions : []
+      questions: normalizeSubQuestions(block.questions)
     };
   }
 };
