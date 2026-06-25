@@ -7,6 +7,7 @@ import {
   duplicateBlock,
   nextPageNumber,
   normalizeLesson,
+  prepareLessonForExport,
   syncPageBreaks
 } from '../config/blockFactory';
 import {
@@ -193,7 +194,14 @@ export const useLessonEditor = () => {
 
     try {
       const parsed = JSON.parse(jsonInput);
-      const validated = lessonImportSchema.safeParse(parsed);
+      const normalized = normalizeLesson(parsed);
+      if (!normalized) {
+        setImportError('JSON must include a lesson object with a blocks array.');
+        setJsonFeedback(null);
+        return;
+      }
+
+      const validated = lessonImportSchema.safeParse(normalized);
 
       if (!validated.success) {
         const firstIssue = validated.error.issues[0];
@@ -202,17 +210,10 @@ export const useLessonEditor = () => {
         return;
       }
 
-      const normalized = normalizeLesson(validated.data);
-      if (!normalized) {
-        setImportError('JSON must include a lesson object with a blocks array.');
-        setJsonFeedback(null);
-        return;
-      }
-
       setImportError(null);
       setJsonFeedback('Lesson imported successfully.');
-      setJsonInput(JSON.stringify(normalized, null, 2));
-      commitLesson(normalized, { markDirty: false, resetHistory: true });
+      setJsonInput(JSON.stringify(validated.data, null, 2));
+      commitLesson(validated.data, { markDirty: false, resetHistory: true });
     } catch {
       setImportError('Invalid JSON syntax. Review the structure and try again.');
       setJsonFeedback(null);
@@ -283,7 +284,8 @@ export const useLessonEditor = () => {
   };
 
   const exportAuthoringJson = () => {
-    const validated = lessonSchema.safeParse(lesson);
+    const exportableLesson = prepareLessonForExport(lesson);
+    const validated = lessonSchema.safeParse(exportableLesson);
     if (!validated.success) {
       setImportError(formatImportIssue(validated.error.issues[0]));
       setJsonFeedback(null);
@@ -296,7 +298,10 @@ export const useLessonEditor = () => {
     setIsDirty(false);
   };
 
-  const publicLessonPreview = useMemo(() => createPublicLesson(lesson), [lesson]);
+  const publicLessonPreview = useMemo(
+    () => createPublicLesson(prepareLessonForExport(lesson)),
+    [lesson]
+  );
 
   const exportPublicJson = () => {
     const validated = publicLessonSchema.safeParse(publicLessonPreview);

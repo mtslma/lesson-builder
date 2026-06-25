@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { createPreviewStorageKey } from '../domain/previewState';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import type {
   BlockFormProps,
   BlockPreviewProps,
@@ -95,6 +97,10 @@ export const ImageNumberingPreview = ({ block }: BlockPreviewProps<ImageNumberin
 
 const ShuffledImageNumberingPreview = ({ block }: BlockPreviewProps<ImageNumberingBlock>) => {
   const [shuffledImages] = useState(() => shuffleArray(block.items, `${block.id}:image-numbering`));
+  const [answers, setAnswers] = usePersistedPreviewState<Record<string, string>>(
+    createPreviewStorageKey(block.id, 'image-numbering.answers'),
+    {}
+  );
 
   return (
     <div className="my-6 space-y-5 rounded-2xl border bg-white p-6 shadow-sm">
@@ -131,6 +137,13 @@ const ShuffledImageNumberingPreview = ({ block }: BlockPreviewProps<ImageNumberi
                 maxLength={2}
                 className="absolute left-2 top-2 h-8 w-8 rounded-lg border-2 border-slate-300 bg-white text-center text-xs font-bold text-lime-600 outline-none shadow-xs focus:border-lime-500"
                 placeholder="#"
+                value={answers[item.id] || ''}
+                onChange={(event) =>
+                  setAnswers((currentAnswers) => ({
+                    ...currentAnswers,
+                    [item.id]: event.target.value
+                  }))
+                }
               />
               <img
                 src={item.imageUrl}

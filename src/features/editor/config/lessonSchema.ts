@@ -26,6 +26,15 @@ const stringArray = () =>
 
 const audienceField = z.enum(['student', 'teacher', 'both']).optional();
 
+const lessonMetaSchema = z.object({
+  slug: requiredString().min(1, 'Campo obrigatÃ³rio'),
+  createdAt: requiredString().min(1, 'Campo obrigatÃ³rio'),
+  updatedAt: requiredString().min(1, 'Campo obrigatÃ³rio'),
+  editorVersion: requiredString().min(1, 'Campo obrigatÃ³rio'),
+  sourceLessonId: requiredString().min(1, 'Campo obrigatÃ³rio').optional(),
+  sourceFormatVersion: numberField().optional()
+});
+
 const conversationHighlightSchemaBase = z.object({
   id: requiredId(),
   text: requiredString().min(1, 'Campo obrigatÃ³rio'),
@@ -148,8 +157,23 @@ const listeningBlockSchema = z.object({
   type: z.literal('listening'),
   audience: audienceField,
   title: requiredString().optional(),
+  instruction: requiredString().optional(),
   audioUrl: requiredString().min(1, 'Campo obrigatório'),
   contextImageUrl: requiredString().optional(),
+  script: z
+    .array(
+      z.preprocess(
+        normalizeConversationMessageInput,
+        z.object({
+          id: requiredId(),
+          speaker: requiredString(),
+          text: requiredString(),
+          highlights: z.array(conversationHighlightSchemaBase).default([])
+        })
+      ),
+      { error: 'Deve ser uma lista' }
+    )
+    .optional(),
   transcript: requiredString().optional(),
   transcriptHighlights: z.array(conversationHighlightSchemaBase).default([]),
   transcriptVisibility: z.enum(['hidden', 'after-answer', 'always']).optional(),
@@ -298,7 +322,7 @@ const fillBlankBlockSchema = z
       .array(
         z.object({
           id: requiredId(),
-          acceptedAnswers: stringArray().min(1, 'Cada gap deve ter pelo menos uma resposta aceita'),
+          acceptedAnswers: stringArray(),
           suggestions: stringArray().optional(),
           caseSensitive: booleanField()
         }),
@@ -486,11 +510,14 @@ export const blockSchema = z.discriminatedUnion('type', [
 ]);
 
 export const lessonSchema = z.object({
+  documentType: z.literal('lesson-authoring'),
+  formatVersion: z.literal(2),
   schemaVersion: z.literal(1, { error: 'schemaVersion deve ser 1' }),
   id: requiredId(),
   title: requiredString(),
   level: requiredString(),
   language: requiredString(),
+  meta: lessonMetaSchema,
   blocks: z.array(blockSchema, { error: 'Deve ser uma lista' })
 });
 
@@ -586,11 +613,14 @@ export const publicBlockSchema = z.discriminatedUnion('type', [
 ]);
 
 export const publicLessonSchema = z.object({
+  documentType: z.literal('lesson-public'),
+  formatVersion: z.literal(2),
   schemaVersion: z.literal(1, { error: 'schemaVersion deve ser 1' }),
   id: requiredId(),
   title: requiredString(),
   level: requiredString(),
   language: requiredString(),
+  meta: lessonMetaSchema,
   blocks: z.array(publicBlockSchema, { error: 'Deve ser uma lista' })
 });
 

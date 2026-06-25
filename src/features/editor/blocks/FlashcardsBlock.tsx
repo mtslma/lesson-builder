@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ChevronIcon } from '../components/ChevronIcon';
+import { createPreviewStorageKey } from '../domain/previewState';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import type { BlockFormProps, BlockPreviewProps, FlashcardsBlock } from '../types/index';
 import { createFlashcard } from '../domain/blockDefaults';
 import { removeItemAt, updateItemAt } from '../domain/collections';
@@ -116,8 +118,14 @@ export const FlashcardsForm = ({ block, onUpdate }: BlockFormProps<FlashcardsBlo
 };
 
 export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>) => {
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [currentExpressionIndex, setCurrentExpressionIndex] = useState(0);
+  const [currentCardIndex, setCurrentCardIndex] = usePersistedPreviewState<number>(
+    createPreviewStorageKey(block.id, 'flashcards.card-index'),
+    0
+  );
+  const [currentExpressionIndex, setCurrentExpressionIndex] = usePersistedPreviewState<number>(
+    createPreviewStorageKey(block.id, 'flashcards.expression-index'),
+    0
+  );
 
   useEffect(() => {
     setCurrentCardIndex(0);

@@ -20,7 +20,7 @@ export const fillBlankBlockDefinition: BlockDefinition = {
     instruction: 'Complete the sentence with the best option.',
     text: 'This is a [] sentence for practice.',
     columns: 1,
-    gaps: [{ id: 'gap1', acceptedAnswers: ['sample'], suggestions: ['sample'], caseSensitive: false }]
+    gaps: [{ id: 'gap1', acceptedAnswers: [], suggestions: ['sample'], caseSensitive: false }]
   }),
   form: FillBlankForm as BlockFormComponent,
   preview: FillBlankPreview as BlockPreviewComponent,
@@ -47,7 +47,7 @@ export const fillBlankBlockDefinition: BlockDefinition = {
           acceptedAnswers:
             gap && Array.isArray(gap.acceptedAnswers)
               ? gap.acceptedAnswers.filter((answer): answer is string => typeof answer === 'string')
-              : [''],
+              : [],
           suggestions:
             gap && Array.isArray(gap.suggestions)
               ? gap.suggestions.filter((suggestion): suggestion is string => typeof suggestion === 'string')

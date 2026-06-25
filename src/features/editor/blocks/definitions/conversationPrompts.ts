@@ -9,7 +9,7 @@ import { createEditorId } from '../../domain/ids';
 
 export const conversationPromptsBlockDefinition: BlockDefinition = {
   type: 'conversation-prompts',
-  label: 'Discussion Prompts',
+  label: 'Talking',
   category: 'Production & Speaking',
   icon: MessageCircleMore,
   accent: 'text-sky-700',
@@ -17,7 +17,7 @@ export const conversationPromptsBlockDefinition: BlockDefinition = {
   create: () => ({
     id: createEditorId(),
     type: 'conversation-prompts',
-    title: 'Discussion Prompts',
+    title: 'Talking',
     prompts: ['What is your opinion on the topic?', 'What example can you share?']
   }),
   form: ConversationPromptsForm as BlockFormComponent,

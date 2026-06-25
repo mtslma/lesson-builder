@@ -1,17 +1,67 @@
-import type { BlockAudience, BlockType, Lesson, LessonBlock, PublicLesson } from '../types/index';
+import type {
+  BlockAudience,
+  BlockType,
+  Lesson,
+  LessonBlock,
+  LessonMeta,
+  PublicLesson
+} from '../types/index';
 import { BLOCK_DEFINITION_MAP } from './blockRegistry';
 import { createEditorId } from '../domain/ids';
 
 const DEFAULT_AUDIENCE: BlockAudience = 'both';
+const EDITOR_VERSION = 'english-platform-editor';
+
+const createTimestamp = () => new Date().toISOString();
+
+const slugifyLessonTitle = (title: string) =>
+  title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'lesson';
+
+const normalizeLessonMeta = (
+  candidate: Partial<LessonMeta> | undefined,
+  fallback: { title: string; createdAt?: string; sourceLessonId?: string; sourceFormatVersion?: number }
+): LessonMeta => ({
+  slug:
+    typeof candidate?.slug === 'string' && candidate.slug.trim().length > 0
+      ? candidate.slug
+      : slugifyLessonTitle(fallback.title),
+  createdAt:
+    typeof candidate?.createdAt === 'string' && candidate.createdAt.trim().length > 0
+      ? candidate.createdAt
+      : fallback.createdAt || createTimestamp(),
+  updatedAt:
+    typeof candidate?.updatedAt === 'string' && candidate.updatedAt.trim().length > 0
+      ? candidate.updatedAt
+      : createTimestamp(),
+  editorVersion:
+    typeof candidate?.editorVersion === 'string' && candidate.editorVersion.trim().length > 0
+      ? candidate.editorVersion
+      : EDITOR_VERSION,
+  sourceLessonId:
+    typeof candidate?.sourceLessonId === 'string' && candidate.sourceLessonId.trim().length > 0
+      ? candidate.sourceLessonId
+      : fallback.sourceLessonId,
+  sourceFormatVersion:
+    typeof candidate?.sourceFormatVersion === 'number'
+      ? candidate.sourceFormatVersion
+      : fallback.sourceFormatVersion
+});
 const readAudience = (value: unknown): BlockAudience =>
   value === 'student' || value === 'teacher' || value === 'both' ? value : DEFAULT_AUDIENCE;
 
 export const createEmptyLesson = (): Lesson => ({
+  documentType: 'lesson-authoring',
+  formatVersion: 2,
   schemaVersion: 1,
   id: createEditorId(),
   title: 'Untitled lesson',
   level: '',
   language: 'en',
+  meta: normalizeLessonMeta(undefined, { title: 'Untitled lesson' }),
   blocks: []
 });
 
@@ -71,12 +121,21 @@ export const normalizeLesson = (input: unknown): Lesson | null => {
     });
   }
 
+  const title = candidate.title || 'Untitled lesson';
+  const createdAtFromInput =
+    typeof candidate.meta?.createdAt === 'string' && candidate.meta.createdAt.trim().length > 0
+      ? candidate.meta.createdAt
+      : undefined;
+
   return {
+    documentType: 'lesson-authoring',
+    formatVersion: 2,
     schemaVersion: 1,
     id: candidate.id || createEditorId(),
-    title: candidate.title || 'Untitled lesson',
+    title,
     level: candidate.level || '',
     language: candidate.language || 'en',
+    meta: normalizeLessonMeta(candidate.meta, { title, createdAt: createdAtFromInput }),
     blocks: syncPageBreaks(normalizedBlocks)
   };
 };
@@ -130,7 +189,19 @@ const sanitizeSubQuestion = <T extends { answer?: string }>(question: T): Omit<T
 };
 
 export const createPublicLesson = (lesson: Lesson): PublicLesson => ({
-  ...lesson,
+  documentType: 'lesson-public',
+  formatVersion: 2,
+  schemaVersion: 1,
+  id: lesson.id,
+  title: lesson.title,
+  level: lesson.level,
+  language: lesson.language,
+  meta: normalizeLessonMeta(lesson.meta, {
+    title: lesson.title,
+    createdAt: lesson.meta.createdAt,
+    sourceLessonId: lesson.id,
+    sourceFormatVersion: lesson.formatVersion
+  }),
   blocks: lesson.blocks
     .filter((block) => block.type !== 'teacher-note')
     .filter((block) => block.audience !== 'teacher')
@@ -174,4 +245,14 @@ export const createPublicLesson = (lesson: Lesson): PublicLesson => ({
           };
       }
     })
+});
+
+export const prepareLessonForExport = (lesson: Lesson): Lesson => ({
+  ...lesson,
+  documentType: 'lesson-authoring',
+  formatVersion: 2,
+  meta: normalizeLessonMeta(lesson.meta, {
+    title: lesson.title,
+    createdAt: lesson.meta.createdAt
+  })
 });

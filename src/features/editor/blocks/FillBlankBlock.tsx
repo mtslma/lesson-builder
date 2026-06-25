@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { createPreviewStorageKey } from '../domain/previewState';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import type { BlockFormProps, BlockPreviewProps, FillBlankBlock } from '../types/index';
 
 const GAP_TOKEN = '[]';
@@ -13,7 +15,7 @@ const syncGapsWithText = (block: FillBlankBlock, text: string): FillBlankBlock['
 
     return {
       id: existingGap?.id || `gap${index + 1}`,
-      acceptedAnswers: existingGap?.acceptedAnswers?.length ? existingGap.acceptedAnswers : [''],
+      acceptedAnswers: existingGap?.acceptedAnswers || [],
       suggestions: existingGap?.suggestions,
       caseSensitive: existingGap?.caseSensitive ?? false
     };
@@ -29,9 +31,24 @@ const normalizeListInput = (value: string) =>
 const getUniqueSuggestions = (gaps: FillBlankBlock['gaps']) =>
   Array.from(
     new Set(
-      gaps.flatMap((gap) => (gap.suggestions || []).map((suggestion) => suggestion.trim()).filter(Boolean))
+      gaps.flatMap((gap) =>
+        [...(gap.suggestions || []), ...(gap.acceptedAnswers || [])]
+          .map((suggestion) => suggestion.trim())
+          .filter(Boolean)
+      )
     )
   );
+
+const getGapWidthClass = (gaps: FillBlankBlock['gaps'], index: number) => {
+  const options = [...(gaps[index]?.suggestions || []), ...(gaps[index]?.acceptedAnswers || [])]
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const longest = options.reduce((max, value) => Math.max(max, value.length), 0);
+
+  if (longest >= 18) return 'min-w-[220px]';
+  if (longest >= 10) return 'min-w-[170px]';
+  return 'min-w-[130px]';
+};
 
 const splitColumns = (text: string, columns: 1 | 2) => {
   const sections = text
@@ -50,6 +67,7 @@ const splitColumns = (text: string, columns: 1 | 2) => {
 const renderSection = (
   section: string,
   startGapIndex: number,
+  gaps: FillBlankBlock['gaps'],
   answers: string[],
   setAnswers: (answers: string[]) => void,
   gapCountRef: { current: number }
@@ -81,7 +99,10 @@ const renderSection = (
                     nextAnswers[currentGapIndex] = event.target.value;
                     setAnswers(nextAnswers);
                   }}
-                  className="mx-1 inline-block min-w-[110px] rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-center font-medium text-slate-700 outline-none transition focus:border-slate-400"
+                  className={`mx-1 inline-block ${getGapWidthClass(
+                    gaps,
+                    currentGapIndex
+                  )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
                   placeholder="..."
                 />
               )}
@@ -132,7 +153,9 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
         <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
           Gaps
         </span>
-        <span className="text-[10px] text-slate-400">One block below for each `[]` in the text.</span>
+        <span className="text-[10px] text-slate-400">
+          One block below for each `[]` in the text.
+        </span>
       </div>
 
       <div className="space-y-3">
@@ -151,7 +174,7 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
                   nextGaps[index].acceptedAnswers = normalizeListInput(e.target.value);
                   onUpdate({ gaps: nextGaps });
                 }}
-                placeholder="Accepted answers, one per line"
+                placeholder="Expected answers (optional), one per line"
               />
 
               <textarea
@@ -163,9 +186,14 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
                   nextGaps[index].suggestions = suggestions.length > 0 ? suggestions : undefined;
                   onUpdate({ gaps: nextGaps });
                 }}
-                placeholder="Optional suggestions, one per line"
+                placeholder="Suggestions/help words (optional), one per line"
               />
             </div>
+
+            <p className="mt-2 text-[11px] text-slate-500">
+              Leave expected answers empty if you want an open gap with only suggestions or free
+              writing.
+            </p>
 
             <label className="mt-3 flex items-center gap-2 text-[11px] font-medium text-slate-600">
               <input
@@ -187,7 +215,10 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
 );
 
 export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) => {
-  const [answers, setAnswers] = useState<string[]>(() => block.gaps.map(() => ''));
+  const [answers, setAnswers] = usePersistedPreviewState<string[]>(
+    createPreviewStorageKey(block.id, 'fill-blank.answers'),
+    block.gaps.map(() => '')
+  );
   const suggestions = getUniqueSuggestions(block.gaps);
   const columns = block.columns === 2 ? 2 : 1;
   const columnSections = useMemo(() => splitColumns(block.text, columns), [block.text, columns]);
@@ -209,7 +240,14 @@ export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) =
           >
             {sections.map((section, sectionIndex) => (
               <div key={`${columnIndex}-${sectionIndex}`} className="space-y-2">
-                {renderSection(section, gapCountRef.current, answers, setAnswers, gapCountRef)}
+                {renderSection(
+                  section,
+                  gapCountRef.current,
+                  block.gaps,
+                  answers,
+                  setAnswers,
+                  gapCountRef
+                )}
               </div>
             ))}
           </div>

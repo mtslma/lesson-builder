@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPreviewStorageKey } from '../domain/previewState';
 import type {
   BlockFormProps,
   BlockPreviewProps,
@@ -6,6 +7,7 @@ import type {
 } from '../types/index';
 import { createVocabularyPair } from '../domain/blockDefaults';
 import { removeItemAt, updateItemAt } from '../domain/collections';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import { shuffleArray } from '../domain/shuffle';
 
 export const VocabularyMatchForm = ({
@@ -89,8 +91,14 @@ export const VocabularyMatchForm = ({
 };
 
 export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMatchBlock>) => {
-  const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
-  const [matchedPairs, setMatchedPairs] = useState<Record<string, string>>({});
+  const [selectedLeft, setSelectedLeft] = usePersistedPreviewState<string | null>(
+    createPreviewStorageKey(block.id, 'vocabulary-match.selected-left'),
+    null
+  );
+  const [matchedPairs, setMatchedPairs] = usePersistedPreviewState<Record<string, string>>(
+    createPreviewStorageKey(block.id, 'vocabulary-match.matches'),
+    {}
+  );
   const [leftItems] = useState(() => shuffleArray(block.pairs, `${block.id}:vocabulary-left`));
   const [rightItems] = useState(() =>
     shuffleArray(

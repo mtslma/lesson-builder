@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { createPreviewStorageKey } from '../domain/previewState';
 import type { BlockFormProps, BlockPreviewProps, ImageChoiceBlock } from '../types/index';
 import { createImageChoiceOption } from '../domain/blockDefaults';
 import { removeItemAt, updateItemAt } from '../domain/collections';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import { shuffleArray } from '../domain/shuffle';
 
 export const ImageChoiceForm = ({ block, onUpdate }: BlockFormProps<ImageChoiceBlock>) => {
@@ -74,6 +76,10 @@ export const ImageChoiceForm = ({ block, onUpdate }: BlockFormProps<ImageChoiceB
 
 export const ImageChoicePreview = ({ block }: BlockPreviewProps<ImageChoiceBlock>) => {
   const [shuffledOptions] = useState(() => shuffleArray(block.options, `${block.id}:image-choice`));
+  const [selectedOptionId, setSelectedOptionId] = usePersistedPreviewState<string>(
+    createPreviewStorageKey(block.id, 'image-choice.answer'),
+    ''
+  );
 
   return (
     <div className="my-6 space-y-4 rounded-2xl border bg-white p-6 shadow-sm">
@@ -82,7 +88,12 @@ export const ImageChoicePreview = ({ block }: BlockPreviewProps<ImageChoiceBlock
         {shuffledOptions.map((option) => (
           <div
             key={option.id}
-            className="flex cursor-pointer flex-col items-center rounded-xl border-2 border-slate-100 p-3 transition-colors hover:border-lime-400 hover:bg-lime-50"
+            onClick={() => setSelectedOptionId(option.id)}
+            className={`flex cursor-pointer flex-col items-center rounded-xl border-2 p-3 transition-colors ${
+              selectedOptionId === option.id
+                ? 'border-lime-500 bg-lime-50'
+                : 'border-slate-100 hover:border-lime-400 hover:bg-lime-50'
+            }`}
           >
             {option.imageUrl && (
               <img

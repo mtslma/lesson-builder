@@ -41,7 +41,7 @@ export const ReadingComprehensionPreview = ({
       <p className="text-base text-slate-700 font-serif leading-loose border-l-4 border-slate-300 pl-4 mb-6 whitespace-pre-wrap">
         {block.text}
       </p>
-      <RenderSubQuestionsPreview questions={block.questions} />
+      <RenderSubQuestionsPreview questions={block.questions} storageKey={block.id} />
     </div>
   </div>
 );

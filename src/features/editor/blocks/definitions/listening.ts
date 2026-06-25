@@ -6,7 +6,11 @@ import type {
   BlockPreviewComponent
 } from '../../config/blockDefinition';
 import { createSubQuestion } from '../../domain/blockDefaults';
-import { normalizeConversationHighlights } from '../../domain/conversation';
+import {
+  createConversationMessage,
+  normalizeConversationHighlights,
+  normalizeConversationMessageInput
+} from '../../domain/conversation';
 import { createEditorId } from '../../domain/ids';
 
 export const listeningBlockDefinition: BlockDefinition = {
@@ -20,7 +24,12 @@ export const listeningBlockDefinition: BlockDefinition = {
     id: createEditorId(),
     type: 'listening',
     title: 'Listening Track',
+    instruction: 'Listen carefully and answer the questions below.',
     audioUrl: 'audio-track.mp3',
+    script: [
+      createConversationMessage({ speaker: 'Speaker A', text: 'Hello. Welcome to the listening activity.' }),
+      createConversationMessage({ speaker: 'Speaker B', text: 'Thank you. I am ready.' })
+    ],
     transcript: '',
     transcriptHighlights: [],
     transcriptVisibility: 'hidden',
@@ -35,23 +44,59 @@ export const listeningBlockDefinition: BlockDefinition = {
   }),
   form: ListeningForm as BlockFormComponent,
   preview: ListeningPreview as BlockPreviewComponent,
-  normalize: (block) => ({
-    id: typeof block.id === 'string' ? block.id : createEditorId(),
-    type: 'listening',
-    title: typeof block.title === 'string' ? block.title : '',
-    audioUrl: typeof block.audioUrl === 'string' ? block.audioUrl : '',
-    contextImageUrl: typeof block.contextImageUrl === 'string' ? block.contextImageUrl : undefined,
-    transcript: typeof block.transcript === 'string' ? block.transcript : '',
-    transcriptHighlights: normalizeConversationHighlights({
-      text: typeof block.transcript === 'string' ? block.transcript : '',
-      highlights: block.transcriptHighlights
-    }),
-    transcriptVisibility:
-      block.transcriptVisibility === 'hidden' ||
-      block.transcriptVisibility === 'after-answer' ||
-      block.transcriptVisibility === 'always'
-        ? block.transcriptVisibility
-        : 'hidden',
-    questions: Array.isArray(block.questions) ? block.questions : []
-  })
+  normalize: (block) => {
+    const transcript = typeof block.transcript === 'string' ? block.transcript : '';
+
+    const rawScript = Array.isArray(block.script)
+      ? block.script.filter((message): message is Record<string, unknown> => Boolean(message && typeof message === 'object'))
+      : [];
+
+    const script =
+      rawScript.length > 0
+        ? rawScript.map((message) => {
+            const normalized = normalizeConversationMessageInput(message) as Record<string, unknown>;
+
+            return {
+              id: typeof normalized.id === 'string' ? normalized.id : createEditorId(),
+              speaker: typeof normalized.speaker === 'string' ? normalized.speaker : '',
+              text: typeof normalized.text === 'string' ? normalized.text : '',
+              highlights: normalizeConversationHighlights(normalized)
+            };
+          })
+        : transcript
+            .split('\n')
+            .map((line) => line.trim())
+            .filter(Boolean)
+            .map((line) => {
+              const separatorIndex = line.indexOf(':');
+              const hasSpeaker = separatorIndex > 0;
+
+              return createConversationMessage({
+                speaker: hasSpeaker ? line.slice(0, separatorIndex).trim() : '',
+                text: hasSpeaker ? line.slice(separatorIndex + 1).trim() : line
+              });
+            });
+
+    return {
+      id: typeof block.id === 'string' ? block.id : createEditorId(),
+      type: 'listening',
+      title: typeof block.title === 'string' ? block.title : '',
+      instruction: typeof block.instruction === 'string' ? block.instruction : '',
+      audioUrl: typeof block.audioUrl === 'string' ? block.audioUrl : '',
+      contextImageUrl: typeof block.contextImageUrl === 'string' ? block.contextImageUrl : undefined,
+      script,
+      transcript,
+      transcriptHighlights: normalizeConversationHighlights({
+        text: transcript,
+        highlights: block.transcriptHighlights
+      }),
+      transcriptVisibility:
+        block.transcriptVisibility === 'hidden' ||
+        block.transcriptVisibility === 'after-answer' ||
+        block.transcriptVisibility === 'always'
+          ? block.transcriptVisibility
+          : 'hidden',
+      questions: Array.isArray(block.questions) ? block.questions : []
+    };
+  }
 };

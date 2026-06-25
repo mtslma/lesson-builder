@@ -1,5 +1,15 @@
 export type QuestionType = 'multiple-choice' | 'true-false' | 'open-ended';
 export type BlockAudience = 'student' | 'teacher' | 'both';
+export type LessonDocumentType = 'lesson-authoring' | 'lesson-public';
+
+export interface LessonMeta {
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  editorVersion: string;
+  sourceLessonId?: string;
+  sourceFormatVersion?: number;
+}
 
 export interface SubQuestion {
   id: string;
@@ -88,8 +98,10 @@ export interface MediaBlock extends BaseBlock {
 export interface ListeningBlock extends BaseBlock {
   type: 'listening';
   title?: string;
+  instruction?: string;
   audioUrl: string;
   contextImageUrl?: string;
+  script?: ConversationMessage[];
   transcript?: string;
   transcriptHighlights?: ConversationHighlight[];
   transcriptVisibility?: 'hidden' | 'after-answer' | 'always';
@@ -269,19 +281,25 @@ export interface BlockPreviewProps<T extends LessonBlock> {
 }
 
 export interface Lesson {
+  documentType: 'lesson-authoring';
+  formatVersion: 2;
   schemaVersion: 1;
   id: string;
   title: string;
   level: string;
   language: string;
+  meta: LessonMeta;
   blocks: LessonBlock[];
 }
 
 export interface PublicLesson {
+  documentType: 'lesson-public';
+  formatVersion: 2;
   schemaVersion: 1;
   id: string;
   title: string;
   level: string;
   language: string;
+  meta: LessonMeta;
   blocks: unknown[];
 }

@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
+  createConversationMessage,
   createConversationHighlight,
   getConversationHighlightMatches
 } from '../domain/conversation';
-import { removeItemAt, updateItemAt } from '../domain/collections';
+import { moveItem, removeItemAt, updateItemAt } from '../domain/collections';
+import { createPreviewStorageKey } from '../domain/previewState';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import { SubQuestionsEditor, RenderSubQuestionsPreview } from '../modules/Shared';
 import type {
   BlockFormProps,
@@ -76,8 +79,113 @@ const renderHighlightedTranscript = (text: string, highlights: ListeningBlock['t
   return parts;
 };
 
+type ScriptMessage = NonNullable<ListeningBlock['script']>[number];
+type ScriptHighlight = ScriptMessage['highlights'][number];
+
+const renderHighlightedScriptMessage = (message: ScriptMessage) => {
+  const matches = getConversationHighlightMatches(message);
+
+  if (matches.length === 0) {
+    return message.text;
+  }
+
+  const parts: ReactNode[] = [];
+  let cursor = 0;
+
+  matches.forEach((match) => {
+    if (match.start > cursor) {
+      parts.push(<span key={`text-${cursor}`}>{message.text.slice(cursor, match.start)}</span>);
+    }
+
+    parts.push(
+      <span
+        key={match.id}
+        className="rounded border-b px-1 py-0.5 font-semibold"
+        style={{
+          backgroundColor: match.color,
+          borderColor: match.color
+        }}
+      >
+        {message.text.slice(match.start, match.end)}
+      </span>
+    );
+
+    cursor = match.end;
+  });
+
+  if (cursor < message.text.length) {
+    parts.push(<span key={`text-${cursor}`}>{message.text.slice(cursor)}</span>);
+  }
+
+  return parts;
+};
+
 export const ListeningForm = ({ block, onUpdate }: BlockFormProps<ListeningBlock>) => {
+  const script = block.script ?? [];
   const transcriptHighlights = block.transcriptHighlights ?? [];
+
+  const updateScript = (nextScript: ScriptMessage[]) => {
+    onUpdate({ script: nextScript });
+  };
+
+  const addScriptMessage = () => {
+    updateScript([...script, createConversationMessage()]);
+  };
+
+  const removeScriptMessage = (index: number) => {
+    updateScript(removeItemAt(script, index));
+  };
+
+  const updateScriptMessage = <K extends keyof ScriptMessage>(
+    index: number,
+    field: K,
+    value: ScriptMessage[K]
+  ) => {
+    updateScript(
+      updateItemAt(script, index, (message) => ({
+        ...message,
+        [field]: value
+      }))
+    );
+  };
+
+  const moveScriptMessage = (index: number, direction: -1 | 1) => {
+    updateScript(moveItem(script, index, direction));
+  };
+
+  const addScriptHighlight = (messageIndex: number) => {
+    const message = script[messageIndex];
+    updateScriptMessage(messageIndex, 'highlights', [
+      ...message.highlights,
+      createConversationHighlight()
+    ]);
+  };
+
+  const updateScriptHighlight = <K extends keyof ScriptHighlight>(
+    messageIndex: number,
+    highlightIndex: number,
+    field: K,
+    value: ScriptHighlight[K]
+  ) => {
+    const message = script[messageIndex];
+    updateScriptMessage(
+      messageIndex,
+      'highlights',
+      updateItemAt(message.highlights, highlightIndex, (highlight) => ({
+        ...highlight,
+        [field]: value
+      }))
+    );
+  };
+
+  const removeScriptHighlight = (messageIndex: number, highlightIndex: number) => {
+    const message = script[messageIndex];
+    updateScriptMessage(
+      messageIndex,
+      'highlights',
+      removeItemAt(message.highlights, highlightIndex)
+    );
+  };
 
   const updateTranscriptHighlights = (highlights: NonNullable<ListeningBlock['transcriptHighlights']>) => {
     onUpdate({ transcriptHighlights: highlights });
@@ -91,6 +199,12 @@ export const ListeningForm = ({ block, onUpdate }: BlockFormProps<ListeningBlock
         value={block.title || ''}
         onChange={(e) => onUpdate({ title: e.target.value })}
         placeholder="Exercise title"
+      />
+      <textarea
+        className="min-h-[84px] w-full rounded border p-2 text-sm"
+        value={block.instruction || ''}
+        onChange={(e) => onUpdate({ instruction: e.target.value })}
+        placeholder="Instruction or detailed prompt for the student"
       />
       <input
         type="text"
@@ -106,6 +220,151 @@ export const ListeningForm = ({ block, onUpdate }: BlockFormProps<ListeningBlock
         onChange={(e) => onUpdate({ contextImageUrl: e.target.value })}
         placeholder="Context image URL"
       />
+
+      <div className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
+            Listening Script
+          </span>
+          <span className="text-[10px] text-slate-400">Add speakers, lines and highlights.</span>
+        </div>
+
+        <div className="space-y-3">
+          {script.map((message, messageIndex) => (
+            <div
+              key={message.id}
+              className="space-y-3 rounded-lg border border-slate-200 bg-white p-3"
+            >
+              <div className="flex items-center gap-2">
+                <div className="flex shrink-0 gap-1">
+                  <button
+                    type="button"
+                    onClick={() => moveScriptMessage(messageIndex, -1)}
+                    disabled={messageIndex === 0}
+                    className="rounded border bg-white px-2 py-1 text-xs disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    Up
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveScriptMessage(messageIndex, 1)}
+                    disabled={messageIndex === script.length - 1}
+                    className="rounded border bg-white px-2 py-1 text-xs disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    Down
+                  </button>
+                </div>
+
+                <input
+                  type="text"
+                  className="w-1/4 rounded border p-2 text-xs font-bold"
+                  value={message.speaker}
+                  onChange={(event) =>
+                    updateScriptMessage(messageIndex, 'speaker', event.target.value)
+                  }
+                  placeholder="Speaker"
+                />
+
+                <input
+                  type="text"
+                  className="flex-1 rounded border p-2 text-xs"
+                  value={message.text}
+                  onChange={(event) => updateScriptMessage(messageIndex, 'text', event.target.value)}
+                  placeholder="Dialogue"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => removeScriptMessage(messageIndex)}
+                  className="rounded border border-red-200 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
+                >
+                  Remove
+                </button>
+              </div>
+
+              <div className="space-y-2 rounded-md border border-dashed border-slate-300 bg-slate-50 p-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                    Highlights
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => addScriptHighlight(messageIndex)}
+                    className="text-xs font-bold text-blue-600"
+                  >
+                    + Add highlight
+                  </button>
+                </div>
+
+                {message.highlights.length === 0 && (
+                  <p className="text-xs text-slate-400">No highlighted sections.</p>
+                )}
+
+                {message.highlights.map((highlight, highlightIndex) => (
+                  <div key={highlight.id} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      className="flex-1 rounded border p-1.5 text-xs"
+                      value={highlight.text}
+                      onChange={(event) =>
+                        updateScriptHighlight(
+                          messageIndex,
+                          highlightIndex,
+                          'text',
+                          event.target.value
+                        )
+                      }
+                      placeholder="Exact text to highlight"
+                    />
+
+                    <select
+                      className="w-28 rounded border p-1.5 text-xs"
+                      value={highlight.color}
+                      onChange={(event) =>
+                        updateScriptHighlight(
+                          messageIndex,
+                          highlightIndex,
+                          'color',
+                          event.target.value
+                        )
+                      }
+                    >
+                      {HIGHLIGHT_COLOR_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+
+                    <span
+                      className="h-7 w-7 shrink-0 rounded border"
+                      style={{
+                        backgroundColor: highlight.color,
+                        borderColor: highlight.color
+                      }}
+                      aria-hidden="true"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => removeScriptHighlight(messageIndex, highlightIndex)}
+                      className="rounded border border-red-200 px-2 py-1 text-[10px] font-semibold text-red-500"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button type="button" onClick={addScriptMessage} className="text-xs font-bold text-blue-600">
+          + Add Line
+        </button>
+      </div>
+
       <select
         className="w-full rounded border p-2 text-sm"
         value={block.transcriptVisibility || 'hidden'}
@@ -118,10 +377,10 @@ export const ListeningForm = ({ block, onUpdate }: BlockFormProps<ListeningBlock
         <option value="always">Transcript Always Visible</option>
       </select>
       <textarea
-        className="min-h-[110px] w-full rounded border p-2 text-sm"
+        className="min-h-[90px] w-full rounded border p-2 text-sm"
         value={block.transcript || ''}
         onChange={(e) => onUpdate({ transcript: e.target.value })}
-        placeholder="Optional transcript"
+        placeholder="Optional plain transcript fallback/import field"
       />
 
       <div className="space-y-2 rounded-md border border-dashed border-slate-300 bg-slate-50 p-3">
@@ -213,7 +472,10 @@ export const ListeningForm = ({ block, onUpdate }: BlockFormProps<ListeningBlock
 
 export const ListeningPreview = ({ block }: BlockPreviewProps<ListeningBlock>) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasInteracted, setHasInteracted] = usePersistedPreviewState<boolean>(
+    createPreviewStorageKey(block.id, 'listening.interacted'),
+    false
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -221,6 +483,7 @@ export const ListeningPreview = ({ block }: BlockPreviewProps<ListeningBlock>) =
   const showTranscript =
     transcriptVisibility === 'always' ||
     (transcriptVisibility === 'after-answer' && hasInteracted);
+  const script = block.script ?? [];
 
   useEffect(() => {
     setIsPlaying(false);
@@ -278,6 +541,11 @@ export const ListeningPreview = ({ block }: BlockPreviewProps<ListeningBlock>) =
             <p className="mt-1 text-lg font-semibold text-slate-950">
               {block.title?.trim() || 'Listening exercise'}
             </p>
+            {block.instruction?.trim() && (
+              <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-600">
+                {block.instruction}
+              </p>
+            )}
 
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <button
@@ -352,17 +620,31 @@ export const ListeningPreview = ({ block }: BlockPreviewProps<ListeningBlock>) =
 
       <RenderSubQuestionsPreview
         questions={block.questions}
+        storageKey={block.id}
         onInteraction={() => setHasInteracted(true)}
       />
 
-      {showTranscript && block.transcript && (
+      {showTranscript && (script.length > 0 || block.transcript) && (
         <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
           <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
             Transcript
           </div>
-          <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-700">
-            {renderHighlightedTranscript(block.transcript, block.transcriptHighlights)}
-          </p>
+          {script.length > 0 ? (
+            <div className="mt-2 space-y-2 text-sm leading-6 text-slate-700">
+              {script.map((message) => (
+                <div key={message.id} className="flex gap-3">
+                  <span className="min-w-[72px] text-xs font-extrabold uppercase tracking-wide text-slate-900">
+                    {message.speaker || 'Audio'}:
+                  </span>
+                  <p>{renderHighlightedScriptMessage(message)}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-700">
+              {renderHighlightedTranscript(block.transcript || '', block.transcriptHighlights)}
+            </p>
+          )}
         </div>
       )}
     </div>

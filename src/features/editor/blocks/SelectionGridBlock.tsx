@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { createPreviewStorageKey } from '../domain/previewState';
 import type { BlockFormProps, BlockPreviewProps, SelectionGridBlock } from '../types/index';
 import { createSelectionGridItem } from '../domain/blockDefaults';
 import { removeItemAt, updateItemAt } from '../domain/collections';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import { shuffleArray } from '../domain/shuffle';
 
 export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionGridBlock>) => {
@@ -96,7 +98,10 @@ export const SelectionGridForm = ({ block, onUpdate }: BlockFormProps<SelectionG
 };
 
 export const SelectionGridPreview = ({ block }: BlockPreviewProps<SelectionGridBlock>) => {
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedIds, setSelectedIds] = usePersistedPreviewState<string[]>(
+    createPreviewStorageKey(block.id, 'selection-grid.answers'),
+    []
+  );
   const [shuffledItems] = useState(() => shuffleArray(block.items, `${block.id}:selection-grid`));
 
   const toggleItem = (itemId: string) =>

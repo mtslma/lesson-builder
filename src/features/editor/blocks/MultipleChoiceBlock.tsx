@@ -1,6 +1,8 @@
+import { createPreviewStorageKey } from '../domain/previewState';
 import type { BlockFormProps, BlockPreviewProps, MultipleChoiceBlock } from '../types/index';
 import { createMultipleChoiceOption } from '../domain/blockDefaults';
 import { removeItemAt, updateItemAt } from '../domain/collections';
+import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 
 export const MultipleChoiceForm = ({ block, onUpdate }: BlockFormProps<MultipleChoiceBlock>) => {
   const addOption = () =>
@@ -44,16 +46,29 @@ export const MultipleChoiceForm = ({ block, onUpdate }: BlockFormProps<MultipleC
   );
 };
 
-export const MultipleChoicePreview = ({ block }: BlockPreviewProps<MultipleChoiceBlock>) => (
-  <div className="my-6 p-5 border bg-slate-50 rounded-2xl shadow-sm space-y-3">
-    <p className="text-sm font-bold text-slate-800 font-serif">{block.question}</p>
-    <div className="space-y-2">
-      {block.options.map((o) => (
-        <label key={o.id} className="flex items-center gap-3 p-3 bg-white border rounded-xl cursor-pointer hover:border-lime-400">
-          <input type="radio" name={block.id} className="w-4 h-4 text-lime-600" />
-          <span className="text-sm font-medium text-slate-700">{o.text}</span>
-        </label>
-      ))}
+export const MultipleChoicePreview = ({ block }: BlockPreviewProps<MultipleChoiceBlock>) => {
+  const [selectedOptionId, setSelectedOptionId] = usePersistedPreviewState<string>(
+    createPreviewStorageKey(block.id, 'multiple-choice.answer'),
+    ''
+  );
+
+  return (
+    <div className="my-6 p-5 border bg-slate-50 rounded-2xl shadow-sm space-y-3">
+      <p className="text-sm font-bold text-slate-800 font-serif">{block.question}</p>
+      <div className="space-y-2">
+        {block.options.map((o) => (
+          <label key={o.id} className="flex items-center gap-3 p-3 bg-white border rounded-xl cursor-pointer hover:border-lime-400">
+            <input
+              type="radio"
+              name={block.id}
+              className="w-4 h-4 text-lime-600"
+              checked={selectedOptionId === o.id}
+              onChange={() => setSelectedOptionId(o.id)}
+            />
+            <span className="text-sm font-medium text-slate-700">{o.text}</span>
+          </label>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
