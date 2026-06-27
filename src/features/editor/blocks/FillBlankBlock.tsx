@@ -17,10 +17,7 @@ const syncGapsWithText = (block: FillBlankBlock, text: string): FillBlankBlock['
 
     return {
       id: existingGap?.id || `gap${index + 1}`,
-      acceptedAnswers: existingGap?.acceptedAnswers || [],
-      suggestions: existingGap?.suggestions,
-      hint: existingGap?.hint,
-      caseSensitive: existingGap?.caseSensitive ?? false
+      suggestions: existingGap?.suggestions
     };
   });
 };
@@ -38,9 +35,7 @@ const getUniqueSuggestions = (gaps: FillBlankBlock['gaps']) =>
   Array.from(
     new Set(
       gaps.flatMap((gap) =>
-        [...(gap.suggestions || []), ...(gap.acceptedAnswers || [])]
-          .map((suggestion) => suggestion.trim())
-          .filter(Boolean)
+        (gap.suggestions || []).map((suggestion) => suggestion.trim()).filter(Boolean)
       )
     )
   );
@@ -50,9 +45,7 @@ const getGapWidthStyle = (
   index: number,
   gapSize: FillBlankBlock['gapSize']
 ) => {
-  const options = [...(gaps[index]?.suggestions || []), ...(gaps[index]?.acceptedAnswers || [])]
-    .map((value) => value.trim())
-    .filter(Boolean);
+  const options = (gaps[index]?.suggestions || []).map((value) => value.trim()).filter(Boolean);
   const longest = options.reduce((max, value) => Math.max(max, value.length), 0);
 
   const safeLength = Math.max(6, Math.min(longest || 8, 16));
@@ -173,7 +166,7 @@ const renderSection = (
                     }}
                     style={getGapWidthStyle(gaps, currentGapIndex, gapSize)}
                     className="mx-1 my-0.5 inline-block max-w-full align-middle rounded-lg border border-slate-300 bg-white px-2.5 py-[0.1rem] text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-500"
-                    placeholder={gaps[currentGapIndex]?.hint || '...'}
+                    placeholder="..."
                   />
                 ))}
             </span>

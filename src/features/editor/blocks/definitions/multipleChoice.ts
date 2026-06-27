@@ -26,8 +26,7 @@ export const multipleChoiceBlockDefinition: BlockDefinition = {
       options: [
         { id: firstOptionId, text: 'Option A' },
         { id: secondOptionId, text: 'Option B' }
-      ],
-      correctOptionIds: [firstOptionId]
+      ]
     };
   },
   form: MultipleChoiceForm as BlockFormComponent,
@@ -43,19 +42,11 @@ export const multipleChoiceBlockDefinition: BlockDefinition = {
           }))
       : [];
 
-    const validOptionIds = new Set(options.map((option) => option.id));
-
     return {
       id: typeof block.id === 'string' ? block.id : createEditorId(),
       type: 'multiple-choice',
       question: typeof block.question === 'string' ? block.question : '',
-      options,
-      correctOptionIds: Array.isArray(block.correctOptionIds)
-        ? block.correctOptionIds.filter(
-            (optionId): optionId is string =>
-              typeof optionId === 'string' && validOptionIds.has(optionId)
-          )
-        : []
+      options
     };
   }
 };

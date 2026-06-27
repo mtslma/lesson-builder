@@ -53,22 +53,19 @@ export const createSubQuestion = (
     case 'multiple-choice':
       return {
         ...base,
-        options: (legacyOptions || ['Option A', 'Option B']).map(createQuestionOption),
-        correctOptionIds: []
+        options: (legacyOptions || ['Option A', 'Option B']).map(createQuestionOption)
       };
     case 'audio-missing-word':
       return {
         ...base,
         instructions: 'Choose the missing word you hear.',
-        options: (legacyOptions || ['Option A', 'Option B']).slice(0, 2).map(createQuestionOption),
-        correctOptionIds: []
+        options: (legacyOptions || ['Option A', 'Option B']).slice(0, 2).map(createQuestionOption)
       };
     case 'checkbox':
     case 'image-choice':
       return {
         ...base,
-        options: (legacyOptions || ['Option A', 'Option B', 'Option C']).map(createQuestionOption),
-        correctOptionIds: []
+        options: (legacyOptions || ['Option A', 'Option B', 'Option C']).map(createQuestionOption)
       };
     case 'audio-sequencing':
       return {
@@ -76,13 +73,12 @@ export const createSubQuestion = (
         instructions: 'Number the items in the order you hear them.',
         options: ['First item', 'Second item', 'Third item'].map(createQuestionOption)
       };
-    case 'true-false':
-      return { ...base, answer: 'True' };
     case 'open-ended':
     case 'short-answer':
     case 'find-in-text':
     case 'correct-false':
-      return { ...base, acceptedAnswers: [] };
+    case 'true-false':
+      return base;
     case 'fill-in-the-blank':
       return {
         ...base,
@@ -142,9 +138,6 @@ export const normalizeSubQuestion = (input: unknown): SubQuestion => {
           };
         })
       : base.options,
-    answer: typeof candidate.answer === 'string' ? candidate.answer : base.answer,
-    acceptedAnswers: normalizeStringArray(candidate.acceptedAnswers),
-    correctOptionIds: normalizeStringArray(candidate.correctOptionIds),
     wordSuggestions: normalizeStringArray(candidate.wordSuggestions),
     pairs: Array.isArray(candidate.pairs)
       ? candidate.pairs.map((pair) => {

@@ -22,7 +22,7 @@ export const fillBlankBlockDefinition: BlockDefinition = {
     columns: 1,
     mode: 'typing',
     gapSize: 'wide',
-    gaps: [{ id: 'gap1', acceptedAnswers: [], suggestions: ['sample'], hint: 'Use the word bank', caseSensitive: false }]
+    gaps: [{ id: 'gap1', suggestions: ['sample'] }]
   }),
   form: FillBlankForm as BlockFormComponent,
   preview: FillBlankPreview as BlockPreviewComponent,
@@ -49,16 +49,10 @@ export const fillBlankBlockDefinition: BlockDefinition = {
 
         return {
           id: gap && typeof gap.id === 'string' ? gap.id : `gap${index + 1}`,
-          acceptedAnswers:
-            gap && Array.isArray(gap.acceptedAnswers)
-              ? gap.acceptedAnswers.filter((answer): answer is string => typeof answer === 'string')
-              : [],
           suggestions:
             gap && Array.isArray(gap.suggestions)
               ? gap.suggestions.filter((suggestion): suggestion is string => typeof suggestion === 'string')
-              : undefined,
-          hint: gap && typeof gap.hint === 'string' ? gap.hint : undefined,
-          caseSensitive: gap && typeof gap.caseSensitive === 'boolean' ? gap.caseSensitive : false
+              : undefined
         };
       })
     };

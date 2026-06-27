@@ -1,4 +1,3 @@
-import { normalizeSubQuestions } from '../../domain/blockDefaults';
 import { TableProperties } from 'lucide-react';
 import { TableCompletionForm, TableCompletionPreview } from '../TableCompletionBlock';
 import type { BlockDefinition, BlockFormComponent, BlockPreviewComponent } from '../../config/blockDefinition';
@@ -22,8 +21,7 @@ export const tableCompletionBlockDefinition: BlockDefinition = {
       { id: createEditorId(), cells: ['Row 1', ''] },
       { id: createEditorId(), cells: ['Row 2', ''] },
       { id: createEditorId(), cells: ['Row 3', ''] }
-    ],
-    questions: []
+    ]
   }),
   form: TableCompletionForm as BlockFormComponent,
   preview: TableCompletionPreview as BlockPreviewComponent,
@@ -48,7 +46,6 @@ export const tableCompletionBlockDefinition: BlockDefinition = {
               ? row.cells.filter((cell): cell is string => typeof cell === 'string').slice(0, 4)
               : ['', '']
           }))
-      : [],
-    questions: normalizeSubQuestions(block.questions)
+      : []
   })
 };

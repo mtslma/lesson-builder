@@ -1,0 +1,1184 @@
+{
+  "documentType": "lesson-authoring",
+  "formatVersion": 2,
+  "schemaVersion": 1,
+  "id": "llm-block-examples",
+  "title": "LLM Block Examples",
+  "level": "A1",
+  "language": "en",
+  "meta": {
+    "slug": "llm-block-examples",
+    "createdAt": "2026-06-24T00:00:00.000Z",
+    "updatedAt": "2026-06-24T00:00:00.000Z",
+    "editorVersion": "english-platform-editor",
+    "sourceLessonId": "book-1-lesson-1-hello-this-is-me"
+  },
+  "blocks": [
+    {
+      "id": "ee99e54f-7f7a-4369-9692-fac0f32b24d2",
+      "type": "page-break",
+      "pageNumber": 1,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "p1-h1",
+      "type": "heading",
+      "content": "First Contact",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "p1-intro",
+      "type": "paragraph",
+      "content": "Let's learn how to ask and answer simple questions about yourself.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "p1-conv1",
+      "type": "conversation",
+      "title": "Meeting Someone",
+      "instruction": "",
+      "imageUrl": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1000",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
+      "layout": "script",
+      "messages": [
+        {
+          "id": "p1-conv1-m1",
+          "speaker": "Sarah",
+          "text": "Hello!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h1",
+              "text": "Hello",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m2",
+          "speaker": "Daniel",
+          "text": "Hi!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h2",
+              "text": "Hi",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m3",
+          "speaker": "Sarah",
+          "text": "My name is Sarah Watson. What's your name?",
+          "highlights": [
+            {
+              "id": "p1-conv1-h3",
+              "text": "My name is",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "p1-conv1-h4",
+              "text": "What's your name",
+              "color": "#fecdd3"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m4",
+          "speaker": "Daniel",
+          "text": "I'm Daniel Morales.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h5",
+              "text": "I'm",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m5",
+          "speaker": "Sarah",
+          "text": "Nice to meet you, Daniel.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h6",
+              "text": "Nice to meet you",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m6",
+          "speaker": "Daniel",
+          "text": "Nice to meet you too.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h7",
+              "text": "Nice to meet you too",
+              "color": "#fde68a"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m7",
+          "speaker": "Sarah",
+          "text": "My friends are calling me, bye bye.",
+          "highlights": [
+            {
+              "id": "p1-conv1-h8",
+              "text": "bye bye",
+              "color": "#bfdbfe"
+            }
+          ]
+        },
+        {
+          "id": "p1-conv1-m8",
+          "speaker": "Daniel",
+          "text": "See you!",
+          "highlights": [
+            {
+              "id": "p1-conv1-h9",
+              "text": "See you",
+              "color": "#bfdbfe"
+            }
+          ]
+        }
+      ],
+      "substitutionBox": [
+        {
+          "original": "Hello!",
+          "alternatives": [
+            "Hi!",
+            "Good morning!",
+            "Good afternoon!"
+          ]
+        },
+        {
+          "original": "My name is Sarah.",
+          "alternatives": [
+            "I'm Sarah.",
+            "I am Sarah."
+          ]
+        },
+        {
+          "original": "Nice to meet you.",
+          "alternatives": [
+            "Nice to meet you too.",
+            "It's nice to meet you."
+          ]
+        },
+        {
+          "original": "Bye!",
+          "alternatives": [
+            "See you!",
+            "See you later!"
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fc1",
+      "type": "flashcards",
+      "title": "Essential Greeting Expressions",
+      "category": "",
+      "variant": "grid",
+      "tags": [],
+      "cards": [
+        {
+          "id": "p1-fc1-c2",
+          "expressions": [
+            "Good morning! ",
+            "Good afternoon! ",
+            "Good evening!",
+            "Good night!"
+          ],
+          "frontImage": "",
+          "backText": "Use these expressions depending on the time of day.",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "shortMeaning": "Use these expressions depending on the time of day.",
+          "tags": []
+        },
+        {
+          "id": "p1-fc1-c3",
+          "expressions": [
+            "My name is... ",
+            "I am... / I'm..."
+          ],
+          "frontImage": "",
+          "backText": "Use these expressions to say your name.",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "shortMeaning": "Use these expressions to say your name.",
+          "tags": []
+        },
+        {
+          "id": "p1-fc1-c4",
+          "expressions": [
+            "What's your name?"
+          ],
+          "frontImage": "",
+          "backText": "Use this question to ask a person's name.",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "shortMeaning": "Use this question to ask a person's name.",
+          "tags": []
+        },
+        {
+          "id": "p1-fc1-c5",
+          "expressions": [
+            "Nice to meet you (too).",
+            "Glad to meet you (too)",
+            "Pleased to meet you (too)."
+          ],
+          "frontImage": "",
+          "backText": "Use these expressions when you meet a person for the first time.",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "shortMeaning": "Use these expressions when you meet a person for the first time.",
+          "tags": []
+        },
+        {
+          "id": "p1-fc1-c6",
+          "expressions": [
+            "Bye!",
+            "See you!"
+          ],
+          "frontImage": "",
+          "backText": "Use these expressions to finish a conversation.",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "shortMeaning": "Use these expressions to finish a conversation.",
+          "tags": []
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "56ffe1ad-227c-4b8f-ac9a-6d3f7d1df918",
+      "type": "roleplay",
+      "title": "",
+      "objective": "Practice the dialog \"Meeting Someone\". Change the names and expressions used.",
+      "customFields": [
+        {
+          "id": "roleplay-field-ijfqmek",
+          "label": "Student A",
+          "value": "Starts Being Sarah."
+        },
+        {
+          "id": "roleplay-field-2rczz8p",
+          "label": "Student B",
+          "value": "Starts Being Daniel."
+        }
+      ],
+      "scenario": "",
+      "studentACard": "",
+      "studentBCard": "",
+      "usefulPhrases": [],
+      "vocabularySupport": [],
+      "teacherNotes": "",
+      "characters": [
+        {
+          "name": "Student A",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Starts being Sarah."
+            }
+          ]
+        },
+        {
+          "name": "Student B",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Starts being Daniel."
+            }
+          ]
+        }
+      ],
+      "tips": "Try changing the expressions and the names of the characters.",
+      "audience": "both"
+    },
+    {
+      "id": "d5b2945c-62de-4a6e-891a-bc6726a2d9f7",
+      "type": "letter-number",
+      "title": "26 letters",
+      "instruction": "",
+      "variant": "letters",
+      "density": "compact",
+      "itemsPerRow": 6,
+      "itemsPerPage": 26,
+      "items": [
+        {
+          "id": "febad497-dd1a-4f24-a7da-7869651be1ea",
+          "symbol": "A",
+          "label": "**ei**"
+        },
+        {
+          "id": "2bfdf82c-c817-46a0-92fd-bc8836aa3cc3",
+          "symbol": "B",
+          "label": "**bi**"
+        },
+        {
+          "id": "fe6cbb5b-f70a-4eb2-b9b4-ad71627b2675",
+          "symbol": "C",
+          "label": "**ci**"
+        },
+        {
+          "id": "6c555966-848e-4a5f-931c-241721bf6cbc",
+          "symbol": "D",
+          "label": "**di**"
+        },
+        {
+          "id": "fd91d3e8-1c06-4edd-8bc8-683dd10f2f0d",
+          "symbol": "E",
+          "label": "**ii**"
+        },
+        {
+          "id": "967fa872-1c23-4a24-9d21-d3c09e6d45ca",
+          "symbol": "F",
+          "label": "**éfi**"
+        },
+        {
+          "id": "03f30ae0-5fa1-4611-be02-e59f3003156d",
+          "symbol": "G",
+          "label": "**dji**"
+        },
+        {
+          "id": "b52411ba-a7fe-487f-a33f-a8cfe6067ff7",
+          "symbol": "H",
+          "label": "**eight**"
+        },
+        {
+          "id": "865111f3-9895-4e96-8c87-7d274899e49f",
+          "symbol": "I",
+          "label": "**ái**"
+        },
+        {
+          "id": "f306ecc0-07c0-4c11-8e16-0b60ad272f06",
+          "symbol": "J",
+          "label": "**jey**"
+        },
+        {
+          "id": "52104bb3-82dd-4861-ae9c-99a6a864f07e",
+          "symbol": "K",
+          "label": "**key**"
+        },
+        {
+          "id": "8b5ecde7-2959-4fce-8a76-38247c971c7d",
+          "symbol": "L",
+          "label": "**él**"
+        },
+        {
+          "id": "e86e7f76-19f4-4ac3-8109-0a692a26a344",
+          "symbol": "M",
+          "label": "**émm**"
+        },
+        {
+          "id": "952a3bc3-be45-4719-886c-7c94cdaee603",
+          "symbol": "N",
+          "label": "**en**"
+        },
+        {
+          "id": "b0d919f9-c84a-4df1-84b9-b8777f392841",
+          "symbol": "O",
+          "label": "**ou**"
+        },
+        {
+          "id": "be4cee84-0a77-4229-8305-4a40f29de174",
+          "symbol": "P",
+          "label": "**pi**"
+        },
+        {
+          "id": "ca0c72cd-41cf-4f5e-af3f-67b55a05db7b",
+          "symbol": "Q",
+          "label": "**cue**"
+        },
+        {
+          "id": "65851b16-549f-4022-8bf8-132b2def1088",
+          "symbol": "R",
+          "label": "**arr**"
+        },
+        {
+          "id": "a1b36b97-2ada-4117-bebf-e85b0c27e082",
+          "symbol": "S",
+          "label": "**éss**"
+        },
+        {
+          "id": "6a419183-9dc7-4d8c-8e17-ff0335ebef09",
+          "symbol": "T",
+          "label": "**tí**"
+        },
+        {
+          "id": "a2eb59ed-1bfa-4104-903f-c541960ff06d",
+          "symbol": "U",
+          "label": "**you**"
+        },
+        {
+          "id": "c760877d-1599-4ed1-aff6-28ee77122e10",
+          "symbol": "V",
+          "label": "**vii**"
+        },
+        {
+          "id": "397d5935-77f3-4b2a-b58b-2ea792bf97f2",
+          "symbol": "W",
+          "label": "**double you**"
+        },
+        {
+          "id": "77343542-cf27-439f-a488-afef14290630",
+          "symbol": "X",
+          "label": "**éxx**"
+        },
+        {
+          "id": "a0db1e53-ef2a-4b1e-bd7a-349a5f119bd8",
+          "symbol": "Y",
+          "label": "**uai**"
+        },
+        {
+          "id": "f2b3ac3b-590e-42b6-9451-8db42c3e4b8c",
+          "symbol": "Z",
+          "label": "**zi**"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p1-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the mini-dialogue.",
+      "text": "Hi!\n[] , what's your name?\nMy [] is John. And yours?\nMy name is []. Nice to [] you!\n[] too meet you [] !\nI need to go now, [].\n[] you!",
+      "columns": 1,
+      "mode": "typing",
+      "gapSize": "normal",
+      "gaps": [
+        {
+          "id": "gap1"
+        },
+        {
+          "id": "gap2"
+        },
+        {
+          "id": "gap3"
+        },
+        {
+          "id": "gap4"
+        },
+        {
+          "id": "gap5"
+        },
+        {
+          "id": "gap6"
+        },
+        {
+          "id": "gap7"
+        },
+        {
+          "id": "gap8"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "081580b2-fe72-481d-884a-4af91f3058b7",
+      "type": "conversation-prompts",
+      "title": "Spelling Practice",
+      "instruction": "Answer the prompts orally.",
+      "speakerMode": "single",
+      "speakers": [
+        {
+          "id": "e1205fbc-092e-431d-95af-713171c76322",
+          "name": "Speaker 1"
+        },
+        {
+          "id": "3eba1aaa-66ef-47f4-9bd3-c10e16de765f",
+          "name": "Speaker 2"
+        }
+      ],
+      "prompts": [],
+      "exchanges": [
+        {
+          "id": "04aa790f-e6e5-4d83-89a4-823cebe13318",
+          "speakerId": "3eba1aaa-66ef-47f4-9bd3-c10e16de765f",
+          "text": "Spell your **full name.**"
+        },
+        {
+          "id": "33b2c55d-9ad4-41ef-ba68-844f4bd1598f",
+          "speakerId": "3eba1aaa-66ef-47f4-9bd3-c10e16de765f",
+          "text": "Spell the word **name**."
+        },
+        {
+          "id": "80811f9a-d613-4d0d-8b4b-6535876b6a58",
+          "speakerId": "e1205fbc-092e-431d-95af-713171c76322",
+          "text": "Spell your **teacher's first name.**"
+        },
+        {
+          "id": "3bbd144f-6847-4606-85ad-60a1bfbcd198",
+          "speakerId": "e1205fbc-092e-431d-95af-713171c76322",
+          "text": "Spell your **mother's last name.**"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-grammar1",
+      "type": "advanced-grammar",
+      "title": "Basic Structure",
+      "explanation": "",
+      "details": "We use DO combined with I, You, They and We",
+      "structureTitle": "Structure table",
+      "structureTableHeaders": [
+        "Use",
+        "Pattern",
+        "Example"
+      ],
+      "structureTableRows": [],
+      "examples": [],
+      "commonMistakes": [],
+      "comparisons": [],
+      "miniPractice": [],
+      "tableHeaders": [
+        "Use",
+        "Pattern",
+        "Example"
+      ],
+      "tableRows": [
+        {
+          "cells": [
+            {
+              "text": "Question",
+              "highlights": []
+            },
+            {
+              "text": "Do + person + action?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h1",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h2",
+                  "text": "action",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "e42339a0-6c43-4de1-b043-9eca905f5d59",
+                  "text": "person",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Do you study English?",
+              "highlights": [
+                {
+                  "id": "p2-g1-h3",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h4",
+                  "text": "study English",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "5a835f42-c6f4-4c6a-a70a-3ee7d4adb665",
+                  "text": "you",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Short Positive Answer",
+              "highlights": []
+            },
+            {
+              "text": "Yes, person + do.",
+              "highlights": [
+                {
+                  "id": "p2-g1-h5",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "bef5ca74-0333-45af-bb91-5e3dd7bf61f7",
+                  "text": "person",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "p2-g1-h7",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "c54efd93-85b4-4f2d-af68-23c6f2b37d5e",
+                  "text": "I",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Short Negative Answer",
+              "highlights": []
+            },
+            {
+              "text": "No, person + don't.",
+              "highlights": [
+                {
+                  "id": "p2-g1-h8",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "p2-g1-h9",
+                  "text": "person",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't",
+              "highlights": [
+                {
+                  "id": "p2-g1-h10",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "d89d2759-c5b2-4611-92e7-9dffbbb61f18",
+                  "text": "I",
+                  "color": "#d9f99d"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "15d32b1b-42d8-440e-80a2-c98d68ece137",
+      "type": "multiple-choice",
+      "question": "Do you understand?",
+      "options": [
+        {
+          "id": "230eb2da-af0f-40eb-90f5-c52dbf31ffbb",
+          "text": "Yes, I do."
+        },
+        {
+          "id": "f8f54e61-cfbb-4e9b-b080-f7b2251ee895",
+          "text": "No, I don't."
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "p2-listen1",
+      "type": "listening",
+      "title": "Listen and Answer",
+      "instruction": "In this exercise, you are Sofia. Answer the questions.",
+      "audioUrl": "audio/example.mp3",
+      "contextImageUrl": "https://images.unsplash.com/photo-1690444963408-9573a17a8058?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "script": [
+        {
+          "id": "b4e2e2c3-9b12-4db4-9a36-6c445e98ffad",
+          "speaker": "Lucas",
+          "text": "Hi Sofia! Do you study English?",
+          "highlights": [
+            {
+              "id": "ace76cb1-35ec-49f9-baa6-4b6e173397d8",
+              "text": "Do",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "7642da58-5eb3-4e50-9dc2-e5b13ffeaa48",
+              "text": "you",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "6e775391-4e2c-482f-b819-51dc67e2e8c4",
+              "text": "study English",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "ba7fd5a4-d6fc-47f9-bacd-f6c033e2765b",
+          "speaker": "Sofia",
+          "text": "Hello! Yes, I do. I study at night.",
+          "highlights": [
+            {
+              "id": "8f4dc50e-8e48-4c08-b915-362bd181b771",
+              "text": "I",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "41aba38c-3249-4c76-9bde-7dd01cf35c19",
+              "text": "do",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "fa9ea78e-7d5b-417b-bf66-2a874dbc3104",
+              "text": "study at night",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "37652067-f3c3-464d-9ee1-5a73a77cf95e",
+          "speaker": "Lucas",
+          "text": "Do you work?",
+          "highlights": [
+            {
+              "id": "bd788086-4a13-426c-a05a-297137039ce1",
+              "text": "you",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "beeae363-4f60-41a7-a740-4d5face64757",
+              "text": "Do",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "41db9d91-1bf8-46d1-8f91-dc1bf99a4d6f",
+              "text": "work",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "cc8c539d-c26f-453f-9ca0-b39e438f3b28",
+          "speaker": "Sofia",
+          "text": "No, I don't. I don't have time to.",
+          "highlights": [
+            {
+              "id": "d93b13d0-182c-4c88-a17f-fc59f8887f5d",
+              "text": "I",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "b5c737df-06fe-478c-82ad-ff50a3b4de5a",
+              "text": "don't",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "bcd75886-50b7-4a56-b12d-da63725314d9",
+              "text": "don't have time to",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "3f6d521c-6b1c-4080-a30b-d214efd707d6",
+          "speaker": "Lucas",
+          "text": "Do you like music?",
+          "highlights": [
+            {
+              "id": "f5e045d5-6dd5-437b-a253-e30af34351dd",
+              "text": "you",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "f6ea1eb1-339f-499d-b2e0-e45db42f1cd8",
+              "text": "like music",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "37b827e1-cbde-4348-b626-ece4649e4734",
+              "text": "",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "88dedb8e-b60b-47ea-979c-3593b95f8703",
+          "speaker": "Sofia",
+          "text": "Yes, I do. I like rock.",
+          "highlights": [
+            {
+              "id": "a8704531-c259-4828-8a73-4b1b78bd5297",
+              "text": "I",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "2f244302-c22f-4989-ac48-f90b7c12e65e",
+              "text": "do",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "54c067e9-144a-41c5-b422-29c33afd2caf",
+              "text": "like rock",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "3cdb427c-2adb-401c-9e38-0c27f6c41d39",
+          "speaker": "Lucas",
+          "text": "Cool! Let's go to a show someday...",
+          "highlights": [
+            {
+              "id": "3093164d-7194-4ea2-9cc8-c07952871185",
+              "text": "",
+              "color": "#d9f99d"
+            }
+          ]
+        },
+        {
+          "id": "d82d83ec-04db-43a1-8ee8-5561a31fe153",
+          "speaker": "Sofia",
+          "text": "Yes, let's do it!",
+          "highlights": []
+        }
+      ],
+      "transcriptVisibility": "hidden",
+      "questions": [
+        {
+          "id": "p2-listen1-q1",
+          "type": "multiple-choice",
+          "question": "Do you study English?",
+          "options": [
+            {
+              "id": "e39799b5-452a-4789-94f3-a44d8b3994a4",
+              "text": "Yes, I do. "
+            },
+            {
+              "id": "e5532f99-1321-4fb3-a1a7-ceabad34ef89",
+              "text": "No, I don't."
+            }
+          ],
+          "instructions": "",
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "p2-listen1-q2",
+          "type": "multiple-choice",
+          "question": "Do you work?",
+          "options": [
+            {
+              "0": "T",
+              "1": "r",
+              "2": "u",
+              "3": "e",
+              "id": "36b9f84e-618d-4eae-93e6-32c7548907b4",
+              "text": "Yes, I do."
+            },
+            {
+              "0": "F",
+              "1": "a",
+              "2": "l",
+              "3": "s",
+              "4": "e",
+              "id": "f2f8cc24-953a-4b96-965d-67aac90213fa",
+              "text": "No, I don't."
+            }
+          ],
+          "instructions": "",
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "p2-listen1-q3",
+          "type": "multiple-choice",
+          "question": "Do you like reggae?",
+          "options": [
+            {
+              "0": "T",
+              "1": "r",
+              "2": "u",
+              "3": "e",
+              "id": "92af2f65-ab8c-49bc-a551-43e59e4c47d3",
+              "text": "Yes, I do. I like reggae."
+            },
+            {
+              "0": "F",
+              "1": "a",
+              "2": "l",
+              "3": "s",
+              "4": "e",
+              "id": "30580e2e-93af-4a0a-8285-720bc5c8162a",
+              "text": "No, I don't. I like rock."
+            }
+          ],
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "p2-listen1-q4",
+          "type": "open-ended",
+          "question": "Do you have time to work?",
+          "instructions": "",
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "accbd521-e6d7-4f1a-badb-8ddf2fc9e435",
+          "type": "fill-in-the-blank",
+          "question": "What kind of music do you like?",
+          "instructions": "I [] rock.",
+          "columns": 1,
+          "mode": "typing",
+          "wordSuggestions": [
+            "Like",
+            "Study",
+            "Don't",
+            "Do"
+          ],
+          "gaps": [
+            {
+              "id": "830107d8-afae-4e9c-82d7-a7ae859bb554"
+            }
+          ],
+          "sequence": []
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "aab5b4f6-9618-420a-b237-bd3f88b7d9b7",
+      "type": "vocabulary-match",
+      "title": "Match the related items",
+      "instruction": "Connect each item on the left to its related item on the right.",
+      "variant": "classic",
+      "matchMode": "image-to-word",
+      "shuffleLeft": true,
+      "shuffleRight": true,
+      "shuffleVersion": 3,
+      "showReferenceBadges": true,
+      "showCorrectMatches": true,
+      "pairs": [
+        {
+          "id": "4e0cdca0-1e95-45de-b1a0-e1fac156bda3",
+          "left": "https://images.pexels.com/photos/8107172/pexels-photo-8107172.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Have breakfast",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "3cd7d0ca-d662-4506-a9fa-b3afe15ed2c6",
+          "left": "https://images.pexels.com/photos/6763078/pexels-photo-6763078.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Brush your teeth",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "640e46d8-0154-4364-b204-ccd7a9a008d8",
+          "left": "https://images.pexels.com/photos/13396812/pexels-photo-13396812.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Take a shower",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "9738755f-37f6-435f-806e-02c0154fb830",
+          "left": "https://images.pexels.com/photos/4963351/pexels-photo-4963351.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Go to school/ work",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "cd9bab7c-ed3e-4264-b393-113b1643f330",
+          "left": "https://images.pexels.com/photos/34529777/pexels-photo-34529777.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Check your phone",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "f85b9c14-6293-4519-b0d9-79605426b1ce",
+          "left": "https://images.pexels.com/photos/6760856/pexels-photo-6760856.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "Watch TV",
+          "rightType": "text",
+          "rightLabel": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "f1891d01-4ffe-424d-848d-5767b7f0ec5d",
+      "type": "question-set",
+      "title": "Make questions with Do you + routine activities + time expressions",
+      "instruction": "Example: Do you brush your teeth every day?",
+      "practiceMode": "question-builder",
+      "questions": [
+        {
+          "id": "8cea2964-e20d-4976-9602-87fdca0fb2f4",
+          "type": "open-ended",
+          "question": "Write a question for this answer: Yes, I do. I exercise in the morning.",
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "c2f2b04f-1fa2-49ba-b78d-477ae8a4aeca",
+          "type": "open-ended",
+          "question": "Write a question for this answer: No, I don't. I don't study every day.",
+          "wordSuggestions": [],
+          "sequence": []
+        },
+        {
+          "id": "d91d2f07-5d8d-4e60-a68a-2f79fe11baef",
+          "type": "open-ended",
+          "question": "Write a question for this answer: Yes, I do. I take a shower in the morning every day.",
+          "wordSuggestions": [],
+          "sequence": []
+        }
+      ],
+      "questionBuilderItems": [
+        {
+          "id": "0cc65d06-5d0d-4b75-9fcb-62677ce5f2c9",
+          "mode": "answer-given",
+          "questionText": "",
+          "answerText": "Yes, I do. I exercise in the morning."
+        },
+        {
+          "id": "d8014493-7949-422b-ae17-2956d91bad9f",
+          "mode": "answer-given",
+          "questionText": "",
+          "answerText": "No, I don't. I don't study every day."
+        },
+        {
+          "id": "32f7eb55-9a53-43df-8a5b-14f0e85d4057",
+          "mode": "answer-given",
+          "questionText": "",
+          "answerText": "Yes, I do. I take a shower in the morning every day."
+        },
+        {
+          "id": "4e3c3c99-413d-4297-a4ab-6e7d14d32f21",
+          "mode": "free-both",
+          "questionText": "",
+          "answerText": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "62dbe8a9-91c5-4537-811f-db41a233bdd0",
+      "type": "teacher-note",
+      "audience": "teacher",
+      "title": "Learning routine activities",
+      "content": "Ask your teacher routine activities you are curious about! Use \"how do I say _____ in English?\""
+    },
+    {
+      "id": "f452beac-459f-4e94-a39e-4c8e4805ee66",
+      "type": "example-boxes",
+      "title": "How to use A or AN",
+      "explanation": "We use a and an before **singular nouns.** \n**A noun** is a word for a person, place, animal, or thing.",
+      "leftTitle": "A",
+      "leftContent": "Before a consonant sound.\n\nA **b**ook\nA **c**ar\nA **c**hair\nA **b**ook\nA **m**ouse",
+      "rightTitle": "AN",
+      "rightContent": "Before a vowel sound.\n\nAn **a**pple\nAn **e**gg\nAn **i**Phone\nAn **u**mbrella\nAn **e**raser\n",
+      "audience": "both"
+    },
+    {
+      "id": "3c527105-79a7-4cc9-a93b-538046a9f8c1",
+      "type": "table-completion",
+      "title": "Missing Information",
+      "instruction": "Read the dialog \"Hello New Friend\" and complete the table.",
+      "audioUrl": "",
+      "headers": [
+        "Item",
+        "character 1",
+        "character 2"
+      ],
+      "rows": [
+        {
+          "id": "7d2888d8-bbd8-4f63-a96c-9a970ad14c56",
+          "cells": [
+            "Name",
+            "(Nico)",
+            ""
+          ]
+        },
+        {
+          "id": "ed6c661a-e61d-4dad-bfa0-efebeae73ef1",
+          "cells": [
+            "Nationality",
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "30efce2d-7187-47bc-851d-6a0a6b04ad2d",
+          "cells": [
+            "Profession",
+            "",
+            ""
+          ]
+        },
+        {
+          "id": "715c2120-2bbf-4e9c-8e71-5c4d16b48c9c",
+          "cells": [
+            "Age",
+            "",
+            ""
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "d7378753-e30b-425d-bd86-76be24ee9db8",
+      "type": "writing-task",
+      "title": "Knowing You Better",
+      "prompt": "Write a short paragraph about yourself.\nSay a greeting, your name, your age, your profession, what you do, your country, and your nationality.",
+      "sentenceStarters": [],
+      "suggestedVocabulary": [],
+      "grammarReminder": "",
+      "checklist": [],
+      "minWords": 25,
+      "rubric": "",
+      "audience": "both"
+    }
+  ]
+}

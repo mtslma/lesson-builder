@@ -23,12 +23,6 @@ const QUESTION_TYPE_LABELS: Array<{ value: SubQuestion['type']; label: string }>
 
 const countGapTokens = (value: string) => (value.match(/\[\]/g) || []).length;
 
-const parseLines = (value: string) =>
-  value
-    .split('\n')
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-
 const syncQuestionGapsWithText = (question: SubQuestion, value: string) => {
   const gapCount = countGapTokens(value);
   const currentGaps = question.gaps || [];
@@ -215,37 +209,13 @@ export const SubQuestionsEditor: React.FC<{
 
   const removeOption = (questionIndex: number, optionIndex: number) => {
     const question = questions[questionIndex];
-    const optionToRemove = question.options?.[optionIndex];
     const nextOptions = removeItemAt(question.options || [], optionIndex);
     update(questionIndex, 'options', nextOptions);
-
-    if (optionToRemove && question.correctOptionIds?.includes(optionToRemove.id)) {
-      update(
-        questionIndex,
-        'correctOptionIds',
-        question.correctOptionIds.filter((optionId) => optionId !== optionToRemove.id)
-      );
-    }
   };
 
   const moveOption = (questionIndex: number, optionIndex: number, direction: -1 | 1) => {
     const currentOptions = questions[questionIndex]?.options || [];
     update(questionIndex, 'options', moveItem(currentOptions, optionIndex, direction));
-  };
-
-  const toggleCorrectOption = (questionIndex: number, optionId: string, checked: boolean) => {
-    const question = questions[questionIndex];
-    const currentCorrectIds = question.correctOptionIds || [];
-    const nextCorrectIds =
-      question.type === 'checkbox'
-        ? checked
-          ? [...currentCorrectIds, optionId]
-          : currentCorrectIds.filter((currentId) => currentId !== optionId)
-        : checked
-          ? [optionId]
-          : [];
-
-    update(questionIndex, 'correctOptionIds', nextCorrectIds);
   };
 
   return (
@@ -325,7 +295,7 @@ export const SubQuestionsEditor: React.FC<{
               {(q.options || []).map((option, optionIndex) => (
                 <div
                   key={option.id}
-                  className="grid gap-2 rounded-lg border border-slate-200 p-3 md:grid-cols-[minmax(0,1fr)_auto_auto_auto]"
+                  className="grid gap-2 rounded-lg border border-slate-200 p-3 md:grid-cols-[minmax(0,1fr)_auto_auto]"
                 >
                   <input
                     type="text"
@@ -334,15 +304,6 @@ export const SubQuestionsEditor: React.FC<{
                     onChange={(e) => updateOption(i, optionIndex, { text: e.target.value })}
                     placeholder="Option text"
                   />
-                  <label className="flex items-center gap-2 rounded border border-slate-200 px-3 py-2 text-xs font-medium text-slate-700">
-                    <input
-                      type={q.type === 'checkbox' ? 'checkbox' : 'radio'}
-                      name={`correct-${q.id}`}
-                      checked={(q.correctOptionIds || []).includes(option.id)}
-                      onChange={(e) => toggleCorrectOption(i, option.id, e.target.checked)}
-                    />
-                    {q.type === 'audio-sequencing' ? 'Reference' : 'Correct'}
-                  </label>
                   {q.type === 'audio-sequencing' ? (
                     <div className="flex items-center gap-1">
                       <button
@@ -380,26 +341,6 @@ export const SubQuestionsEditor: React.FC<{
                 + Add option
               </button>
             </div>
-          )}
-
-          {q.type === 'open-ended' && (
-            <textarea
-              className="min-h-[90px] w-full rounded border bg-white p-2 text-xs"
-              value={(q.acceptedAnswers || []).join('\n')}
-              onChange={(e) => update(i, 'acceptedAnswers', parseLines(e.target.value))}
-              placeholder="Accepted answers / teacher notes, one per line"
-            />
-          )}
-
-          {q.type === 'true-false' && (
-            <select
-              className="w-full rounded border bg-white p-2 text-xs"
-              value={q.answer || 'True'}
-              onChange={(e) => update(i, 'answer', e.target.value)}
-            >
-              <option value="True">True</option>
-              <option value="False">False</option>
-            </select>
           )}
 
           {q.type === 'fill-in-the-blank' && (

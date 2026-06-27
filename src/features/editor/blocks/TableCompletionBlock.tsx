@@ -3,7 +3,6 @@ import { createPreviewStorageKey } from '../domain/previewState';
 import { createTableCompletionRow } from '../domain/blockDefaults';
 import { moveItem, removeItemAt } from '../domain/collections';
 import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
-import { RenderSubQuestionsPreview, SubQuestionsEditor } from '../modules/Shared';
 import type { BlockFormProps, BlockPreviewProps, TableCompletionBlock } from '../types/index';
 
 const createCellValue = (row: TableCompletionBlock['rows'][number], index: number) => row.cells[index] || '';
@@ -258,11 +257,6 @@ export const TableCompletionForm = ({ block, onUpdate }: BlockFormProps<TableCom
           </div>
         ))}
       </div>
-
-      <SubQuestionsEditor
-        questions={block.questions || []}
-        onChange={(questions) => onUpdate({ questions })}
-      />
     </div>
   );
 };
@@ -334,7 +328,6 @@ export const TableCompletionPreview = ({ block }: BlockPreviewProps<TableComplet
           </tbody>
         </table>
       </div>
-      <RenderSubQuestionsPreview questions={block.questions || []} storageKey={block.id} />
     </div>
   );
 };

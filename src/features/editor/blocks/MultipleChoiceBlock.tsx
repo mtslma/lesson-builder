@@ -8,27 +8,13 @@ export const MultipleChoiceForm = ({ block, onUpdate }: BlockFormProps<MultipleC
   const addOption = () =>
     onUpdate({ options: [...block.options, createMultipleChoiceOption()] });
   const removeOption = (index: number) =>
-    onUpdate({
-      options: removeItemAt(block.options, index),
-      correctOptionIds: block.correctOptionIds.filter((optionId) => optionId !== block.options[index]?.id)
-    });
+    onUpdate({ options: removeItemAt(block.options, index) });
   return (
     <div className="space-y-2">
       <input type="text" className="w-full p-2 border rounded text-sm font-bold" value={block.question} onChange={(e) => onUpdate({ question: e.target.value })} placeholder="Question..." />
       <div className="space-y-1">
         {(block.options || []).map((o, i) => (
           <div key={o.id} className="flex items-center gap-2 border p-1 rounded bg-slate-50">
-            <input
-              type="checkbox"
-              checked={block.correctOptionIds.includes(o.id)}
-              onChange={(e) =>
-                onUpdate({
-                  correctOptionIds: e.target.checked
-                    ? [...block.correctOptionIds, o.id]
-                    : block.correctOptionIds.filter((optionId) => optionId !== o.id)
-                })
-              }
-            />
             <input type="text" className="flex-1 p-1 text-xs border rounded" value={o.text} onChange={(e) => {
               onUpdate({
                 options: updateItemAt(block.options, i, (option) => ({

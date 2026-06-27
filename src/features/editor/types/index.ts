@@ -72,9 +72,6 @@ export interface SubQuestion {
   columns?: 1 | 2;
   mode?: 'typing' | 'dropdown';
   options?: SharedQuestionOption[];
-  answer?: string;
-  acceptedAnswers?: string[];
-  correctOptionIds?: string[];
   allowMultiple?: boolean;
   wordSuggestions?: string[];
   pairs?: { id: string; left: string; right: string }[];
@@ -328,17 +325,13 @@ export interface FillBlankBlock extends BaseBlock {
   gapSize?: 'compact' | 'normal' | 'wide';
   gaps: {
     id: string;
-    acceptedAnswers: string[];
     suggestions?: string[];
-    hint?: string;
-    caseSensitive: boolean;
   }[];
 }
 export interface MultipleChoiceBlock extends BaseBlock {
   type: 'multiple-choice';
   question: string;
   options: { id: string; text: string }[];
-  correctOptionIds: string[];
 }
 export interface RewriteQuestionBlock extends BaseBlock {
   type: 'rewrite-question';
@@ -435,7 +428,6 @@ export interface TableCompletionBlock extends BaseBlock {
   audioUrl?: string;
   headers: string[];
   rows: { id: string; cells: string[] }[];
-  questions?: SubQuestion[];
 }
 
 export interface ImageLabelBlock extends BaseBlock {

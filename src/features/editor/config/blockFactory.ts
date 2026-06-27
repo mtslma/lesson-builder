@@ -167,12 +167,6 @@ const renewIdsDeep = (value: unknown): unknown => {
 export const duplicateBlock = (block: LessonBlock): LessonBlock => {
   const duplicated = renewIdsDeep(structuredClone(block)) as LessonBlock;
 
-  if (duplicated.type === 'multiple-choice') {
-    duplicated.correctOptionIds = duplicated.options
-      .filter((_, index) => block.type === 'multiple-choice' && block.correctOptionIds.includes(block.options[index]?.id))
-      .map((option) => option.id);
-  }
-
   if (duplicated.type === 'fill-blank' && block.type === 'fill-blank') {
     duplicated.text = block.text
       .replace(/\{\{([^}]+)\}\}/g, '[]')
@@ -180,12 +174,6 @@ export const duplicateBlock = (block: LessonBlock): LessonBlock => {
   }
 
   return { ...duplicated, audience: duplicated.audience || DEFAULT_AUDIENCE };
-};
-
-const sanitizeSubQuestion = <T extends { answer?: string }>(question: T): Omit<T, 'answer'> => {
-  const rest = { ...question };
-  delete rest.answer;
-  return rest;
 };
 
 export const createPublicLesson = (lesson: Lesson): PublicLesson => ({
@@ -211,19 +199,14 @@ export const createPublicLesson = (lesson: Lesson): PublicLesson => ({
           return {
             ...block,
             audience: block.audience === 'both' ? 'both' : 'student',
-            questions: block.questions.map((question) => sanitizeSubQuestion(question))
+            questions: block.questions
           };
         case 'reading-comprehension':
           return {
             ...block,
             audience: block.audience === 'both' ? 'both' : 'student',
-            questions: block.questions.map((question) => sanitizeSubQuestion(question))
+            questions: block.questions
           };
-        case 'multiple-choice': {
-          const rest = { ...block } as Record<string, unknown>;
-          delete rest.correctOptionIds;
-          return rest as unknown;
-        }
         case 'fill-blank':
           return {
             ...block,
