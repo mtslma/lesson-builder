@@ -1,5 +1,11 @@
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Plus, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import type { AdvancedGrammarBlock, BlockFormProps, BlockPreviewProps, ConversationHighlight } from '../types/index';
+import type {
+  AdvancedGrammarBlock,
+  BlockFormProps,
+  BlockPreviewProps,
+  ConversationHighlight
+} from '../types/index';
 import { removeItemAt } from '../domain/collections';
 
 const HIGHLIGHT_COLOR_OPTIONS = [
@@ -21,6 +27,14 @@ const createHighlight = (): ConversationHighlight => ({
   color: '#d9f99d'
 });
 
+const moveItem = <T,>(items: T[], from: number, to: number) => {
+  if (to < 0 || to >= items.length || from === to) return items;
+  const next = [...items];
+  const [item] = next.splice(from, 1);
+  next.splice(to, 0, item);
+  return next;
+};
+
 const renderParagraphs = (content: string, className: string) =>
   content
     .split(/\n{2,}/)
@@ -32,10 +46,7 @@ const renderParagraphs = (content: string, className: string) =>
       </p>
     ));
 
-const renderHighlightedText = (
-  text: string,
-  highlights: ConversationHighlight[]
-): ReactNode => {
+const renderHighlightedText = (text: string, highlights: ConversationHighlight[]): ReactNode => {
   const validHighlights = highlights.filter(
     (highlight) => highlight.text.trim().length > 0 && text.includes(highlight.text)
   );
@@ -109,10 +120,7 @@ const renderHighlightedText = (
   return parts;
 };
 
-export const AdvancedGrammarForm = ({
-  block,
-  onUpdate
-}: BlockFormProps<AdvancedGrammarBlock>) => {
+export const AdvancedGrammarForm = ({ block, onUpdate }: BlockFormProps<AdvancedGrammarBlock>) => {
   const updateHeader = (index: number, value: string) => {
     const nextHeaders = [...block.tableHeaders];
     nextHeaders[index] = value;
@@ -128,6 +136,14 @@ export const AdvancedGrammarForm = ({
     });
   };
 
+  const moveHeader = (from: number, to: number) =>
+    onUpdate({
+      tableHeaders: moveItem(block.tableHeaders, from, to),
+      tableRows: block.tableRows.map((row) => ({
+        cells: moveItem(row.cells, from, to)
+      }))
+    });
+
   const removeHeader = (headerIndex: number) =>
     onUpdate({
       tableHeaders: removeItemAt(block.tableHeaders, headerIndex),
@@ -138,7 +154,19 @@ export const AdvancedGrammarForm = ({
 
   const addRow = () =>
     onUpdate({
-      tableRows: [...block.tableRows, { cells: Array(block.tableHeaders.length).fill(null).map(() => createCell()) }]
+      tableRows: [
+        ...block.tableRows,
+        {
+          cells: Array(block.tableHeaders.length)
+            .fill(null)
+            .map(() => createCell())
+        }
+      ]
+    });
+
+  const moveRow = (from: number, to: number) =>
+    onUpdate({
+      tableRows: moveItem(block.tableRows, from, to)
     });
 
   const removeRow = (rowIndex: number) =>
@@ -204,61 +232,135 @@ export const AdvancedGrammarForm = ({
         placeholder="Optional extra notes, reminders or teaching explanations."
       />
 
-      <div className="space-y-2 rounded border bg-slate-50 p-2">
-        <span className="block text-[10px] font-bold uppercase">Table Headers</span>
-        <div className="flex gap-1">
-          {block.tableHeaders.map((header, index) => (
-            <div key={index} className="flex flex-1 gap-1">
-              <input
-                type="text"
-                className="flex-1 rounded border p-1 text-xs"
-                value={header}
-                onChange={(e) => updateHeader(index, e.target.value)}
-              />
-              {block.tableHeaders.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeHeader(index)}
-                  className="rounded border border-red-200 bg-white px-2 text-[10px] font-bold text-red-500"
-                >
-                  -
-                </button>
-              )}
-            </div>
-          ))}
+      <div className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50 p-3">
+        <div className="flex items-center justify-between gap-3">
+          <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
+            Table structure
+          </span>
           <button
             type="button"
             onClick={addHeader}
-            className="rounded bg-blue-100 px-2 text-xs font-bold text-blue-600"
+            className="inline-flex items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-700"
           >
-            +
+            <Plus size={12} />
+            Column
+          </button>
+        </div>
+        <div className="overflow-x-auto pb-1">
+          <div
+            className="flex gap-2"
+            style={{ minWidth: `${Math.max(block.tableHeaders.length, 1) * 220}px` }}
+          >
+            {block.tableHeaders.map((header, index) => (
+              <div
+                key={index}
+                className="min-w-[220px] flex-1 rounded-xl border border-slate-200 bg-white p-2"
+              >
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+                    Col {index + 1}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => moveHeader(index, index - 1)}
+                      disabled={index === 0}
+                      className="rounded border border-slate-200 bg-white p-1 text-slate-500 disabled:opacity-30"
+                    >
+                      <ArrowLeft size={12} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveHeader(index, index + 1)}
+                      disabled={index === block.tableHeaders.length - 1}
+                      className="rounded border border-slate-200 bg-white p-1 text-slate-500 disabled:opacity-30"
+                    >
+                      <ArrowRight size={12} />
+                    </button>
+                    {block.tableHeaders.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeHeader(index)}
+                        className="rounded border border-red-200 bg-red-50 p-1 text-red-500"
+                      >
+                        <Trash2 size={12} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  className="w-full rounded border p-1.5 text-xs"
+                  value={header}
+                  onChange={(e) => updateHeader(index, e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-3">
+          <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
+            Table rows
+          </span>
+          <button
+            type="button"
+            onClick={addRow}
+            className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-700"
+          >
+            <Plus size={12} />
+            Row
           </button>
         </div>
 
         {block.tableRows.map((row, rowIndex) => (
-          <div key={rowIndex} className="space-y-2 rounded border border-slate-200 bg-white p-2">
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => removeRow(rowIndex)}
-                className="rounded border border-red-200 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500"
-              >
-                Remove row
-              </button>
+          <div key={rowIndex} className="space-y-2 rounded-xl border border-slate-200 bg-white p-3">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+                Row {rowIndex + 1}
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => moveRow(rowIndex, rowIndex - 1)}
+                  disabled={rowIndex === 0}
+                  className="rounded border border-slate-200 bg-white p-1 text-slate-500 disabled:opacity-30"
+                >
+                  <ArrowUp size={12} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveRow(rowIndex, rowIndex + 1)}
+                  disabled={rowIndex === block.tableRows.length - 1}
+                  className="rounded border border-slate-200 bg-white p-1 text-slate-500 disabled:opacity-30"
+                >
+                  <ArrowDown size={12} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => removeRow(rowIndex)}
+                  className="rounded border border-red-200 bg-red-50 p-1 text-red-500"
+                >
+                  <Trash2 size={12} />
+                </button>
+              </div>
             </div>
-            <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.max(block.tableHeaders.length, 1)}, minmax(0, 1fr))` }}>
-              {row.cells.map((cell, cellIndex) => (
-                <div key={cellIndex} className="space-y-2 rounded border border-slate-200 bg-slate-50 p-2">
-                  <textarea
-                    className="min-h-[72px] w-full resize-y rounded border p-2 text-xs"
-                    value={cell.text}
-                    onChange={(e) => updateCellText(rowIndex, cellIndex, e.target.value)}
-                  />
-
-                  <div className="space-y-2 rounded border border-dashed border-slate-300 bg-white p-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
-                        Highlights
+            <div className="overflow-x-auto pb-1">
+              <div
+                className="grid gap-2"
+                style={{
+                  gridTemplateColumns: `repeat(${Math.max(block.tableHeaders.length, 1)}, minmax(220px, 1fr))`,
+                  minWidth: `${Math.max(block.tableHeaders.length, 1) * 220}px`
+                }}
+              >
+                {row.cells.map((cell, cellIndex) => (
+                  <div
+                    key={cellIndex}
+                    className="space-y-2 rounded-lg border border-slate-200 bg-slate-50 p-2"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+                        {block.tableHeaders[cellIndex] || `Cell ${cellIndex + 1}`}
                       </span>
                       <button
                         type="button"
@@ -268,56 +370,76 @@ export const AdvancedGrammarForm = ({
                         + Add
                       </button>
                     </div>
+                    <textarea
+                      className="min-h-[64px] w-full resize-y rounded border p-2 text-xs"
+                      value={cell.text}
+                      onChange={(e) => updateCellText(rowIndex, cellIndex, e.target.value)}
+                    />
 
-                    {cell.highlights.map((highlight, highlightIndex) => (
-                      <div key={highlight.id} className="space-y-2">
-                        <input
-                          type="text"
-                          className="w-full rounded border p-1.5 text-xs"
-                          value={highlight.text}
-                          onChange={(e) =>
-                            updateCellHighlight(rowIndex, cellIndex, highlightIndex, 'text', e.target.value)
-                          }
-                          placeholder="Exact text to highlight"
-                        />
-                        <div className="flex items-center gap-2">
-                          <select
-                            className="flex-1 rounded border p-1.5 text-xs"
-                            value={highlight.color}
-                            onChange={(e) =>
-                              updateCellHighlight(rowIndex, cellIndex, highlightIndex, 'color', e.target.value)
-                            }
-                          >
-                            {HIGHLIGHT_COLOR_OPTIONS.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                          <button
-                            type="button"
-                            onClick={() => removeCellHighlight(rowIndex, cellIndex, highlightIndex)}
-                            className="rounded border border-red-200 bg-white px-2 py-1 text-[10px] font-semibold text-red-500"
-                          >
-                            Remove
-                          </button>
+                    {cell.highlights.length > 0 && (
+                      <div className="space-y-2 rounded border border-dashed border-slate-300 bg-white p-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                            Highlights
+                          </span>
                         </div>
+                        {cell.highlights.map((highlight, highlightIndex) => (
+                          <div key={highlight.id} className="space-y-2">
+                            <input
+                              type="text"
+                              className="w-full rounded border p-1.5 text-xs"
+                              value={highlight.text}
+                              onChange={(e) =>
+                                updateCellHighlight(
+                                  rowIndex,
+                                  cellIndex,
+                                  highlightIndex,
+                                  'text',
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Exact text to highlight"
+                            />
+                            <div className="flex items-center gap-2">
+                              <select
+                                className="flex-1 rounded border p-1.5 text-xs"
+                                value={highlight.color}
+                                onChange={(e) =>
+                                  updateCellHighlight(
+                                    rowIndex,
+                                    cellIndex,
+                                    highlightIndex,
+                                    'color',
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                {HIGHLIGHT_COLOR_OPTIONS.map((option) => (
+                                  <option key={option.value} value={option.value}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  removeCellHighlight(rowIndex, cellIndex, highlightIndex)
+                                }
+                                className="rounded border border-red-200 bg-white px-2 py-1 text-[10px] font-semibold text-red-500"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         ))}
-
-        <button
-          type="button"
-          onClick={addRow}
-          className="mt-1 rounded bg-slate-200 px-2 py-1 text-[10px] font-bold"
-        >
-          + Add Row
-        </button>
       </div>
     </div>
   );
@@ -335,13 +457,13 @@ export const AdvancedGrammarPreview = ({ block }: BlockPreviewProps<AdvancedGram
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-[400px] w-full border-collapse text-left">
+        <table className="w-full min-w-max border-collapse text-left">
           <thead>
             <tr>
               {block.tableHeaders.map((header, index) => (
                 <th
                   key={index}
-                  className="border border-slate-200 bg-slate-100 p-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600"
+                  className="min-w-[180px] border border-slate-200 bg-slate-100 p-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600"
                 >
                   {header}
                 </th>
@@ -354,7 +476,7 @@ export const AdvancedGrammarPreview = ({ block }: BlockPreviewProps<AdvancedGram
                 {row.cells.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
-                    className="whitespace-pre-wrap border border-slate-200 p-3 align-top text-sm leading-6 text-slate-700"
+                    className="min-w-[180px] whitespace-pre-wrap border border-slate-200 p-3 align-top text-sm leading-6 text-slate-700"
                   >
                     {renderHighlightedText(cell.text, cell.highlights)}
                   </td>

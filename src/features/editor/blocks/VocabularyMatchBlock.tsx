@@ -1,10 +1,6 @@
 import { useMemo } from 'react';
 import { createPreviewStorageKey } from '../domain/previewState';
-import type {
-  BlockFormProps,
-  BlockPreviewProps,
-  VocabularyMatchBlock
-} from '../types/index';
+import type { BlockFormProps, BlockPreviewProps, VocabularyMatchBlock } from '../types/index';
 import { createVocabularyPair } from '../domain/blockDefaults';
 import { removeItemAt, updateItemAt } from '../domain/collections';
 import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
@@ -14,15 +10,17 @@ type MatchMode = NonNullable<VocabularyMatchBlock['matchMode']>;
 type Pair = VocabularyMatchBlock['pairs'][number];
 type MatchTone = {
   badge: string;
+  border: string;
 };
 
+// Adicionado classes de borda correspondentes para unificar o design colorido
 const MATCH_TONES: MatchTone[] = [
-  { badge: 'bg-[#d9f99d]' },
-  { badge: 'bg-[#ead5f7]' },
-  { badge: 'bg-[#bfdbfe]' },
-  { badge: 'bg-[#fde68a]' },
-  { badge: 'bg-[#fecdd3]' },
-  { badge: 'bg-[#fbcfe8]' }
+  { badge: 'bg-[#d9f99d]', border: 'border-[#d9f99d] focus:border-[#b5e468]' },
+  { badge: 'bg-[#ead5f7]', border: 'border-[#ead5f7] focus:border-[#d6b4ed]' },
+  { badge: 'bg-[#bfdbfe]', border: 'border-[#bfdbfe] focus:border-[#93c5fd]' },
+  { badge: 'bg-[#fde68a]', border: 'border-[#fde68a] focus:border-[#fcd34d]' },
+  { badge: 'bg-[#fecdd3]', border: 'border-[#fecdd3] focus:border-[#fda4af]' },
+  { badge: 'bg-[#fbcfe8]', border: 'border-[#fbcfe8] focus:border-[#f9a8d4]' }
 ];
 
 const MATCH_MODE_OPTIONS: Array<{ value: MatchMode; label: string }> = [
@@ -101,58 +99,63 @@ const renderImageCard = (
   showFeedback: boolean,
   isCorrect: boolean,
   optionCount: number
-) => (
-  <div
-    key={pair.id}
-    className={`mx-auto flex w-full max-w-[220px] flex-col items-center justify-center gap-2 rounded-[18px] border bg-white p-3 shadow-sm ${
-      showFeedback
-        ? isCorrect
-          ? 'border-emerald-300'
-          : value
-            ? 'border-amber-300'
-            : 'border-slate-200'
-        : 'border-slate-200'
-    }`}
-  >
-    {pair.left ? (
-      <img
-        src={pair.left}
-        alt={pair.leftLabel || `Image ${index + 1}`}
-        className="h-32 w-full max-w-[200px] rounded-xl bg-slate-100 object-cover"
-      />
-    ) : (
-      <div className="flex h-32 w-full max-w-[200px] items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-100 text-[10px] uppercase tracking-[0.14em] text-slate-400">
-        Image
+) => {
+  const tone = getToneByNumber(value, optionCount);
+
+  return (
+    <div
+      key={pair.id}
+      className={`mx-auto flex w-full max-w-55 flex-col items-center justify-center gap-2 rounded-[18px] border bg-white p-3 shadow-sm ${
+        showFeedback
+          ? isCorrect
+            ? 'border-emerald-300'
+            : value
+              ? 'border-amber-300'
+              : 'border-slate-200'
+          : 'border-slate-200'
+      }`}
+    >
+      {pair.left ? (
+        <img
+          src={pair.left}
+          alt={pair.leftLabel || `Image ${index + 1}`}
+          className="h-32 w-full max-w-50 rounded-xl bg-slate-100 object-cover"
+        />
+      ) : (
+        <div className="flex h-32 w-full max-w-50 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-100 text-[10px] uppercase tracking-[0.14em] text-slate-400">
+          Image
+        </div>
+      )}
+      <div className="flex items-center justify-center w-full mt-1">
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={3}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="-"
+          className={`h-9 w-9 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
+            tone
+              ? `${tone.badge} ${tone.border}`
+              : 'border-dashed border-slate-300 bg-slate-50 focus:border-solid focus:border-slate-400 focus:bg-white'
+          }`}
+        />
       </div>
-    )}
-    <div className="flex items-center gap-2">
-      <span
-        className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${
-          getToneByNumber(value, optionCount)?.badge || 'bg-slate-100'
-        }`}
-      >
-        {value || '#'}
-      </span>
-      <input
-        type="text"
-        inputMode="numeric"
-        maxLength={3}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="#"
-        className="h-8 w-11 rounded-lg border border-slate-300 bg-white text-center text-xs font-bold text-slate-700 outline-none transition focus:border-slate-500"
-      />
+      {pair.leftLabel ? (
+        <div className="text-[11px] leading-4 text-slate-500 text-center">{pair.leftLabel}</div>
+      ) : null}
     </div>
-    {pair.leftLabel ? <div className="text-[11px] leading-4 text-slate-500">{pair.leftLabel}</div> : null}
-  </div>
-);
+  );
+};
 
 const renderTextOption = (pair: Pair, index: number) => (
   <div
     key={pair.id}
-    className="grid min-h-[44px] grid-cols-[28px_minmax(0,1fr)] items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+    className="grid min-h-11 grid-cols-[28px_minmax(0,1fr)] items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
   >
-    <span className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${getTone(index).badge}`}>
+    <span
+      className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${getTone(index).badge}`}
+    >
       {getRightNumber(index)}
     </span>
     <div className="min-w-0">
@@ -169,65 +172,68 @@ const renderAudioPrompt = (
   showFeedback: boolean,
   isCorrect: boolean,
   optionCount: number
-) => (
-  <div
-    key={pair.id}
-    className={`grid min-h-[72px] items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_84px_minmax(0,1fr)] ${
-      showFeedback
-        ? isCorrect
-          ? 'border-emerald-300'
-          : value
-            ? 'border-amber-300'
-            : 'border-slate-200'
-        : 'border-slate-200'
-    }`}
-  >
-    <div className="flex min-w-0">
-      {pair.left ? (
-        <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
-          {pair.leftLabel ? (
-            <div className="mr-3 max-w-[120px] truncate text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
-              {pair.leftLabel}
-            </div>
-          ) : null}
-          <audio controls className="h-9 min-w-0 flex-1">
-            <source src={pair.left} />
-          </audio>
-        </div>
-      ) : (
-        <div className="flex min-h-[56px] w-full items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-center text-sm text-slate-400">
-          Add audio URL
-        </div>
-      )}
-    </div>
-    <div className="flex min-h-[56px] h-full flex-col items-center justify-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
-      <span
-        className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${
-          getToneByNumber(value, optionCount)?.badge || 'bg-slate-200'
-        }`}
-      >
-        {value || '#'}
-      </span>
-      <input
-        type="text"
-        inputMode="numeric"
-        maxLength={3}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="#"
-        className="h-8 w-11 rounded-md border border-slate-300 bg-white text-center text-sm font-bold text-slate-700 outline-none transition focus:border-slate-500"
-      />
-    </div>
-    <div className="flex min-w-0">
-      <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
-        <div className="min-w-0">
-          {pair.right || 'Option'}
-          {pair.rightLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div> : null}
+) => {
+  const tone = getToneByNumber(value, optionCount);
+
+  return (
+    <div
+      key={pair.id}
+      className={`grid min-h-18 items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_64px_minmax(0,1fr)] ${
+        showFeedback
+          ? isCorrect
+            ? 'border-emerald-300'
+            : value
+              ? 'border-amber-300'
+              : 'border-slate-200'
+          : 'border-slate-200'
+      }`}
+    >
+      <div className="flex min-w-0">
+        {pair.left ? (
+          <div className="flex min-h-14 w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+            {pair.leftLabel ? (
+              <div className="mr-3 max-w-30 truncate text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+                {pair.leftLabel}
+              </div>
+            ) : null}
+            <audio controls className="h-9 min-w-0 flex-1">
+              <source src={pair.left} />
+            </audio>
+          </div>
+        ) : (
+          <div className="flex min-h-14 w-full items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-center text-sm text-slate-400">
+            Add audio URL
+          </div>
+        )}
+      </div>
+      <div className="flex min-h-14 h-full items-center justify-center rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={3}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="-"
+          className={`h-9 w-9 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
+            tone
+              ? `${tone.badge} ${tone.border}`
+              : 'border-dashed border-slate-300 bg-white focus:border-solid focus:border-slate-400'
+          }`}
+        />
+      </div>
+      <div className="flex min-w-0">
+        <div className="flex min-h-14 w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+          <div className="min-w-0">
+            {pair.right || 'Option'}
+            {pair.rightLabel ? (
+              <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const renderAlignedTextPrompt = (
   pair: Pair,
@@ -236,60 +242,62 @@ const renderAlignedTextPrompt = (
   showFeedback: boolean,
   isCorrect: boolean,
   optionCount: number
-) => (
-  <div
-    key={pair.id}
-    className={`grid min-h-[72px] items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_84px_minmax(0,1fr)] ${
-      showFeedback
-        ? isCorrect
-          ? 'border-emerald-300'
-          : value
-            ? 'border-amber-300'
-            : 'border-slate-200'
-        : 'border-slate-200'
-    }`}
-  >
-    <div className="flex min-w-0">
-      <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
-        <div className="min-w-0">
-          {pair.left || 'Empty item'}
-          {pair.leftLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.leftLabel}</div> : null}
-        </div>
-      </div>
-    </div>
-    <div className="flex min-h-[56px] h-full items-center justify-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
-      <span
-        className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${
-          getToneByNumber(value, optionCount)?.badge || 'bg-slate-200'
-        }`}
-      >
-        {value || '#'}
-      </span>
-      <input
-        type="text"
-        inputMode="numeric"
-        maxLength={3}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="#"
-        className="h-8 w-11 rounded-md border border-slate-300 bg-white text-center text-sm font-bold text-slate-700 outline-none transition focus:border-slate-500"
-      />
-    </div>
-    <div className="flex min-w-0">
-      <div className="flex min-h-[56px] w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
-        <div className="min-w-0">
-          {pair.right || 'Option'}
-          {pair.rightLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div> : null}
-        </div>
-      </div>
-    </div>
-  </div>
-);
+) => {
+  const tone = getToneByNumber(value, optionCount);
 
-export const VocabularyMatchForm = ({
-  block,
-  onUpdate
-}: BlockFormProps<VocabularyMatchBlock>) => {
+  return (
+    <div
+      key={pair.id}
+      className={`grid min-h-18 items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_64px_minmax(0,1fr)] ${
+        showFeedback
+          ? isCorrect
+            ? 'border-emerald-300'
+            : value
+              ? 'border-amber-300'
+              : 'border-slate-200'
+          : 'border-slate-200'
+      }`}
+    >
+      <div className="flex min-w-0">
+        <div className="flex min-h-14 w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+          <div className="min-w-0">
+            {pair.left || 'Empty item'}
+            {pair.leftLabel ? (
+              <div className="mt-1 text-[11px] text-slate-500">{pair.leftLabel}</div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+      <div className="flex min-h-14 h-full items-center justify-center rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={3}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="-"
+          className={`h-9 w-9 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
+            tone
+              ? `${tone.badge} ${tone.border}`
+              : 'border-dashed border-slate-300 bg-white focus:border-solid focus:border-slate-400'
+          }`}
+        />
+      </div>
+      <div className="flex min-w-0">
+        <div className="flex min-h-14 w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+          <div className="min-w-0">
+            {pair.right || 'Option'}
+            {pair.rightLabel ? (
+              <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const VocabularyMatchForm = ({ block, onUpdate }: BlockFormProps<VocabularyMatchBlock>) => {
   const mode = getResolvedMode(block.matchMode);
 
   const updateMode = (nextMode: MatchMode) =>
@@ -298,11 +306,9 @@ export const VocabularyMatchForm = ({
       pairs: block.pairs.map((pair) => normalizePairForMode(pair, nextMode))
     });
 
-  const addPair = () =>
-    onUpdate({ pairs: [...block.pairs, createPairForMode(mode)] });
+  const addPair = () => onUpdate({ pairs: [...block.pairs, createPairForMode(mode)] });
 
-  const removePair = (index: number) =>
-    onUpdate({ pairs: removeItemAt(block.pairs, index) });
+  const removePair = (index: number) => onUpdate({ pairs: removeItemAt(block.pairs, index) });
 
   const updatePair = (index: number, updater: (currentPair: Pair) => Pair) =>
     onUpdate({
@@ -321,7 +327,7 @@ export const VocabularyMatchForm = ({
         placeholder="Title..."
       />
       <textarea
-        className="min-h-[72px] w-full rounded border p-2 text-sm"
+        className="min-h-18 w-full rounded border p-2 text-sm"
         value={block.instruction || ''}
         onChange={(e) => onUpdate({ instruction: e.target.value })}
         placeholder="Instruction..."
@@ -354,9 +360,7 @@ export const VocabularyMatchForm = ({
         >
           Shuffle Options
         </button>
-        <span className="text-xs text-slate-500">
-          Reorders the numbered options in preview.
-        </span>
+        <span className="text-xs text-slate-500">Reorders the numbered options in preview.</span>
       </div>
       <label className="flex items-center gap-2 rounded border bg-slate-50 px-3 py-2 text-xs text-slate-700">
         <input
@@ -472,7 +476,10 @@ export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMa
 
   const leftPairs = useMemo(() => {
     if (mode === 'image-to-word') {
-      return shuffleArray(normalizedPairs, `${block.id}:vocabulary-left:${block.shuffleVersion || 0}`);
+      return shuffleArray(
+        normalizedPairs,
+        `${block.id}:vocabulary-left:${block.shuffleVersion || 0}`
+      );
     }
 
     return normalizedPairs;
@@ -480,7 +487,10 @@ export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMa
 
   const rightPairs = useMemo(() => {
     if (mode === 'image-to-word' || mode === 'audio-to-word' || mode === 'word-to-meaning') {
-      return shuffleArray(normalizedPairs, `${block.id}:vocabulary-right:${block.shuffleVersion || 0}`);
+      return shuffleArray(
+        normalizedPairs,
+        `${block.id}:vocabulary-right:${block.shuffleVersion || 0}`
+      );
     }
 
     return normalizedPairs;

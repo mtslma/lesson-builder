@@ -18,6 +18,13 @@ const HIGHLIGHT_COLOR_OPTIONS = [
 type ConversationMessage = ConversationBlock['messages'][number];
 type ConversationHighlight = ConversationMessage['highlights'][number];
 
+const IMAGE_FIT_OPTIONS: Array<{ value: NonNullable<ConversationBlock['imageFit']>; label: string }> = [
+  { value: 'cover', label: 'Fill area' },
+  { value: 'contain', label: 'Show full image' }
+];
+
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
 export const ConversationForm = ({ block, onUpdate }: BlockFormProps<ConversationBlock>) => {
   const updateMessages = (messages: ConversationBlock['messages']) => {
     onUpdate({ messages });
@@ -101,17 +108,89 @@ export const ConversationForm = ({ block, onUpdate }: BlockFormProps<Conversatio
         <option value="cards">Cards</option>
         <option value="classroom">Classroom</option>
       </select>
-      <input
-        type="text"
-        className="w-full rounded border p-2 text-sm"
-        value={block.imageUrl ?? ''}
-        onChange={(event) =>
-          onUpdate({
-            imageUrl: event.target.value
-          })
-        }
-        placeholder="Context Image URL"
-      />
+      <div className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+        <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+          Image
+        </div>
+        <input
+          type="text"
+          className="w-full rounded border p-2 text-sm"
+          value={block.imageUrl ?? ''}
+          onChange={(event) =>
+            onUpdate({
+              imageUrl: event.target.value
+            })
+          }
+          placeholder="Context Image URL"
+        />
+
+        <select
+          className="w-full rounded border p-2 text-sm"
+          value={block.imageFit || 'cover'}
+          onChange={(event) =>
+            onUpdate({
+              imageFit: event.target.value as ConversationBlock['imageFit']
+            })
+          }
+        >
+          {IMAGE_FIT_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              Image mode: {option.label}
+            </option>
+          ))}
+        </select>
+
+        <label className="block text-[11px] text-slate-600">
+          Zoom: {Math.round(block.imageZoom || 100)}%
+          <input
+            type="range"
+            min={50}
+            max={200}
+            step={5}
+            value={block.imageZoom || 100}
+            onChange={(event) =>
+              onUpdate({
+                imageZoom: clamp(Number(event.target.value), 50, 200)
+              })
+            }
+            className="mt-1 w-full"
+          />
+        </label>
+
+        <label className="block text-[11px] text-slate-600">
+          Horizontal: {Math.round(block.imagePositionX || 50)}%
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            value={block.imagePositionX || 50}
+            onChange={(event) =>
+              onUpdate({
+                imagePositionX: clamp(Number(event.target.value), 0, 100)
+              })
+            }
+            className="mt-1 w-full"
+          />
+        </label>
+
+        <label className="block text-[11px] text-slate-600">
+          Vertical: {Math.round(block.imagePositionY || 50)}%
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            value={block.imagePositionY || 50}
+            onChange={(event) =>
+              onUpdate({
+                imagePositionY: clamp(Number(event.target.value), 0, 100)
+              })
+            }
+            className="mt-1 w-full"
+          />
+        </label>
+      </div>
 
       <div className="space-y-3">
         {block.messages.map((message, messageIndex) => (
@@ -300,11 +379,19 @@ export const ConversationPreview = ({ block }: BlockPreviewProps<ConversationBlo
       </div>
     )}
     {block.imageUrl && (
-      <img
-        src={block.imageUrl}
-        className="h-32 w-full rounded-lg border border-slate-200 object-cover"
-        alt="Conversation context"
-      />
+      <div className="h-32 w-full overflow-hidden rounded-lg border border-slate-200">
+        <img
+          src={block.imageUrl}
+          className={`h-full w-full ${
+            block.imageFit === 'contain' ? 'object-contain' : 'object-cover'
+          }`}
+          style={{
+            objectPosition: `${block.imagePositionX ?? 50}% ${block.imagePositionY ?? 50}%`,
+            transform: `scale(${(block.imageZoom ?? 100) / 100})`
+          }}
+          alt="Conversation context"
+        />
+      </div>
     )}
 
     {block.messages.map((message) => (

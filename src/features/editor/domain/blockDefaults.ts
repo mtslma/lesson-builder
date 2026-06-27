@@ -5,6 +5,7 @@ import type {
   ImageNumberingBlock,
   MultipleChoiceBlock,
   PhrasalVerbFocusBlock,
+  QuestionBuilderItem,
   QuestionSetBlock,
   SelectionGridBlock,
   SharedQuestionGap,
@@ -236,7 +237,7 @@ export const createVocabularyPair = (): VocabularyMatchBlock['pairs'][number] =>
 export const createWordOrderItem = (): WordOrderBlock['items'][number] => ({
   id: createEditorId(),
   prompt: 'Put the sentence in order.',
-  sequence: ['I', 'go', 'to', 'school']
+  sentence: 'I go to school.'
 });
 
 export const createTableCompletionRow = (columnCount = 2): TableCompletionBlock['rows'][number] => ({
@@ -259,3 +260,29 @@ export const createQuestionSetDefaults = (): Pick<QuestionSetBlock, 'title' | 'i
     createSubQuestion('open-ended', 'Write your own answer.')
   ]
 });
+
+export const createQuestionBuilderItem = (): QuestionBuilderItem => ({
+  id: createEditorId(),
+  mode: 'answer-given',
+  questionText: '',
+  answerText: ''
+});
+
+export const normalizeQuestionBuilderItems = (value: unknown): QuestionBuilderItem[] =>
+  Array.isArray(value)
+    ? value.map((item) => {
+        const record = item && typeof item === 'object' ? (item as Record<string, unknown>) : {};
+        return {
+          id: typeof record.id === 'string' ? record.id : createEditorId(),
+          mode:
+            record.mode === 'question-only' ||
+            record.mode === 'question-given' ||
+            record.mode === 'answer-given' ||
+            record.mode === 'free-both'
+              ? record.mode
+              : 'answer-given',
+          questionText: typeof record.questionText === 'string' ? record.questionText : '',
+          answerText: typeof record.answerText === 'string' ? record.answerText : ''
+        };
+      })
+    : [];

@@ -89,6 +89,7 @@ export type BlockType =
   | 'letter-number'
   | 'teacher-note'
   | 'grammar-note'
+  | 'example-boxes'
   | 'advanced-grammar'
   | 'media-block'
   | 'listening'
@@ -163,6 +164,16 @@ export interface GrammarNoteBlock extends BaseBlock {
   expandableContent: string;
 }
 
+export interface ExampleBoxesBlock extends BaseBlock {
+  type: 'example-boxes';
+  title: string;
+  explanation: string;
+  leftTitle: string;
+  leftContent: string;
+  rightTitle: string;
+  rightContent: string;
+}
+
 export interface AdvancedGrammarBlock extends BaseBlock {
   type: 'advanced-grammar';
   title: string;
@@ -228,6 +239,10 @@ export interface ConversationBlock extends BaseBlock {
   title?: string;
   instruction?: string;
   imageUrl?: string;
+  imageFit?: 'cover' | 'contain';
+  imagePositionX?: number;
+  imagePositionY?: number;
+  imageZoom?: number;
   layout?: 'script' | 'chat' | 'cards' | 'classroom';
   messages: ConversationMessage[];
   substitutionBox?: ConversationSubstitution[];
@@ -245,6 +260,7 @@ export interface FlashcardsBlock extends BaseBlock {
     frontImage?: string;
     backText: string;
     backImage?: string;
+    imageFrame?: 'banner' | 'rounded-rect' | 'square';
     imageFit?: 'cover' | 'contain';
     imagePositionX?: number;
     imagePositionY?: number;
@@ -306,6 +322,7 @@ export interface FillBlankBlock extends BaseBlock {
   text: string;
   columns?: 1 | 2;
   mode?: 'typing' | 'dropdown';
+  gapSize?: 'compact' | 'normal' | 'wide';
   gaps: {
     id: string;
     acceptedAnswers: string[];
@@ -385,18 +402,27 @@ export interface WritingTaskBlock extends BaseBlock {
   rubric?: string;
 }
 
+export interface QuestionBuilderItem {
+  id: string;
+  mode?: 'question-only' | 'question-given' | 'answer-given' | 'free-both';
+  questionText?: string;
+  answerText?: string;
+}
+
 export interface QuestionSetBlock extends BaseBlock {
   type: 'question-set';
   title: string;
   instruction: string;
+  practiceMode?: 'mixed' | 'question-builder';
   questions: SubQuestion[];
+  questionBuilderItems?: QuestionBuilderItem[];
 }
 
 export interface WordOrderBlock extends BaseBlock {
   type: 'word-order';
   title: string;
   instruction: string;
-  items: { id: string; prompt: string; sequence: string[] }[];
+  items: { id: string; prompt: string; sentence: string }[];
 }
 
 export interface TableCompletionBlock extends BaseBlock {
@@ -454,6 +480,7 @@ export type LessonBlock =
   | LetterNumberBlock
   | TeacherNoteBlock
   | GrammarNoteBlock
+  | ExampleBoxesBlock
   | AdvancedGrammarBlock
   | MediaBlock
   | ListeningBlock

@@ -14,7 +14,7 @@
   },
   "blocks": [
     {
-      "id": "37df2e1a-414a-4271-81c7-dae5f9743eef",
+      "id": "ed2e820e-fb48-411b-a9f2-0382d5d1d5b0",
       "type": "page-break",
       "pageNumber": 1,
       "estimatedTime": "45 min",
@@ -30,21 +30,25 @@
     {
       "id": "p1-intro",
       "type": "paragraph",
-      "content": "In this first lesson, you learn how to start a conversation, say your name, the alphabet and \nspelling, ask simple questions, answer about yourself, and make a short introduction in English.",
+      "content": "Let's learn how to ask and answer simple questions about yourself.",
       "style": "intro",
       "audience": "both"
     },
     {
       "id": "p1-conv1",
       "type": "conversation",
-      "title": "Conversation Model",
-      "instruction": "Use a short answer first. Then you can add extra information.",
+      "title": "Meeting Someone",
+      "instruction": "",
       "imageUrl": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1000",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
       "layout": "script",
       "messages": [
         {
           "id": "p1-conv1-m1",
-          "speaker": "Emma",
+          "speaker": "Sarah",
           "text": "Hello!",
           "highlights": [
             {
@@ -56,7 +60,7 @@
         },
         {
           "id": "p1-conv1-m2",
-          "speaker": "Miles",
+          "speaker": "Daniel",
           "text": "Hi!",
           "highlights": [
             {
@@ -68,8 +72,8 @@
         },
         {
           "id": "p1-conv1-m3",
-          "speaker": "Emma",
-          "text": "My name is Emma Watson. What's your name?",
+          "speaker": "Sarah",
+          "text": "My name is Sarah Watson. What's your name?",
           "highlights": [
             {
               "id": "p1-conv1-h3",
@@ -85,8 +89,8 @@
         },
         {
           "id": "p1-conv1-m4",
-          "speaker": "Miles",
-          "text": "I'm Miles Morales.",
+          "speaker": "Daniel",
+          "text": "I'm Daniel Morales.",
           "highlights": [
             {
               "id": "p1-conv1-h5",
@@ -97,8 +101,8 @@
         },
         {
           "id": "p1-conv1-m5",
-          "speaker": "Emma",
-          "text": "Nice to meet you, Leo.",
+          "speaker": "Sarah",
+          "text": "Nice to meet you, Daniel.",
           "highlights": [
             {
               "id": "p1-conv1-h6",
@@ -109,7 +113,7 @@
         },
         {
           "id": "p1-conv1-m6",
-          "speaker": "Miles",
+          "speaker": "Daniel",
           "text": "Nice to meet you too.",
           "highlights": [
             {
@@ -121,7 +125,7 @@
         },
         {
           "id": "p1-conv1-m7",
-          "speaker": "Emma",
+          "speaker": "Sarah",
           "text": "My friends are calling me, bye bye.",
           "highlights": [
             {
@@ -133,7 +137,7 @@
         },
         {
           "id": "p1-conv1-m8",
-          "speaker": "Miles",
+          "speaker": "Daniel",
           "text": "See you!",
           "highlights": [
             {
@@ -147,19 +151,32 @@
       "substitutionBox": [
         {
           "original": "Hello!",
-          "alternatives": ["Hi!", "Good morning!", "Good afternoon!"]
+          "alternatives": [
+            "Hi!",
+            "Good morning!",
+            "Good afternoon!"
+          ]
         },
         {
           "original": "My name is Emma.",
-          "alternatives": ["I'm Emma.", "I am Emma."]
+          "alternatives": [
+            "I'm Emma.",
+            "I am Emma."
+          ]
         },
         {
           "original": "Nice to meet you.",
-          "alternatives": ["Nice to meet you too.", "It's nice to meet you."]
+          "alternatives": [
+            "Nice to meet you too.",
+            "It's nice to meet you."
+          ]
         },
         {
           "original": "Bye!",
-          "alternatives": ["See you!", "See you later!"]
+          "alternatives": [
+            "See you!",
+            "See you later!"
+          ]
         }
       ],
       "audience": "both"
@@ -174,10 +191,16 @@
       "cards": [
         {
           "id": "p1-fc1-c2",
-          "expressions": ["Good morning! ", "Good afternoon! ", "Good evening!", "Good night!"],
+          "expressions": [
+            "Good morning! ",
+            "Good afternoon! ",
+            "Good evening!",
+            "Good night!"
+          ],
           "frontImage": "",
           "backText": "Use these expressions depending on the time of day.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -187,10 +210,14 @@
         },
         {
           "id": "p1-fc1-c3",
-          "expressions": ["My name is... ", "I am... / I'm..."],
+          "expressions": [
+            "My name is... ",
+            "I am... / I'm..."
+          ],
           "frontImage": "",
           "backText": "Use these expressions to say your name.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -200,10 +227,13 @@
         },
         {
           "id": "p1-fc1-c4",
-          "expressions": ["What's your name?"],
+          "expressions": [
+            "What's your name?"
+          ],
           "frontImage": "",
           "backText": "Use this question to ask a person's name.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -221,6 +251,7 @@
           "frontImage": "",
           "backText": "Use these expressions when you meet a person for the first time.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -230,10 +261,14 @@
         },
         {
           "id": "p1-fc1-c6",
-          "expressions": ["Bye!", "See you!"],
+          "expressions": [
+            "Bye!",
+            "See you!"
+          ],
           "frontImage": "",
           "backText": "Use these expressions to finish a conversation.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -245,54 +280,20 @@
       "audience": "both"
     },
     {
-      "id": "9fe40135-ffbb-49db-a1c6-ae8367292192",
-      "type": "heading",
-      "content": "Hands-on!",
-      "level": "h1",
-      "audience": "both"
-    },
-    {
-      "id": "p1-fill1",
-      "type": "fill-blank",
-      "instruction": "Complete the mini-dialogue.",
-      "text": "[] you study?\n\nYes, I [].\nNo, I [].",
-      "columns": 2,
-      "mode": "typing",
-      "gaps": [
-        {
-          "id": "gap-0",
-          "acceptedAnswers": ["Do"],
-          "hint": "",
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-1",
-          "acceptedAnswers": ["do"],
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-2",
-          "acceptedAnswers": ["don't", "do not"],
-          "caseSensitive": false
-        }
-      ],
-      "audience": "both"
-    },
-    {
       "id": "56ffe1ad-227c-4b8f-ac9a-6d3f7d1df918",
       "type": "roleplay",
       "title": "",
-      "objective": "Play the dialog above, change the names and expressions.",
+      "objective": "Practice the dialog \"Meeting Someone\". Change the names and expressions used.",
       "customFields": [
         {
           "id": "roleplay-field-ijfqmek",
           "label": "Student A",
-          "value": "Starts being Emma."
+          "value": "Starts Being Sarah."
         },
         {
           "id": "roleplay-field-2rczz8p",
           "label": "Student B",
-          "value": "Starts being Miles."
+          "value": "Starts Being Daniel."
         }
       ],
       "scenario": "",
@@ -325,24 +326,24 @@
       "audience": "both"
     },
     {
+      "id": "2726445a-c2ae-4ea8-8f04-2aadcac4a5ab",
+      "type": "paragraph",
+      "content": "After completing the gaps, practice the dialog with your answers.",
+      "style": "instruction",
+      "audience": "both"
+    },
+    {
       "id": "004978de-b16e-4b34-a8f6-cd3f9ee7d3e8",
       "type": "heading",
-      "content": "3. Learning Letters",
+      "content": "Learning Letters",
       "level": "h1",
       "audience": "both"
     },
     {
       "id": "f70cf677-f5a0-4975-92d6-b22120fc0e30",
       "type": "heading",
-      "content": "THE ALPHABET",
+      "content": "The Alphabet",
       "level": "h3",
-      "audience": "both"
-    },
-    {
-      "id": "a7dab47f-24b8-4b01-afc6-d63a46eba75f",
-      "type": "paragraph",
-      "content": "There are 26 letters in the English alphabet.",
-      "style": "note",
       "audience": "both"
     },
     {
@@ -490,14 +491,14 @@
     {
       "id": "ed7f92a6-9de3-46a3-92ad-50eb2bf3ea15",
       "type": "heading",
-      "content": "SPELLING",
+      "content": "Spelling",
       "level": "h3",
       "audience": "both"
     },
     {
       "id": "a2cea46a-8fa0-4788-92ea-209e9263a2f7",
       "type": "paragraph",
-      "content": "Speeling is act of saying letters individually to form names or words. ",
+      "content": "Speeling is the act of saying letters individually to form names or words. ",
       "style": "note",
       "audience": "both"
     },
@@ -506,6 +507,10 @@
       "type": "conversation",
       "title": "",
       "instruction": "Follow the example:",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
       "layout": "script",
       "messages": [
         {
@@ -584,7 +589,9 @@
       "substitutionBox": [
         {
           "original": "I am ready to begin.",
-          "alternatives": ["Let us start."]
+          "alternatives": [
+            "Let us start."
+          ]
         }
       ],
       "audience": "both"
@@ -592,8 +599,68 @@
     {
       "id": "9809a254-3eb5-4920-9d92-a101caa7a760",
       "type": "paragraph",
-      "content": "Now it's your turn, practice following the example!",
+      "content": "Now it's your turn, practice the dialog, change the names.",
       "style": "instruction",
+      "audience": "both"
+    },
+    {
+      "id": "9fe40135-ffbb-49db-a1c6-ae8367292192",
+      "type": "heading",
+      "content": "Hands-on!",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "p1-fill1",
+      "type": "fill-blank",
+      "instruction": "Complete the mini-dialogue.",
+      "text": "Hi!\n[] , what's your name?\nMy [] is John. And yours?\nMy name is []. Nice to [] you!\n[] too meet you [] !\nI need to go now, [].\n[] you!",
+      "columns": 1,
+      "mode": "typing",
+      "gapSize": "normal",
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap6",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap7",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap8",
+          "acceptedAnswers": [],
+          "hint": "",
+          "caseSensitive": false
+        }
+      ],
       "audience": "both"
     },
     {
@@ -612,33 +679,36 @@
           "name": "Speaker 2"
         }
       ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
+      "prompts": [
+        "What is your opinion on the topic?",
+        "What example can you share?"
+      ],
       "exchanges": [
         {
           "id": "04aa790f-e6e5-4d83-89a4-823cebe13318",
           "speakerId": "3eba1aaa-66ef-47f4-9bd3-c10e16de765f",
-          "text": "Spell your full name."
+          "text": "Spell your **full name.**"
         },
         {
           "id": "33b2c55d-9ad4-41ef-ba68-844f4bd1598f",
           "speakerId": "3eba1aaa-66ef-47f4-9bd3-c10e16de765f",
-          "text": "Spell the word **NAME**."
+          "text": "Spell **name**."
         },
         {
           "id": "80811f9a-d613-4d0d-8b4b-6535876b6a58",
           "speakerId": "e1205fbc-092e-431d-95af-713171c76322",
-          "text": "Spell your teacher's first name."
+          "text": "Spell your **teacher's first name.**"
         },
         {
           "id": "3bbd144f-6847-4606-85ad-60a1bfbcd198",
           "speakerId": "e1205fbc-092e-431d-95af-713171c76322",
-          "text": "Spell your mother's last name."
+          "text": "Spell your **mother's last name.**"
         }
       ],
       "audience": "both"
     },
     {
-      "id": "577765ce-bb39-4d75-9c0a-3769913706f9",
+      "id": "ab7ebde6-40a2-453d-a94b-887c6cdab4f0",
       "type": "page-break",
       "pageNumber": 2,
       "estimatedTime": "45 min",
@@ -665,13 +735,21 @@
       "explanation": "",
       "details": "We use DO combined with I, You, They and We",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Use", "Pattern", "Example"],
+      "structureTableHeaders": [
+        "Use",
+        "Pattern",
+        "Example"
+      ],
       "structureTableRows": [],
       "examples": [],
       "commonMistakes": [],
       "comparisons": [],
       "miniPractice": [],
-      "tableHeaders": ["Use", "Pattern", "Example"],
+      "tableHeaders": [
+        "Use",
+        "Pattern",
+        "Example"
+      ],
       "tableRows": [
         {
           "cells": [
@@ -807,13 +885,21 @@
       "explanation": "Use a short answer first. Then you can add extra information.",
       "details": "Keep the same answer pattern every time in this part.",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "structureTableHeaders": [
+        "Question",
+        "Short Answer",
+        "Long Answer"
+      ],
       "structureTableRows": [],
       "examples": [],
       "commonMistakes": [],
       "comparisons": [],
       "miniPractice": [],
-      "tableHeaders": ["Question", "Short Answer", "Long Answer"],
+      "tableHeaders": [
+        "Question",
+        "Short Answer",
+        "Long Answer"
+      ],
       "tableRows": [
         {
           "cells": [
@@ -1005,10 +1091,13 @@
       "cards": [
         {
           "id": "p2-fc1-c1",
-          "expressions": ["STUDY"],
+          "expressions": [
+            "STUDY"
+          ],
           "frontImage": "",
           "backText": "Do you study English?",
           "backImage": "https://images.pexels.com/photos/7320375/pexels-photo-7320375.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -1020,10 +1109,13 @@
         },
         {
           "id": "p2-fc1-c2",
-          "expressions": ["WORK"],
+          "expressions": [
+            "WORK"
+          ],
           "frontImage": "",
           "backText": "Do you work?",
           "backImage": "https://images.pexels.com/photos/7163399/pexels-photo-7163399.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 100,
           "imagePositionY": 70,
@@ -1033,10 +1125,13 @@
         },
         {
           "id": "p2-fc1-c3",
-          "expressions": ["LIKE"],
+          "expressions": [
+            "LIKE"
+          ],
           "frontImage": "",
           "backText": "Do you like music?",
           "backImage": "https://images.pexels.com/photos/12798522/pexels-photo-12798522.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 67,
@@ -1046,10 +1141,13 @@
         },
         {
           "id": "p2-fc1-c4",
-          "expressions": ["PLAY"],
+          "expressions": [
+            "PLAY"
+          ],
           "frontImage": "",
           "backText": "Do you play games?",
           "backImage": "https://images.pexels.com/photos/5453907/pexels-photo-5453907.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 54,
@@ -1059,10 +1157,13 @@
         },
         {
           "id": "p2-fc1-c5",
-          "expressions": ["WATCH"],
+          "expressions": [
+            "WATCH"
+          ],
           "frontImage": "",
           "backText": "Do you watch movies?",
           "backImage": "https://images.pexels.com/photos/4009409/pexels-photo-4009409.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 25,
           "imagePositionY": 49,
@@ -1072,10 +1173,13 @@
         },
         {
           "id": "p2-fc1-c6",
-          "expressions": ["LISTEN TO"],
+          "expressions": [
+            "LISTEN TO"
+          ],
           "frontImage": "",
           "backText": "Do you listen to music?",
           "backImage": "https://images.pexels.com/photos/3933540/pexels-photo-3933540.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 64,
           "imagePositionY": 47,
@@ -1085,10 +1189,13 @@
         },
         {
           "id": "p2-fc1-c7",
-          "expressions": ["READ"],
+          "expressions": [
+            "READ"
+          ],
           "frontImage": "",
           "backText": "Do you read books?",
           "backImage": "https://images.pexels.com/photos/7034586/pexels-photo-7034586.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 100,
           "imagePositionY": 75,
@@ -1098,10 +1205,13 @@
         },
         {
           "id": "p2-fc1-c8",
-          "expressions": ["COOK"],
+          "expressions": [
+            "COOK"
+          ],
           "frontImage": "",
           "backText": "Do you cook?",
           "backImage": "https://images.pexels.com/photos/37923406/pexels-photo-37923406.jpeg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 78,
@@ -1127,20 +1237,28 @@
       "text": "[] you study?\n\nYes, I [].\nNo, I [].",
       "columns": 2,
       "mode": "typing",
+      "gapSize": "normal",
       "gaps": [
         {
           "id": "gap-0",
-          "acceptedAnswers": ["Do"],
+          "acceptedAnswers": [
+            "Do"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-1",
-          "acceptedAnswers": ["do"],
+          "acceptedAnswers": [
+            "do"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-2",
-          "acceptedAnswers": ["don't", "do not"],
+          "acceptedAnswers": [
+            "don't",
+            "do not"
+          ],
           "caseSensitive": false
         }
       ],
@@ -1153,29 +1271,38 @@
       "text": "Do you [] English?\nDo you [] music?\nDo you [] games?\nDo you [] movies?",
       "columns": 1,
       "mode": "typing",
+      "gapSize": "normal",
       "gaps": [
         {
           "id": "gap-0",
           "acceptedAnswers": [],
-          "suggestions": ["Watch"],
+          "suggestions": [
+            "Watch"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-1",
           "acceptedAnswers": [],
-          "suggestions": ["Study"],
+          "suggestions": [
+            "Study"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-2",
           "acceptedAnswers": [],
-          "suggestions": ["Like"],
+          "suggestions": [
+            "Like"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-3",
           "acceptedAnswers": [],
-          "suggestions": ["Play"],
+          "suggestions": [
+            "Play"
+          ],
           "caseSensitive": false
         }
       ],
@@ -1195,7 +1322,9 @@
           "text": "No, I don't."
         }
       ],
-      "correctOptionIds": ["230eb2da-af0f-40eb-90f5-c52dbf31ffbb"],
+      "correctOptionIds": [
+        "230eb2da-af0f-40eb-90f5-c52dbf31ffbb"
+      ],
       "audience": "both"
     },
     {
@@ -1212,7 +1341,9 @@
           "text": "No, I don't."
         }
       ],
-      "correctOptionIds": ["b3d64c74-8baf-447a-9f7e-f368059b190d"],
+      "correctOptionIds": [
+        "b3d64c74-8baf-447a-9f7e-f368059b190d"
+      ],
       "audience": "both"
     },
     {
@@ -1480,7 +1611,12 @@
           "instructions": "I [] rock.",
           "columns": 1,
           "mode": "typing",
-          "wordSuggestions": ["Like", "Study", "Don't", "Do"],
+          "wordSuggestions": [
+            "Like",
+            "Study",
+            "Don't",
+            "Do"
+          ],
           "gaps": [
             {
               "id": "830107d8-afae-4e9c-82d7-a7ae859bb554"
@@ -1494,7 +1630,7 @@
       "audience": "both"
     },
     {
-      "id": "72269471-98b5-4617-95b3-8b443f5ccd01",
+      "id": "1fe06c9c-9867-4b94-8542-9a05d0d83bd3",
       "type": "page-break",
       "pageNumber": 3,
       "estimatedTime": "45 min",
@@ -1587,102 +1723,380 @@
     {
       "id": "07213c79-a073-48ed-a7ad-ada77c8b5c3e",
       "type": "heading",
-      "content": "Adding more details to questions",
+      "content": "Adding time details to questions",
       "level": "h2",
       "audience": "both"
     },
     {
       "id": "c5b277d9-7fb5-4c2c-88db-9ce6e5c072ab",
       "type": "paragraph",
-      "content": "We can add extra information to say when or how often an activity happens.",
+      "content": "We can add time expressions to say **when** or **how often** an activity happens.",
       "style": "body",
       "audience": "both"
     },
     {
-      "id": "5b09f75b-4a43-48d3-8979-f0fea038e169",
+      "id": "4c7447d0-2174-41a2-b1a7-12b4c00725d8",
       "type": "advanced-grammar",
-      "title": "Grammar Reference",
-      "explanation": "Summarize the structure or contrast in a concise way.",
+      "title": "Basic Structure",
+      "explanation": "Use Do + you + action + time expression?",
       "details": "",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Form", "Structure", "Example"],
-      "structureTableRows": [
-        {
-          "cells": [
-            {
-              "text": "Affirmative",
-              "highlights": []
-            },
-            {
-              "text": "Subject + verb",
-              "highlights": []
-            },
-            {
-              "text": "Example sentence",
-              "highlights": []
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "text": "Negative",
-              "highlights": []
-            },
-            {
-              "text": "Subject + do not + verb",
-              "highlights": []
-            },
-            {
-              "text": "Example sentence",
-              "highlights": []
-            }
-          ]
-        }
+      "structureTableHeaders": [
+        "Question",
+        "Short Answer",
+        "Long Answer"
       ],
-      "examples": ["She studies English every day."],
-      "commonMistakes": ["Do not forget the auxiliary verb."],
-      "comparisons": [
-        {
-          "id": "f29f4500-da89-49da-a410-b0deaeeb217e",
-          "label": "Compare",
-          "detail": "Use this form, not that form."
-        }
+      "structureTableRows": [],
+      "examples": [],
+      "commonMistakes": [],
+      "comparisons": [],
+      "miniPractice": [],
+      "tableHeaders": [
+        "Question",
+        "Short Answer",
+        "Long Answer"
       ],
-      "miniPractice": ["Write one sentence using the target structure."],
-      "tableHeaders": ["Form", "Structure", "Example"],
       "tableRows": [
         {
           "cells": [
             {
-              "text": "Question",
-              "highlights": []
+              "text": "Do you study every day?",
+              "highlights": [
+                {
+                  "id": "defea165-40eb-4ef5-92d1-b991c965137c",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "7797c4f2-996d-4133-91d6-647083ade750",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "28b5e24c-1c31-4360-a9c5-98cf09a0f7b0",
+                  "text": "study",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "baab9d91-06c8-4af8-b345-d148bba3fdc6",
+                  "text": "every day",
+                  "color": "#fde68a"
+                }
+              ]
             },
             {
-              "text": "Subject + verb",
-              "highlights": []
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "141fe0d7-2e26-4027-b5c4-27dff0f04bd7",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "8bdb1fc7-af10-4bfe-9b3f-0d41eac5b3a1",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
             },
             {
-              "text": "Example sentence",
-              "highlights": []
+              "text": "Yes, I do. I study every day.",
+              "highlights": [
+                {
+                  "id": "1319a5ef-a247-4837-a509-7d11236f316c",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "e3599501-bf0f-43ed-b211-949a7dc77b76",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "22e01580-374e-4cb1-9435-ebdad7eacfce",
+                  "text": "study",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "b62479a4-3d10-44fb-b87e-2a372527b8d0",
+                  "text": "every day",
+                  "color": "#fde68a"
+                }
+              ]
             }
           ]
         },
         {
           "cells": [
             {
-              "text": "Negative",
-              "highlights": []
+              "text": "Do you brush your teeth every night?",
+              "highlights": [
+                {
+                  "id": "38da97b9-2102-47e9-93f3-40eae5a42a20",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "d6d01f50-b699-49b6-832a-25510837bb52",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "7de9adf6-63f8-4859-869f-81c079af50a4",
+                  "text": "brush your teeth",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "ce0c27fc-40ba-4da9-b61b-0e69ab932d57",
+                  "text": "every night",
+                  "color": "#fde68a"
+                }
+              ]
             },
             {
-              "text": "Subject + do not + verb",
-              "highlights": []
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "fa1b20ea-4ec9-4ac7-bf8a-8204f30cbdfb",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "b84f4d02-54d6-41da-95c0-1db24c9332cf",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
             },
             {
-              "text": "Example sentence",
-              "highlights": []
+              "text": "Yes, I do. I brush my teeth every night.",
+              "highlights": [
+                {
+                  "id": "d7adb082-b82e-4d98-994f-5072aa27265a",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "1774ae24-278c-4a63-8249-4b7e322e12ec",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "db9372ed-65e5-4a0d-97dd-7f122892213b",
+                  "text": "brush my teeth",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "9c186797-e770-4340-b6d7-96f00ad31632",
+                  "text": "every night",
+                  "color": "#fde68a"
+                }
+              ]
             }
           ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you exercise in the afternoon?",
+              "highlights": [
+                {
+                  "id": "eff301c8-4079-4206-8797-433b7905a46e",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "d445c673-27da-4c0c-92c6-20c3416ea99f",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "4bf8a011-8993-43d8-908a-0665be55e9ed",
+                  "text": "exercise",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "f8edd7d7-e0f0-4e80-b642-cebb6d3fb6de",
+                  "text": "in the afternoon",
+                  "color": "#fde68a"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do.",
+              "highlights": [
+                {
+                  "id": "f0825645-12e2-4138-8fd5-19fe900e1be9",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "3993db65-9531-4ece-bed2-55b22ed77d0f",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I do. I exercise in the afternoon.",
+              "highlights": [
+                {
+                  "id": "92175c9e-0944-4dd3-9e02-23710d6119e2",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "764baf8e-daab-417d-b2d8-6a87950d9c06",
+                  "text": "do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "212e9e2e-cdf9-4cfe-9e91-5fb82cda85cb",
+                  "text": "exercise",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "0d2096ff-0c12-4e2e-bfee-b40532d2ac71",
+                  "text": "in the afternoon",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Do you work at night?",
+              "highlights": [
+                {
+                  "id": "63881bd4-ee78-4ee9-ade1-c57efc1223f8",
+                  "text": "Do",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "a7d203fc-eb4c-4604-ae54-f317c4f3fed1",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "efd31091-5cf6-4d0c-a85b-42398a75809f",
+                  "text": "work",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "03deed23-2c64-4468-b2c7-734810719301",
+                  "text": "at night",
+                  "color": "#fde68a"
+                },
+                {
+                  "id": "95a2d217-b0de-4e80-bf76-b1169b986748",
+                  "text": "",
+                  "color": "#d9f99d"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't.",
+              "highlights": [
+                {
+                  "id": "a467ecec-880c-4bdd-88b5-a07d15440a21",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "3986ab08-186b-4394-8121-efb7226b642c",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "No, I don't. I work in the morning.",
+              "highlights": [
+                {
+                  "id": "4df44bf7-15ee-4917-9d87-384cc6599ccc",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "ed9be542-104c-4222-b18a-8b6d874b869c",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "648e3db6-2b47-461c-95e4-1caa03281c15",
+                  "text": "work",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "cbbbefd7-acb4-4122-90d6-51d994436026",
+                  "text": "in the morning",
+                  "color": "#fde68a"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "b1506d64-f157-4131-9055-93690b01419d",
+      "type": "flashcards",
+      "title": "Common time expressions",
+      "category": "",
+      "variant": "grid",
+      "tags": [],
+      "cards": [
+        {
+          "id": "95bcc811-2215-4210-9367-9287f12fc643",
+          "expressions": [
+            "Every Day",
+            "Every Morning",
+            "Every Afternoon",
+            "Every Evening",
+            "Every Night",
+            "Every Week",
+            "Every Month",
+            "Every Year"
+          ],
+          "frontImage": "",
+          "backText": "Expressions used with \"Every\"",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Expressions used with \"Every\"",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "73c4192f-75a4-48fe-8f91-8d1be600c23a",
+          "expressions": [
+            "In the morning",
+            "In the afternoon",
+            "In the evening"
+          ],
+          "frontImage": "",
+          "backText": "Expressions used with \"In the\"",
+          "backImage": "",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Expressions used with \"In the\"",
+          "category": "",
+          "tags": []
         }
       ],
       "audience": "both"
@@ -1690,16 +2104,26 @@
     {
       "id": "f1891d01-4ffe-424d-848d-5767b7f0ec5d",
       "type": "question-set",
-      "title": "Make 3 questions with DO + YOU and Routine Activities",
-      "instruction": "Example: Do you brush you teeth?",
+      "title": "Make questions with Do + you + routine activities + ",
+      "instruction": "Example: Do you brush your teeth every day?",
+      "practiceMode": "question-builder",
       "questions": [
         {
           "id": "8cea2964-e20d-4976-9602-87fdca0fb2f4",
-          "type": "open-ended",
+          "type": "multiple-choice",
           "question": "",
-          "acceptedAnswers": [],
-          "instructions": "",
+          "options": [
+            {
+              "id": "e1a25dc6-8ad7-49dd-b1da-ab7ff6ebbaa1",
+              "text": "Option A"
+            },
+            {
+              "id": "6e392a33-f45c-4836-adc8-84ef00715464",
+              "text": "Option B"
+            }
+          ],
           "correctOptionIds": [],
+          "acceptedAnswers": [],
           "wordSuggestions": [],
           "sequence": []
         },
@@ -1722,876 +2146,1016 @@
           "sequence": []
         }
       ],
-      "audience": "both"
-    },
-    {
-      "id": "bab3a656-c902-40f6-8942-d7eda6a0d252",
-      "type": "advanced-grammar",
-      "title": "More ways to answer",
-      "explanation": "Use a short answer first. Then you can add extra information.",
-      "details": "Keep the same answer pattern every time in this part.",
-      "structureTitle": "Structure table",
-      "structureTableHeaders": ["Question", "Short Answer", "Long Answer"],
-      "structureTableRows": [],
-      "examples": [],
-      "commonMistakes": [],
-      "comparisons": [],
-      "miniPractice": [],
-      "tableHeaders": ["Question", "Short Answer", "Long Answer"],
-      "tableRows": [
+      "questionBuilderItems": [
         {
-          "cells": [
-            {
-              "text": "Do you study English?",
-              "highlights": [
-                {
-                  "id": "d05caa2c-2691-4543-b121-4f1a4063f85d",
-                  "text": "Do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "9c013853-a88f-4f7c-9e91-b7e496bf5028",
-                  "text": "you",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "d73f6a3a-924e-400e-877c-5dce03165c06",
-                  "text": "study English",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do.",
-              "highlights": [
-                {
-                  "id": "4afe9a30-2307-47f5-b3b1-8796a4df0c42",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "4b16238c-9bd9-46ae-9bb8-cd4ff919f98c",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do. I study at night.",
-              "highlights": [
-                {
-                  "id": "09d07bfc-1444-4df8-aacd-640fa82994cb",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "b2698834-8d03-4e2c-8ae7-65a070831560",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "e7108c5f-8723-4617-b326-ac1813a1567a",
-                  "text": "study at night",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            }
-          ]
+          "id": "0cc65d06-5d0d-4b75-9fcb-62677ce5f2c9",
+          "mode": "answer-given",
+          "questionText": "",
+          "answerText": "Yes, I do. I exercise in the morning."
         },
         {
-          "cells": [
-            {
-              "text": "Do you work?",
-              "highlights": [
-                {
-                  "id": "34234ee5-0ad2-4e08-b94a-fe33d063c5b0",
-                  "text": "Do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "c4f5a15e-7a98-4e15-9b37-cae0a59c621a",
-                  "text": "you",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "0067e63f-0985-4b86-976c-a780af83e7cd",
-                  "text": "work",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "No, I don't.",
-              "highlights": [
-                {
-                  "id": "674e4be7-2e81-4d7c-be60-7115540ab9bb",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "591d526a-adc0-4b0c-9c99-072f10ada032",
-                  "text": "don't",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "No, I don't. I study in the morning.",
-              "highlights": [
-                {
-                  "id": "a0b7528a-9468-4d9a-83dc-7162927d738c",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "25953762-06b0-484d-9fe3-16577c483d2b",
-                  "text": "don't",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "4a0ef563-8de6-48cd-9020-af877d330502",
-                  "text": "study in the morning",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            }
-          ]
+          "id": "d8014493-7949-422b-ae17-2956d91bad9f",
+          "mode": "answer-given",
+          "questionText": "",
+          "answerText": "No, I don't. I don't study every day."
         },
         {
-          "cells": [
-            {
-              "text": "Do you like music?",
-              "highlights": [
-                {
-                  "id": "25e943ae-b3b3-4d8e-936e-4f5295eb4173",
-                  "text": "Do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "4c07157f-182b-4dad-b7e0-25d835ff2574",
-                  "text": "you",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "13996fac-a58b-42b5-bb50-4464ac9733ee",
-                  "text": "like music",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do.",
-              "highlights": [
-                {
-                  "id": "18fe4c6c-8f9e-4283-ac87-7fcd8cdd401b",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "6ad56f2d-ade3-4fc4-9b1c-56a9bf6e7574",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do. I like pop music.",
-              "highlights": [
-                {
-                  "id": "2598fda2-b3ab-4717-bb92-a47cd9892e0e",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "7f20dfc6-a394-4107-9792-f3bba019cab2",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "ecbc836a-5e25-49d1-8b94-21af2fedb5a9",
-                  "text": "like pop music",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            }
-          ]
+          "id": "32f7eb55-9a53-43df-8a5b-14f0e85d4057",
+          "mode": "answer-given",
+          "questionText": "",
+          "answerText": "Yes, I do. I take a shower in the morning every day."
+        },
+        {
+          "id": "4e3c3c99-413d-4297-a4ab-6e7d14d32f21",
+          "mode": "free-both",
+          "questionText": "",
+          "answerText": ""
         }
       ],
       "audience": "both"
     },
     {
-      "id": "4c7447d0-2174-41a2-b1a7-12b4c00725d8",
-      "type": "advanced-grammar",
-      "title": "More ways to answer",
-      "explanation": "Use a short answer first. Then you can add extra information.",
-      "details": "Keep the same answer pattern every time in this part.",
-      "structureTitle": "Structure table",
-      "structureTableHeaders": ["Question", "Short Answer", "Long Answer"],
-      "structureTableRows": [],
-      "examples": [],
-      "commonMistakes": [],
-      "comparisons": [],
-      "miniPractice": [],
-      "tableHeaders": ["Question", "Short Answer", "Long Answer"],
-      "tableRows": [
-        {
-          "cells": [
-            {
-              "text": "Do you study English?",
-              "highlights": [
-                {
-                  "id": "defea165-40eb-4ef5-92d1-b991c965137c",
-                  "text": "Do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "7797c4f2-996d-4133-91d6-647083ade750",
-                  "text": "you",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "28b5e24c-1c31-4360-a9c5-98cf09a0f7b0",
-                  "text": "study English",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do.",
-              "highlights": [
-                {
-                  "id": "141fe0d7-2e26-4027-b5c4-27dff0f04bd7",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "8bdb1fc7-af10-4bfe-9b3f-0d41eac5b3a1",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do. I study at night.",
-              "highlights": [
-                {
-                  "id": "1319a5ef-a247-4837-a509-7d11236f316c",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "e3599501-bf0f-43ed-b211-949a7dc77b76",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "22e01580-374e-4cb1-9435-ebdad7eacfce",
-                  "text": "study at night",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "text": "Do you work?",
-              "highlights": [
-                {
-                  "id": "63881bd4-ee78-4ee9-ade1-c57efc1223f8",
-                  "text": "Do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "a7d203fc-eb4c-4604-ae54-f317c4f3fed1",
-                  "text": "you",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "efd31091-5cf6-4d0c-a85b-42398a75809f",
-                  "text": "work",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "No, I don't.",
-              "highlights": [
-                {
-                  "id": "a467ecec-880c-4bdd-88b5-a07d15440a21",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "3986ab08-186b-4394-8121-efb7226b642c",
-                  "text": "don't",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "No, I don't. I study in the morning.",
-              "highlights": [
-                {
-                  "id": "4df44bf7-15ee-4917-9d87-384cc6599ccc",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "ed9be542-104c-4222-b18a-8b6d874b869c",
-                  "text": "don't",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "648e3db6-2b47-461c-95e4-1caa03281c15",
-                  "text": "study in the morning",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "text": "Do you like music?",
-              "highlights": [
-                {
-                  "id": "eff301c8-4079-4206-8797-433b7905a46e",
-                  "text": "Do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "d445c673-27da-4c0c-92c6-20c3416ea99f",
-                  "text": "you",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "4bf8a011-8993-43d8-908a-0665be55e9ed",
-                  "text": "like music",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do.",
-              "highlights": [
-                {
-                  "id": "f0825645-12e2-4138-8fd5-19fe900e1be9",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "3993db65-9531-4ece-bed2-55b22ed77d0f",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I do. I like pop music.",
-              "highlights": [
-                {
-                  "id": "92175c9e-0944-4dd3-9e02-23710d6119e2",
-                  "text": "I",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "764baf8e-daab-417d-b2d8-6a87950d9c06",
-                  "text": "do",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "212e9e2e-cdf9-4cfe-9e91-5fb82cda85cb",
-                  "text": "like pop music",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "audience": "both"
+      "id": "62dbe8a9-91c5-4537-811f-db41a233bdd0",
+      "type": "teacher-note",
+      "audience": "teacher",
+      "title": "Learning routine activities",
+      "content": "Ask your teacher routine activities you are curious about! Use \"how do I say _____ in English?\""
     },
     {
-      "id": "15892511-6596-425e-9b15-8930c6965c3a",
-      "type": "question-set",
-      "title": "Make 3 questions with DO + YOU and Routine Activities",
-      "instruction": "Example: Do you brush you teeth?",
-      "questions": [
-        {
-          "id": "be869aaa-4897-4eb4-81dc-546d12bcb039",
-          "type": "open-ended",
-          "question": "",
-          "acceptedAnswers": [],
-          "instructions": "",
-          "correctOptionIds": [],
-          "wordSuggestions": [],
-          "sequence": []
-        },
-        {
-          "id": "9b817e06-f536-42f6-b851-5ac75fec3b58",
-          "type": "open-ended",
-          "question": "",
-          "acceptedAnswers": [],
-          "correctOptionIds": [],
-          "wordSuggestions": [],
-          "sequence": []
-        },
-        {
-          "id": "39e9e867-9df8-4837-9b48-c749d632f794",
-          "type": "open-ended",
-          "question": "",
-          "acceptedAnswers": [],
-          "correctOptionIds": [],
-          "wordSuggestions": [],
-          "sequence": []
-        }
-      ],
-      "audience": "both"
-    },
-    {
-      "id": "0a1d16cc-0ae3-44d9-8f46-cfa4ce3e5daf",
+      "id": "ce9709d7-e383-498f-981d-08a97d859c19",
       "type": "page-break",
       "pageNumber": 4,
       "estimatedTime": "45 min",
       "audience": "both"
     },
     {
-      "id": "p4-h1",
+      "id": "684a272e-a857-4219-a000-bf11a203dd83",
       "type": "heading",
-      "content": "4. How Are You?",
-      "level": "h2",
+      "content": "Tell Me About You",
+      "level": "h1",
       "audience": "both"
     },
     {
-      "id": "p4-p1",
+      "id": "c4e050eb-c210-4d72-8634-39fa2187a426",
       "type": "paragraph",
-      "content": "After saying hello, people often ask how you are. Use a short feeling word to answer.",
+      "content": "Let's learn how to ask and answer simple questions about yourself.",
       "style": "intro",
       "audience": "both"
     },
     {
-      "id": "p4-conv1",
+      "id": "084037a8-0c62-4f8e-a81e-b30adf4f0e0e",
       "type": "conversation",
-      "title": "Conversation Model",
+      "title": "Knowing People Better",
       "instruction": "",
-      "imageUrl": "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1000",
+      "imageUrl": "https://images.pexels.com/photos/7963856/pexels-photo-7963856.jpeg",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
       "layout": "script",
       "messages": [
         {
-          "id": "p4-conv1-m1",
-          "speaker": "Leo",
-          "text": "Hi, Emma. How are you?",
-          "highlights": [
-            {
-              "id": "p4-conv1-h1",
-              "text": "How are you",
-              "color": "#d9f99d"
-            }
-          ]
+          "id": "6b410d1e-c33e-49cb-a9b6-7af2fcde6c81",
+          "speaker": "Sarah",
+          "text": "Hi again, Daniel!",
+          "highlights": []
         },
         {
-          "id": "p4-conv1-m2",
-          "speaker": "Emma",
-          "text": "I'm good, thanks. And you?",
+          "id": "7d20a3d3-8b91-470e-8c4a-62d218652ff3",
+          "speaker": "Daniel",
+          "text": "Hi, Sarah!",
+          "highlights": []
+        },
+        {
+          "id": "7f345df7-bfde-4084-8b35-948cb966b09b",
+          "speaker": "Sarah",
+          "text": "Can I ask you a question? Are you from Brazil?",
           "highlights": [
             {
-              "id": "p4-conv1-h2",
-              "text": "I'm good, thanks",
+              "id": "1420370e-b987-4c85-b682-7dc9042f67b5",
+              "text": "Are",
               "color": "#bfdbfe"
             },
             {
-              "id": "p4-conv1-h3",
-              "text": "And you",
+              "id": "14af8dc8-2453-412d-bebb-bb53acad183b",
+              "text": "you",
               "color": "#d9f99d"
+            },
+            {
+              "id": "d3b822e0-23af-4340-9725-02c3ccf24f7b",
+              "text": "from Brazil",
+              "color": "#d6b2eea2"
             }
           ]
         },
         {
-          "id": "p4-conv1-m3",
-          "speaker": "Leo",
-          "text": "I'm great!",
+          "id": "654f4681-7383-47ae-b512-3634c3d3dfff",
+          "speaker": "Daniel",
+          "text": "Yes, I am Brazilian.",
           "highlights": [
             {
-              "id": "p4-conv1-h4",
-              "text": "I'm great",
+              "id": "e7071d8d-08d6-43e8-969b-d9e877e76381",
+              "text": "I",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "37d5e253-5c43-44f9-9a1e-84fcee467354",
+              "text": "am",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "53a94b94-3b9c-433b-a289-9abf703bf809",
+              "text": "Brazilian",
+              "color": "#d6b2eea2"
+            }
+          ]
+        },
+        {
+          "id": "e29b8528-ce6f-4b25-90cd-8230356272d0",
+          "speaker": "Sarah",
+          "text": "Cool! I am Portuguese. I'm from Portugal.",
+          "highlights": [
+            {
+              "id": "6e8ce41c-e9ad-4beb-893f-c9277144e30f",
+              "text": "Portuguese",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "278e780e-2726-4b7b-909e-ba59426b77d9",
+              "text": "from Portugal",
+              "color": "#d6b2eea2"
+            },
+            {
+              "id": "ca24cfc5-fe8a-49e9-b65f-781dd67a6418",
+              "text": "I",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "f2399d8a-9db0-4de8-ab2d-c6a339b161b6",
+              "text": "am",
+              "color": "#bfdbfe"
+            },
+            {
+              "id": "665f5433-3e19-4e3c-8ea3-cba6fa8a5c23",
+              "text": "'m",
               "color": "#bfdbfe"
             }
           ]
         },
         {
-          "id": "p4-conv1-m4",
-          "speaker": "Emma",
-          "text": "That's good!",
+          "id": "2346f6d7-e96b-40cd-98dd-bbd0f931fba7",
+          "speaker": "Daniel",
+          "text": "That's nice, I like Cristiano Ronaldo!",
+          "highlights": []
+        },
+        {
+          "id": "af17ff4e-b1ef-4dc7-b47a-0f5d5d0a864e",
+          "speaker": "Sarah",
+          "text": "Haha, I like Pelé! Well, I need to go now... See you around!",
+          "highlights": []
+        },
+        {
+          "id": "3f900ef9-825b-4fd1-b822-73f960628098",
+          "speaker": "Daniel",
+          "text": "Bye bye.",
           "highlights": []
         }
       ],
       "substitutionBox": [
         {
-          "original": "I'm good.",
-          "alternatives": ["I'm great.", "I'm okay.", "I'm tired.", "I'm happy.", "I'm nervous."]
+          "original": "Hello!",
+          "alternatives": [
+            "Hi!",
+            "Good morning!",
+            "Good afternoon!"
+          ]
         },
         {
-          "original": "And you?",
-          "alternatives": ["How about you?", "What about you?"]
+          "original": "My name is Emma.",
+          "alternatives": [
+            "I'm Emma.",
+            "I am Emma."
+          ]
+        },
+        {
+          "original": "Nice to meet you.",
+          "alternatives": [
+            "Nice to meet you too.",
+            "It's nice to meet you."
+          ]
+        },
+        {
+          "original": "Bye!",
+          "alternatives": [
+            "See you!",
+            "See you later!"
+          ]
         }
       ],
       "audience": "both"
     },
     {
-      "id": "p4-fc1",
+      "id": "fa96343e-4c49-4778-805a-e902b57f1012",
       "type": "flashcards",
-      "title": "Feeling Words",
-      "category": "Feelings",
+      "title": "COUNTRIES AND NATIONALITIES",
+      "category": "",
       "variant": "grid",
       "tags": [],
       "cards": [
         {
-          "id": "p4-fc1-c1",
-          "expressions": ["I'm good."],
+          "id": "9c85e45e-7b5f-4cec-82d1-85db56e216d5",
+          "expressions": [
+            "Brazil / Brazilian"
+          ],
           "frontImage": "",
-          "backText": "A simple positive answer.",
-          "backImage": "",
+          "backText": "I'm from Brazil. / I'm Brazilian.",
+          "backImage": "https://flagcdn.com/br.svg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
           "imageZoom": 100,
-          "shortMeaning": "A simple positive answer.",
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Brazil. / I'm Brazilian.",
+          "category": "",
           "tags": []
         },
         {
-          "id": "p4-fc1-c2",
-          "expressions": ["I'm great."],
+          "id": "5caabaed-bc78-4bbc-ad57-4a1cc561104b",
+          "expressions": [
+            "Portugal / Portuguese"
+          ],
           "frontImage": "",
-          "backText": "A very positive answer.",
-          "backImage": "",
+          "backText": "I'm from Portugal. / I'm Portuguese.",
+          "backImage": "https://flagcdn.com/pt.svg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
           "imageZoom": 100,
-          "shortMeaning": "A very positive answer.",
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Portugal. / I'm Portuguese.",
+          "category": "",
           "tags": []
         },
         {
-          "id": "p4-fc1-c3",
-          "expressions": ["I'm okay."],
+          "id": "30658f38-f8d2-42b0-b7b6-83996157c45b",
+          "expressions": [
+            "The United States / American",
+            ""
+          ],
           "frontImage": "",
-          "backText": "A neutral answer.",
-          "backImage": "",
+          "backText": "I'm from the United States. / I'm American.",
+          "backImage": "https://flagcdn.com/us.svg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
           "imageZoom": 100,
-          "shortMeaning": "A neutral answer.",
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from the United States. / I'm American.",
+          "category": "",
           "tags": []
         },
         {
-          "id": "p4-fc1-c4",
-          "expressions": ["I'm tired."],
+          "id": "13fb8da8-7487-41ae-8ee4-4835d42b7e62",
+          "expressions": [
+            "Canada / Canadian",
+            ""
+          ],
           "frontImage": "",
-          "backText": "Use this when you need rest.",
-          "backImage": "",
+          "backText": "I'm from Canada. / I'm Canadian.",
+          "backImage": "https://flagcdn.com/ca.svg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
           "imageZoom": 100,
-          "shortMeaning": "Use this when you need rest.",
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Canada. / I'm Canadian.",
+          "category": "",
           "tags": []
         },
         {
-          "id": "p4-fc1-c5",
-          "expressions": ["I'm happy."],
+          "id": "dd70c707-4a26-4ca6-86ab-8508c10d7bb7",
+          "expressions": [
+            "Mexico / Mexican",
+            "",
+            ""
+          ],
           "frontImage": "",
-          "backText": "Use this when you feel happy.",
-          "backImage": "",
+          "backText": "I'm from Mexico. / I'm Mexican.",
+          "backImage": "https://flagcdn.com/mx.svg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
           "imageZoom": 100,
-          "shortMeaning": "Use this when you feel happy.",
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Mexico. / I'm Mexican.",
+          "category": "",
           "tags": []
         },
         {
-          "id": "p4-fc1-c6",
-          "expressions": ["I'm nervous."],
+          "id": "ae65dd93-a8b9-42b8-b8de-3b1b887c1ebe",
+          "expressions": [
+            "England / British",
+            ""
+          ],
           "frontImage": "",
-          "backText": "Use this before a test, presentation, or new situation.",
-          "backImage": "",
+          "backText": "I'm from England. / I'm British.",
+          "backImage": "https://flagcdn.com/gb-eng.svg",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
           "imageZoom": 100,
-          "shortMeaning": "Use this before a test, presentation, or new situation.",
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from England. / I'm British.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "e373b363-9b84-4d3c-ab2b-d6247143354f",
+          "expressions": [
+            "Spain / Spanish",
+            "",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from Spain. / I'm Spanish.",
+          "backImage": "https://flagcdn.com/es.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Spain. / I'm Spanish.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "30c7f767-b756-4825-b88c-41928b44e1ee",
+          "expressions": [
+            "France / French",
+            "",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from France. / I'm French.",
+          "backImage": "https://flagcdn.com/fr.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from France. / I'm French.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "34de42b3-c391-427b-9bff-f8b0be0523a1",
+          "expressions": [
+            "Italy / Italian",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from Italy. / I'm Italian.",
+          "backImage": "https://flagcdn.com/it.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Italy. / I'm Italian.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "a8581561-c9cb-40e2-85ed-aca12618b268",
+          "expressions": [
+            "Germany / German",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from Germany. / I'm German.",
+          "backImage": "https://flagcdn.com/de.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Germany. / I'm German.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "225a5d51-93f8-4e85-99ab-c68ca109e920",
+          "expressions": [
+            "Japan / Japanese",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from Japan. / I'm Japanese.",
+          "backImage": "https://flagcdn.com/jp.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Japan. / I'm Japanese.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "62f4ab62-5a5e-4d29-bd6a-b3b342b6f7f0",
+          "expressions": [
+            "China / Chinese",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from China. / I'm Chinese.",
+          "backImage": "https://flagcdn.com/cn.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from China. / I'm Chinese.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "f8aafdcb-d88b-4043-ae14-17d4de80561c",
+          "expressions": [
+            "South Korea / Korean",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from South Korea. / I'm Korean.",
+          "backImage": "https://flagcdn.com/kr.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from South Korea. / I'm Korean.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "70dc1469-55ed-4aed-b684-f1bab1a52596",
+          "expressions": [
+            "Australia / Australian",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from Australia. / I'm Australian.",
+          "backImage": "https://flagcdn.com/au.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Australia. / I'm Australian.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "2807658a-a25e-4b6e-af0c-93b9e137b29e",
+          "expressions": [
+            "Argentina / Argentinian"
+          ],
+          "frontImage": "",
+          "backText": "I'm from Argentina. / I'm Argentinian.",
+          "backImage": "https://flagcdn.com/ar.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from Argentina. / I'm Argentinian.",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "13cc4c7d-3d10-4395-91d7-70d85199edd7",
+          "expressions": [
+            "India / Indian",
+            ""
+          ],
+          "frontImage": "",
+          "backText": "I'm from India. / I'm Indian.",
+          "backImage": "https://flagcdn.com/in.svg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "I'm from India. / I'm Indian.",
+          "category": "",
           "tags": []
         }
       ],
       "audience": "both"
     },
     {
-      "id": "70518d31-71aa-428a-8c46-68ac2024799e",
-      "type": "grammar-note",
-      "title": "Grammar Note",
-      "ruleContext": "Add a short and neutral explanation of the language pattern here.",
-      "expandableTitle": "See model examples",
-      "expandableContent": "Example 1\nExample 2",
+      "id": "a5f9d484-3285-4033-bf62-1fd23d238ea6",
+      "type": "roleplay",
+      "title": "",
+      "objective": "Practice the dialog \"Knowing People Better\". Change the countries and nationalities used.",
+      "customFields": [
+        {
+          "id": "c005de7b-a6fd-4fd4-b336-aa009fef027d",
+          "label": "Student A",
+          "value": "Starts Being Sarah."
+        },
+        {
+          "id": "008c5e69-fcdb-4eda-afa7-1edc5babba46",
+          "label": "Student B",
+          "value": "Starts Being Daniel."
+        }
+      ],
+      "scenario": "",
+      "studentACard": "",
+      "studentBCard": "",
+      "usefulPhrases": [],
+      "vocabularySupport": [],
+      "teacherNotes": "",
+      "characters": [
+        {
+          "name": "Student A",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Starts being Emma"
+            }
+          ]
+        },
+        {
+          "name": "Student B",
+          "details": [
+            {
+              "label": "Role",
+              "value": "Starts being Miles"
+            }
+          ]
+        }
+      ],
+      "tips": "Try changing the expressions and the names of the characters.",
       "audience": "both"
     },
     {
-      "id": "p4-fill1",
+      "id": "2fac2499-0eb0-438d-b98b-f723173b6f57",
+      "type": "heading",
+      "content": "Learning Letters",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "9f160998-8d87-4559-9c6a-4b58e7ab39c0",
+      "type": "letter-number",
+      "title": "Vowels",
+      "instruction": "",
+      "variant": "letters",
+      "density": "compact",
+      "itemsPerRow": 5,
+      "items": [
+        {
+          "id": "9732a092-0dd2-4516-b1cb-848c64aad1e6",
+          "symbol": "A",
+          "label": "ei"
+        },
+        {
+          "id": "693a3f92-1e00-4191-852c-fbc145549ba2",
+          "symbol": "E",
+          "label": "ii"
+        },
+        {
+          "id": "34083497-9e81-45df-b465-5e0028b65c5e",
+          "symbol": "I",
+          "label": "ái"
+        },
+        {
+          "id": "b8230556-3859-47b7-81c5-31f895945868",
+          "symbol": "O",
+          "label": "ou"
+        },
+        {
+          "id": "792f8de7-0a12-4b77-a4d4-a2eb102620be",
+          "symbol": "U",
+          "label": "you"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "033bbaec-16ea-4de7-b327-ade5202e7c04",
+      "type": "letter-number",
+      "title": "Consonants",
+      "instruction": "",
+      "variant": "letters",
+      "density": "compact",
+      "itemsPerRow": 7,
+      "items": [
+        {
+          "id": "693a3f92-1e00-4191-852c-fbc145549ba2",
+          "symbol": "B",
+          "label": "b"
+        },
+        {
+          "id": "34083497-9e81-45df-b465-5e0028b65c5e",
+          "symbol": "C",
+          "label": "c"
+        },
+        {
+          "id": "b8230556-3859-47b7-81c5-31f895945868",
+          "symbol": "D",
+          "label": "d"
+        },
+        {
+          "id": "4dfb3663-496c-4922-bc35-11ab8cfd1b01",
+          "symbol": "F",
+          "label": "f"
+        },
+        {
+          "id": "a50d4049-6353-4695-a363-fe59c13f6c17",
+          "symbol": "G",
+          "label": "g"
+        },
+        {
+          "id": "3fb36e9c-5b50-42db-8d91-e8f5f67fd301",
+          "symbol": "H",
+          "label": "h"
+        },
+        {
+          "id": "0338d76b-9694-4d35-ae60-98b2e9064c76",
+          "symbol": "J",
+          "label": "j"
+        },
+        {
+          "id": "48b9f591-f8de-4b2d-b8d8-1462b0f0f72c",
+          "symbol": "K",
+          "label": "k"
+        },
+        {
+          "id": "52fed5b9-8c2d-404b-85b5-8f1556f01ec0",
+          "symbol": "L",
+          "label": "l"
+        },
+        {
+          "id": "5492f0e3-494e-4426-986d-e6b24cc70b54",
+          "symbol": "M",
+          "label": "m"
+        },
+        {
+          "id": "4c2fbc5b-bea5-4c26-8db9-984d56668848",
+          "symbol": "N",
+          "label": "n"
+        },
+        {
+          "id": "f96e8c5b-97d7-4c99-b7a0-7c65f06d680b",
+          "symbol": "P",
+          "label": "p"
+        },
+        {
+          "id": "8c83edae-120f-4d3d-920e-23bebb237230",
+          "symbol": "Q",
+          "label": "q"
+        },
+        {
+          "id": "8942c231-743a-4fcc-9f0e-b249c7c30470",
+          "symbol": "R",
+          "label": "r"
+        },
+        {
+          "id": "15612373-d36d-41b4-bfe5-f332c42c4a58",
+          "symbol": "S",
+          "label": "s"
+        },
+        {
+          "id": "430c3797-9c07-4f06-8d7b-1af845dabee2",
+          "symbol": "T",
+          "label": "t"
+        },
+        {
+          "id": "6bf94232-eba8-42d1-8274-3ef490aa24cc",
+          "symbol": "V",
+          "label": "v"
+        },
+        {
+          "id": "6f6cff6a-bdb2-4f5c-8690-7a30f6f1f561",
+          "symbol": "W",
+          "label": "w"
+        },
+        {
+          "id": "f0da68c2-9161-4af8-ae19-fdc920e026a8",
+          "symbol": "X",
+          "label": "x"
+        },
+        {
+          "id": "ffd56b8a-334f-466a-a7f6-9bf45847be8d",
+          "symbol": "Y",
+          "label": "y"
+        },
+        {
+          "id": "f86a7e7e-fe32-4dd8-b537-5160023849e4",
+          "symbol": "Z",
+          "label": "z"
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "5af99599-7c84-4ba0-bc99-accc7b86cd72",
+      "type": "heading",
+      "content": "A and AN",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "f452beac-459f-4e94-a39e-4c8e4805ee66",
+      "type": "example-boxes",
+      "title": "How to use A or AN",
+      "explanation": "We use a and an before **singular nouns.** \n**A noun** is a word for a person, place, animal, or thing.",
+      "leftTitle": "A",
+      "leftContent": "Before a consonant sound.\n\nA **b**ook\nA **c**ar\nA **c**hair\nA **b**ook\nA **m**ouse",
+      "rightTitle": "AN",
+      "rightContent": "Before a vowel sound.\n\nAn **a**pple\nAn **e**gg\nAn **i**Phone\nAn **u**mbrella\nAn **e**raser**\n",
+      "audience": "both"
+    },
+    {
+      "id": "dc2bbc3a-38ee-4b30-b650-e26efb5fe11b",
+      "type": "heading",
+      "content": "Hands-On!",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "0a7fdd71-c26e-43c2-88f2-22014c807a78",
       "type": "fill-blank",
       "instruction": "Complete the mini-dialogue.",
-      "text": "A: How [] you?\nB: I'm [], thanks. And []?\nA: I'm fine.",
+      "text": "Can I ask [] a question?\n\n[] you from Brazil?\n\nYes, I [].\n\nI'm [].\n\nAre you [] Portugal?\n\nNo, I'm [].\n\nI'm from [].\n\nI need to go now, [].\n\n[] you around!",
       "columns": 1,
       "mode": "typing",
+      "gapSize": "normal",
       "gaps": [
         {
-          "id": "gap-0",
-          "acceptedAnswers": ["are"],
+          "id": "3e934669-4a51-4684-87e7-8ff8d96825cb",
+          "acceptedAnswers": [],
           "caseSensitive": false
         },
         {
-          "id": "gap-1",
-          "acceptedAnswers": ["good", "great", "okay", "fine", "tired", "happy", "nervous"],
+          "id": "02e69e56-3bdf-4f5b-b580-aa47286ca9b5",
+          "acceptedAnswers": [],
           "caseSensitive": false
         },
         {
-          "id": "gap-2",
-          "acceptedAnswers": ["you"],
+          "id": "98141466-d16a-47ff-953e-75c6ae21dca6",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "c1c71482-1338-4f05-8ca1-f3cebcb5a92d",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "b47a06d2-fa42-4e33-9ced-0e9cfc4a51ba",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "1d236c2c-c0b7-4762-acc7-c2157ca4db15",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "5b886c5a-1996-4e2e-9f93-41916d1d56fc",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "a093b493-f861-4d2a-b353-d65c4045c65d",
+          "acceptedAnswers": [],
+          "hint": "",
+          "caseSensitive": false
+        },
+        {
+          "id": "fdea17cd-5e65-4241-8ea0-c1e43b991d7c",
+          "acceptedAnswers": [],
           "caseSensitive": false
         }
       ],
       "audience": "both"
     },
     {
-      "id": "3b4590bf-fbd3-4ffe-851f-c8f0d8e45fac",
-      "type": "multiple-choice",
-      "question": "Choose the best answer.",
-      "options": [
+      "id": "71f4315c-3ea2-4fe1-84a0-beaf8d7ce0da",
+      "type": "fill-blank",
+      "instruction": "Complete de sentences using A or AN",
+      "text": "[] apple\n[] orange\n\n[] egg\n[] umbrella\n\n\n[] book\n[] pen\n\n[] pencil\n[] notebook\n\n[] backpack\n[] chair\n\n[] desk\n[] computer",
+      "columns": 2,
+      "mode": "typing",
+      "gapSize": "normal",
+      "gaps": [
         {
-          "id": "4cb69261-822d-445f-9a34-f656d581aece",
-          "text": "Option A"
+          "id": "gap1",
+          "acceptedAnswers": [],
+          "caseSensitive": false
         },
         {
-          "id": "c052a9c5-ad56-4f07-97aa-62b1b0aa9ef7",
-          "text": "Option B"
+          "id": "gap2",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap6",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap7",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap8",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap9",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap10",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap11",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap12",
+          "acceptedAnswers": [],
+          "caseSensitive": false
         }
       ],
-      "correctOptionIds": ["4cb69261-822d-445f-9a34-f656d581aece"],
       "audience": "both"
     },
     {
-      "id": "8703681b-6d7a-4692-961e-6193074e9e97",
-      "type": "conversation-prompts",
-      "title": "Talking",
-      "instruction": "",
-      "speakerMode": "pair",
-      "speakers": [
-        {
-          "id": "28a2f7d3-21d0-480c-b55a-5adce53b8443",
-          "name": "Speaker 1"
-        },
-        {
-          "id": "d7f7273e-f1d2-4450-9a71-43ae79761179",
-          "name": "Speaker 2"
-        }
-      ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
-      "exchanges": [
-        {
-          "id": "fcb3368f-d60b-4efb-ac73-5ca239f5a605",
-          "speakerId": "28a2f7d3-21d0-480c-b55a-5adce53b8443",
-          "text": "What is your opinion on the topic?"
-        },
-        {
-          "id": "683a1a64-26fa-4cb6-8fcf-7e66f09d5acf",
-          "speakerId": "d7f7273e-f1d2-4450-9a71-43ae79761179",
-          "text": "What example can you share?"
-        }
-      ],
-      "audience": "both"
+      "id": "e7c0c5f4-1d45-48be-8c4e-5d5218f38c98",
+      "type": "teacher-note",
+      "audience": "teacher",
+      "title": "Learning new words",
+      "content": "Ask your teacher words you are curious about!  Use \"how do I say _____ in English?\""
     },
     {
-      "id": "85c2bb6f-4d5e-4cf9-bd53-b1f88f78768b",
+      "id": "a161e877-bedd-40ec-a357-a0e0d7909064",
       "type": "page-break",
       "pageNumber": 5,
       "estimatedTime": "45 min",
       "audience": "both"
     },
     {
-      "id": "p5-h1",
+      "id": "p4-h1",
       "type": "heading",
-      "content": "5. Are You...?",
-      "level": "h2",
+      "content": "Are You...?",
+      "level": "h1",
       "audience": "both"
     },
     {
-      "id": "p5-p1",
+      "id": "p4-p1",
       "type": "paragraph",
-      "content": "Now use Are you...? for identity, feelings, condition, nationality, and origin. This is a different question pattern from Do you...?.",
+      "content": "To ask simple questions using the verb to be, we use **\"Are + person + information?\"**.\n\nWe can ask about countries, nationalities, professions, age, and personal information.",
       "style": "intro",
       "audience": "both"
     },
     {
-      "id": "p5-grammar1",
+      "id": "5eedfbe2-1651-4d96-accf-72b049512e40",
       "type": "advanced-grammar",
-      "title": "Question Pattern: Are You...?",
-      "explanation": "Use Are you + information to ask about a person.",
-      "details": "Use this pattern for a student, a teacher, tired, happy, Brazilian, and from Brazil.",
+      "title": "Basic Structure",
+      "explanation": "",
+      "details": "In English, nationalities always start with Capital letter. Ex: Brazilian, Portuguese, Chilean...",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Use", "Question", "Short Answer"],
-      "structureTableRows": [],
-      "examples": [],
-      "commonMistakes": [],
-      "comparisons": [],
-      "miniPractice": [],
-      "tableHeaders": ["Use", "Question", "Short Answer"],
-      "tableRows": [
-        {
-          "cells": [
-            {
-              "text": "Identity",
-              "highlights": []
-            },
-            {
-              "text": "Are you a student?",
-              "highlights": [
-                {
-                  "id": "p5-g1-h1",
-                  "text": "Are you",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "p5-g1-h2",
-                  "text": "a student",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I am. / No, I'm not.",
-              "highlights": [
-                {
-                  "id": "p5-g1-h3",
-                  "text": "I am",
-                  "color": "#d9f99d"
-                },
-                {
-                  "id": "p5-g1-h4",
-                  "text": "I'm not",
-                  "color": "#fde68a"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "text": "Feeling",
-              "highlights": []
-            },
-            {
-              "text": "Are you tired?",
-              "highlights": [
-                {
-                  "id": "p5-g1-h5",
-                  "text": "Are you",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "p5-g1-h6",
-                  "text": "tired",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I am. / No, I'm not.",
-              "highlights": [
-                {
-                  "id": "p5-g1-h7",
-                  "text": "I am",
-                  "color": "#d9f99d"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "text": "Origin",
-              "highlights": []
-            },
-            {
-              "text": "Are you from Brazil?",
-              "highlights": [
-                {
-                  "id": "p5-g1-h8",
-                  "text": "Are you",
-                  "color": "#bfdbfe"
-                },
-                {
-                  "id": "p5-g1-h9",
-                  "text": "from Brazil",
-                  "color": "#d6b2eea2"
-                }
-              ]
-            },
-            {
-              "text": "Yes, I am. / No, I'm not.",
-              "highlights": [
-                {
-                  "id": "p5-g1-h10",
-                  "text": "I'm not",
-                  "color": "#fde68a"
-                }
-              ]
-            }
-          ]
-        }
+      "structureTableHeaders": [
+        "Use",
+        "Pattern",
+        "Example"
       ],
-      "audience": "both"
-    },
-    {
-      "id": "p5-compare1",
-      "type": "advanced-grammar",
-      "title": "Do You...? or Are You...?",
-      "explanation": "Use Do you...? for actions. Use Are you...? for information about the person.",
-      "details": "Look at the first words and the answer.",
-      "structureTitle": "Structure table",
-      "structureTableHeaders": ["Question", "Use", "Answer"],
       "structureTableRows": [],
       "examples": [],
       "commonMistakes": [],
       "comparisons": [],
       "miniPractice": [],
-      "tableHeaders": ["Question", "Use", "Answer"],
+      "tableHeaders": [
+        "Use",
+        "Pattern",
+        "Example"
+      ],
       "tableRows": [
         {
           "cells": [
             {
-              "text": "Do you study English?",
+              "text": "Question",
+              "highlights": []
+            },
+            {
+              "text": "Are + person + information?",
               "highlights": [
                 {
-                  "id": "p5-c1-h1",
-                  "text": "Do you",
+                  "id": "5ca686c7-f004-439b-9be4-de405af8d341",
+                  "text": "Are",
                   "color": "#bfdbfe"
+                },
+                {
+                  "id": "1fc543a8-7d4a-4566-a000-82fc96c9e45c",
+                  "text": "information",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "1bb8b55a-af36-4b48-b50e-13990ae10007",
+                  "text": "person",
+                  "color": "#d9f99d"
                 }
               ]
             },
             {
-              "text": "Action",
-              "highlights": []
-            },
-            {
-              "text": "Yes, I do.",
+              "text": "Are you Brazilian?",
               "highlights": [
                 {
-                  "id": "p5-c1-h2",
-                  "text": "I do",
+                  "id": "b2ffb6d6-10cd-48d0-ac14-239b30a4a46e",
+                  "text": "Are",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "59c957fa-3cc0-48e3-b7ab-a3fe6c5bc467",
+                  "text": "Brazilian",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "47d209a1-cccc-4540-ab6f-dfdc0fbd8866",
+                  "text": "you",
                   "color": "#d9f99d"
                 }
               ]
@@ -2601,53 +3165,40 @@
         {
           "cells": [
             {
-              "text": "Do you work?",
-              "highlights": [
-                {
-                  "id": "p5-c1-h3",
-                  "text": "Do you",
-                  "color": "#bfdbfe"
-                }
-              ]
-            },
-            {
-              "text": "Action",
+              "text": "Short Positive Answer",
               "highlights": []
             },
             {
-              "text": "No, I don't.",
+              "text": "Yes, person + am / are.",
               "highlights": [
                 {
-                  "id": "p5-c1-h4",
-                  "text": "I don't",
-                  "color": "#fde68a"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "cells": [
-            {
-              "text": "Are you a student?",
-              "highlights": [
+                  "id": "af5cf1c0-a172-48c0-83ae-2e3d4cc9ece4",
+                  "text": "am",
+                  "color": "#bfdbfe"
+                },
                 {
-                  "id": "p5-c1-h5",
-                  "text": "Are you",
+                  "id": "69b40b2d-62fd-474e-bf31-b8273c23afc4",
+                  "text": "person",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "fa00ad76-5433-4b59-8832-9cb34ef03c96",
+                  "text": "are",
                   "color": "#bfdbfe"
                 }
               ]
-            },
-            {
-              "text": "Identity",
-              "highlights": []
             },
             {
               "text": "Yes, I am.",
               "highlights": [
                 {
-                  "id": "p5-c1-h6",
-                  "text": "I am",
+                  "id": "afe892e7-9852-4af9-9f29-b46a674e7332",
+                  "text": "am",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "236bdd4e-1e2d-4d45-8467-980bd08cb1cd",
+                  "text": "I",
                   "color": "#d9f99d"
                 }
               ]
@@ -2657,26 +3208,41 @@
         {
           "cells": [
             {
-              "text": "Are you tired?",
+              "text": "Short Negative Answer",
+              "highlights": []
+            },
+            {
+              "text": "No, person + am not / aren't.",
               "highlights": [
                 {
-                  "id": "p5-c1-h7",
-                  "text": "Are you",
+                  "id": "f73ffb0b-0f3f-41be-8506-c89aa0cf8845",
+                  "text": "am not",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "ea3a4aea-3382-44f4-9490-876c05aa078e",
+                  "text": "person",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "641c0cf3-3dfa-44bc-b03b-7abbc2ff5fb9",
+                  "text": "aren't",
                   "color": "#bfdbfe"
                 }
               ]
             },
             {
-              "text": "Feeling",
-              "highlights": []
-            },
-            {
               "text": "No, I'm not.",
               "highlights": [
                 {
-                  "id": "p5-c1-h8",
-                  "text": "I'm not",
-                  "color": "#fde68a"
+                  "id": "3ccf7c05-04ed-4f64-b64b-4442626f6970",
+                  "text": "don't",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "fc0767f1-0c46-44a0-a4c2-fa604b93fe88",
+                  "text": "I'm",
+                  "color": "#d9f99d"
                 }
               ]
             }
@@ -2686,214 +3252,771 @@
       "audience": "both"
     },
     {
-      "id": "p5-fill1",
-      "type": "fill-blank",
-      "instruction": "Complete the Are you...? questions.",
-      "text": "[] you a student?\n[] you tired?\n[] you happy?\n[] you from Brazil?",
-      "columns": 1,
-      "mode": "typing",
-      "gaps": [
-        {
-          "id": "gap-0",
-          "acceptedAnswers": ["Are"],
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-1",
-          "acceptedAnswers": ["Are"],
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-2",
-          "acceptedAnswers": ["Are"],
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-3",
-          "acceptedAnswers": ["Are"],
-          "caseSensitive": false
-        }
+      "id": "70ec6c19-63f9-450a-91da-4f28926458e5",
+      "type": "advanced-grammar",
+      "title": "More ways to answer",
+      "explanation": "Use a short answer first. Then you can add extra information.",
+      "details": "You can answer with extra personal information after the short answer",
+      "structureTitle": "Structure table",
+      "structureTableHeaders": [
+        "Question",
+        "Short Answer",
+        "Long Answer"
       ],
-      "audience": "both"
-    },
-    {
-      "id": "p5-fill2",
-      "type": "fill-blank",
-      "instruction": "Complete the short answers.",
-      "text": "Are you a student?\nYes, I [].\nAre you tired?\nNo, I'm [].\nAre you from Brazil?\nYes, I [].",
-      "columns": 1,
-      "mode": "typing",
-      "gaps": [
-        {
-          "id": "gap-0",
-          "acceptedAnswers": ["am"],
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-1",
-          "acceptedAnswers": ["not"],
-          "caseSensitive": false
-        },
-        {
-          "id": "gap-2",
-          "acceptedAnswers": ["am"],
-          "caseSensitive": false
-        }
+      "structureTableRows": [],
+      "examples": [],
+      "commonMistakes": [],
+      "comparisons": [],
+      "miniPractice": [],
+      "tableHeaders": [
+        "Question",
+        "Short Answer",
+        "Long Answer"
       ],
-      "audience": "both"
-    },
-    {
-      "id": "e5fa6730-9b5e-46c6-bc8f-f18079a7db04",
-      "type": "multiple-choice",
-      "question": "Choose the best answer.",
-      "options": [
+      "tableRows": [
         {
-          "id": "fad93d6b-60c0-49d3-8d89-68b469a86446",
-          "text": "Option A"
-        },
-        {
-          "id": "4d02b2a6-9644-46f7-9d51-4aeb5d935750",
-          "text": "Option B"
-        }
-      ],
-      "correctOptionIds": ["fad93d6b-60c0-49d3-8d89-68b469a86446"],
-      "audience": "both"
-    },
-    {
-      "id": "b1da5f41-eec5-4d16-ba51-a6d57321889f",
-      "type": "multiple-choice",
-      "question": "Choose the best answer.",
-      "options": [
-        {
-          "id": "be971277-7270-4a0b-abc7-c0196bc74396",
-          "text": "Option A"
-        },
-        {
-          "id": "3fb1b6fb-5c30-4a99-9cb6-69064f6d1f64",
-          "text": "Option B"
-        }
-      ],
-      "correctOptionIds": ["be971277-7270-4a0b-abc7-c0196bc74396"],
-      "audience": "both"
-    },
-    {
-      "id": "p5-conv1",
-      "type": "conversation",
-      "title": "Conversation Model",
-      "instruction": "",
-      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000",
-      "layout": "script",
-      "messages": [
-        {
-          "id": "p5-conv1-m1",
-          "speaker": "Ana",
-          "text": "Are you a student?",
-          "highlights": [
+          "cells": [
             {
-              "id": "p5-conv1-h1",
-              "text": "Are you",
-              "color": "#bfdbfe"
+              "text": "Are you Brazilian?",
+              "highlights": [
+                {
+                  "id": "1e5dd90f-6f4b-4902-9db4-27921896b3dd",
+                  "text": "Are",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "d366b587-37b4-4e6d-a879-d78cfe4057db",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "cd4974a0-fd6a-4f4c-a29d-ad34cc16b92b",
+                  "text": "Brazilian",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am.",
+              "highlights": [
+                {
+                  "id": "bbd06d9c-f541-4d5f-92c4-a2bb6bcaf913",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "dcbffdda-aa12-4df7-a4b1-67660941ff20",
+                  "text": "am",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am. I am from Brazil",
+              "highlights": [
+                {
+                  "id": "b1d135b6-bca2-4e79-b377-d744632cf943",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "0e594213-d57e-4a40-b67f-4ad007283337",
+                  "text": "am",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "0ad4a594-7e3b-49b4-b02a-eeb7938dc0f7",
+                  "text": "from Brazil",
+                  "color": "#d6b2eea2"
+                }
+              ]
             }
           ]
         },
         {
-          "id": "p5-conv1-m2",
-          "speaker": "Bruno",
-          "text": "Yes, I am.",
+          "cells": [
+            {
+              "text": "Are you Chilean?",
+              "highlights": [
+                {
+                  "id": "b325a8db-eae3-4881-8450-7deb8dacbe03",
+                  "text": "Are",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "49d9faa5-6b39-48e5-9697-ec68b2a2bd00",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "ecb70b89-498e-4104-889d-c1a0dc1572f1",
+                  "text": "Chilean",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "No, I'm not.",
+              "highlights": [
+                {
+                  "id": "54384832-7ae4-4798-9ca8-a09958843382",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "8d7a864c-19cc-4c20-b2b7-a8cca2a5a1e1",
+                  "text": "'m not",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "No, I'm not. I'm Argentinian.",
+              "highlights": [
+                {
+                  "id": "8d4c17ff-2e80-4dd7-8118-555a2bebf32c",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "6035a9fb-70fe-4540-b682-fa05a1031861",
+                  "text": "'m",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "d127574b-f8a2-4ec1-bcbd-3c50bfb9952d",
+                  "text": "Argentinian",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "cells": [
+            {
+              "text": "Are you 18 years old?",
+              "highlights": [
+                {
+                  "id": "7fc67683-88a5-4352-aa22-d4b0644e74e8",
+                  "text": "Are",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "b0d97c63-aeaa-4731-a1fe-474b0d8d723d",
+                  "text": "you",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "77af40d3-5e19-4795-8dd3-97cbbe17c9d5",
+                  "text": "18 years old",
+                  "color": "#d6b2eea2"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am.",
+              "highlights": [
+                {
+                  "id": "e1c58f31-2ba7-4fad-89a0-1e4e018f0546",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "a42ebd5f-c37a-459b-a158-e8c340851a11",
+                  "text": "am",
+                  "color": "#bfdbfe"
+                }
+              ]
+            },
+            {
+              "text": "Yes, I am. I'm 18 years old.",
+              "highlights": [
+                {
+                  "id": "1db2f0ec-edaa-4e20-9ab1-206e4b1d4c07",
+                  "text": "I",
+                  "color": "#d9f99d"
+                },
+                {
+                  "id": "d2473000-ce2e-48b4-b0a5-6deadb685ace",
+                  "text": "'m",
+                  "color": "#bfdbfe"
+                },
+                {
+                  "id": "e5d478bf-81dc-4d0d-a6dc-e7e9636fa2fa",
+                  "text": "18 years old.",
+                  "color": "#d6b2eea2"
+                },
+                {
+                  "id": "b59f52ae-10dc-4cc5-868d-3c510646baba",
+                  "text": "am",
+                  "color": "#bfdbfe"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "03a468a5-a52d-4ba2-873a-6ff588f7fa36",
+      "type": "flashcards",
+      "title": "COMMON PROFESSIONS",
+      "category": "",
+      "variant": "grid",
+      "tags": [],
+      "cards": [
+        {
+          "id": "eb9179ae-6fe6-4e7a-abf6-43ba40e053ce",
+          "expressions": [
+            "Teacher"
+          ],
+          "frontImage": "",
+          "backText": "Are you **a** teacher?",
+          "backImage": "https://images.pexels.com/photos/5212675/pexels-photo-5212675.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **a** teacher?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "040810d5-e917-41ba-899f-e90e9ee2ce73",
+          "expressions": [
+            "Engineer"
+          ],
+          "frontImage": "",
+          "backText": "Are you **an** engineer?",
+          "backImage": "https://images.pexels.com/photos/4872040/pexels-photo-4872040.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **an** engineer?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "be070060-3a92-4abf-b117-018436530078",
+          "expressions": [
+            "Doctor"
+          ],
+          "frontImage": "",
+          "backText": "Are you **a** doctor?",
+          "backImage": "https://images.pexels.com/photos/7966285/pexels-photo-7966285.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 50,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **a** doctor?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "9add51cd-4e10-4a8b-8fd4-e33b2a11a9ed",
+          "expressions": [
+            "Accountant"
+          ],
+          "frontImage": "",
+          "backText": "Are you **an** accountant?",
+          "backImage": "https://images.pexels.com/photos/8297076/pexels-photo-8297076.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 22,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **an** accountant?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "ac65e11a-cb3c-4e1d-a8c3-d55b14f9d415",
+          "expressions": [
+            "Chef"
+          ],
+          "frontImage": "",
+          "backText": "Are you **a** chef?",
+          "backImage": "https://images.pexels.com/photos/4253133/pexels-photo-4253133.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 33,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **a** chef?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "5fff16aa-4283-4b88-94cc-65e4d9764e1b",
+          "expressions": [
+            "Actor"
+          ],
+          "frontImage": "",
+          "backText": "Are you **an** actor?",
+          "backImage": "https://images.pexels.com/photos/13226335/pexels-photo-13226335.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 47,
+          "imagePositionY": 52,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **an** actor?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "019827dd-c490-4609-ba09-f3160e38e36e",
+          "expressions": [
+            "Police officer"
+          ],
+          "frontImage": "",
+          "backText": "Are you **a** police officer?",
+          "backImage": "https://images.pexels.com/photos/7714675/pexels-photo-7714675.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 11,
+          "imageZoom": 125,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **a** police officer?",
+          "category": "",
+          "tags": []
+        },
+        {
+          "id": "5463d93a-d1ef-4e61-af09-d11ec63a9672",
+          "expressions": [
+            "Electrician"
+          ],
+          "frontImage": "",
+          "backText": "Are you **an** electrician?",
+          "backImage": "https://images.pexels.com/photos/34054464/pexels-photo-34054464.jpeg",
+          "imageFrame": "rounded-rect",
+          "imageFit": "cover",
+          "imagePositionX": 50,
+          "imagePositionY": 36,
+          "imageZoom": 100,
+          "audioUrl": "",
+          "exampleSentence": "",
+          "translation": "",
+          "shortMeaning": "Are you **an** electrician?",
+          "category": "",
+          "tags": []
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "afb0b73d-17ea-464b-b26e-7b61bf21c366",
+      "type": "heading",
+      "content": "Practicing Grammar",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "ce2a3099-7335-4789-bfef-f02637212344",
+      "type": "fill-blank",
+      "instruction": "Complete the pattern.",
+      "text": "Are you [] Brazilian?\n\nYes, I []\nNo, I []\n",
+      "columns": 2,
+      "mode": "typing",
+      "gapSize": "normal",
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "47dad646-0c63-40cc-a60e-eb6beaa3cf02",
+      "type": "fill-blank",
+      "instruction": "Complete with A/AN, a country, a nationality, a profession, or an age.",
+      "text": "Are you a []?\nAre you from []?\nAre you []?\n\n[[column]]\n\nAre you [] years old?\nAre you from []?\nAre you an []?\n\n[[level]]\n\nI am from Portugal. I'm [].\nI [] years old.\nI teach English. I'm a [].\n\n[[column]]\n\nI'm from []. I'm [].\nMy father is a []. He works at a hospital.\nShe is [] years old. She's from [].",
+      "columns": 2,
+      "mode": "typing",
+      "gapSize": "wide",
+      "gaps": [
+        {
+          "id": "gap1",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap2",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap3",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap4",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap5",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap6",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap7",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap8",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap9",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap10",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap11",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap12",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap13",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        },
+        {
+          "id": "gap14",
+          "acceptedAnswers": [],
+          "caseSensitive": false
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "b61245e0-3d14-44c0-befd-08ed37f8ed86",
+      "type": "multiple-choice",
+      "question": "Are you from Brazil?",
+      "options": [
+        {
+          "id": "302e9f31-1ea2-4b4a-a12d-51632a630d85",
+          "text": "Yes, I am. I'm Brazilian."
+        },
+        {
+          "id": "8cbac494-1eba-4a1f-b5de-e7d718cc2192",
+          "text": "No, I am not. I'm Argentinian."
+        }
+      ],
+      "correctOptionIds": [
+        "302e9f31-1ea2-4b4a-a12d-51632a630d85"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "33383976-6aad-4644-b75c-d9374ce0f50b",
+      "type": "multiple-choice",
+      "question": "Are you a teacher?",
+      "options": [
+        {
+          "id": "4da6b996-42a6-447e-bd06-2ceedd7c0829",
+          "text": "Yes, I am. I'm an English teacher."
+        },
+        {
+          "id": "075ed430-4214-4744-843b-d93e8738fa4c",
+          "text": "No, I am not. I'm an English student."
+        }
+      ],
+      "correctOptionIds": [
+        "4da6b996-42a6-447e-bd06-2ceedd7c0829"
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "07fb0a95-15f1-4812-8924-c1b3f92f31cb",
+      "type": "heading",
+      "content": "Practicing Listening",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "ee88fc4c-5bbd-4e4b-80e3-e9412e5dd80c",
+      "type": "listening",
+      "title": "About Me",
+      "instruction": "Pretend you are Olivia. Answer the questions using her information.",
+      "audioUrl": "audio/example.mp3",
+      "script": [
+        {
+          "id": "9fa80ecb-2756-4ad1-a530-a2616359c576",
+          "speaker": "Olivia",
+          "text": "Hi! My name is Olivia. I'm from Spain, and I'm Spanish. I'm 21 years old. I'm an engineer. I love my job, and I draw every weekend. Nice to meet you!",
           "highlights": [
             {
-              "id": "p5-conv1-h2",
-              "text": "Yes, I am",
+              "id": "d58b3245-767a-4bff-8b09-b61b63467b79",
+              "text": "I'm from Spain",
               "color": "#d9f99d"
-            }
-          ]
-        },
-        {
-          "id": "p5-conv1-m3",
-          "speaker": "Ana",
-          "text": "Are you tired today?",
-          "highlights": [
+            },
             {
-              "id": "p5-conv1-h3",
-              "text": "Are you tired",
+              "id": "b586a075-c5af-419b-901f-8ed91db0728a",
+              "text": "I'm Spanish",
+              "color": "#d9f99d"
+            },
+            {
+              "id": "6ff8b20f-914c-4ee4-a52c-038d32d996f6",
+              "text": "I'm 21 years old",
               "color": "#bfdbfe"
-            }
-          ]
-        },
-        {
-          "id": "p5-conv1-m4",
-          "speaker": "Bruno",
-          "text": "No, I'm not. I'm good.",
-          "highlights": [
+            },
             {
-              "id": "p5-conv1-h4",
-              "text": "No, I'm not",
+              "id": "27e009d2-a61b-4ca0-9a45-0ffb1a50c1bc",
+              "text": "I'm an engineer",
               "color": "#fde68a"
             }
           ]
+        }
+      ],
+      "transcriptVisibility": "hidden",
+      "questions": [
+        {
+          "id": "630589f7-4ccb-4e5b-a0af-73b8a51a113b",
+          "type": "multiple-choice",
+          "question": "I'm from...",
+          "options": [
+            {
+              "id": "558087e9-70a9-462a-a878-63004114fa8f",
+              "text": "Brazil"
+            },
+            {
+              "id": "647506a5-648f-4492-9d17-dfc1866adf8a",
+              "text": "Spain"
+            },
+            {
+              "id": "c651e3c9-e16c-4b0b-9447-5ace0a007bf7",
+              "text": "Portugal"
+            }
+          ],
+          "correctOptionIds": [],
+          "instructions": ""
         },
         {
-          "id": "p5-conv1-m5",
-          "speaker": "Ana",
-          "text": "Do you study English at night?",
-          "highlights": [
+          "id": "2d685760-051f-4a64-ad8f-7246c3c14e81",
+          "type": "multiple-choice",
+          "question": "I'm...",
+          "options": [
             {
-              "id": "p5-conv1-h5",
-              "text": "Do you study",
-              "color": "#d6b2eea2"
+              "id": "bbb8cbdb-69e0-4188-b165-3411665672d0",
+              "text": "Argentinian"
+            },
+            {
+              "id": "a4297345-b116-445a-84c7-b44211dd2c54",
+              "text": "Spain"
+            },
+            {
+              "id": "83a3023e-8812-42b7-8992-ddf3a4bf3375",
+              "text": "Spanish"
+            }
+          ],
+          "correctOptionIds": []
+        },
+        {
+          "id": "a284f569-1fc6-451c-9928-29ad981023d3",
+          "type": "multiple-choice",
+          "question": "I'm an...",
+          "options": [
+            {
+              "id": "3d96517b-0685-4120-977d-bb9028df0d61",
+              "text": "Chef"
+            },
+            {
+              "id": "524e14d3-923d-4f72-a72e-afe9f11d7e32",
+              "text": "Doctor"
+            },
+            {
+              "id": "73b74afa-cba2-4b31-88bc-be5567054a67",
+              "text": "Engineer"
+            }
+          ],
+          "correctOptionIds": [],
+          "instructions": ""
+        },
+        {
+          "id": "b091e53e-a0ca-4d5c-bc32-dd4fffd84dfd",
+          "type": "open-ended",
+          "question": "Are you a teacher?",
+          "acceptedAnswers": []
+        },
+        {
+          "id": "89bad27f-26f0-46db-93d9-9cbe2a233c46",
+          "type": "fill-in-the-blank",
+          "question": "How old are you?",
+          "instructions": "I [] [] years old.",
+          "columns": 1,
+          "mode": "typing",
+          "wordSuggestions": [
+            " 21",
+            "an",
+            "am",
+            "Spanish"
+          ],
+          "gaps": [
+            {
+              "id": "357d2034-f171-47de-bcc3-a7e76d939c7c"
+            },
+            {
+              "id": "9d186b65-4cbb-46fa-bfbd-b582c39c5d8c"
             }
           ]
-        },
-        {
-          "id": "p5-conv1-m6",
-          "speaker": "Bruno",
-          "text": "Yes, I do.",
-          "highlights": [
-            {
-              "id": "p5-conv1-h6",
-              "text": "Yes, I do",
-              "color": "#d9f99d"
-            }
-          ]
         }
       ],
-      "audience": "both"
+      "audience": "both",
+      "contextImageUrl": "https://images.pexels.com/photos/33715782/pexels-photo-33715782.jpeg"
     },
     {
-      "id": "3b588d8a-7392-4c43-8ba3-52aeb550bb40",
-      "type": "conversation-prompts",
-      "title": "Talking",
-      "instruction": "",
-      "speakerMode": "pair",
-      "speakers": [
-        {
-          "id": "a4bd1fec-343b-41c5-ad80-a30e7c25f4e6",
-          "name": "Speaker 1"
-        },
-        {
-          "id": "96af7806-be13-43e4-b884-24e4cab02bb9",
-          "name": "Speaker 2"
-        }
-      ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
-      "exchanges": [
-        {
-          "id": "13741a17-3c31-437a-bf3e-602030291ed1",
-          "speakerId": "a4bd1fec-343b-41c5-ad80-a30e7c25f4e6",
-          "text": "What is your opinion on the topic?"
-        },
-        {
-          "id": "40b3b6bc-4af2-40c3-a4bf-6167a70379e2",
-          "speakerId": "96af7806-be13-43e4-b884-24e4cab02bb9",
-          "text": "What example can you share?"
-        }
-      ],
-      "audience": "both"
-    },
-    {
-      "id": "e0ee80f0-40df-434d-a6cf-06606204c6af",
+      "id": "2550f9e0-7456-4812-b02c-a35596ac3453",
       "type": "page-break",
       "pageNumber": 6,
+      "estimatedTime": "45 min",
+      "audience": "both"
+    },
+    {
+      "id": "748a1ebf-c24f-4b7d-abc1-b8ff40a0b744",
+      "type": "heading",
+      "content": "Everyday Jobs",
+      "level": "h1",
+      "audience": "both"
+    },
+    {
+      "id": "6234fb5d-2574-4f84-ad25-4324eb577540",
+      "type": "paragraph",
+      "content": "Let's learn some common professions that many people do.",
+      "style": "intro",
+      "audience": "both"
+    },
+    {
+      "id": "ead77daa-c2a4-4bbf-a4c5-2c4b9b63138c",
+      "type": "vocabulary-match",
+      "title": "Match the related items",
+      "instruction": "Connect each item on the left to its related item on the right.",
+      "variant": "classic",
+      "matchMode": "image-to-word",
+      "shuffleLeft": false,
+      "shuffleRight": true,
+      "shuffleVersion": 13,
+      "showReferenceBadges": true,
+      "showCorrectMatches": false,
+      "pairs": [
+        {
+          "id": "079a5635-dfc3-4512-8f47-823f23000578",
+          "left": "https://images.pexels.com/photos/14186727/pexels-photo-14186727.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "I'm a pilot.",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "24d8acd0-406f-4775-bcc7-919ae87ad144",
+          "left": "https://images.pexels.com/photos/15340593/pexels-photo-15340593.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "I'm a photographer",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "557b66b9-f6bf-4c98-9dba-7dc167b5aa0a",
+          "left": "https://images.pexels.com/photos/8112126/pexels-photo-8112126.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "I'm a lawyer.",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "e230fd02-fddd-4dcc-a488-988192c8d0d7",
+          "left": "https://images.pexels.com/photos/7564863/pexels-photo-7564863.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "I'm a mechanic.",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "969c7993-3590-44f5-ae3c-9d37297847f8",
+          "left": "https://images.pexels.com/photos/6563916/pexels-photo-6563916.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "I'm a baker.",
+          "rightType": "text",
+          "rightLabel": ""
+        },
+        {
+          "id": "d578cccd-3817-4074-9b7b-7d655a3d3f05",
+          "left": "https://images.pexels.com/photos/5368632/pexels-photo-5368632.jpeg",
+          "leftType": "image",
+          "leftLabel": "",
+          "right": "I'm a hairdresser.",
+          "rightType": "text",
+          "rightLabel": ""
+        }
+      ],
+      "audience": "both"
+    },
+    {
+      "id": "f953892b-a158-4ce9-a848-4cb0f5d12dd6",
+      "type": "page-break",
+      "pageNumber": 7,
       "estimatedTime": "45 min",
       "audience": "both"
     },
@@ -2918,13 +4041,21 @@
       "explanation": "Use from with a country or city.",
       "details": "Use Are you from...? for yes/no. Use Where are you from? for information.",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Question", "Answer", "Example"],
+      "structureTableHeaders": [
+        "Question",
+        "Answer",
+        "Example"
+      ],
       "structureTableRows": [],
       "examples": [],
       "commonMistakes": [],
       "comparisons": [],
       "miniPractice": [],
-      "tableHeaders": ["Question", "Answer", "Example"],
+      "tableHeaders": [
+        "Question",
+        "Answer",
+        "Example"
+      ],
       "tableRows": [
         {
           "cells": [
@@ -3023,10 +4154,13 @@
       "cards": [
         {
           "id": "p6-fc1-c1",
-          "expressions": ["Brazil / Brazilian"],
+          "expressions": [
+            "Brazil / Brazilian"
+          ],
           "frontImage": "",
           "backText": "I'm from Brazil. I'm Brazilian.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3036,10 +4170,13 @@
         },
         {
           "id": "p6-fc1-c2",
-          "expressions": ["Canada / Canadian"],
+          "expressions": [
+            "Canada / Canadian"
+          ],
           "frontImage": "",
           "backText": "I'm from Canada. I'm Canadian.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3049,10 +4186,13 @@
         },
         {
           "id": "p6-fc1-c3",
-          "expressions": ["Japan / Japanese"],
+          "expressions": [
+            "Japan / Japanese"
+          ],
           "frontImage": "",
           "backText": "I'm from Japan. I'm Japanese.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3062,10 +4202,13 @@
         },
         {
           "id": "p6-fc1-c4",
-          "expressions": ["Mexico / Mexican"],
+          "expressions": [
+            "Mexico / Mexican"
+          ],
           "frontImage": "",
           "backText": "I'm from Mexico. I'm Mexican.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3075,10 +4218,13 @@
         },
         {
           "id": "p6-fc1-c5",
-          "expressions": ["Italy / Italian"],
+          "expressions": [
+            "Italy / Italian"
+          ],
           "frontImage": "",
           "backText": "I'm from Italy. I'm Italian.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3088,10 +4234,13 @@
         },
         {
           "id": "p6-fc1-c6",
-          "expressions": ["France / French"],
+          "expressions": [
+            "France / French"
+          ],
           "frontImage": "",
           "backText": "I'm from France. I'm French.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3101,10 +4250,13 @@
         },
         {
           "id": "p6-fc1-c7",
-          "expressions": ["Spain / Spanish"],
+          "expressions": [
+            "Spain / Spanish"
+          ],
           "frontImage": "",
           "backText": "I'm from Spain. I'm Spanish.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3114,10 +4266,13 @@
         },
         {
           "id": "p6-fc1-c8",
-          "expressions": ["Portugal / Portuguese"],
+          "expressions": [
+            "Portugal / Portuguese"
+          ],
           "frontImage": "",
           "backText": "I'm from Portugal. I'm Portuguese.",
           "backImage": "",
+          "imageFrame": "rounded-rect",
           "imageFit": "cover",
           "imagePositionX": 50,
           "imagePositionY": 50,
@@ -3154,18 +4309,18 @@
       "audience": "both"
     },
     {
-      "id": "3d28cd70-4ec1-4a90-ab0b-04991bf03d2b",
+      "id": "511de66b-ac86-4bca-b017-40eacec00e7f",
       "type": "selection-grid",
       "instruction": "Select the items that match the prompt.",
       "isMultiSelect": true,
       "items": [
         {
-          "id": "067193ae-b634-4b0d-8e2b-0c6d8bfe1867",
+          "id": "01c9a22d-938b-4e1d-9678-81ff1550d45c",
           "text": "Correct option",
           "isCorrect": true
         },
         {
-          "id": "0a11adf3-e6e9-400c-869e-c1a2b233257f",
+          "id": "e3fd0397-6555-4815-bf98-a9f4274631c3",
           "text": "Distractor option",
           "isCorrect": false
         }
@@ -3173,18 +4328,18 @@
       "audience": "both"
     },
     {
-      "id": "5aee2ca5-aade-4d55-9f4a-000bf69a953b",
+      "id": "c3da3541-5822-4ea8-a29e-27c699c4e867",
       "type": "selection-grid",
       "instruction": "Select the items that match the prompt.",
       "isMultiSelect": true,
       "items": [
         {
-          "id": "efa03f3f-4a56-456f-bbb4-2f68a19bf6ba",
+          "id": "552fa997-32d1-42c4-9db2-3cc7a637a459",
           "text": "Correct option",
           "isCorrect": true
         },
         {
-          "id": "b423f36b-5bce-4d18-b162-ece7c17df383",
+          "id": "bc701d36-397f-41e3-9e46-8f278206dcd4",
           "text": "Distractor option",
           "isCorrect": false
         }
@@ -3198,30 +4353,41 @@
       "text": "A: Are you [] Brazil?\nB: Yes, I [].\nA: Where are you []?\nB: I'm [] São Paulo.\nA: Are you Brazilian?\nB: Yes, I [].",
       "columns": 1,
       "mode": "typing",
+      "gapSize": "normal",
       "gaps": [
         {
           "id": "gap-0",
-          "acceptedAnswers": ["from"],
+          "acceptedAnswers": [
+            "from"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-1",
-          "acceptedAnswers": ["am"],
+          "acceptedAnswers": [
+            "am"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-2",
-          "acceptedAnswers": ["from"],
+          "acceptedAnswers": [
+            "from"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-3",
-          "acceptedAnswers": ["from"],
+          "acceptedAnswers": [
+            "from"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-4",
-          "acceptedAnswers": ["am"],
+          "acceptedAnswers": [
+            "am"
+          ],
           "caseSensitive": false
         }
       ],
@@ -3233,6 +4399,10 @@
       "title": "Conversation Model",
       "instruction": "",
       "imageUrl": "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=1000",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
       "layout": "script",
       "messages": [
         {
@@ -3309,15 +4479,27 @@
       "substitutionBox": [
         {
           "original": "Are you from Canada?",
-          "alternatives": ["Are you from Brazil?", "Are you from Japan?", "Are you from Mexico?"]
+          "alternatives": [
+            "Are you from Brazil?",
+            "Are you from Japan?",
+            "Are you from Mexico?"
+          ]
         },
         {
           "original": "I'm from Toronto.",
-          "alternatives": ["I'm from São Paulo.", "I'm from Tokyo.", "I'm from Mexico City."]
+          "alternatives": [
+            "I'm from São Paulo.",
+            "I'm from Tokyo.",
+            "I'm from Mexico City."
+          ]
         },
         {
           "original": "I'm Japanese.",
-          "alternatives": ["I'm Brazilian.", "I'm Canadian.", "I'm Mexican."]
+          "alternatives": [
+            "I'm Brazilian.",
+            "I'm Canadian.",
+            "I'm Mexican."
+          ]
         }
       ],
       "audience": "both"
@@ -3470,7 +4652,10 @@
           "name": "Speaker 2"
         }
       ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
+      "prompts": [
+        "What is your opinion on the topic?",
+        "What example can you share?"
+      ],
       "exchanges": [
         {
           "id": "4c24b2fa-f040-4ece-94ee-db4c8786a68b",
@@ -3486,9 +4671,9 @@
       "audience": "both"
     },
     {
-      "id": "8aaac223-344c-44a6-bc43-5dd261a5d1a1",
+      "id": "400ffe62-f495-425e-bcb3-9c41b0c196aa",
       "type": "page-break",
-      "pageNumber": 7,
+      "pageNumber": 8,
       "estimatedTime": "45 min",
       "audience": "both"
     },
@@ -3512,6 +4697,10 @@
       "title": "Conversation Model",
       "instruction": "",
       "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
       "layout": "script",
       "messages": [
         {
@@ -3614,11 +4803,19 @@
       "substitutionBox": [
         {
           "original": "I'm 21 years old.",
-          "alternatives": ["I'm 18 years old.", "I'm 25 years old.", "I'm 30 years old."]
+          "alternatives": [
+            "I'm 18 years old.",
+            "I'm 25 years old.",
+            "I'm 30 years old."
+          ]
         },
         {
           "original": "I'm a student.",
-          "alternatives": ["I'm a teacher.", "I'm a developer.", "I work in sales."]
+          "alternatives": [
+            "I'm a teacher.",
+            "I'm a developer.",
+            "I work in sales."
+          ]
         },
         {
           "original": "I like music and movies.",
@@ -3632,7 +4829,7 @@
       "audience": "both"
     },
     {
-      "id": "31c56231-b7a6-40dc-ad26-07f752af4e46",
+      "id": "d1f80dd4-4103-4db8-b33b-56d6048f531f",
       "type": "grammar-note",
       "title": "Grammar Note",
       "ruleContext": "Add a short and neutral explanation of the language pattern here.",
@@ -3647,13 +4844,21 @@
       "explanation": "Use one short sentence for each piece of information.",
       "details": "Replace the examples with real information.",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Information", "Pattern", "Example"],
+      "structureTableHeaders": [
+        "Information",
+        "Pattern",
+        "Example"
+      ],
       "structureTableRows": [],
       "examples": [],
       "commonMistakes": [],
       "comparisons": [],
       "miniPractice": [],
-      "tableHeaders": ["Information", "Pattern", "Example"],
+      "tableHeaders": [
+        "Information",
+        "Pattern",
+        "Example"
+      ],
       "tableRows": [
         {
           "cells": [
@@ -3807,35 +5012,48 @@
       "text": "Hello! My [] is Ana.\nI'm 21 years [].\nI'm [] São Paulo, Brazil.\nI'm Brazilian.\nI'm a [].\nI [] English at night.\nI [] music and movies.\nI'm happy today.",
       "columns": 1,
       "mode": "typing",
+      "gapSize": "normal",
       "gaps": [
         {
           "id": "gap-0",
-          "acceptedAnswers": ["name"],
+          "acceptedAnswers": [
+            "name"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-1",
-          "acceptedAnswers": ["old"],
+          "acceptedAnswers": [
+            "old"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-2",
-          "acceptedAnswers": ["from"],
+          "acceptedAnswers": [
+            "from"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-3",
-          "acceptedAnswers": ["student"],
+          "acceptedAnswers": [
+            "student"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-4",
-          "acceptedAnswers": ["study"],
+          "acceptedAnswers": [
+            "study"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-5",
-          "acceptedAnswers": ["like"],
+          "acceptedAnswers": [
+            "like"
+          ],
           "caseSensitive": false
         }
       ],
@@ -3855,9 +5073,9 @@
       "audience": "both"
     },
     {
-      "id": "9de09e4b-e8b5-4943-a5e2-cbcfa1e0074a",
+      "id": "aff67952-2d40-45a3-9a27-0d698744f090",
       "type": "page-break",
-      "pageNumber": 8,
+      "pageNumber": 9,
       "estimatedTime": "45 min",
       "audience": "both"
     },
@@ -3881,6 +5099,10 @@
       "title": "Conversation Model",
       "instruction": "",
       "imageUrl": "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=900",
+      "imageFit": "cover",
+      "imagePositionX": 50,
+      "imagePositionY": 50,
+      "imageZoom": 100,
       "layout": "script",
       "messages": [
         {
@@ -4066,13 +5288,21 @@
       "explanation": "Use these questions to learn basic information about another person.",
       "details": "Notice the answer pattern for each question.",
       "structureTitle": "Structure table",
-      "structureTableHeaders": ["Question", "Answer Type", "Model Answer"],
+      "structureTableHeaders": [
+        "Question",
+        "Answer Type",
+        "Model Answer"
+      ],
       "structureTableRows": [],
       "examples": [],
       "commonMistakes": [],
       "comparisons": [],
       "miniPractice": [],
-      "tableHeaders": ["Question", "Answer Type", "Model Answer"],
+      "tableHeaders": [
+        "Question",
+        "Answer Type",
+        "Model Answer"
+      ],
       "tableRows": [
         {
           "cells": [
@@ -4196,40 +5426,55 @@
       "text": "A: What's your []?\nB: My name is Carla.\nA: Are you [] Brazil?\nB: Yes, I [].\nA: Where are you from?\nB: I'm [] São Paulo.\nA: Do you [] English?\nB: Yes, I [].\nA: Are you a student?\nB: Yes, I [].",
       "columns": 1,
       "mode": "typing",
+      "gapSize": "normal",
       "gaps": [
         {
           "id": "gap-0",
-          "acceptedAnswers": ["name"],
+          "acceptedAnswers": [
+            "name"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-1",
-          "acceptedAnswers": ["from"],
+          "acceptedAnswers": [
+            "from"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-2",
-          "acceptedAnswers": ["am"],
+          "acceptedAnswers": [
+            "am"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-3",
-          "acceptedAnswers": ["from"],
+          "acceptedAnswers": [
+            "from"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-4",
-          "acceptedAnswers": ["study"],
+          "acceptedAnswers": [
+            "study"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-5",
-          "acceptedAnswers": ["do"],
+          "acceptedAnswers": [
+            "do"
+          ],
           "caseSensitive": false
         },
         {
           "id": "gap-6",
-          "acceptedAnswers": ["am"],
+          "acceptedAnswers": [
+            "am"
+          ],
           "caseSensitive": false
         }
       ],
@@ -4249,7 +5494,9 @@
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["2f39b692-8836-4490-807b-d39f5b3b82de"],
+      "correctOptionIds": [
+        "2f39b692-8836-4490-807b-d39f5b3b82de"
+      ],
       "audience": "both"
     },
     {
@@ -4266,7 +5513,9 @@
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["489c0e68-9766-45ed-b3be-cf1af0f6e90e"],
+      "correctOptionIds": [
+        "489c0e68-9766-45ed-b3be-cf1af0f6e90e"
+      ],
       "audience": "both"
     },
     {
@@ -4283,7 +5532,9 @@
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["87900ede-8d7a-40fa-aed5-575a270346d9"],
+      "correctOptionIds": [
+        "87900ede-8d7a-40fa-aed5-575a270346d9"
+      ],
       "audience": "both"
     },
     {
@@ -4300,7 +5551,9 @@
           "text": "Option B"
         }
       ],
-      "correctOptionIds": ["700ca17e-a076-4a9a-9889-b364f5b16919"],
+      "correctOptionIds": [
+        "700ca17e-a076-4a9a-9889-b364f5b16919"
+      ],
       "audience": "both"
     },
     {
@@ -4433,7 +5686,10 @@
           "name": "Speaker 2"
         }
       ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
+      "prompts": [
+        "What is your opinion on the topic?",
+        "What example can you share?"
+      ],
       "exchanges": [
         {
           "id": "cd36dc0d-4c68-44bf-9a27-3c59c347b25a",
@@ -4449,9 +5705,9 @@
       "audience": "both"
     },
     {
-      "id": "c81e9fd0-7ab7-4c4e-9d01-0b6937c90c7b",
+      "id": "e3c89ae9-39d1-4a06-ad63-647c813fa6bf",
       "type": "page-break",
-      "pageNumber": 9,
+      "pageNumber": 10,
       "estimatedTime": "45 min",
       "audience": "both"
     },
@@ -4470,7 +5726,7 @@
       "audience": "both"
     },
     {
-      "id": "b4931804-d089-42cc-af5c-d44363caf13f",
+      "id": "23e713ea-3fd6-4e46-92ae-7041a8ab6a4e",
       "type": "repetition-drill",
       "title": "Pronunciation Drill",
       "words": [
@@ -4532,10 +5788,14 @@
       "audience": "both"
     },
     {
-      "id": "01360cf0-b78d-4745-ae0e-72ad7f9653f6",
+      "id": "d7b7ef71-7af2-4966-b7e7-14ed95f0b46a",
       "type": "final-task",
       "title": "Final Task",
-      "fields": ["Name", "Response", "Reflection"],
+      "fields": [
+        "Name",
+        "Response",
+        "Reflection"
+      ],
       "audience": "both"
     },
     {
@@ -4567,7 +5827,10 @@
           "name": "Speaker 2"
         }
       ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
+      "prompts": [
+        "What is your opinion on the topic?",
+        "What example can you share?"
+      ],
       "exchanges": [
         {
           "id": "ddccc2fc-51db-4a15-b61b-865657688ccd",
@@ -4583,7 +5846,7 @@
       "audience": "both"
     },
     {
-      "id": "a14b8afa-dd2d-4d2d-86a9-b6c913c4da87",
+      "id": "cf56ca75-1081-4ef3-ba11-98d213818d54",
       "type": "grammar-note",
       "title": "Grammar Note",
       "ruleContext": "Add a short and neutral explanation of the language pattern here.",

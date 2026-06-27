@@ -123,8 +123,12 @@ export const getConversationHighlightMatches = (message: ConversationMessage): H
 
 export const createConversationBlockDefaults = (): Pick<
   ConversationBlock,
-  'messages' | 'substitutionBox'
+  'messages' | 'substitutionBox' | 'imageFit' | 'imagePositionX' | 'imagePositionY' | 'imageZoom'
 > => ({
+  imageFit: 'cover',
+  imagePositionX: 50,
+  imagePositionY: 50,
+  imageZoom: 100,
   messages: [
     createConversationMessage({
       speaker: 'Speaker A',

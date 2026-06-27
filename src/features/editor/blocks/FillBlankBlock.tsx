@@ -4,6 +4,8 @@ import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import type { BlockFormProps, BlockPreviewProps, FillBlankBlock } from '../types/index';
 
 const GAP_TOKEN = '[]';
+const COLUMN_BREAK_TOKEN = '[[column]]';
+const LEVEL_BREAK_TOKEN = '[[level]]';
 
 const countPlaceholders = (text: string) => (text.match(/\[\]/g) || []).length;
 
@@ -29,6 +31,9 @@ const normalizeListInput = (value: string) =>
     .map((entry) => entry.trim())
     .filter(Boolean);
 
+const getSharedSuggestionsInput = (gaps: FillBlankBlock['gaps']) =>
+  getUniqueSuggestions(gaps).join('\n');
+
 const getUniqueSuggestions = (gaps: FillBlankBlock['gaps']) =>
   Array.from(
     new Set(
@@ -40,15 +45,27 @@ const getUniqueSuggestions = (gaps: FillBlankBlock['gaps']) =>
     )
   );
 
-const getGapWidthClass = (gaps: FillBlankBlock['gaps'], index: number) => {
+const getGapWidthStyle = (
+  gaps: FillBlankBlock['gaps'],
+  index: number,
+  gapSize: FillBlankBlock['gapSize']
+) => {
   const options = [...(gaps[index]?.suggestions || []), ...(gaps[index]?.acceptedAnswers || [])]
     .map((value) => value.trim())
     .filter(Boolean);
   const longest = options.reduce((max, value) => Math.max(max, value.length), 0);
 
-  if (longest >= 18) return 'min-w-[220px]';
-  if (longest >= 10) return 'min-w-[170px]';
-  return 'min-w-[130px]';
+  const safeLength = Math.max(6, Math.min(longest || 8, 16));
+
+  if (gapSize === 'compact') {
+    return { width: `${Math.max(9, safeLength + 2)}ch` };
+  }
+
+  if (gapSize === 'wide') {
+    return { width: `${safeLength + 7}ch` };
+  }
+
+  return { width: `${safeLength + 5}ch` };
 };
 
 const splitColumns = (text: string, columns: 1 | 2) => {
@@ -65,11 +82,45 @@ const splitColumns = (text: string, columns: 1 | 2) => {
   return [sections.slice(0, midpoint), sections.slice(midpoint)];
 };
 
+const splitColumnLevels = (text: string, columns: 1 | 2) => {
+  const levels = text
+    .split(LEVEL_BREAK_TOKEN)
+    .map((level) => level.trim())
+    .filter(Boolean);
+
+  const normalizedLevels = levels.length > 0 ? levels : [text];
+
+  return normalizedLevels.map((levelText) => {
+    if (columns !== 2) {
+      return splitColumns(levelText, 1);
+    }
+
+    if (levelText.includes(COLUMN_BREAK_TOKEN)) {
+      const explicitColumns = levelText
+        .split(COLUMN_BREAK_TOKEN)
+        .map((column) =>
+          column
+            .split(/\n{2,}/)
+            .map((section) => section.trim())
+            .filter(Boolean)
+        )
+        .filter((columnSections) => columnSections.length > 0);
+
+      if (explicitColumns.length > 0) {
+        return explicitColumns.slice(0, 2);
+      }
+    }
+
+    return splitColumns(levelText, 2);
+  });
+};
+
 const renderSection = (
   section: string,
   startGapIndex: number,
   gaps: FillBlankBlock['gaps'],
   mode: FillBlankBlock['mode'],
+  gapSize: FillBlankBlock['gapSize'],
   answers: string[],
   setAnswers: (answers: string[]) => void,
   gapCountRef: { current: number }
@@ -80,7 +131,7 @@ const renderSection = (
     const parts = line.split(GAP_TOKEN);
 
     return (
-      <div key={`${startGapIndex}-${lineIndex}`} className="min-h-[2.25rem]">
+      <div key={`${startGapIndex}-${lineIndex}`} className="min-h-[2.25rem] leading-8">
         {parts.map((part, partIndex) => {
           const currentGapIndex = gapCountRef.current;
           const shouldRenderGap = partIndex < parts.length - 1;
@@ -92,8 +143,8 @@ const renderSection = (
           return (
             <span key={`${startGapIndex}-${lineIndex}-${partIndex}`}>
               {part}
-              {shouldRenderGap && (
-                mode === 'dropdown' && (gaps[currentGapIndex]?.suggestions || []).length > 0 ? (
+              {shouldRenderGap &&
+                (mode === 'dropdown' && (gaps[currentGapIndex]?.suggestions || []).length > 0 ? (
                   <select
                     value={answers[currentGapIndex] || ''}
                     onChange={(event) => {
@@ -101,10 +152,8 @@ const renderSection = (
                       nextAnswers[currentGapIndex] = event.target.value;
                       setAnswers(nextAnswers);
                     }}
-                    className={`mx-1 inline-block ${getGapWidthClass(
-                      gaps,
-                      currentGapIndex
-                    )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
+                    style={getGapWidthStyle(gaps, currentGapIndex, gapSize)}
+                    className="mx-1 my-0.5 inline-flex max-w-full align-middle rounded-lg border border-slate-300 bg-white px-2.5 py-[0.1rem] text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-500"
                   >
                     <option value="">Select</option>
                     {(gaps[currentGapIndex]?.suggestions || []).map((suggestion) => (
@@ -122,14 +171,11 @@ const renderSection = (
                       nextAnswers[currentGapIndex] = event.target.value;
                       setAnswers(nextAnswers);
                     }}
-                    className={`mx-1 inline-block ${getGapWidthClass(
-                      gaps,
-                      currentGapIndex
-                    )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
+                    style={getGapWidthStyle(gaps, currentGapIndex, gapSize)}
+                    className="mx-1 my-0.5 inline-block max-w-full align-middle rounded-lg border border-slate-300 bg-white px-2.5 py-[0.1rem] text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-500"
                     placeholder={gaps[currentGapIndex]?.hint || '...'}
                   />
-                )
-              )}
+                ))}
             </span>
           );
         })}
@@ -166,6 +212,15 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
         <option value="typing">Typing mode</option>
         <option value="dropdown">Dropdown mode</option>
       </select>
+      <select
+        className="rounded border p-2 text-sm"
+        value={block.gapSize || 'wide'}
+        onChange={(e) => onUpdate({ gapSize: e.target.value as FillBlankBlock['gapSize'] })}
+      >
+        <option value="compact">Compact gaps</option>
+        <option value="normal">Normal gaps</option>
+        <option value="wide">Wide gaps</option>
+      </select>
     </div>
 
     <textarea
@@ -177,7 +232,9 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
           gaps: syncGapsWithText(block, e.target.value)
         })
       }
-      placeholder={'Write your text and use [] for each gap.\n\nExample:\nShe [] to school every day.'}
+      placeholder={
+        'Write your text and use [] for each gap.\nUse [[column]] to split left/right and [[level]] to start a new row of columns.\n\nExample:\nShe [] to school every day.'
+      }
     />
 
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -185,74 +242,30 @@ export const FillBlankForm = ({ block, onUpdate }: BlockFormProps<FillBlankBlock
         <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
           Gaps
         </span>
-        <span className="text-[10px] text-slate-400">
-          One block below for each `[]` in the text.
-        </span>
+        <span className="text-[10px] text-slate-400">{block.gaps.length} detected</span>
       </div>
 
       <div className="space-y-3">
-        {block.gaps.map((gap, index) => (
-          <div key={gap.id} className="rounded-xl border border-slate-200 bg-white p-3">
-            <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500">
-              Gap {index + 1}
-            </div>
+        <div className="rounded-xl border border-dashed border-slate-200 bg-white px-3 py-2 text-xs text-slate-500">
+          Each <code>[]</code> creates one gap automatically. Per-gap answer fields were removed to
+          keep this editor shorter. Use <code>[[column]]</code> for side-by-side columns and{' '}
+          <code>[[level]]</code> to stack another column row below.
+        </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              <textarea
-                className="min-h-[86px] rounded border p-2 text-xs"
-                value={gap.acceptedAnswers.join('\n')}
-                onChange={(e) => {
-                  const nextGaps = [...block.gaps];
-                  nextGaps[index].acceptedAnswers = normalizeListInput(e.target.value);
-                  onUpdate({ gaps: nextGaps });
-                }}
-                placeholder="Expected answers (optional), one per line"
-              />
-
-              <textarea
-                className="min-h-[86px] rounded border p-2 text-xs"
-                value={(gap.suggestions || []).join('\n')}
-                onChange={(e) => {
-                  const nextGaps = [...block.gaps];
-                  const suggestions = normalizeListInput(e.target.value);
-                  nextGaps[index].suggestions = suggestions.length > 0 ? suggestions : undefined;
-                  onUpdate({ gaps: nextGaps });
-                }}
-                placeholder="Suggestions/help words (optional), one per line"
-              />
-            </div>
-
-            <input
-              type="text"
-              className="mt-3 w-full rounded border p-2 text-xs"
-              value={gap.hint || ''}
-              onChange={(e) => {
-                const nextGaps = [...block.gaps];
-                nextGaps[index].hint = e.target.value;
-                onUpdate({ gaps: nextGaps });
-              }}
-              placeholder="Optional hint"
-            />
-
-            <p className="mt-2 text-[11px] text-slate-500">
-              Leave expected answers empty if you want an open gap with only suggestions or free
-              writing.
-            </p>
-
-            <label className="mt-3 flex items-center gap-2 text-[11px] font-medium text-slate-600">
-              <input
-                type="checkbox"
-                checked={gap.caseSensitive}
-                onChange={(e) => {
-                  const nextGaps = [...block.gaps];
-                  nextGaps[index].caseSensitive = e.target.checked;
-                  onUpdate({ gaps: nextGaps });
-                }}
-              />
-              Case sensitive
-            </label>
-          </div>
-        ))}
+        <textarea
+          className="min-h-[96px] w-full rounded border bg-white p-2 text-xs"
+          value={getSharedSuggestionsInput(block.gaps)}
+          onChange={(e) => {
+            const suggestions = normalizeListInput(e.target.value);
+            onUpdate({
+              gaps: block.gaps.map((gap) => ({
+                ...gap,
+                suggestions: suggestions.length > 0 ? suggestions : undefined
+              }))
+            });
+          }}
+          placeholder="General suggestions, one per line"
+        />
       </div>
     </div>
   </div>
@@ -265,7 +278,7 @@ export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) =
   );
   const suggestions = getUniqueSuggestions(block.gaps);
   const columns = block.columns === 2 ? 2 : 1;
-  const columnSections = useMemo(() => splitColumns(block.text, columns), [block.text, columns]);
+  const columnLevels = useMemo(() => splitColumnLevels(block.text, columns), [block.text, columns]);
   const gapCountRef = { current: 0 };
 
   return (
@@ -276,23 +289,31 @@ export const FillBlankPreview = ({ block }: BlockPreviewProps<FillBlankBlock>) =
         </p>
       </div>
 
-      <div className={`grid gap-5 ${columns === 2 ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
-        {columnSections.map((sections, columnIndex) => (
+      <div className="space-y-5">
+        {columnLevels.map((levelColumns, levelIndex) => (
           <div
-            key={columnIndex}
-            className="space-y-3 rounded-xl bg-slate-50 px-5 py-5 text-sm leading-8 text-slate-800"
+            key={levelIndex}
+            className={`grid items-start gap-5 ${columns === 2 ? 'lg:grid-cols-2' : 'grid-cols-1'}`}
           >
-            {sections.map((section, sectionIndex) => (
-              <div key={`${columnIndex}-${sectionIndex}`} className="space-y-2">
-                {renderSection(
-                  section,
-                  gapCountRef.current,
-                  block.gaps,
-                  block.mode,
-                  answers,
-                  setAnswers,
-                  gapCountRef
-                )}
+            {levelColumns.map((sections, columnIndex) => (
+              <div
+                key={`${levelIndex}-${columnIndex}`}
+                className="self-start space-y-3 rounded-xl bg-slate-50 px-5 py-5 text-sm leading-8 text-slate-800"
+              >
+                {sections.map((section, sectionIndex) => (
+                  <div key={`${levelIndex}-${columnIndex}-${sectionIndex}`} className="space-y-2">
+                    {renderSection(
+                      section,
+                      gapCountRef.current,
+                      block.gaps,
+                      block.mode,
+                      block.gapSize,
+                      answers,
+                      setAnswers,
+                      gapCountRef
+                    )}
+                  </div>
+                ))}
               </div>
             ))}
           </div>

@@ -22,5 +22,14 @@ export const teacherNoteBlockDefinition: BlockDefinition = {
     content: 'Add a short guidance note or tip for the student here.'
   }),
   form: TeacherNoteForm as BlockFormComponent,
-  preview: TeacherNotePreview as BlockPreviewComponent
+  preview: TeacherNotePreview as BlockPreviewComponent,
+  normalize: (block) => ({
+    id: typeof block.id === 'string' ? block.id : createEditorId(),
+    type: 'teacher-note',
+    audience: block.audience === 'teacher' || block.audience === 'student' || block.audience === 'both'
+      ? block.audience
+      : 'teacher',
+    title: typeof block.title === 'string' ? block.title : '',
+    content: typeof block.content === 'string' ? block.content : ''
+  })
 };

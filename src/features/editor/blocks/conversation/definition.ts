@@ -31,6 +31,19 @@ export const conversationBlockDefinition: BlockDefinition = {
     title: typeof block.title === 'string' ? block.title : 'Conversation Model',
     instruction: typeof block.instruction === 'string' ? block.instruction : '',
     imageUrl: typeof block.imageUrl === 'string' ? block.imageUrl : undefined,
+    imageFit: block.imageFit === 'contain' ? 'contain' : 'cover',
+    imagePositionX:
+      typeof block.imagePositionX === 'number' && Number.isFinite(block.imagePositionX)
+        ? Math.min(Math.max(block.imagePositionX, 0), 100)
+        : 50,
+    imagePositionY:
+      typeof block.imagePositionY === 'number' && Number.isFinite(block.imagePositionY)
+        ? Math.min(Math.max(block.imagePositionY, 0), 100)
+        : 50,
+    imageZoom:
+      typeof block.imageZoom === 'number' && Number.isFinite(block.imageZoom)
+        ? Math.min(Math.max(block.imageZoom, 50), 200)
+        : 100,
     layout:
       block.layout === 'script' ||
       block.layout === 'chat' ||

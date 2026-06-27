@@ -2,7 +2,12 @@ import { Blocks } from 'lucide-react';
 import { QuestionSetForm, QuestionSetPreview } from '../QuestionSetBlock';
 import type { BlockDefinition, BlockFormComponent, BlockPreviewComponent } from '../../config/blockDefinition';
 import { createEditorId } from '../../domain/ids';
-import { createQuestionSetDefaults, normalizeSubQuestions } from '../../domain/blockDefaults';
+import {
+  createQuestionBuilderItem,
+  createQuestionSetDefaults,
+  normalizeQuestionBuilderItems,
+  normalizeSubQuestions
+} from '../../domain/blockDefaults';
 
 export const questionSetBlockDefinition: BlockDefinition = {
   type: 'question-set',
@@ -19,6 +24,11 @@ export const questionSetBlockDefinition: BlockDefinition = {
     type: 'question-set',
     title: typeof block.title === 'string' ? block.title : 'Mixed Practice',
     instruction: typeof block.instruction === 'string' ? block.instruction : '',
-    questions: normalizeSubQuestions(block.questions)
+    practiceMode: block.practiceMode === 'question-builder' ? 'question-builder' : 'mixed',
+    questions: normalizeSubQuestions(block.questions),
+    questionBuilderItems:
+      normalizeQuestionBuilderItems(block.questionBuilderItems).length > 0
+        ? normalizeQuestionBuilderItems(block.questionBuilderItems)
+        : [createQuestionBuilderItem()]
   })
 };

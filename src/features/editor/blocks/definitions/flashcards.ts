@@ -61,6 +61,12 @@ export const flashcardsBlockDefinition: BlockDefinition = {
             frontImage: typeof card.frontImage === 'string' ? card.frontImage : undefined,
             backText: typeof card.backText === 'string' ? card.backText : '',
             backImage: typeof card.backImage === 'string' ? card.backImage : undefined,
+            imageFrame:
+              card.imageFrame === 'square' ||
+              card.imageFrame === 'rounded-rect' ||
+              card.imageFrame === 'banner'
+                ? card.imageFrame
+                : 'rounded-rect',
             imageFit: card.imageFit === 'contain' ? 'contain' : 'cover',
             imagePositionX:
               typeof card.imagePositionX === 'number' && Number.isFinite(card.imagePositionX)

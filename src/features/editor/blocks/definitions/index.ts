@@ -7,6 +7,7 @@ import { fillBlankBlockDefinition } from './fillBlank';
 import { finalTaskBlockDefinition } from './finalTask';
 import { flashcardsBlockDefinition } from './flashcards';
 import { grammarNoteBlockDefinition } from './grammarNote';
+import { exampleBoxesBlockDefinition } from './exampleBoxes';
 import { headingBlockDefinition } from './heading';
 import { imageChoiceBlockDefinition } from './imageChoice';
 import { imageLabelBlockDefinition } from './imageLabel';
@@ -39,6 +40,7 @@ export const BLOCK_DEFINITIONS: BlockDefinition[] = [
   letterNumberBlockDefinition,
   teacherNoteBlockDefinition,
   grammarNoteBlockDefinition,
+  exampleBoxesBlockDefinition,
   advancedGrammarBlockDefinition,
   mediaBlockDefinition,
   listeningBlockDefinition,

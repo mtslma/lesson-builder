@@ -23,6 +23,16 @@ import { StudentPreviewDispatcher } from './components/StudentPreviewDispatcher'
 import { BLOCK_CATEGORIES } from './config/blockCatalog';
 import { BLOCK_LABELS } from './config/blockMeta';
 
+const CURRENT_PAGE_STORAGE_KEY = 'english-platform-editor.current-page';
+
+const readStoredCurrentPage = () => {
+  if (typeof window === 'undefined') return 1;
+
+  const raw = window.localStorage.getItem(CURRENT_PAGE_STORAGE_KEY);
+  const parsed = Number(raw);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
+};
+
 export const LessonEditor: React.FC = () => {
   const {
     lesson,
@@ -55,16 +65,28 @@ export const LessonEditor: React.FC = () => {
     undo,
     redo
   } = useLessonEditor();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(readStoredCurrentPage);
   const [insertMenuIndex, setInsertMenuIndex] = useState<number | null>(null);
+  const [blockSearch, setBlockSearch] = useState('');
   const [jsonCopied, setJsonCopied] = useState(false);
   const [previewResetKey, setPreviewResetKey] = useState(0);
   const [showBlockLabels, setShowBlockLabels] = useState(false);
-  const [previewWidth, setPreviewWidth] = useState(56);
+  const [previewWidth, setPreviewWidth] = useState(50);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const previewScrollRef = useRef<HTMLDivElement | null>(null);
 
   const totalPages = Math.max(1, lesson.blocks.filter((b) => b.type === 'page-break').length);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(CURRENT_PAGE_STORAGE_KEY, String(currentPage));
+  }, [currentPage]);
+
+  React.useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
 
   const pageScopedData = useMemo(() => {
     const previewPageBlocks: typeof lesson.blocks = [];
@@ -100,6 +122,19 @@ export const LessonEditor: React.FC = () => {
   }, [currentPage, lesson]);
 
   const previewBlocks = pageScopedData.previewBlocks;
+  const normalizedBlockSearch = blockSearch.trim().toLowerCase();
+  const filteredBlockCategories = useMemo(() => {
+    if (!normalizedBlockSearch) return BLOCK_CATEGORIES;
+
+    return BLOCK_CATEGORIES.map((category) => ({
+      ...category,
+      blocks: category.blocks.filter(
+        (block) =>
+          block.l.toLowerCase().includes(normalizedBlockSearch) ||
+          category.title.toLowerCase().includes(normalizedBlockSearch)
+      )
+    })).filter((category) => category.blocks.length > 0);
+  }, [normalizedBlockSearch]);
 
   const saveStatusLabel =
     saveStatus === 'saving'
@@ -194,6 +229,17 @@ export const LessonEditor: React.FC = () => {
     </div>
   );
 
+  const renderStudentPageFooter = () => (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50/85 px-5 py-4 text-center">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+        End Of Page
+      </div>
+      <p className="mt-2 text-sm text-slate-600">
+        Continue to the next page when you finish this part of the lesson.
+      </p>
+    </div>
+  );
+
   const renderInlineInserter = (index: number) => {
     const isOpen = insertMenuIndex === index;
     const isListEmpty = lesson.blocks.length === 0;
@@ -221,7 +267,10 @@ export const LessonEditor: React.FC = () => {
                 Insert Block
               </span>
               <button
-                onClick={() => setInsertMenuIndex(null)}
+                onClick={() => {
+                  setBlockSearch('');
+                  setInsertMenuIndex(null);
+                }}
                 className="inline-flex items-center gap-1 rounded px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-red-500 hover:bg-red-50"
                 type="button"
               >
@@ -229,8 +278,20 @@ export const LessonEditor: React.FC = () => {
                 Close
               </button>
             </div>
+            <input
+              type="text"
+              value={blockSearch}
+              onChange={(e) => setBlockSearch(e.target.value)}
+              placeholder="Search blocks..."
+              className="mb-4 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 outline-none transition-colors focus:border-sky-400 focus:bg-white"
+            />
             <div className="custom-scrollbar max-h-[360px] space-y-5 overflow-y-auto pr-2">
-              {BLOCK_CATEGORIES.map((cat) => (
+              {filteredBlockCategories.length === 0 ? (
+                <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-500">
+                  No blocks found.
+                </div>
+              ) : (
+                filteredBlockCategories.map((cat) => (
                 <div key={cat.title}>
                   <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
                     {cat.title}
@@ -241,6 +302,7 @@ export const LessonEditor: React.FC = () => {
                         key={btn.t}
                         onClick={() => {
                           addBlock(btn.t, index);
+                          setBlockSearch('');
                           setInsertMenuIndex(null);
                         }}
                         className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-2.5 text-left transition-all hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-sm"
@@ -256,7 +318,8 @@ export const LessonEditor: React.FC = () => {
                     ))}
                   </div>
                 </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         )}
@@ -491,8 +554,8 @@ export const LessonEditor: React.FC = () => {
               Width
               <input
                 type="range"
-                min={44}
-                max={72}
+                min={36}
+                max={76}
                 value={previewWidth}
                 onChange={(e) => setPreviewWidth(Number(e.target.value))}
                 className="w-24 accent-white"
@@ -587,7 +650,8 @@ export const LessonEditor: React.FC = () => {
                 )}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-8 space-y-4">
+                {previewBlocks.length > 0 && renderStudentPageFooter()}
                 {renderPageControls('dark')}
               </div>
             </div>

@@ -7,7 +7,7 @@ import {
   createQuestionOption,
   createSubQuestion
 } from '../domain/blockDefaults';
-import { removeItemAt, updateItemAt } from '../domain/collections';
+import { moveItem, removeItemAt, updateItemAt } from '../domain/collections';
 
 const GAP_TOKEN = '[]';
 
@@ -52,15 +52,14 @@ const splitColumns = (text: string, columns: 1 | 2) => {
   return [sections.slice(0, midpoint), sections.slice(midpoint)];
 };
 
-const getInlineGapWidthClass = (suggestions?: string[]) => {
+const getInlineGapWidthStyle = (suggestions?: string[]) => {
   const length = (suggestions || []).reduce(
     (max, suggestion) => Math.max(max, suggestion.trim().length),
     0
   );
 
-  if (length >= 18) return 'min-w-[220px]';
-  if (length >= 10) return 'min-w-[170px]';
-  return 'min-w-[120px]';
+  const safeLength = Math.max(6, Math.min(length || 8, 16));
+  return { width: `${safeLength + 7}ch` };
 };
 
 const renderFillInTheBlankSection = (
@@ -78,7 +77,10 @@ const renderFillInTheBlankSection = (
     const parts = line.split(GAP_TOKEN);
 
     return (
-      <div key={`${questionId}-${lineIndex}-${gapCountRef.current}`} className="min-h-[2.25rem]">
+      <div
+        key={`${questionId}-${lineIndex}-${gapCountRef.current}`}
+        className="min-h-[2.25rem] leading-8"
+      >
         {parts.map((part, partIndex) => {
           const currentGapIndex = gapCountRef.current;
           const shouldRenderGap = partIndex < parts.length - 1;
@@ -99,9 +101,8 @@ const renderFillInTheBlankSection = (
                       nextAnswers[currentGapIndex] = event.target.value;
                       setAnswers(nextAnswers);
                     }}
-                    className={`mx-1 inline-block ${getInlineGapWidthClass(
-                      suggestions
-                    )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
+                    style={getInlineGapWidthStyle(suggestions)}
+                    className="mx-1 my-0.5 inline-flex max-w-full align-middle rounded-lg border border-slate-300 bg-white px-2.5 py-[0.1rem] text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-500"
                   >
                     <option value="">Select</option>
                     {suggestions.map((suggestion) => (
@@ -119,9 +120,8 @@ const renderFillInTheBlankSection = (
                       nextAnswers[currentGapIndex] = event.target.value;
                       setAnswers(nextAnswers);
                     }}
-                    className={`mx-1 inline-block ${getInlineGapWidthClass(
-                      suggestions
-                    )} rounded-xl border-b-2 border-slate-400 bg-white/80 px-3 py-2 text-center font-medium text-slate-700 outline-none transition focus:border-slate-600`}
+                    style={getInlineGapWidthStyle(suggestions)}
+                    className="mx-1 my-0.5 inline-block max-w-full align-middle rounded-lg border border-slate-300 bg-white px-2.5 py-[0.1rem] text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-500"
                     placeholder="..."
                   />
                 ))}
@@ -139,6 +139,7 @@ export const SubQuestionsEditor: React.FC<{
 }> = ({ questions, onChange }) => {
   const addQ = (type?: SubQuestion['type']) => onChange([...questions, createSubQuestion(type)]);
   const removeQ = (idx: number) => onChange(removeItemAt(questions, idx));
+  const moveQ = (idx: number, direction: -1 | 1) => onChange(moveItem(questions, idx, direction));
   const update = <K extends keyof SubQuestion>(idx: number, field: K, val: SubQuestion[K]) => {
     onChange(
       updateItemAt(questions, idx, (question) => ({
@@ -248,6 +249,24 @@ export const SubQuestionsEditor: React.FC<{
       {questions.map((q, i) => (
         <div key={q.id} className="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
           <div className="flex flex-col gap-2 md:flex-row">
+            <div className="flex shrink-0 gap-1">
+              <button
+                type="button"
+                onClick={() => moveQ(i, -1)}
+                disabled={i === 0}
+                className="rounded border bg-white px-2 py-1 text-xs disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                Up
+              </button>
+              <button
+                type="button"
+                onClick={() => moveQ(i, 1)}
+                disabled={i === questions.length - 1}
+                className="rounded border bg-white px-2 py-1 text-xs disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                Down
+              </button>
+            </div>
             <select
               className="w-full rounded border bg-white p-2 text-xs font-bold text-slate-700 md:w-[220px]"
               value={QUESTION_TYPE_LABELS.some((option) => option.value === q.type) ? q.type : 'multiple-choice'}

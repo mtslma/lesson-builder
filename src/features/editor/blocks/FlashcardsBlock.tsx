@@ -13,11 +13,40 @@ const getCardExpressions = (card: Flashcard) => {
   return expressions.length > 0 ? expressions : [''];
 };
 
+const renderInlineBold = (text: string) =>
+  text.split(/(\*\*.*?\*\*)/g).filter(Boolean).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+
+    return <span key={index}>{part}</span>;
+  });
+
+const renderRichTextLines = (text: string, className: string) =>
+  text
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index) => (
+      <p key={index} className={className}>
+        {renderInlineBold(line)}
+      </p>
+    ));
+
 const compactFieldClass = 'w-full rounded border p-2 text-xs';
 
 const IMAGE_FIT_OPTIONS: Array<{ value: NonNullable<Flashcard['imageFit']>; label: string }> = [
   { value: 'cover', label: 'Fill area' },
   { value: 'contain', label: 'Show full image' }
+];
+
+const IMAGE_FRAME_OPTIONS: Array<{
+  value: NonNullable<Flashcard['imageFrame']>;
+  label: string;
+}> = [
+  { value: 'banner', label: 'Banner' },
+  { value: 'rounded-rect', label: 'Rounded rectangle' },
+  { value: 'square', label: 'Square' }
 ];
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
@@ -96,7 +125,9 @@ export const FlashcardsForm = ({ block, onUpdate }: BlockFormProps<FlashcardsBlo
               Card editor
             </span>
             <span className="text-xs text-slate-400">
-              {block.cards.length === 0 ? 'No cards yet.' : `Card ${editorCardIndex + 1} of ${block.cards.length}`}
+              {block.cards.length === 0
+                ? 'No cards yet.'
+                : `Card ${editorCardIndex + 1} of ${block.cards.length}`}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -241,6 +272,25 @@ export const FlashcardsForm = ({ block, onUpdate }: BlockFormProps<FlashcardsBlo
 
                 <select
                   className={compactFieldClass}
+                  value={currentCard.imageFrame || 'rounded-rect'}
+                  onChange={(e) =>
+                    onUpdate({
+                      cards: updateItemAt(block.cards, editorCardIndex, (card) => ({
+                        ...card,
+                        imageFrame: e.target.value as Flashcard['imageFrame']
+                      }))
+                    })
+                  }
+                >
+                  {IMAGE_FRAME_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      Frame: {option.label}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  className={compactFieldClass}
                   value={currentCard.imageFit || 'cover'}
                   onChange={(e) =>
                     onUpdate({
@@ -347,6 +397,7 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
   const currentCard = block.cards[Math.min(currentCardIndex, block.cards.length - 1)];
   const expressions = getCardExpressions(currentCard);
   const currentExpression = expressions[Math.min(currentExpressionIndex, expressions.length - 1)];
+  const imageFrame = currentCard.imageFrame || 'rounded-rect';
   const hasImage = Boolean(currentCard.backImage?.trim().length);
   const hasSupportContent = Boolean(currentCard.exampleSentence) || Boolean(currentCard.audioUrl);
   const imageIdentity = `${currentCard.id}:${currentCard.backImage || ''}:${currentExpressionIndex}`;
@@ -363,6 +414,14 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
   const goToExpression = (nextIndex: number) => {
     setCurrentExpressionIndex(nextIndex);
   };
+
+  const imageFrameClass =
+    imageFrame === 'banner'
+      ? 'h-[84px] w-[80%] rounded-xl'
+      : imageFrame === 'square'
+        ? 'aspect-square w-[44%] max-w-[152px] rounded-2xl'
+        : 'h-[84px] w-[44%] max-w-[152px] rounded-2xl';
+  const isBannerFrame = imageFrame === 'banner';
 
   return (
     <div className="my-6 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
@@ -401,43 +460,39 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
               type="button"
               onClick={() => goToCard(Math.max(0, currentCardIndex - 1))}
               disabled={currentCardIndex === 0}
-              className="absolute left-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 shadow-sm disabled:opacity-35"
+              className="absolute left-4 top-1/2 z-30 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 shadow-lg transition hover:scale-105 disabled:opacity-35"
               aria-label="Previous card"
             >
-              <ChevronIcon className="h-4 w-4 rotate-180" />
+              <ChevronIcon className="h-5 w-5 rotate-180" />
             </button>
 
             <button
               type="button"
               onClick={() => goToCard(Math.min(block.cards.length - 1, currentCardIndex + 1))}
               disabled={currentCardIndex === block.cards.length - 1}
-              className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-500 shadow-sm disabled:opacity-35"
+              className="absolute right-4 top-1/2 z-30 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 shadow-lg transition hover:scale-105 disabled:opacity-35"
               aria-label="Next card"
             >
-              <ChevronIcon className="h-4 w-4" />
+              <ChevronIcon className="h-5 w-5" />
             </button>
 
             {hasImage ? (
               <div className="flex flex-col items-center text-center">
-                <div className="flex h-[112px] w-full items-center justify-center overflow-hidden rounded-xl">
+                <div className={`flex w-full items-center justify-center overflow-hidden ${isBannerFrame ? 'min-h-[84px]' : 'min-h-[84px]'}`}>
                   <div
-                    className="h-full overflow-hidden rounded-xl"
-                    style={{
-                      width: '60%'
-                    }}
+                    className={`${imageFrameClass} overflow-hidden border border-slate-100 bg-white`}
                   >
-                    {!imageLoaded && (
-                      <div className="h-full w-full animate-pulse rounded-xl bg-slate-200" />
-                    )}
+                    {!imageLoaded && <div className="h-full w-full animate-pulse bg-slate-200" />}
                     <img
                       key={imageIdentity}
                       src={currentCard.backImage}
                       alt=""
-                      className={`h-full w-full rounded-xl ${
+                      className={`h-full w-full ${
                         currentCard.imageFit === 'contain' ? 'object-contain' : 'object-cover'
                       } ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
                       style={{
                         objectPosition: `${currentCard.imagePositionX ?? 50}% ${currentCard.imagePositionY ?? 50}%`,
+                        transformOrigin: 'center center',
                         transform: `scale(${(currentCard.imageZoom ?? 100) / 100})`
                       }}
                       onLoad={() => setImageLoaded(true)}
@@ -445,10 +500,12 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
                     />
                   </div>
                 </div>
-                <div className="mt-4">
+                <div className="mt-3">
                   <p className="text-xl font-semibold text-slate-900">{currentExpression}</p>
                   {currentCard.shortMeaning && (
-                    <p className="mt-2 text-sm text-slate-600">{currentCard.shortMeaning}</p>
+                    <div className="mt-2 space-y-1">
+                      {renderRichTextLines(currentCard.shortMeaning, 'text-sm text-slate-600')}
+                    </div>
                   )}
                   {currentCard.translation && (
                     <p className="mt-1 text-sm text-slate-500">{currentCard.translation}</p>
@@ -461,7 +518,9 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
                   {currentExpression}
                 </p>
                 {currentCard.shortMeaning && (
-                  <p className="mt-3 max-w-xl text-sm text-slate-600">{currentCard.shortMeaning}</p>
+                  <div className="mt-3 max-w-xl space-y-1">
+                    {renderRichTextLines(currentCard.shortMeaning, 'text-sm text-slate-600')}
+                  </div>
                 )}
                 {currentCard.translation && (
                   <p className="mt-1 max-w-xl text-sm text-slate-500">{currentCard.translation}</p>
@@ -470,7 +529,7 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
             )}
 
             {hasSupportContent && (
-              <div className="mt-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left">
+              <div className="mt-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left">
                 {currentCard.exampleSentence && (
                   <p className="text-sm text-slate-700">{currentCard.exampleSentence}</p>
                 )}
@@ -485,7 +544,7 @@ export const FlashcardsPreview = ({ block }: BlockPreviewProps<FlashcardsBlock>)
             )}
 
             {expressions.length > 1 && (
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
                 {expressions.map((expression, index) => (
                   <button
                     key={`${currentCard.id}-${index}`}

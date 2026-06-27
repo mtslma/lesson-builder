@@ -21,6 +21,7 @@ export const fillBlankBlockDefinition: BlockDefinition = {
     text: 'This is a [] sentence for practice.',
     columns: 1,
     mode: 'typing',
+    gapSize: 'wide',
     gaps: [{ id: 'gap1', acceptedAnswers: [], suggestions: ['sample'], hint: 'Use the word bank', caseSensitive: false }]
   }),
   form: FillBlankForm as BlockFormComponent,
@@ -41,6 +42,8 @@ export const fillBlankBlockDefinition: BlockDefinition = {
       text: normalizedText,
       columns: block.columns === 2 ? 2 : 1,
       mode: block.mode === 'dropdown' ? 'dropdown' : 'typing',
+      gapSize:
+        block.gapSize === 'compact' || block.gapSize === 'normal' ? block.gapSize : 'wide',
       gaps: Array.from({ length: placeholderCount }, (_, index) => {
         const gap = rawGaps[index];
 
