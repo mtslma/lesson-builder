@@ -154,8 +154,8 @@
           "alternatives": ["Hi!", "Good morning!", "Good afternoon!"]
         },
         {
-          "original": "My name is Emma.",
-          "alternatives": ["I'm Emma.", "I am Emma."]
+          "original": "My name is Sarah.",
+          "alternatives": ["I'm Sarah.", "I am Sarah."]
         },
         {
           "original": "Nice to meet you.",
@@ -282,7 +282,7 @@
           "details": [
             {
               "label": "Role",
-              "value": "Starts being Emma"
+              "value": "Starts being Sarah."
             }
           ]
         },
@@ -291,7 +291,7 @@
           "details": [
             {
               "label": "Role",
-              "value": "Starts being Miles"
+              "value": "Starts being Daniel."
             }
           ]
         }
@@ -473,7 +473,7 @@
     {
       "id": "a2cea46a-8fa0-4788-92ea-209e9263a2f7",
       "type": "paragraph",
-      "content": "Speeling is the act of saying letters individually to form names or words. ",
+      "content": "Spelling is the act of saying letters individually to form names or words.",
       "style": "note",
       "audience": "both"
     },
@@ -572,7 +572,7 @@
     {
       "id": "9809a254-3eb5-4920-9d92-a101caa7a760",
       "type": "paragraph",
-      "content": "Now it's your turn, practice the dialog, change the names.",
+      "content": "Now it's your turn. Practice the dialog and change the names.",
       "style": "instruction",
       "audience": "both"
     },
@@ -639,8 +639,8 @@
     {
       "id": "081580b2-fe72-481d-884a-4af91f3058b7",
       "type": "conversation-prompts",
-      "title": "",
-      "instruction": "",
+      "title": "Spelling Practice",
+      "instruction": "Answer the prompts orally.",
       "speakerMode": "single",
       "speakers": [
         {
@@ -652,7 +652,7 @@
           "name": "Speaker 2"
         }
       ],
-      "prompts": ["What is your opinion on the topic?", "What example can you share?"],
+      "prompts": [],
       "exchanges": [
         {
           "id": "04aa790f-e6e5-4d83-89a4-823cebe13318",
@@ -662,7 +662,7 @@
         {
           "id": "33b2c55d-9ad4-41ef-ba68-844f4bd1598f",
           "speakerId": "3eba1aaa-66ef-47f4-9bd3-c10e16de765f",
-          "text": "Spell **name**."
+          "text": "Spell the word **name**."
         },
         {
           "id": "80811f9a-d613-4d0d-8b4b-6535876b6a58",
@@ -1389,7 +1389,7 @@
       "id": "p2-listen1",
       "type": "listening",
       "title": "Listen and Answer",
-      "instruction": "In this exercise you are Sofia. Answer the questions ",
+      "instruction": "In this exercise, you are Sofia. Answer the questions.",
       "audioUrl": "audio/example.mp3",
       "contextImageUrl": "https://images.unsplash.com/photo-1690444963408-9573a17a8058?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "script": [
@@ -1549,7 +1549,7 @@
         {
           "id": "p2-listen1-q1",
           "type": "multiple-choice",
-          "question": "Do you study English",
+          "question": "Do you study English?",
           "options": [
             {
               "id": "e39799b5-452a-4789-94f3-a44d8b3994a4",
@@ -1560,7 +1560,7 @@
               "text": "No, I don't."
             }
           ],
-          "correctOptionIds": [],
+          "correctOptionIds": ["e39799b5-452a-4789-94f3-a44d8b3994a4"],
           "instructions": "",
           "acceptedAnswers": [],
           "wordSuggestions": [],
@@ -1589,7 +1589,7 @@
               "text": "No, I don't."
             }
           ],
-          "correctOptionIds": [],
+          "correctOptionIds": ["f2f8cc24-953a-4b96-965d-67aac90213fa"],
           "answer": "False",
           "instructions": "",
           "acceptedAnswers": [],
@@ -1619,8 +1619,8 @@
               "text": "No, I don't. I like rock."
             }
           ],
-          "correctOptionIds": [],
-          "answer": "True",
+          "correctOptionIds": ["30580e2e-93af-4a0a-8285-720bc5c8162a"],
+          "answer": "False",
           "acceptedAnswers": [],
           "wordSuggestions": [],
           "sequence": []
@@ -1629,8 +1629,8 @@
           "id": "p2-listen1-q4",
           "type": "open-ended",
           "question": "Do you have time to work?",
-          "acceptedAnswers": [],
-          "answer": "Pop music",
+          "acceptedAnswers": ["No, I don't.", "No, I do not."],
+          "answer": "No, I don't.",
           "instructions": "",
           "correctOptionIds": [],
           "wordSuggestions": [],
@@ -1649,7 +1649,7 @@
               "id": "830107d8-afae-4e9c-82d7-a7ae859bb554"
             }
           ],
-          "acceptedAnswers": [],
+          "acceptedAnswers": ["like"],
           "correctOptionIds": [],
           "sequence": []
         }
@@ -2119,33 +2119,23 @@
     {
       "id": "f1891d01-4ffe-424d-848d-5767b7f0ec5d",
       "type": "question-set",
-      "title": "Make questions with Do + you + routine activities + ",
+      "title": "Make questions with Do you + routine activities + time expressions",
       "instruction": "Example: Do you brush your teeth every day?",
       "practiceMode": "question-builder",
       "questions": [
         {
           "id": "8cea2964-e20d-4976-9602-87fdca0fb2f4",
-          "type": "multiple-choice",
-          "question": "",
-          "options": [
-            {
-              "id": "e1a25dc6-8ad7-49dd-b1da-ab7ff6ebbaa1",
-              "text": "Option A"
-            },
-            {
-              "id": "6e392a33-f45c-4836-adc8-84ef00715464",
-              "text": "Option B"
-            }
-          ],
-          "correctOptionIds": [],
+          "type": "open-ended",
+          "question": "Write a question for this answer: Yes, I do. I exercise in the morning.",
           "acceptedAnswers": [],
+          "correctOptionIds": [],
           "wordSuggestions": [],
           "sequence": []
         },
         {
           "id": "c2f2b04f-1fa2-49ba-b78d-477ae8a4aeca",
           "type": "open-ended",
-          "question": "",
+          "question": "Write a question for this answer: No, I don't. I don't study every day.",
           "acceptedAnswers": [],
           "correctOptionIds": [],
           "wordSuggestions": [],
@@ -2154,7 +2144,7 @@
         {
           "id": "d91d2f07-5d8d-4e60-a68a-2f79fe11baef",
           "type": "open-ended",
-          "question": "",
+          "question": "Write a question for this answer: Yes, I do. I take a shower in the morning every day.",
           "acceptedAnswers": [],
           "correctOptionIds": [],
           "wordSuggestions": [],
@@ -2684,7 +2674,7 @@
           "details": [
             {
               "label": "Role",
-              "value": "Starts being Emma"
+              "value": "Starts being Sarah."
             }
           ]
         },
@@ -2693,7 +2683,7 @@
           "details": [
             {
               "label": "Role",
-              "value": "Starts being Miles"
+              "value": "Starts being Daniel."
             }
           ]
         }
@@ -3052,7 +3042,7 @@
       "type": "advanced-grammar",
       "title": "Basic Structure",
       "explanation": "",
-      "details": "In English, nationalities always start with Capital letter. Ex: Brazilian, Portuguese, Chilean...",
+      "details": "In English, nationalities always start with a capital letter. Example: Brazilian, Portuguese, Chilean.",
       "structureTitle": "Structure table",
       "structureTableHeaders": ["Use", "Pattern", "Example"],
       "structureTableRows": [],
@@ -3184,7 +3174,7 @@
               "highlights": [
                 {
                   "id": "3ccf7c05-04ed-4f64-b64b-4442626f6970",
-                  "text": "don't",
+                  "text": "not",
                   "color": "#bfdbfe"
                 },
                 {
@@ -3767,7 +3757,7 @@
               "text": "Portugal"
             }
           ],
-          "correctOptionIds": [],
+          "correctOptionIds": ["647506a5-648f-4492-9d17-dfc1866adf8a"],
           "instructions": "",
           "acceptedAnswers": [],
           "wordSuggestions": [],
@@ -3791,7 +3781,7 @@
               "text": "Spanish"
             }
           ],
-          "correctOptionIds": [],
+          "correctOptionIds": ["83a3023e-8812-42b7-8992-ddf3a4bf3375"],
           "acceptedAnswers": [],
           "wordSuggestions": [],
           "sequence": []
@@ -3814,9 +3804,9 @@
               "text": "Engineer"
             }
           ],
-          "correctOptionIds": [],
+          "correctOptionIds": ["73b74afa-cba2-4b31-88bc-be5567054a67"],
           "instructions": "",
-          "acceptedAnswers": [],
+          "acceptedAnswers": ["No, I'm not.", "No, I am not."],
           "wordSuggestions": [],
           "sequence": []
         },
@@ -5069,7 +5059,7 @@
       "id": "3c527105-79a7-4cc9-a93b-538046a9f8c1",
       "type": "table-completion",
       "title": "Missing Information",
-      "instruction": "Read the dialog \"Hello new friend\" to complete:",
+      "instruction": "Read the dialog \"Hello New Friend\" and complete the table.",
       "audioUrl": "",
       "headers": ["Item", "character 1", "character 2"],
       "rows": [
@@ -5103,8 +5093,8 @@
     {
       "id": "b16ef121-3ff4-420c-a0f9-1f9f34819880",
       "type": "question-set",
-      "title": "",
-      "instruction": "",
+      "title": "Review Practice",
+      "instruction": "Answer the questions and choose the best option.",
       "practiceMode": "mixed",
       "questions": [
         {
@@ -5112,7 +5102,7 @@
           "type": "open-ended",
           "question": "Write 3 routine activities:",
           "acceptedAnswers": [],
-          "correctOptionIds": [],
+          "correctOptionIds": ["dae575d8-588a-4b1a-b02a-fef500052a37"],
           "wordSuggestions": [],
           "sequence": []
         },
@@ -5146,10 +5136,10 @@
             },
             {
               "id": "17a40bbd-b1e2-4856-a4e1-4c52120845e2",
-              "text": "No, I don't. I am from Portugal."
+              "text": "No, I'm not. I'm from Portugal."
             }
           ],
-          "correctOptionIds": [],
+          "correctOptionIds": ["a26fb3b3-76ae-4687-869e-1d72de1ed846"],
           "acceptedAnswers": [],
           "wordSuggestions": [],
           "sequence": []
@@ -5165,11 +5155,11 @@
             },
             {
               "id": "bea0c523-b799-44d0-b714-ef47b41591e7",
-              "text": "No, I do. I comb my hair in the morning."
+              "text": "No, I don't. I comb my hair in the morning."
             },
             {
               "id": "fb4064d6-0e28-4f7f-892a-ad843d354a96",
-              "text": "No, I am not. I am every day."
+              "text": "No, I don't. I comb my hair every morning."
             }
           ],
           "correctOptionIds": [],
@@ -5229,7 +5219,7 @@
               "text": "The United States"
             }
           ],
-          "correctOptionIds": []
+          "correctOptionIds": ["8fc2e1cc-444f-44df-9f8b-e6391b397c1f"]
         },
         {
           "id": "ea47207b-c82f-44e8-8e25-721cc3ca1821",
@@ -5249,7 +5239,7 @@
               "text": "Italian"
             }
           ],
-          "correctOptionIds": []
+          "correctOptionIds": ["f8b010f5-374e-48b9-9d39-703ccfe1a3ff"]
         },
         {
           "id": "da744604-9a94-463b-a248-fa739b606616",
@@ -5269,7 +5259,7 @@
               "text": "Teacher"
             }
           ],
-          "correctOptionIds": []
+          "correctOptionIds": ["155277d5-f211-458f-9d25-e0164d9ccf4c"]
         },
         {
           "id": "7999ad24-f4ac-4a65-8b69-1ff40518c4b6",
@@ -5354,7 +5344,7 @@
         {
           "id": "d4b4b440-1d79-49e9-9db2-62dcff514da3",
           "speakerId": "ba438629-cf8c-4579-86ce-68b9c970e701",
-          "text": "Good morning/ afternoon/ night!"
+          "text": "Good morning / Good afternoon / Good evening!"
         },
         {
           "id": "f2f4cc5f-c2bc-40dc-aa9e-195ea821bdda",
@@ -5409,8 +5399,8 @@
     {
       "id": "d7378753-e30b-425d-bd86-76be24ee9db8",
       "type": "writing-task",
-      "title": "Knowing you Better",
-      "prompt": "Write a short paragraph talking about you. \nSay a greeting, your name, your age, your profession and what you do, your country and nationality.",
+      "title": "Knowing You Better",
+      "prompt": "Write a short paragraph about yourself.\nSay a greeting, your name, your age, your profession, what you do, your country, and your nationality.",
       "sentenceStarters": [],
       "suggestedVocabulary": [],
       "grammarReminder": "",
