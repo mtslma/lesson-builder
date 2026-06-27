@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Plus, Trash2 } from 'lucide-react';
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Copy, Plus, Trash2 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type {
   AdvancedGrammarBlock,
@@ -169,6 +169,25 @@ export const AdvancedGrammarForm = ({ block, onUpdate }: BlockFormProps<Advanced
       tableRows: moveItem(block.tableRows, from, to)
     });
 
+  const duplicateRow = (rowIndex: number) => {
+    const sourceRow = block.tableRows[rowIndex];
+    if (!sourceRow) return;
+
+    const duplicatedRow = {
+      cells: sourceRow.cells.map((cell) => ({
+        ...cell,
+        highlights: cell.highlights.map((highlight) => ({
+          ...highlight,
+          id: crypto.randomUUID()
+        }))
+      }))
+    };
+
+    const nextRows = [...block.tableRows];
+    nextRows.splice(rowIndex + 1, 0, duplicatedRow);
+    onUpdate({ tableRows: nextRows });
+  };
+
   const removeRow = (rowIndex: number) =>
     onUpdate({ tableRows: removeItemAt(block.tableRows, rowIndex) });
 
@@ -335,6 +354,14 @@ export const AdvancedGrammarForm = ({ block, onUpdate }: BlockFormProps<Advanced
                   className="rounded border border-slate-200 bg-white p-1 text-slate-500 disabled:opacity-30"
                 >
                   <ArrowDown size={12} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => duplicateRow(rowIndex)}
+                  className="rounded border border-slate-200 bg-white p-1 text-slate-500"
+                  title="Duplicate row"
+                >
+                  <Copy size={12} />
                 </button>
                 <button
                   type="button"

@@ -5,6 +5,8 @@ export type QuestionType =
   | 'short-answer'
   | 'checkbox'
   | 'fill-in-the-blank'
+  | 'audio-sequencing'
+  | 'audio-missing-word'
   | 'matching'
   | 'ordering'
   | 'correct-false'
@@ -145,6 +147,7 @@ export interface LetterNumberBlock extends BaseBlock {
   variant?: 'letters' | 'numbers' | 'mixed';
   density?: 'compact' | 'regular';
   itemsPerRow?: number;
+  itemsPerPage?: number;
   items: {
     id: string;
     symbol: string;
@@ -429,6 +432,7 @@ export interface TableCompletionBlock extends BaseBlock {
   type: 'table-completion';
   title: string;
   instruction: string;
+  audioUrl?: string;
   headers: string[];
   rows: { id: string; cells: string[] }[];
   questions?: SubQuestion[];

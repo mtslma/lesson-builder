@@ -1,11 +1,32 @@
 import { removeItemAt, updateItemAt } from '../domain/collections';
 import type { BlockFormProps, BlockPreviewProps, RoleplayBlock } from '../types/index';
+import type { ReactNode } from 'react';
 
 const createCustomField = () => ({
   id: `roleplay-field-${Math.random().toString(36).slice(2, 9)}`,
   label: '',
   value: ''
 });
+
+const renderInlineBold = (text: string): ReactNode[] =>
+  text.split(/(\*\*.*?\*\*)/g).filter(Boolean).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+
+    return <span key={index}>{part}</span>;
+  });
+
+const renderRichText = (text: string, className: string) => (
+  <div className={className}>
+    {text.split('\n').map((line, index) => (
+      <span key={index}>
+        {index > 0 && <br />}
+        {renderInlineBold(line)}
+      </span>
+    ))}
+  </div>
+);
 
 export const RoleplayForm = ({ block, onUpdate }: BlockFormProps<RoleplayBlock>) => (
   <div className="space-y-3">
@@ -106,11 +127,15 @@ export const RoleplayPreview = ({ block }: BlockPreviewProps<RoleplayBlock>) => 
     <span className="mb-2 block text-[10px] font-black uppercase tracking-widest text-indigo-500">
       Roleplay Card
     </span>
-    {block.title && <h3 className="text-xl font-semibold text-slate-900">{block.title}</h3>}
+    {block.title && (
+      <h3 className="text-xl font-semibold text-slate-900">{renderInlineBold(block.title)}</h3>
+    )}
 
     <div className="rounded-xl border border-indigo-100 bg-white p-4">
       <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-500">Objective</p>
-      <p className="mt-2 whitespace-pre-wrap text-sm text-slate-700">{block.objective}</p>
+      <div className="mt-2 whitespace-pre-wrap text-sm text-slate-700">
+        {renderRichText(block.objective, 'text-sm text-slate-700')}
+      </div>
     </div>
 
     {(block.customFields || []).length > 0 && (
@@ -118,9 +143,11 @@ export const RoleplayPreview = ({ block }: BlockPreviewProps<RoleplayBlock>) => 
         {(block.customFields || []).map((field) => (
           <div key={field.id} className="rounded-xl border border-slate-200 bg-white p-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
-              {field.label || 'Field'}
+              {field.label ? renderInlineBold(field.label) : 'Field'}
             </p>
-            <p className="mt-2 whitespace-pre-wrap text-sm text-slate-700">{field.value}</p>
+            <div className="mt-2 whitespace-pre-wrap text-sm text-slate-700">
+              {renderRichText(field.value, 'text-sm text-slate-700')}
+            </div>
           </div>
         ))}
       </div>

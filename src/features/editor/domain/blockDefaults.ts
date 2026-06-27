@@ -56,12 +56,25 @@ export const createSubQuestion = (
         options: (legacyOptions || ['Option A', 'Option B']).map(createQuestionOption),
         correctOptionIds: []
       };
+    case 'audio-missing-word':
+      return {
+        ...base,
+        instructions: 'Choose the missing word you hear.',
+        options: (legacyOptions || ['Option A', 'Option B']).slice(0, 2).map(createQuestionOption),
+        correctOptionIds: []
+      };
     case 'checkbox':
     case 'image-choice':
       return {
         ...base,
         options: (legacyOptions || ['Option A', 'Option B', 'Option C']).map(createQuestionOption),
         correctOptionIds: []
+      };
+    case 'audio-sequencing':
+      return {
+        ...base,
+        instructions: 'Number the items in the order you hear them.',
+        options: ['First item', 'Second item', 'Third item'].map(createQuestionOption)
       };
     case 'true-false':
       return { ...base, answer: 'True' };

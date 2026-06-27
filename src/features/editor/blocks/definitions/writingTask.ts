@@ -19,12 +19,12 @@ export const writingTaskBlockDefinition: BlockDefinition = {
     type: 'writing-task',
     title: 'Writing Task',
     prompt: 'Write a short response using the target language from the lesson.',
-    sentenceStarters: ['I usually...', 'My favorite...'],
-    suggestedVocabulary: ['morning', 'afternoon', 'favorite'],
-    grammarReminder: 'Use the simple present.',
-    checklist: ['Write complete sentences.', 'Use the target grammar.'],
-    rubric: 'Clear ideas, correct target grammar, enough detail.',
-    minWords: 60
+    sentenceStarters: [],
+    suggestedVocabulary: [],
+    grammarReminder: '',
+    checklist: ['Write complete sentences.'],
+    rubric: '',
+    minWords: undefined
   }),
   form: WritingTaskForm as BlockFormComponent,
   preview: WritingTaskPreview as BlockPreviewComponent,

@@ -16,7 +16,9 @@ const QUESTION_TYPE_LABELS: Array<{ value: SubQuestion['type']; label: string }>
   { value: 'true-false', label: 'True / False' },
   { value: 'open-ended', label: 'Open answer' },
   { value: 'checkbox', label: 'Checkbox' },
-  { value: 'fill-in-the-blank', label: 'Fill in the blank' }
+  { value: 'fill-in-the-blank', label: 'Fill in the blank' },
+  { value: 'audio-sequencing', label: 'Audio sequencing' },
+  { value: 'audio-missing-word', label: 'Audio missing word' }
 ];
 
 const countGapTokens = (value: string) => (value.match(/\[\]/g) || []).length;
@@ -226,6 +228,11 @@ export const SubQuestionsEditor: React.FC<{
     }
   };
 
+  const moveOption = (questionIndex: number, optionIndex: number, direction: -1 | 1) => {
+    const currentOptions = questions[questionIndex]?.options || [];
+    update(questionIndex, 'options', moveItem(currentOptions, optionIndex, direction));
+  };
+
   const toggleCorrectOption = (questionIndex: number, optionId: string, checked: boolean) => {
     const question = questions[questionIndex];
     const currentCorrectIds = question.correctOptionIds || [];
@@ -310,12 +317,15 @@ export const SubQuestionsEditor: React.FC<{
             />
           )}
 
-          {(q.type === 'multiple-choice' || q.type === 'checkbox') && (
+          {(q.type === 'multiple-choice' ||
+            q.type === 'checkbox' ||
+            q.type === 'audio-missing-word' ||
+            q.type === 'audio-sequencing') && (
             <div className="space-y-3 rounded border border-slate-200 bg-white p-3">
               {(q.options || []).map((option, optionIndex) => (
                 <div
                   key={option.id}
-                  className="grid gap-2 rounded-lg border border-slate-200 p-3 md:grid-cols-[minmax(0,1fr)_auto_auto]"
+                  className="grid gap-2 rounded-lg border border-slate-200 p-3 md:grid-cols-[minmax(0,1fr)_auto_auto_auto]"
                 >
                   <input
                     type="text"
@@ -331,8 +341,28 @@ export const SubQuestionsEditor: React.FC<{
                       checked={(q.correctOptionIds || []).includes(option.id)}
                       onChange={(e) => toggleCorrectOption(i, option.id, e.target.checked)}
                     />
-                    Correct
+                    {q.type === 'audio-sequencing' ? 'Reference' : 'Correct'}
                   </label>
+                  {q.type === 'audio-sequencing' ? (
+                    <div className="flex items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={() => moveOption(i, optionIndex, -1)}
+                        disabled={optionIndex === 0}
+                        className="rounded border border-slate-200 bg-white px-2 py-1 text-xs disabled:opacity-30"
+                      >
+                        Up
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => moveOption(i, optionIndex, 1)}
+                        disabled={optionIndex === (q.options || []).length - 1}
+                        className="rounded border border-slate-200 bg-white px-2 py-1 text-xs disabled:opacity-30"
+                      >
+                        Down
+                      </button>
+                    </div>
+                  ) : null}
                   <button
                     type="button"
                     onClick={() => removeOption(i, optionIndex)}
@@ -507,7 +537,10 @@ export const RenderSubQuestionsPreview: React.FC<{
           {q.type === 'true-false' && (
             <div className="flex gap-4">
               {['True', 'False'].map((value) => (
-                <label key={value} className="flex flex-1 cursor-pointer items-center gap-2 rounded-xl border bg-white p-3">
+                <label
+                  key={value}
+                  className="flex flex-1 cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white p-3"
+                >
                   <input
                     type="radio"
                     name={q.id}
@@ -519,7 +552,7 @@ export const RenderSubQuestionsPreview: React.FC<{
                       }))
                     }
                   />
-                  <span className="text-sm font-bold text-slate-700">{value}</span>
+                  <span className="text-sm font-medium text-slate-700">{value}</span>
                 </label>
               ))}
             </div>
@@ -545,6 +578,62 @@ export const RenderSubQuestionsPreview: React.FC<{
                   />
                   <span className="text-sm font-medium text-slate-700">{opt.text}</span>
                 </label>
+              ))}
+            </div>
+          )}
+
+          {q.type === 'audio-missing-word' && (
+            <div className="space-y-2">
+              {(q.options || []).map((opt, index) => (
+                <label
+                  key={opt.id || `${q.id}-audio-missing-${index}`}
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white p-3"
+                >
+                  <input
+                    type="radio"
+                    name={q.id}
+                    checked={answers[q.id] === opt.id}
+                    onChange={() =>
+                      setAnswers((currentAnswers) => ({
+                        ...currentAnswers,
+                        [q.id]: opt.id
+                      }))
+                    }
+                  />
+                  <span className="text-sm font-medium text-slate-700">{opt.text}</span>
+                </label>
+              ))}
+            </div>
+          )}
+
+          {q.type === 'audio-sequencing' && (
+            <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-3">
+              {(q.options || []).map((opt, index) => (
+                <div
+                  key={opt.id || `${q.id}-audio-seq-${index}`}
+                  className="grid min-h-11 items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 md:grid-cols-[64px_minmax(0,1fr)]"
+                >
+                  <select
+                    className="rounded-full border-2 border-dashed border-slate-300 bg-white px-3 py-1.5 text-center text-sm font-bold text-slate-800 outline-none transition focus:border-slate-400"
+                    value={String((answers[opt.id] as string) || '')}
+                    onChange={(e) =>
+                      setAnswers((currentAnswers) => ({
+                        ...currentAnswers,
+                        [opt.id]: e.target.value
+                      }))
+                    }
+                  >
+                    <option value="">#</option>
+                    {(q.options || []).map((_, orderIndex) => (
+                      <option key={`${opt.id}-order-${orderIndex + 1}`} value={String(orderIndex + 1)}>
+                        {orderIndex + 1}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="flex min-w-0 items-center text-sm text-slate-700">
+                    {opt.text}
+                  </div>
+                </div>
               ))}
             </div>
           )}

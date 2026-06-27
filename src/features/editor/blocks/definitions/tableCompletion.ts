@@ -16,7 +16,8 @@ export const tableCompletionBlockDefinition: BlockDefinition = {
     type: 'table-completion',
     title: 'Complete the table',
     instruction: 'Use the lesson information to complete the table.',
-    headers: ['Item', 'Answer'],
+    audioUrl: '',
+    headers: ['Prompt', 'Answer 1'],
     rows: [
       { id: createEditorId(), cells: ['Row 1', ''] },
       { id: createEditorId(), cells: ['Row 2', ''] },
@@ -31,8 +32,23 @@ export const tableCompletionBlockDefinition: BlockDefinition = {
     type: 'table-completion',
     title: typeof block.title === 'string' ? block.title : 'Complete the table',
     instruction: typeof block.instruction === 'string' ? block.instruction : '',
-    headers: Array.isArray(block.headers) ? block.headers.filter((item): item is string => typeof item === 'string') : ['Item', 'Answer'],
-    rows: Array.isArray(block.rows) ? block.rows : [],
+    audioUrl: typeof block.audioUrl === 'string' ? block.audioUrl : '',
+    headers:
+      Array.isArray(block.headers) && block.headers.length > 0
+        ? block.headers
+            .filter((item): item is string => typeof item === 'string')
+            .slice(0, 4)
+        : ['Prompt', 'Answer 1'],
+    rows: Array.isArray(block.rows)
+      ? block.rows
+          .filter((row): row is Record<string, unknown> => Boolean(row && typeof row === 'object'))
+          .map((row) => ({
+            id: typeof row.id === 'string' ? row.id : createEditorId(),
+            cells: Array.isArray(row.cells)
+              ? row.cells.filter((cell): cell is string => typeof cell === 'string').slice(0, 4)
+              : ['', '']
+          }))
+      : [],
     questions: normalizeSubQuestions(block.questions)
   })
 };

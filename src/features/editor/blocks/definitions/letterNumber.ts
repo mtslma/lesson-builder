@@ -28,6 +28,7 @@ export const letterNumberBlockDefinition: BlockDefinition = {
     variant: 'letters',
     density: 'compact',
     itemsPerRow: 6,
+    itemsPerPage: 20,
     items: alphabetItems
   }),
   form: LetterNumberForm as BlockFormComponent,
@@ -46,6 +47,10 @@ export const letterNumberBlockDefinition: BlockDefinition = {
       typeof block.itemsPerRow === 'number' && Number.isFinite(block.itemsPerRow)
         ? Math.min(Math.max(Math.round(block.itemsPerRow), 1), 10)
         : 6,
+    itemsPerPage:
+      typeof block.itemsPerPage === 'number' && Number.isFinite(block.itemsPerPage)
+        ? Math.min(Math.max(Math.round(block.itemsPerPage), 1), 40)
+        : 20,
     items: Array.isArray(block.items)
       ? block.items
           .filter((item): item is Record<string, unknown> => Boolean(item && typeof item === 'object'))
