@@ -134,7 +134,7 @@ const renderImageCard = (
           value={value}
           onChange={(event) => onChange(event.target.value)}
           placeholder="-"
-          className={`h-9 w-9 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
+          className={`h-8 w-8 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
             tone
               ? `${tone.badge} ${tone.border}`
               : 'border-dashed border-slate-300 bg-slate-50 focus:border-solid focus:border-slate-400 focus:bg-white'
@@ -151,10 +151,10 @@ const renderImageCard = (
 const renderTextOption = (pair: Pair, index: number) => (
   <div
     key={pair.id}
-    className="grid min-h-11 grid-cols-[28px_minmax(0,1fr)] items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+    className="grid min-h-14 grid-cols-[36px_minmax(0,1fr)] items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
   >
     <span
-      className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-slate-700 ${getTone(index).badge}`}
+      className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-slate-700 ${getTone(index).badge}`}
     >
       {getRightNumber(index)}
     </span>
@@ -214,7 +214,7 @@ const renderAudioPrompt = (
           value={value}
           onChange={(event) => onChange(event.target.value)}
           placeholder="-"
-          className={`h-9 w-9 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
+          className={`h-8 w-8 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
             tone
               ? `${tone.badge} ${tone.border}`
               : 'border-dashed border-slate-300 bg-white focus:border-solid focus:border-slate-400'
@@ -248,7 +248,7 @@ const renderAlignedTextPrompt = (
   return (
     <div
       key={pair.id}
-      className={`grid min-h-18 items-stretch gap-3 rounded-lg border bg-white px-3 py-2 md:grid-cols-[minmax(0,1fr)_64px_minmax(0,1fr)] ${
+      className={`grid min-h-14 grid-cols-[44px_minmax(0,1fr)] items-center gap-2 rounded-lg border bg-white px-3 py-2 ${
         showFeedback
           ? isCorrect
             ? 'border-emerald-300'
@@ -258,39 +258,25 @@ const renderAlignedTextPrompt = (
           : 'border-slate-200'
       }`}
     >
-      <div className="flex min-w-0">
-        <div className="flex min-h-14 w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
-          <div className="min-w-0">
-            {pair.left || 'Empty item'}
-            {pair.leftLabel ? (
-              <div className="mt-1 text-[11px] text-slate-500">{pair.leftLabel}</div>
-            ) : null}
-          </div>
-        </div>
-      </div>
-      <div className="flex min-h-14 h-full items-center justify-center rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5">
+      <div className="flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-1.5 py-1">
         <input
           type="text"
           inputMode="numeric"
           maxLength={3}
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="-"
-          className={`h-9 w-9 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
+          placeholder=""
+          className={`h-8 w-8 rounded-full border-2 text-center text-sm font-bold text-slate-800 outline-none transition duration-150 ${
             tone
               ? `${tone.badge} ${tone.border}`
               : 'border-dashed border-slate-300 bg-white focus:border-solid focus:border-slate-400'
           }`}
         />
       </div>
-      <div className="flex min-w-0">
-        <div className="flex min-h-14 w-full items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
-          <div className="min-w-0">
-            {pair.right || 'Option'}
-            {pair.rightLabel ? (
-              <div className="mt-1 text-[11px] text-slate-500">{pair.rightLabel}</div>
-            ) : null}
-          </div>
+      <div className="min-w-0 rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium leading-4 text-slate-800">
+        <div className="min-w-0">
+          {pair.left || 'Prompt'}
+          {pair.leftLabel ? <div className="mt-1 text-[11px] text-slate-500">{pair.leftLabel}</div> : null}
         </div>
       </div>
     </div>
@@ -587,7 +573,10 @@ export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMa
       ) : null}
 
       {mode !== 'image-to-word' && mode !== 'audio-to-word' ? (
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-3">
+            {rightPairs.map((pair, index) => renderTextOption(pair, index))}
+          </div>
           <div className="space-y-3">
             {normalizedPairs.map((pair) => {
               const typedValue = answers[pair.id] || '';
@@ -606,9 +595,6 @@ export const VocabularyMatchPreview = ({ block }: BlockPreviewProps<VocabularyMa
                 rightPairs.length
               );
             })}
-          </div>
-          <div className="space-y-2">
-            {rightPairs.map((pair, index) => renderTextOption(pair, index))}
           </div>
         </div>
       ) : null}

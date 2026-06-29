@@ -12,6 +12,7 @@ import {
 } from '../config/blockFactory';
 import {
   formatImportIssue,
+  formatImportIssues,
   lessonImportSchema,
   lessonSchema,
   publicLessonSchema
@@ -71,6 +72,50 @@ const downloadLessonJson = (lesson: Lesson | PublicLesson, suffix?: string) => {
   anchor.download = `${slug}${suffix ? `-${suffix}` : ''}.json`;
   anchor.click();
   URL.revokeObjectURL(url);
+};
+
+const unwrapLessonPayload = (payload: unknown): unknown => {
+  if (!payload || typeof payload !== 'object') return payload;
+
+  const candidate = payload as Record<string, unknown>;
+
+  if ('documentType' in candidate && 'blocks' in candidate) {
+    return candidate;
+  }
+
+  if ('lesson' in candidate) {
+    return unwrapLessonPayload(candidate.lesson);
+  }
+
+  if ('contentJson' in candidate) {
+    const content = candidate.contentJson;
+
+    if (typeof content === 'string') {
+      try {
+        return unwrapLessonPayload(JSON.parse(content));
+      } catch {
+        return content;
+      }
+    }
+
+    return unwrapLessonPayload(content);
+  }
+
+  if ('data' in candidate) {
+    return unwrapLessonPayload(candidate.data);
+  }
+
+  return candidate;
+};
+
+const logLessonValidationFailure = (context: string, payload: unknown, issues?: string[]) => {
+  console.group(`[lesson-editor] ${context}`);
+  if (issues && issues.length > 0) {
+    console.error('Issues:');
+    issues.forEach((issue, index) => console.error(`${index + 1}. ${issue}`));
+  }
+  console.error('Payload:', payload);
+  console.groupEnd();
 };
 
 export const useLessonEditor = () => {
@@ -210,19 +255,32 @@ export const useLessonEditor = () => {
 
     try {
       const parsed = JSON.parse(jsonInput);
-      const normalized = normalizeLesson(parsed);
+      const unwrapped = unwrapLessonPayload(parsed);
+      const normalized = normalizeLesson(unwrapped);
       if (!normalized) {
-        setImportError('JSON must include a lesson object with a blocks array.');
+        const message =
+          'JSON must include a lesson object with a blocks array. Check console for details.';
+        setImportError(message);
         setJsonFeedback(null);
+        logLessonValidationFailure('Import rejected before normalization', {
+          parsed,
+          unwrapped
+        });
         return;
       }
 
       const validated = lessonImportSchema.safeParse(normalized);
 
       if (!validated.success) {
+        const formattedIssues = formatImportIssues(validated.error.issues);
         const firstIssue = validated.error.issues[0];
-        setImportError(firstIssue ? formatImportIssue(firstIssue) : 'Invalid lesson JSON.');
+        setImportError(
+          firstIssue
+            ? `${formatImportIssue(firstIssue)} (${validated.error.issues.length} issue(s) found. See console.)`
+            : 'Invalid lesson JSON. See console for details.'
+        );
         setJsonFeedback(null);
+        logLessonValidationFailure('Import schema validation failed', normalized, formattedIssues);
         return;
       }
 
@@ -230,9 +288,13 @@ export const useLessonEditor = () => {
       setJsonFeedback('Lesson imported successfully.');
       setJsonInput(JSON.stringify(validated.data, null, 2));
       commitLesson(validated.data as unknown as Lesson, { markDirty: false, resetHistory: true });
-    } catch {
-      setImportError('Invalid JSON syntax. Review the structure and try again.');
+    } catch (error) {
+      setImportError('Invalid JSON syntax. Review the structure and check console for details.');
       setJsonFeedback(null);
+      console.group('[lesson-editor] JSON parse failed');
+      console.error(error);
+      console.error('Raw input:', jsonInput);
+      console.groupEnd();
     }
   };
 

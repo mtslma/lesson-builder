@@ -6,6 +6,7 @@ import { usePersistedPreviewState } from '../hooks/usePersistedPreviewState';
 import type { BlockFormProps, BlockPreviewProps, TableCompletionBlock } from '../types/index';
 
 const createCellValue = (row: TableCompletionBlock['rows'][number], index: number) => row.cells[index] || '';
+const normalizePreviewCellText = (value: string) => value.trim().replace(/^\((.*)\)$/, '$1');
 
 export const TableCompletionForm = ({ block, onUpdate }: BlockFormProps<TableCompletionBlock>) => {
   const updateHeader = (index: number, value: string) => {
@@ -305,7 +306,9 @@ export const TableCompletionPreview = ({ block }: BlockPreviewProps<TableComplet
                       className="min-w-[180px] border border-slate-200 p-3 align-top text-sm leading-6 text-slate-700"
                     >
                       {isPromptColumn ? (
-                        <div className="whitespace-pre-wrap">{createCellValue(row, index) || '...'}</div>
+                        <div className="whitespace-pre-wrap">
+                          {normalizePreviewCellText(createCellValue(row, index)) || '...'}
+                        </div>
                       ) : (
                         <input
                           type="text"
@@ -316,8 +319,8 @@ export const TableCompletionPreview = ({ block }: BlockPreviewProps<TableComplet
                               [answerKey]: e.target.value
                             }))
                           }
-                          className="inline-block w-full rounded-lg border border-slate-300 bg-white px-2.5 py-[0.1rem] text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-500"
-                          placeholder={createCellValue(row, index) || '...'}
+                          className="inline-block w-full max-w-[9.5rem] rounded-full border border-slate-300 bg-slate-50 px-2.5 py-1 text-center text-sm font-medium leading-5 text-slate-700 outline-none transition focus:border-slate-400 focus:bg-white"
+                          placeholder={normalizePreviewCellText(createCellValue(row, index)) || '...'}
                         />
                       )}
                     </td>

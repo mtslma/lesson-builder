@@ -96,4 +96,14 @@ export const formatImportIssue = (issue: z.ZodIssue) => {
   return path ? `${path}: ${issue.message}` : issue.message;
 };
 
+export const formatImportIssues = (issues: z.ZodIssue[], limit = 5) => {
+  const selectedIssues = issues.slice(0, limit).map((issue) => formatImportIssue(issue));
+  const remaining = issues.length - selectedIssues.length;
+
+  return [
+    ...selectedIssues,
+    remaining > 0 ? `...and ${remaining} more issue${remaining > 1 ? 's' : ''}` : null
+  ].filter(Boolean) as string[];
+};
+
 export { sharedQuestionSchema };
